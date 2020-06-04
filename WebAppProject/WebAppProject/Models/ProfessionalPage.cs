@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class ProfessionalPage
 {
@@ -11,7 +12,7 @@ public class ProfessionalPage
 
     private string userName;
 
-    public ProfessionalPage(string nameOfPage, list<string> categories, list<Post> posts, string userName)
+    public ProfessionalPage(string nameOfPage, List<string> categories, list<Post> posts, string userName)
 	{
 
         this.Categories = categories;

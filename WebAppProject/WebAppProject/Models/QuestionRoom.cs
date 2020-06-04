@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class QuestionRoom
 {
@@ -6,12 +7,12 @@ public class QuestionRoom
 
     private string creator;
 
-    private list<string> categories;
+    private List<string> categories;
 
-    private list<Comment> comments;
+    private List<Comment> comments;
 
 
-	public QuestionRoom(string title, string creator, list<string> categories, list<Comment> comments)
+	public QuestionRoom(string title, string creator, List<string> categories, List<Comment> comments)
 	{
 
         this.Categories = categories;

@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class Professional : User
 {
 
-    private list<string> professionalSubjects;
+    private List<string> professionalSubjects;
 
     private double score;
 
     private int numOfRating;
 
-	public Professional(list<string> professionalSubjects, double score, int numOfRating)
+	public Professional(List<string> professionalSubjects, double score, int numOfRating)
 	{
         User();
         this.NumOfRating = numOfRating;

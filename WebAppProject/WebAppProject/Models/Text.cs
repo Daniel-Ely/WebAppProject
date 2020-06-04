@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class Text: Item
 {
 
-    private list<Letter> text;
+    private List<Letter> text;
 
 	public Text()
 	{

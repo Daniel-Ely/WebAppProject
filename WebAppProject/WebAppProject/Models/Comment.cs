@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class Comment
 {
@@ -9,7 +10,7 @@ public class Comment
 
     private int identifier;
 
-    private list<Item> content;
+    private List<Item> content;
 
     public Comment(string userName)
 	{

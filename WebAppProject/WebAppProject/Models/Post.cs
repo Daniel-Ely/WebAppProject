@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class Post
 {
     private int identifier;
 
-    private list<string> categories;
+    private List<string> categories;
 
     private string title;
 
@@ -12,9 +13,9 @@ public class Post
 
     private DateTime date;
 
-    private list<Comment> comments;
+    private List<Comment> comments;
 
-    private list<Item> content;
+    private List<Item> content;
 
 	public Post(string creator)
 	{
