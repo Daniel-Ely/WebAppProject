@@ -99,6 +99,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Register.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -116,7 +117,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Views\HomePage\LogIn.css" />
+    <Content Include="Content\Home.css" />
+    <Content Include="Content\LogIn.css" />
+    <Content Include="src\landScape_soulOwl.jpg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -207,6 +210,7 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\HomePage\Home.cshtml" />
     <Content Include="Views\HomePage\LogIn.cshtml" />
+    <Content Include="Views\HomePage\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
