@@ -3,6 +3,7 @@ namespace WebApplicationProject_sucks
 {
     public interface Item
     {
-        void display();
+        void Display();
     }
+
 }

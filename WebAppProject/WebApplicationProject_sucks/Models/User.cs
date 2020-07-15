@@ -31,6 +31,5 @@ namespace WebApplicationProject_sucks
             this.Password = password;
 
         }
-
     }
 }

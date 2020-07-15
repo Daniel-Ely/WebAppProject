@@ -11,7 +11,7 @@ namespace WebApplicationProject_sucks
 
         public int CommentID { get; set; }
 
-        public List<Item> Content { get; set; }
+        public Text Content { get; set; }
 
         public Comment(string userName)
         {

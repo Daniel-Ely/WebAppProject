@@ -4,29 +4,18 @@ namespace WebApplicationProject_sucks
 {
     public class Text : Item
     {
+
+        public string[] Location { get; set; }
         public int TextID { get; set; }
 
-        public List<Letter> _Text { get; set; }
+        public string _Text { get; set; }
 
-        public Text()
+        public Text(string text)
         {
-            _Text = new List<Letter>();
+            this._Text = text;
         }
-
-        public void addLetter(Letter l, int index)
-        {
-            _Text.Insert(index, l);
-        }
-
-        public void removeLetter(int index)
-        {
-            _Text.RemoveRange(index, 1);
-        }
-
-        //add an update option
-
-        public void display() { }
-
-        //public int TextID { get => textID; }
+ 
+        public void Display() { }
+     
     }
 }

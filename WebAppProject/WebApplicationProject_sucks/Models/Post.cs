@@ -24,7 +24,6 @@ namespace WebApplicationProject_sucks
         public Post(string creator)
         {
             this.Creator = creator;
-
         }
 
     }

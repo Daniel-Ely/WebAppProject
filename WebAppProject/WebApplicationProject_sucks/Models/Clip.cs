@@ -1,17 +1,21 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 
 namespace WebApplicationProject_sucks
 {
     public class Clip : Item
     {
+        public string[] Size { get; set; }
+        public string[] Location { get; set; }
         public int ClipID { get; set; }
-        public int Size { get; set; }
-        public string Path { get; set; }
+        public string URLPath { get; set; }
+        
+        
         public Clip(string path)
         {
-            this.Path = path;
+           // FileStream this.URLPath = path;
         }
-        public void display() { }
+        public void Display() { }
     }
 }
