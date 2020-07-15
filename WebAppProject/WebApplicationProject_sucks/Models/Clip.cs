@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
+using System.Web;
 
 namespace WebApplicationProject_sucks
 {
@@ -9,12 +10,14 @@ namespace WebApplicationProject_sucks
         public string[] Size { get; set; }
         public string[] Location { get; set; }
         public int ClipID { get; set; }
-        public string URLPath { get; set; }
+        public string VideoPath { get; set; }
         
         
-        public Clip(string path)
+        public Clip(HttpPostedFileBase file)
         {
-           // FileStream this.URLPath = path;
+            string fileName = file.FileName;
+            VideoPath = Path.Combine(Environment.CurrentDirectory, @"Data\", fileName);
+            file.SaveAs(VideoPath);
         }
         public void Display() { }
     }
