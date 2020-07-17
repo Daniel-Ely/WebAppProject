@@ -17,7 +17,7 @@ namespace WebApplicationProject_sucks.Controllers
         // GET: Clips
         public ActionResult Index()
         {
-            return View(db.Clip.ToList());
+            return View(db.Clips.ToList());
         }
 
         // GET: Clips/Details/5
@@ -27,7 +27,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Clip clip = db.Clip.Find(id);
+            Clip clip = db.Clips.Find(id);
             if (clip == null)
             {
                 return HttpNotFound();
@@ -46,11 +46,11 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ClipID,Size,Path")] Clip clip)
+        public ActionResult Create([Bind(Include = "ClipId,ClipTitle,ClipData")] Clip clip)
         {
             if (ModelState.IsValid)
             {
-                db.Clip.Add(clip);
+                db.Clips.Add(clip);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Clip clip = db.Clip.Find(id);
+            Clip clip = db.Clips.Find(id);
             if (clip == null)
             {
                 return HttpNotFound();
@@ -78,7 +78,7 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ClipID,Size,Path")] Clip clip)
+        public ActionResult Edit([Bind(Include = "ClipId,ClipTitle,ClipData")] Clip clip)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Clip clip = db.Clip.Find(id);
+            Clip clip = db.Clips.Find(id);
             if (clip == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Clip clip = db.Clip.Find(id);
-            db.Clip.Remove(clip);
+            Clip clip = db.Clips.Find(id);
+            db.Clips.Remove(clip);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

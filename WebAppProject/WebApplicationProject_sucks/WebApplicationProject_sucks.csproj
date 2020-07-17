@@ -128,8 +128,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClipsController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
-    <Compile Include="Controllers\HomePageController.cs" />
-    <Compile Include="Controllers\PhotosController.cs" />
+    <Compile Include="Controllers\HTMLScriptsController.cs" />
+    <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\ProfessionalPagesController.cs" />
     <Compile Include="Controllers\ProfessionalsController.cs" />
@@ -141,10 +141,10 @@
     </Compile>
     <Compile Include="Models\Clip.cs" />
     <Compile Include="Models\Comment.cs" />
-    <Compile Include="Models\PostHTML.cs" />
+    <Compile Include="Models\HTMLScript.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\MyDB.cs" />
-    <Compile Include="Models\Photo.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Professional.cs" />
     <Compile Include="Models\ProfessionalPage.cs" />
@@ -212,6 +212,16 @@
     <Content Include="Views\HomePage\Home.cshtml" />
     <Content Include="Views\HomePage\LogIn.cshtml" />
     <Content Include="Views\HomePage\Register.cshtml" />
+    <Content Include="Views\HTMLScripts\Create.cshtml" />
+    <Content Include="Views\HTMLScripts\Delete.cshtml" />
+    <Content Include="Views\HTMLScripts\Details.cshtml" />
+    <Content Include="Views\HTMLScripts\Edit.cshtml" />
+    <Content Include="Views\HTMLScripts\Index.cshtml" />
+    <Content Include="Views\Images\Create.cshtml" />
+    <Content Include="Views\Images\Delete.cshtml" />
+    <Content Include="Views\Images\Details.cshtml" />
+    <Content Include="Views\Images\Edit.cshtml" />
+    <Content Include="Views\Images\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -70,5 +70,6 @@ span.psw {
 
     .cancelbtn {
         width: 100%;
+        float:left
     }
 }

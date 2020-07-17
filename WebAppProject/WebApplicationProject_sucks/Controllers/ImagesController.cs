@@ -10,107 +10,107 @@ using WebApplicationProject_sucks;
 
 namespace WebApplicationProject_sucks.Controllers
 {
-    public class PhotosController : Controller
+    public class ImagesController : Controller
     {
         private MyDB db = new MyDB();
 
-        // GET: Photos
+        // GET: Images
         public ActionResult Index()
         {
-            return View(db.Photo.ToList());
+            return View(db.Images.ToList());
         }
 
-        // GET: Photos/Details/5
+        // GET: Images/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Photo photo = db.Photo.Find(id);
-            if (photo == null)
+            Image image = db.Images.Find(id);
+            if (image == null)
             {
                 return HttpNotFound();
             }
-            return View(photo);
+            return View(image);
         }
 
-        // GET: Photos/Create
+        // GET: Images/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Photos/Create
+        // POST: Images/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PhotoID,Size,Path")] Photo photo)
+        public ActionResult Create([Bind(Include = "ImageId,ImageTitle,ImageData")] Image image)
         {
             if (ModelState.IsValid)
             {
-                db.Photo.Add(photo);
+                db.Images.Add(image);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(photo);
+            return View(image);
         }
 
-        // GET: Photos/Edit/5
+        // GET: Images/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Photo photo = db.Photo.Find(id);
-            if (photo == null)
+            Image image = db.Images.Find(id);
+            if (image == null)
             {
                 return HttpNotFound();
             }
-            return View(photo);
+            return View(image);
         }
 
-        // POST: Photos/Edit/5
+        // POST: Images/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PhotoID,Size,Path")] Photo photo)
+        public ActionResult Edit([Bind(Include = "ImageId,ImageTitle,ImageData")] Image image)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(photo).State = EntityState.Modified;
+                db.Entry(image).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(photo);
+            return View(image);
         }
 
-        // GET: Photos/Delete/5
+        // GET: Images/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Photo photo = db.Photo.Find(id);
-            if (photo == null)
+            Image image = db.Images.Find(id);
+            if (image == null)
             {
                 return HttpNotFound();
             }
-            return View(photo);
+            return View(image);
         }
 
-        // POST: Photos/Delete/5
+        // POST: Images/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Photo photo = db.Photo.Find(id);
-            db.Photo.Remove(photo);
+            Image image = db.Images.Find(id);
+            db.Images.Remove(image);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

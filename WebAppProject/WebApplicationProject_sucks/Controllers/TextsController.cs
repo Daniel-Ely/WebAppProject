@@ -17,7 +17,7 @@ namespace WebApplicationProject_sucks.Controllers
         // GET: Texts
         public ActionResult Index()
         {
-            return View(db.Text.ToList());
+            return View(db.Texts.ToList());
         }
 
         // GET: Texts/Details/5
@@ -27,7 +27,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Text text = db.Text.Find(id);
+            Text text = db.Texts.Find(id);
             if (text == null)
             {
                 return HttpNotFound();
@@ -46,11 +46,11 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TextID")] Text text)
+        public ActionResult Create([Bind(Include = "TextID,_Text")] Text text)
         {
             if (ModelState.IsValid)
             {
-                db.Text.Add(text);
+                db.Texts.Add(text);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Text text = db.Text.Find(id);
+            Text text = db.Texts.Find(id);
             if (text == null)
             {
                 return HttpNotFound();
@@ -78,7 +78,7 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TextID")] Text text)
+        public ActionResult Edit([Bind(Include = "TextID,_Text")] Text text)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Text text = db.Text.Find(id);
+            Text text = db.Texts.Find(id);
             if (text == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Text text = db.Text.Find(id);
-            db.Text.Remove(text);
+            Text text = db.Texts.Find(id);
+            db.Texts.Remove(text);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

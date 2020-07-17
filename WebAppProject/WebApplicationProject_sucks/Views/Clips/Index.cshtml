@@ -12,10 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Size)
+            @Html.DisplayNameFor(model => model.ClipTitle)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Path)
+            @Html.DisplayNameFor(model => model.ClipData)
         </th>
         <th></th>
     </tr>
@@ -23,15 +23,15 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Size)
+            @Html.DisplayFor(modelItem => item.ClipTitle)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Path)
+            @Html.DisplayFor(modelItem => item.ClipData)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ClipID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ClipID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ClipID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.ClipId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ClipId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ClipId })
         </td>
     </tr>
 }

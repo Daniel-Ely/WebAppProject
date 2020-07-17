@@ -7,17 +7,17 @@ namespace WebApplicationProject_sucks
 {
     public class Clip : Item
     {
+        
+        public int ClipId { get; set; }
+        public string ClipTitle { get; set; }
+        public byte[] ClipData { get; set; }
         public string[] Size { get; set; }
         public string[] Location { get; set; }
-        public int ClipID { get; set; }
-        public string VideoPath { get; set; }
         
         
-        public Clip(HttpPostedFileBase file)
+        public Clip()
         {
-            string fileName = file.FileName;
-            VideoPath = Path.Combine(Environment.CurrentDirectory, @"Data\", fileName);
-            file.SaveAs(VideoPath);
+        
         }
         public void Display() { }
     }

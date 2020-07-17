@@ -3,18 +3,18 @@ using System.Drawing;
 
 namespace WebApplicationProject_sucks
 {
-    public class Photo : Item
+    public class Image : Item
     {
-
+        public int ImageId { get; set; }
+        public string ImageTitle { get; set; }
+        public byte[] ImageData { get; set; }
         public string[] Size { get; set; }
         public string[] Location { get; set; }
-        public Image Img { get; set; }
+  
 
-        public int PhotoID { get; set; }
-
-        public Photo(string path)//this refers to local images.
+        public Image()
         { 
-           Img= Image.FromFile(path);         
+       
         }
 
         public void Display() { }

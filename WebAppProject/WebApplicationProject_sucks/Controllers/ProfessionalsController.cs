@@ -17,7 +17,7 @@ namespace WebApplicationProject_sucks.Controllers
         // GET: Professionals
         public ActionResult Index()
         {
-            return View(db.Professional.ToList());
+            return View(db.Users.ToList());
         }
 
         // GET: Professionals/Details/5
@@ -27,7 +27,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Professional professional = db.Professional.Find(id);
+            Professional professional = db.Users.Find(id);
             if (professional == null)
             {
                 return HttpNotFound();
@@ -46,15 +46,15 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,UserName,FirstName,Gender,BirthDay,Email,Password")] User user , [Bind(Include = "UserID,UserName,FirstName,Gender,BirthDay,Email,Password,Score,NumOfRating")] Professional professional)
+        public ActionResult Create([Bind(Include = "UserID,UserName,FirstName,Gender,BirthDay,Email,Password,Score,NumOfRating")] Professional professional)
         {
             if (ModelState.IsValid)
             {
-                db.User.Add(user);
-                db.Professional.Add(professional);
+                db.Users.Add(professional);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             return View(professional);
         }
 
@@ -65,7 +65,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Professional professional = db.Professional.Find(id);
+            Professional professional = db.Users.Find(id);
             if (professional == null)
             {
                 return HttpNotFound();
@@ -78,11 +78,10 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,UserName,FirstName,Gender,BirthDay,Email,Password,Score,NumOfRating")] Professional professional , [Bind(Include = "UserID,UserName,FirstName,Gender,BirthDay,Email,Password")] User user)
+        public ActionResult Edit([Bind(Include = "UserID,UserName,FirstName,Gender,BirthDay,Email,Password,Score,NumOfRating")] Professional professional)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
                 db.Entry(professional).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -97,7 +96,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Professional professional = db.Professional.Find(id);
+            Professional professional = db.Users.Find(id);
             if (professional == null)
             {
                 return HttpNotFound();
@@ -110,10 +109,8 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Professional professional = db.Professional.Find(id);
-            User user = db.User.Find(id);
-            db.Professional.Remove(professional);
-            db.User.Remove(user);
+            Professional professional = db.Users.Find(id);
+            db.Users.Remove(professional);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

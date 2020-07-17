@@ -15,9 +15,9 @@ namespace WebApplicationProject_sucks
 
         public DateTime Date { get; set; }
 
-        public List<Comment> Comments { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
 
-        public List<Item> Content { get; set; }
+        public virtual ICollection<Item> Content { get; set; }
 
 
 

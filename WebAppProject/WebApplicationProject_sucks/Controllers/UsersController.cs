@@ -17,7 +17,7 @@ namespace WebApplicationProject_sucks.Controllers
         // GET: Users
         public ActionResult Index()
         {
-            return View(db.User.ToList());
+            return View(db.Users.ToList());
         }
 
         // GET: Users/Details/5
@@ -27,7 +27,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.User.Find(id);
+            User user = db.Users.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace WebApplicationProject_sucks.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.User.Add(user);
+                db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.User.Find(id);
+            User user = db.Users.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.User.Find(id);
+            User user = db.Users.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            User user = db.User.Find(id);
-            db.User.Remove(user);
+            User user = db.Users.Find(id);
+            db.Users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -11,7 +11,7 @@ namespace WebApplicationProject_sucks
 
         public List<string> Categories { get; set; }
 
-        public List<Post> Posts { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
 
         public string UserName { get; set; }
 

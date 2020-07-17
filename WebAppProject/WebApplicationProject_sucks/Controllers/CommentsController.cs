@@ -17,7 +17,7 @@ namespace WebApplicationProject_sucks.Controllers
         // GET: Comments
         public ActionResult Index()
         {
-            return View(db.Comment.ToList());
+            return View(db.Comments.ToList());
         }
 
         // GET: Comments/Details/5
@@ -27,7 +27,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comment.Find(id);
+            Comment comment = db.Comments.Find(id);
             if (comment == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace WebApplicationProject_sucks.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Comment.Add(comment);
+                db.Comments.Add(comment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comment.Find(id);
+            Comment comment = db.Comments.Find(id);
             if (comment == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comment.Find(id);
+            Comment comment = db.Comments.Find(id);
             if (comment == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Comment comment = db.Comment.Find(id);
-            db.Comment.Remove(comment);
+            Comment comment = db.Comments.Find(id);
+            db.Comments.Remove(comment);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

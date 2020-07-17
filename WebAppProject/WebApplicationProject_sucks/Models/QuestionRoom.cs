@@ -11,7 +11,7 @@ namespace WebApplicationProject_sucks
 
         public List<string> Categories { get; set; }
 
-        public List<Comment> Comments { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
 
         public int QuestionRoomID { get; set; }
 
