@@ -6,10 +6,17 @@ using System.Web.Mvc;
 
 namespace WebApplicationProject_sucks.Controllers
 {
-    public class LogInController : Controller
+    public class HomePageController : Controller
     {
-        // GET: LogIn
+        public ActionResult Home()
+        {
+            return View();
+        }
         public ActionResult LogIn()
+        {
+            return View();
+        }
+        public ActionResult Register()
         {
             return View();
         }
