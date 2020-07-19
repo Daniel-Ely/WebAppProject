@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace WebApplicationProject_sucks.Model
+using System.ComponentModel.DataAnnotations;
+
+namespace WebApplicationProject_sucks
 {
     public class Text : Item
     {
 
         public string[] Location { get; set; }
-        public int TextID { get; set; }
+        [Key] public int TextID { get; set; }
 
         public string _Text { get; set; }
 

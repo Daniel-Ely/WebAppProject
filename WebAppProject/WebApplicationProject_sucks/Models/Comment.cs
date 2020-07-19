@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace WebApplicationProject_sucks.Model
+namespace WebApplicationProject_sucks
 {
     public class Comment
     {

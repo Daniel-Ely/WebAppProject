@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace WebApplicationProject_sucks.Model
+namespace WebApplicationProject_sucks
 {
     public class Image : Item
     {
