@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Web;
 
-namespace WebApplicationProject_sucks
+namespace WebApplicationProject_sucks.Model
 {
     public class Clip : Item
     {
