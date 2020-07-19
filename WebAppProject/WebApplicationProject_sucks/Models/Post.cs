@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace WebApplicationProject_sucks
+namespace WebApplicationProject_sucks.Model
 {
     public class Post
     {
-        [Key] public int PostID { get; set; }
+        public int PostID { get; set; }
 
         public List<string> Categories { get; set; }
 
@@ -20,12 +19,9 @@ namespace WebApplicationProject_sucks
 
         public virtual ICollection<Item> Content { get; set; }
 
-        public int Rate { get; set; }//quality of the post
+        public int Rating { get; set; }
 
-        public int NumOfRate { get; set; }
-
-
-
+        public int NumOfRating { get; set; }
 
         public Post(string creator)
         {
