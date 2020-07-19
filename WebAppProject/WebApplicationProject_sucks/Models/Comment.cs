@@ -9,7 +9,7 @@ namespace WebApplicationProject_sucks
 
         public DateTime Date { get; set; }
 
-        public int CommentID { get; set; }
+        [Key] public int CommentID { get; set; }
 
         public Text Content { get; set; }
 

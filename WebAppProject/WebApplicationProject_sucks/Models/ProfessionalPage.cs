@@ -15,7 +15,7 @@ namespace WebApplicationProject_sucks
 
         public string UserName { get; set; }
 
-        [Key]public int ProffesionalPageID { get; set; }
+      [Key] public int ProffesionalPageID { get; set; }
 
         public ProfessionalPage(string nameOfPage, List<string> categories, List<Post> posts, string userName)
         {

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApplicationProject_sucks
 {
     public class Post
     {
-        public int PostID { get; set; }
+        [Key] public int PostID { get; set; }
 
         public List<string> Categories { get; set; }
 
@@ -18,6 +19,11 @@ namespace WebApplicationProject_sucks
         public virtual ICollection<Comment> Comments { get; set; }
 
         public virtual ICollection<Item> Content { get; set; }
+
+        public int Rate { get; set; }//quality of the post
+
+        public int NumOfRate { get; set; }
+
 
 
 

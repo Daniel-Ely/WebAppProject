@@ -7,18 +7,14 @@ namespace WebApplicationProject_sucks
 {
     public class Clip : Item
     {
-        
-        public int ClipId { get; set; }
+
+        [Key] public int ClipID { get; set; }
         public string ClipTitle { get; set; }
         public byte[] ClipData { get; set; }
         public string[] Size { get; set; }
         public string[] Location { get; set; }
         
         
-        public Clip()
-        {
-        
-        }
         public void Display() { }
     }
 }

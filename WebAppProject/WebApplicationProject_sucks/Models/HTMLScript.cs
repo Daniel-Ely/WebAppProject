@@ -9,7 +9,7 @@ namespace WebApplicationProject_sucks
     {
 
         public string Content { get; set; }
-        public int HTMLScriptID { get; set; }
+        [Key] public int HTMLScriptID { get; set; }
 
         public void Display()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApplicationProject_sucks
 {
@@ -13,7 +14,7 @@ namespace WebApplicationProject_sucks
 
         public virtual ICollection<Comment> Comments { get; set; }
 
-        public int QuestionRoomID { get; set; }
+        [Key]  public int QuestionRoomID { get; set; }
 
         public QuestionRoom(string title, string creator, List<string> categories, List<Comment> comments)
         {

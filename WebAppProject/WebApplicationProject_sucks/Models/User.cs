@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApplicationProject_sucks
 {
@@ -19,7 +20,7 @@ namespace WebApplicationProject_sucks
 
         public string Password { get; set; }
 
-        public int UserID { get; set; }
+        [Key] public int UserID { get; set; }
 
         public User(string userName, string firstName, string gender, DateTime birthDay, List<string> intrest, string email, string password)
         {
@@ -29,6 +30,10 @@ namespace WebApplicationProject_sucks
             this.Gender = gender;
             this.Intrest = intrest;
             this.Password = password;
+
+        }
+        public User()
+        {
 
         }
     }

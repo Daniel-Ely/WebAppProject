@@ -11,6 +11,14 @@ namespace WebApplicationProject_sucks
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+
+        /*    <connectionStrings>
+           < add name = "Library"
+         providerName = "System.Data.SqlClient"
+         connectionString = "Data Source=.\SQLEXPRESS;Database=Library;Trusted_Connection=true;" />
+            </connectionStrings>
+
+    */
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
@@ -18,6 +26,10 @@ namespace WebApplicationProject_sucks
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+             
+
+
         }
     }
 }

@@ -170,11 +170,6 @@
     <Content Include="Views\Comments\Details.cshtml" />
     <Content Include="Views\Comments\Edit.cshtml" />
     <Content Include="Views\Comments\Index.cshtml" />
-    <Content Include="Views\Letters\Create.cshtml" />
-    <Content Include="Views\Letters\Delete.cshtml" />
-    <Content Include="Views\Letters\Details.cshtml" />
-    <Content Include="Views\Letters\Edit.cshtml" />
-    <Content Include="Views\Letters\Index.cshtml" />
     <Content Include="Views\Photos\Create.cshtml" />
     <Content Include="Views\Photos\Delete.cshtml" />
     <Content Include="Views\Photos\Details.cshtml" />
