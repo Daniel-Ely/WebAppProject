@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace WebApplicationProject_sucks
+namespace WebApplicationProject_sucks.Model
 {
     public class ProfessionalPage
     {

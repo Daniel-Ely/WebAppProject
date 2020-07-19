@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebApplicationProject_sucks
+namespace WebApplicationProject_sucks.Model
 {
     public class QuestionRoom
     {

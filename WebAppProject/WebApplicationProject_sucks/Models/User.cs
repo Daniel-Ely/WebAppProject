@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebApplicationProject_sucks
+namespace WebApplicationProject_sucks.Model
 {
     public class User
     {
@@ -30,6 +30,19 @@ namespace WebApplicationProject_sucks
             this.Intrest = intrest;
             this.Password = password;
 
+        }
+        public User(string userName, string firstName, string gender, DateTime birthDay, string email, string password)
+        {
+            this.BirthDay = birthDay;
+            this.Email = email;
+            this.FirstName = firstName;
+            this.Gender = gender;
+            this.Intrest = null;
+            this.Password = password;
+
+        }
+        public User()
+        {
         }
     }
 }

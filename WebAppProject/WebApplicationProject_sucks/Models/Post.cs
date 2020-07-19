@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebApplicationProject_sucks
+namespace WebApplicationProject_sucks.Model
 {
     public class Post
     {
@@ -19,7 +19,9 @@ namespace WebApplicationProject_sucks
 
         public virtual ICollection<Item> Content { get; set; }
 
+        public int Rating { get; set; }
 
+        public int NumOfRating { get; set; }
 
         public Post(string creator)
         {

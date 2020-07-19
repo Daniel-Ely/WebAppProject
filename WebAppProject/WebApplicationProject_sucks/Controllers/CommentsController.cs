@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using WebApplicationProject_sucks;
+using WebApplicationProject_sucks.Model;
 
 namespace WebApplicationProject_sucks.Controllers
 {
