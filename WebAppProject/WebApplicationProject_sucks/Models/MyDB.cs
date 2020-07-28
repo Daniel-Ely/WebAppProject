@@ -12,12 +12,8 @@ namespace WebApplicationProject_sucks
         public DbSet<HTMLScript> HTMLScripts { set; get; }
         public DbSet<QuestRoomComment> Comments{ set; get; }
         public DbSet<Post> Posts { set; get; }
-        public DbSet<Clip> Clips { set; get; }
-        public DbSet<Image> Images { get; set; }
-        public DbSet<Professional> Professionals { set; get; }
         public DbSet<ProfessionalPage> ProfessionalPages { set; get; }
         public DbSet<QuestionRoom> QuestionRooms { set; get; }
-        public DbSet<Text> Texts { set; get; }
         public DbSet<User> Users { set; get; }
         public DbSet<ProfessionalToCategory> ProfessionalToCategories { set; get; }
         public DbSet<UserToCategory> UserToCategories { set; get; }
@@ -26,5 +22,8 @@ namespace WebApplicationProject_sucks
         public DbSet<RoomToCategory> RoomToCategories { set; get; }
         public DbSet<Category> Categories { set; get; }
 
+        public DbSet<Item> Items { get; set; }
+
+        public DbSet<PostComment> PostComments { get; set; }
     }
 }

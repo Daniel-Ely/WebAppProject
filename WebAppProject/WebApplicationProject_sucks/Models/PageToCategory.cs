@@ -12,13 +12,13 @@ namespace WebApplicationProject_sucks.Models
         [Key]
         [Column(Order = 0)]
         [ForeignKey("ProfessionalPage")]
-        public string ProfessionalPageID { get; set; }
+        public int ProfessionalPageID { get; set; }
         public ProfessionalPage ProfessionalPage { get; set; }
         //
         [Key]
         [Column(Order = 1)]
         [ForeignKey("Category")]
-        public string CategoryID { get; set; }
+        public string CategoryName { get; set; }
         public Category Category { get; set; }
     }
 }

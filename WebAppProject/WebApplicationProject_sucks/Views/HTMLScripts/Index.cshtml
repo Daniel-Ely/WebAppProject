@@ -1,33 +1,47 @@
-﻿@model IEnumerable<WebApplicationProject_sucks.HTMLScript>
+﻿@model IEnumerable<WebApplicationProject_sucks.Models.HTMLScript>
 
 @{
-    ViewBag.Title = "Index";
+    Layout = null;
 }
 
-<h2>Index</h2>
+<!DOCTYPE html>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Content)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Content)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.HTMLScriptID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.HTMLScriptID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.HTMLScriptID })
-        </td>
-    </tr>
-}
-
-</table>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Post.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Post.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ItemID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.ItemID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ItemID })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

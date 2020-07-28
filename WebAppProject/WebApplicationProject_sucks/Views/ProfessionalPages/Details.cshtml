@@ -1,34 +1,42 @@
-﻿@model WebApplicationProject_sucks.ProfessionalPage
+﻿@model WebApplicationProject_sucks.Models.ProfessionalPage
 
 @{
-    ViewBag.Title = "Details";
+    Layout = null;
 }
 
-<h2>Details</h2>
+<!DOCTYPE html>
 
-<div>
-    <h4>ProfessionalPage</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.NameOfPage)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NameOfPage)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ProffesionalPageID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>ProfessionalPage</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.User.FirstName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.User.FirstName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.NameOfPage)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.NameOfPage)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ProffesionalPageID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

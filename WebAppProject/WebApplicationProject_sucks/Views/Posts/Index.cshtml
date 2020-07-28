@@ -1,45 +1,65 @@
-﻿@model IEnumerable<WebApplicationProject_sucks.Post>
+﻿@model IEnumerable<WebApplicationProject_sucks.Models.Post>
 
 @{
-    ViewBag.Title = "Index";
+    Layout = null;
 }
 
-<h2>Index</h2>
+<!DOCTYPE html>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Creator)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Creator)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PostID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PostID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PostID })
-        </td>
-    </tr>
-}
-
-</table>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProfessionalPage.NameOfPage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumOfRating)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProfessionalPage.NameOfPage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumOfRating)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.PostID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.PostID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.PostID })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

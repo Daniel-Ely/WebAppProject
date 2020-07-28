@@ -10,7 +10,7 @@ namespace WebApplicationProject_sucks.Models
         [Key] public int QuestCommentID { get; set; }
 
         [ForeignKey("QuestionRoom")]
-        public string RoomID { get; set; }
+        public int RoomID { get; set; }
         public QuestionRoom QuestionRoom { get; set; }
 
         public Text Content { get; set; }

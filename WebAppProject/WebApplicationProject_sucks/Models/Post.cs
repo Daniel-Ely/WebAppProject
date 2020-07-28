@@ -20,8 +20,10 @@ namespace WebApplicationProject_sucks.Models
 
         public virtual ICollection<Item> Content { get; set; }
 
+        public virtual ICollection<PostComment> Comments { get; set; }
+
         [ForeignKey("ProfessionalPage")]
-        public string PageID { get; set; }
+        public int PageID { get; set; }
         public ProfessionalPage ProfessionalPage { get; set; }
 
         public virtual ICollection<PostToCategory> Categories { get; set; }

@@ -126,6 +126,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\ClipsController.cs" />
+    <Compile Include="Controllers\HomePageController.cs" />
+    <Compile Include="Controllers\HTMLScriptsController.cs" />
+    <Compile Include="Controllers\ImagesController.cs" />
+    <Compile Include="Controllers\ItemsController.cs" />
+    <Compile Include="Controllers\PageToCategoriesController.cs" />
+    <Compile Include="Controllers\PostCommentsController.cs" />
+    <Compile Include="Controllers\PostsController.cs" />
+    <Compile Include="Controllers\PostToCategoriesController.cs" />
+    <Compile Include="Controllers\ProfessionalPagesController.cs" />
+    <Compile Include="Controllers\ProfessionalsController.cs" />
+    <Compile Include="Controllers\ProfessionalToCategoriesController.cs" />
+    <Compile Include="Controllers\QuestionRoomsController.cs" />
+    <Compile Include="Controllers\QuestRoomCommentsController.cs" />
+    <Compile Include="Controllers\RoomToCategoriesController.cs" />
+    <Compile Include="Controllers\TextsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\UserToCategoriesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -214,6 +233,51 @@
     <Content Include="Views\Images\Details.cshtml" />
     <Content Include="Views\Images\Edit.cshtml" />
     <Content Include="Views\Images\Index.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Items\Create.cshtml" />
+    <Content Include="Views\Items\Delete.cshtml" />
+    <Content Include="Views\Items\Details.cshtml" />
+    <Content Include="Views\Items\Edit.cshtml" />
+    <Content Include="Views\Items\Index.cshtml" />
+    <Content Include="Views\PageToCategories\Create.cshtml" />
+    <Content Include="Views\PageToCategories\Delete.cshtml" />
+    <Content Include="Views\PageToCategories\Details.cshtml" />
+    <Content Include="Views\PageToCategories\Edit.cshtml" />
+    <Content Include="Views\PageToCategories\Index.cshtml" />
+    <Content Include="Views\PostComments\Create.cshtml" />
+    <Content Include="Views\PostComments\Delete.cshtml" />
+    <Content Include="Views\PostComments\Details.cshtml" />
+    <Content Include="Views\PostComments\Edit.cshtml" />
+    <Content Include="Views\PostComments\Index.cshtml" />
+    <Content Include="Views\PostToCategories\Create.cshtml" />
+    <Content Include="Views\PostToCategories\Delete.cshtml" />
+    <Content Include="Views\PostToCategories\Details.cshtml" />
+    <Content Include="Views\PostToCategories\Edit.cshtml" />
+    <Content Include="Views\PostToCategories\Index.cshtml" />
+    <Content Include="Views\ProfessionalToCategories\Create.cshtml" />
+    <Content Include="Views\ProfessionalToCategories\Delete.cshtml" />
+    <Content Include="Views\ProfessionalToCategories\Details.cshtml" />
+    <Content Include="Views\ProfessionalToCategories\Edit.cshtml" />
+    <Content Include="Views\ProfessionalToCategories\Index.cshtml" />
+    <Content Include="Views\QuestRoomComments\Create.cshtml" />
+    <Content Include="Views\QuestRoomComments\Delete.cshtml" />
+    <Content Include="Views\QuestRoomComments\Details.cshtml" />
+    <Content Include="Views\QuestRoomComments\Edit.cshtml" />
+    <Content Include="Views\QuestRoomComments\Index.cshtml" />
+    <Content Include="Views\RoomToCategories\Create.cshtml" />
+    <Content Include="Views\RoomToCategories\Delete.cshtml" />
+    <Content Include="Views\RoomToCategories\Details.cshtml" />
+    <Content Include="Views\RoomToCategories\Edit.cshtml" />
+    <Content Include="Views\RoomToCategories\Index.cshtml" />
+    <Content Include="Views\UserToCategories\Create.cshtml" />
+    <Content Include="Views\UserToCategories\Delete.cshtml" />
+    <Content Include="Views\UserToCategories\Details.cshtml" />
+    <Content Include="Views\UserToCategories\Edit.cshtml" />
+    <Content Include="Views\UserToCategories\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -223,7 +287,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\LogIn\" />
   </ItemGroup>

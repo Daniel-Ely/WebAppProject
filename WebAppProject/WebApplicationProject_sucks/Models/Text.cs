@@ -9,9 +9,6 @@ namespace WebApplicationProject_sucks.Models
         public string[] Location { get; set; }
        [Key] public int TextID { get; set; }
 
-        public string _Text { get; set; }
-
-        public void Display() { }
-     
+        public string Content { get; set; }
     }
 }

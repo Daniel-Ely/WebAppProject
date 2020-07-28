@@ -6,9 +6,9 @@ namespace WebApplicationProject_sucks.Models
 {
     public class Item
     {
-
+        [Key] public int ItemID {get;set;}
         [ForeignKey("Post")]
-        public string PostID { get; set; }
+        public int PostID { get; set; }
         public Post Post { get; set; }
     }
 

@@ -7,7 +7,6 @@ namespace WebApplicationProject_sucks.Models
 {
     public class Clip : Item
     {
-        [Key] public int ClipID { get; set; }
         public string ClipTitle { get; set; }
         public byte[] ClipData { get; set; }
         public string[] Size { get; set; }

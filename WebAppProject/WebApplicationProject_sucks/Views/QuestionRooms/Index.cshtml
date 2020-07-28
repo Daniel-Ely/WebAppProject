@@ -1,39 +1,47 @@
-﻿@model IEnumerable<WebApplicationProject_sucks.QuestionRoom>
+﻿@model IEnumerable<WebApplicationProject_sucks.Models.QuestionRoom>
 
 @{
-    ViewBag.Title = "Index";
+    Layout = null;
 }
 
-<h2>Index</h2>
+<!DOCTYPE html>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Creator)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Creator)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.QuestionRoomID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.QuestionRoomID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.QuestionRoomID })
-        </td>
-    </tr>
-}
-
-</table>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Creator)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Creator)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.QuestionRoomID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.QuestionRoomID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.QuestionRoomID })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

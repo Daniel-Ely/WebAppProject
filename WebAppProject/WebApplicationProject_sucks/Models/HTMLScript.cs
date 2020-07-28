@@ -8,8 +8,6 @@ namespace WebApplicationProject_sucks.Models
 {
     public class HTMLScript : Item
     {
-        [Key] public int HTMLScriptID { get; set; }
-
         public string Content { get; set; }
         
 
