@@ -10,7 +10,7 @@ namespace WebApplicationProject_sucks.Models
 
         public string Creator { get; set; }
 
-        public List<string> Categories { get; set; }
+        public virtual ICollection<RoomToCategory> Categories { get; set; }
 
         public virtual ICollection<QuestRoomComment> Comments { get; set; }
 

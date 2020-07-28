@@ -12,7 +12,7 @@ namespace WebApplicationProject_sucks.Models
         [Key] public int PostCommentID { get; set; }
 
         [ForeignKey("Post")]
-        public string PostID { get; set; }
+        public string PostID { get; set;}
         public Post Post { get; set; }
 
         public Text Content { get; set; }

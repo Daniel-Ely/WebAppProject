@@ -19,6 +19,12 @@ namespace WebApplicationProject_sucks
         public DbSet<QuestionRoom> QuestionRooms { set; get; }
         public DbSet<Text> Texts { set; get; }
         public DbSet<User> Users { set; get; }
+        public DbSet<ProfessionalToCategory> ProfessionalToCategories { set; get; }
+        public DbSet<UserToCategory> UserToCategories { set; get; }
+        public DbSet<PostToCategory> PostToCategories { set; get; }
+        public DbSet<PageToCategory> PageToCategories { set; get; }
+        public DbSet<RoomToCategory> RoomToCategories { set; get; }
+        public DbSet<Category> Categories { set; get; }
 
     }
 }

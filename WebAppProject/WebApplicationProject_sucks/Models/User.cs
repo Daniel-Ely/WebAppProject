@@ -14,7 +14,7 @@ namespace WebApplicationProject_sucks.Models
 
         public DateTime BirthDay { get; set; }
 
-        public virtual ICollection<Category> Interests { get; set; }     
+        public virtual ICollection<UserToCategory> Interests { get; set; }     
 
         public string Email { get; set; }
 

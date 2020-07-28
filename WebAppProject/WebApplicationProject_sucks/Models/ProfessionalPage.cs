@@ -11,12 +11,10 @@ namespace WebApplicationProject_sucks.Models
 
         public string NameOfPage { get; set; }
 
-        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<PageToCategory> Categories {get; set;}
 
         [ForeignKey("User")]
         public string UserName { get; set; }
         public User User { get; set; }
-
- 
     }
 }

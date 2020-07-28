@@ -8,7 +8,7 @@ namespace WebApplicationProject_sucks.Models
    
         public string Description { get; set; }//education related- requires approvement
 
-        public virtual ICollection<Category> ProfessionalCategories { get; set; }
+        public virtual ICollection<ProfessionalToCategory> ProfessionalCategories { get; set;}
 
         public double Score { get; set; }
   
