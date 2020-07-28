@@ -140,13 +140,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Clip.cs" />
-    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\QuestRoomComment.cs" />
     <Compile Include="Models\HTMLScript.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\MyDB.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\PostComment.cs" />
     <Compile Include="Models\Professional.cs" />
     <Compile Include="Models\ProfessionalPage.cs" />
     <Compile Include="Models\QuestionRoom.cs" />

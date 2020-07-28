@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Web;
 
-namespace WebApplicationProject_sucks.Model
+namespace WebApplicationProject_sucks.Models
 {
     public class Clip : Item
     {
-
+        
         [Key] public int ClipID { get; set; }
         public string ClipTitle { get; set; }
         public byte[] ClipData { get; set; }

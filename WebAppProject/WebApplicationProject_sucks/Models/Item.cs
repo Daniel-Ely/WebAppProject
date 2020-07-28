@@ -1,5 +1,5 @@
 ﻿using System;
-namespace WebApplicationProject_sucks.Model
+namespace WebApplicationProject_sucks.Models
 {
     public interface Item
     {

@@ -1,32 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WebApplicationProject_sucks.Model
+namespace WebApplicationProject_sucks.Models
 {
     public class Post
     {
-        public int PostID { get; set; }
-
-        public List<string> Categories { get; set; }
+        [Key]public int PostID { get; set; }
 
         public string Title { get; set; }
 
-        public string Creator { get; set; }
-
         public DateTime Date { get; set; }
 
-        public virtual ICollection<Comment> Comments { get; set; }
-
-        public virtual ICollection<Item> Content { get; set; }
 
         public int Rating { get; set; }
 
         public int NumOfRating { get; set; }
 
-        public Post(string creator)
-        {
-            this.Creator = creator;
-        }
+        public virtual ICollection<Item> Content { get; set; }
+
+
+        [ForeignKey("ProfessionalPage")]
+        public string PageID { get; set; }
+        public ProfessionalPage ProfessionalPage { get; set; }
+
+
+
+        public virtual ICollection<Category> Categories { get; set; }
 
     }
 }

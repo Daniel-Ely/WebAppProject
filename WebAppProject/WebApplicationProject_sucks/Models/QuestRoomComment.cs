@@ -5,18 +5,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplicationProject_sucks.Models
 {
-    public class ProfessionalPage
+    public class QuestRoomComment
     {
-        [Key] public int ProffesionalPageID { get; set; }
+        [Key] public int QuestCommentID { get; set; }
 
-        public string NameOfPage { get; set; }
+        [ForeignKey("QuestionRoom")]
+        public string RoomID { get; set; }
+        public QuestionRoom QuestionRoom { get; set; }
 
-        public virtual ICollection<Category> Categories { get; set; }
+        public Text Content { get; set; }
+
+
 
         [ForeignKey("User")]
         public string UserName { get; set; }
         public User User { get; set; }
 
- 
+        public DateTime Date { get; set; }
     }
 }

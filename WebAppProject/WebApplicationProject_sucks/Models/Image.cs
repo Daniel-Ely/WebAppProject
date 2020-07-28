@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
-
-namespace WebApplicationProject_sucks.Model
+using System.ComponentModel.DataAnnotations;
+namespace WebApplicationProject_sucks.Models
 {
     public class Image : Item
     {
@@ -10,12 +10,6 @@ namespace WebApplicationProject_sucks.Model
         public byte[] ImageData { get; set; }
         public string[] Size { get; set; }
         public string[] Location { get; set; }
-  
-
-        public Image()
-        { 
-       
-        }
 
         public void Display() { }
     }

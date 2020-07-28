@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace WebApplicationProject_sucks.Model
+namespace WebApplicationProject_sucks.Models
 {
     public class QuestionRoom
     {
@@ -12,20 +12,11 @@ namespace WebApplicationProject_sucks.Model
 
         public List<string> Categories { get; set; }
 
-        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<QuestRoomComment> Comments { get; set; }
 
         [Key]  public int QuestionRoomID { get; set; }
 
-        public QuestionRoom(string title, string creator, List<string> categories, List<Comment> comments)
-        {
-
-            this.Categories = categories;
-            this.Comments = comments;
-            this.Creator = creator;
-            this.Title = title;
-
-
-        }
+ 
 
     }
 }
