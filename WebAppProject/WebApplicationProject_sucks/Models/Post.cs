@@ -17,6 +17,9 @@ namespace WebApplicationProject_sucks.Models
         public int Rating { get; set; }
 
         public int NumOfRating { get; set; }
+        public string Description { get; set; }
+        public Image Thumbnail { get; set; }
+
 
         public virtual ICollection<Item> Content { get; set; }
 

@@ -20,6 +20,7 @@ namespace WebApplicationProject_sucks.Models
 
         public string Password { get; set; }
 
+        public Image ProfileImage { get; set; }
 
     }
 }

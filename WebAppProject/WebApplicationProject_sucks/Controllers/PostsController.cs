@@ -49,7 +49,7 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PostID,Title,Date,Rating,NumOfRating,PageID")] Post post)
+        public ActionResult Create([Bind(Include = "PostID,Title,Date,Rating,NumOfRating,Description,PageID")] Post post)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PostID,Title,Date,Rating,NumOfRating,PageID")] Post post)
+        public ActionResult Edit([Bind(Include = "PostID,Title,Date,Rating,NumOfRating,Description,PageID")] Post post)
         {
             if (ModelState.IsValid)
             {
