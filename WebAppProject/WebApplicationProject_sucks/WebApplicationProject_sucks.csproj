@@ -121,7 +121,8 @@
     <Content Include="Content\Home.css" />
     <Content Include="src\landScape_soulOwl.jpg" />
     <Content Include="src\logIn.bmp" />
-    <Content Include="src\owl.jpg" />
+    <Content Include="src\Owl family.png" />
+    <Content Include="src\Owl.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

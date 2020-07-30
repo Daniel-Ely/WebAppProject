@@ -1,8 +1,30 @@
 ﻿body {
     font-family: Arial, Helvetica, sans-serif;
-    font-size:smaller;
-    background-color: black;
-    text-align: center;    
+    font-size: smaller;
+    text-align: center;
+    background-image: url(../src/logIn.bmp);
+    background-size: 100% 100%;
+    background-size: cover;
+}
+
+.imgcontainer {
+    display:inline-block;
+    float:right;
+    text-align:right;
+}
+
+img.avatar {
+    margin-top:3%;
+   float:right;
+   width:55%;
+}
+
+.validations{
+    text-align:left;
+    color:darkred;
+}
+h2 {
+    margin-top : 5%;
 }
 
 * {
@@ -11,27 +33,21 @@
 
 /* Add padding to containers */
 .form-horizontal {
-    margin-top : 5%;
     display: inline-block;
     width: 30%;
     height: 80%;
-    background-color: gray;
-    padding: 12px 20px;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 .form-group {
     display: inline-block;
     width: 100%;
+    text-align:center;
 }
-    h4 
-    {
-        text-align: center;
-    }
-label {
-float : left;
-padding-top:5%;
-}
+
 /* Full-width input fields */
-input {
+input,
+select
+{
     width: 70%;
     padding: 12px 20px;
     margin: 8px;
@@ -40,12 +56,8 @@ input {
 }
 .btn-default {
     width:30%;
-    margin-right: 35%;
-}
-
-.gender
-{
-    display:inline-table;
+    margin-right:35%;
+    margin-left:35%;
 }
 
 .icon {
@@ -55,12 +67,6 @@ input {
     color: white;
     min-width: 50px;
     text-align: center;
-}
-
-/* Overwrite default styles of hr */
-hr {
-    border: 1px solid #f1f1f1;
-    margin-bottom: 25px;
 }
 
 /* Set a style for the submit button */
@@ -74,7 +80,6 @@ hr {
     width: 100%;
     opacity: 0.9;
 }
-
     .registerbtn:hover {
         opacity: 1;
     }
