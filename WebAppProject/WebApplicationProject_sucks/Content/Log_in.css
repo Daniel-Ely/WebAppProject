@@ -10,7 +10,7 @@ form {
     display : inline-block;
     width : 30%;
     height : 80%;
-    background-color : rgba(0, 0, 0 , 0.5);
+    background-color : rgba(0, 0, 0 , 0);
 }
 
 input[type=text], input[type=password] {
@@ -48,7 +48,8 @@ button {
 }
 
 img.avatar {
-    width: 100%;
+    width: 30%;
+    border-radius:50%;
 }
 
 .container {
