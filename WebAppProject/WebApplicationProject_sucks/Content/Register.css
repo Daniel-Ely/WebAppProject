@@ -32,7 +32,6 @@ padding-top:5%;
 }
 /* Full-width input fields */
 input {
-    float : right;
     width: 70%;
     padding: 12px 20px;
     margin: 8px;
@@ -42,6 +41,20 @@ input {
 .btn-default {
     width:30%;
     margin-right: 35%;
+}
+
+.gender
+{
+    display:inline-table;
+}
+
+.icon {
+    float:left;
+    padding: 15px;
+    background: black;
+    color: white;
+    min-width: 50px;
+    text-align: center;
 }
 
 /* Overwrite default styles of hr */

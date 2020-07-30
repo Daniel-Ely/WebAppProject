@@ -8,6 +8,7 @@ namespace WebApplicationProject_sucks.Models
     {
         [Display(Name = "User name")]
         [Key] public string UserName { get; set; }
+
         [Display(Name = "First name")]
         public string FirstName { get; set; }
        
