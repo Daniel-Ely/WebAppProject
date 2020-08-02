@@ -20,7 +20,7 @@ namespace WebApplicationProject_sucks.Controllers
         {
             return View(db.QuestionRooms.ToList());
         }
-
+        
         // GET: QuestionRooms/Details/5
         public ActionResult Details(int? id)
         {
