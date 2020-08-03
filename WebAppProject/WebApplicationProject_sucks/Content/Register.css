@@ -37,6 +37,7 @@ h2 {
     width: 30%;
     height: 80%;
     background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 25px;
 }
 .form-group {
     display: inline-block;
@@ -93,3 +94,4 @@ a {
 .signin {
     background-color: #f1f1f1;
     text-align: center;
+}

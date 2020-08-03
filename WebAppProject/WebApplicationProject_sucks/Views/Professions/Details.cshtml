@@ -1,4 +1,4 @@
-﻿@model WebApplicationProject_sucks.Models.Category
+﻿@model WebApplicationProject_sucks.Models.Profession
 
 @{
     ViewBag.Title = "Details";
@@ -7,12 +7,12 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Category</h4>
+    <h4>Profession</h4>
     <hr />
     <dl class="dl-horizontal">
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Name }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Profession_Name }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
