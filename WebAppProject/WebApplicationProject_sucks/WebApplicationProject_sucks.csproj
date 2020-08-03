@@ -140,8 +140,9 @@
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\PostToCategoriesController.cs" />
     <Compile Include="Controllers\ProfessionalPagesController.cs" />
-    <Compile Include="Controllers\ProfessionalsController.cs" />
     <Compile Include="Controllers\ProfessionalToCategoriesController.cs" />
+    <Compile Include="Controllers\ProfessionsController.cs" />
+    <Compile Include="Controllers\ProfessionToCategoriesController.cs" />
     <Compile Include="Controllers\QuestionRoomsController.cs" />
     <Compile Include="Controllers\QuestRoomCommentsController.cs" />
     <Compile Include="Controllers\RoomToCategoriesController.cs" />
@@ -152,10 +153,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Profession.cs" />
     <Compile Include="Models\Clip.cs" />
     <Compile Include="Models\PageToCategory.cs" />
     <Compile Include="Models\PostToCategory.cs" />
     <Compile Include="Models\ProfessionalToCategory.cs" />
+    <Compile Include="Models\ProfessionToCategory.cs" />
     <Compile Include="Models\QuestRoomComment.cs" />
     <Compile Include="Models\HTMLScript.cs" />
     <Compile Include="Models\Item.cs" />
@@ -281,6 +284,16 @@
     <Content Include="Views\UserToCategories\Details.cshtml" />
     <Content Include="Views\UserToCategories\Edit.cshtml" />
     <Content Include="Views\UserToCategories\Index.cshtml" />
+    <Content Include="Views\Professions\Create.cshtml" />
+    <Content Include="Views\Professions\Delete.cshtml" />
+    <Content Include="Views\Professions\Details.cshtml" />
+    <Content Include="Views\Professions\Edit.cshtml" />
+    <Content Include="Views\Professions\Index.cshtml" />
+    <Content Include="Views\ProfessionToCategories\Create.cshtml" />
+    <Content Include="Views\ProfessionToCategories\Delete.cshtml" />
+    <Content Include="Views\ProfessionToCategories\Details.cshtml" />
+    <Content Include="Views\ProfessionToCategories\Edit.cshtml" />
+    <Content Include="Views\ProfessionToCategories\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

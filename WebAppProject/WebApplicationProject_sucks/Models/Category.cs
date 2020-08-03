@@ -16,5 +16,7 @@ namespace WebApplicationProject_sucks.Models
         public virtual ICollection<UserToCategory> Users { get; set; }
         public virtual ICollection<PostToCategory> Posts { get; set; }
 
+        public virtual ICollection<ProfessionToCategory> Professions { get; set; }
+
     }
 }

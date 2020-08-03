@@ -1,4 +1,4 @@
-﻿@model WebApplicationProject_sucks.Models.Category
+﻿@model WebApplicationProject_sucks.Models.Profession
 
 @{
     ViewBag.Title = "Edit";
@@ -12,10 +12,10 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Category</h4>
+        <h4>Profession</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Name)
+        @Html.HiddenFor(model => model.Profession_Name)
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

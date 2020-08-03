@@ -1,16 +1,16 @@
 ﻿@model WebApplicationProject_sucks.Models.Professional
-<!---->
+
 @{
     Layout = null;
 }
 
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="~/Content/Professional.css?ver=<?php echo rand(111,999)?" type="text/css">
-    <title>Create</title>
+    <title>Professional Addition</title>
 </head>
 <body>
     <h4>Professional Addition</h4>
@@ -18,27 +18,33 @@
     {
         @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+        <div class="form-horizontal">
+            <h4>Professional</h4>
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Describe your specialty" } })
+
+            <div class="form-group">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Describe your specialty" } })
+            </div>
+            }
+
+
+            <div class="form-group">
+                @Html.DropDownListFor(model=>model.ProfessionalCategories, new List<SelectListItem>
+                       {
+
+                       } , "Select your specialties")
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Send for verification" class="btn btn-default" />
+            </div>
+            @Html.ActionLink("Cancel", "Index")
         </div>
-
-        <div class="form-group">
-            @Html.DropDownListFor(model=>model.ProfessionalCategories, new List<SelectListItem>
-                   {
-
-                   } , "Select your specialties")
-        </div>
-
-        <div class="form-group">
-            <input type="submit" value="Send for verification" class="btn btn-default" />
-        </div>
-        @Html.ActionLink("Cancel", "Index")
-    </div>
     }
+
+
 
 </body>
 </html>
