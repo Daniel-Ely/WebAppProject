@@ -11,107 +11,84 @@ using WebApplicationProject_sucks.Models;
 
 namespace WebApplicationProject_sucks.Controllers
 {
-    public class UsersController : Controller
+    public class ProfessionalsController : UsersController
     {
         private MyDB db = new MyDB();
 
-        // GET: Users
-        public ActionResult Index()
-        {
-            return View(db.Users.ToList());
-        }
-
-        // GET: Users/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-
-        // GET: Users/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Users/Create
+        // POST: Professionals/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserName,FirstName,Gender,BirthDay,Email,Password")] User user)
+        public ActionResult Create([Bind(Include = "UserName,Profession_Name,Description,Score")] Professional professional)
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(user);
+                User user = db.Users.Find(professional.UserName);
+                db.Users.Find(professional.UserName).;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(user);
+            ViewBag.Profession_Name = new SelectList(db.Professions, "Profession_Name", "Profession_Name", professional.Profession_Name);
+            return View(professional);
         }
 
-        // GET: Users/Edit/5
+        // GET: Professionals/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
-            if (user == null)
+            Professional professional = (Professional)db.Users.Find(id);
+            if (professional == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            ViewBag.Profession_Name = new SelectList(db.Professions, "Profession_Name", "Profession_Name", professional.Profession_Name);
+            return View(professional);
         }
 
-        // POST: Users/Edit/5
+        // POST: Professionals/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserName,FirstName,Gender,BirthDay,Email,Password")] User user , [Bind(Include = "Profession_Name,Description,Score")] Professional professional)
+        public ActionResult Edit([Bind(Include = "UserName,FirstName,Gender,BirthDay,Email,Password,Profession_Name,Description,Score")] Professional professional)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
+                db.Entry(professional).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(user);
+            ViewBag.Profession_Name = new SelectList(db.Professions, "Profession_Name", "Profession_Name", professional.Profession_Name);
+            return View(professional);
         }
 
-        // GET: Users/Delete/5
+        // GET: Professionals/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
-            if (user == null)
+            //Professional professional = db.Users.Find(id);
+            //if (professional == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            //return View(professional);
         }
 
-        // POST: Users/Delete/5
+        // POST: Professionals/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            User user = db.Users.Find(id);
-            db.Users.Remove(user);
+            //Professional professional = db.Users.Find(id);
+            //db.Users.Remove(professional);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

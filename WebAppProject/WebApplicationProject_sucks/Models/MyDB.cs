@@ -21,12 +21,11 @@ namespace WebApplicationProject_sucks
         public DbSet<PageToCategory> PageToCategories { set; get; }
         public DbSet<RoomToCategory> RoomToCategories { set; get; }
         public DbSet<Category> Categories { set; get; }
-
         public DbSet<Item> Items { get; set; }
-
         public DbSet<PostComment> PostComments { get; set; }
         public DbSet<Profession> Professions { get; set; }
-
         public DbSet<ProfessionToCategory> ProfessionToCategories { get; set; }
+        public DbSet<ProfessionalPending> ProfessionalPendings { get; set; }
+        public DbSet<Admin> Admins { get; set; }
     }
 }

@@ -199,6 +199,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ClipsController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
@@ -210,6 +211,8 @@
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\PostToCategoriesController.cs" />
     <Compile Include="Controllers\ProfessionalPagesController.cs" />
+    <Compile Include="Controllers\ProfessionalPendingsController.cs" />
+    <Compile Include="Controllers\ProfessionalsController.cs" />
     <Compile Include="Controllers\ProfessionalToCategoriesController.cs" />
     <Compile Include="Controllers\ProfessionsController.cs" />
     <Compile Include="Controllers\ProfessionToCategoriesController.cs" />
@@ -222,7 +225,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\ProfessionalPending.cs" />
     <Compile Include="Models\Profession.cs" />
     <Compile Include="Models\Clip.cs" />
     <Compile Include="Models\PageToCategory.cs" />
@@ -349,6 +354,16 @@
     <Content Include="Views\UserToCategories\Details.cshtml" />
     <Content Include="Views\UserToCategories\Edit.cshtml" />
     <Content Include="Views\UserToCategories\Index.cshtml" />
+    <Content Include="Views\Admins\Create.cshtml" />
+    <Content Include="Views\Admins\Delete.cshtml" />
+    <Content Include="Views\Admins\Details.cshtml" />
+    <Content Include="Views\Admins\Edit.cshtml" />
+    <Content Include="Views\Admins\Index.cshtml" />
+    <Content Include="Views\ProfessionalPendings\Create.cshtml" />
+    <Content Include="Views\ProfessionalPendings\Delete.cshtml" />
+    <Content Include="Views\ProfessionalPendings\Details.cshtml" />
+    <Content Include="Views\ProfessionalPendings\Edit.cshtml" />
+    <Content Include="Views\ProfessionalPendings\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
