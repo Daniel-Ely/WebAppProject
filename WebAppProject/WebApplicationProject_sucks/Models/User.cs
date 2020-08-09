@@ -9,9 +9,10 @@ namespace WebApplicationProject_sucks.Models
         //
         //User name
         //
+        [Key]
         [Required(ErrorMessage = "User name is Required")]
         [Display(Name = "User name")]
-        [Key] public string UserName { get; set; }
+        public string UserName { get; set; }
         //
         //First name
         //
@@ -50,6 +51,8 @@ namespace WebApplicationProject_sucks.Models
         //Profile image
         //
         public Image ProfileImage { get; set; }
+
+        public bool isProfessional { get; set; }
 
     }
 }

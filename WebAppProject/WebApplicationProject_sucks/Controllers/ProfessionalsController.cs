@@ -11,9 +11,39 @@ using WebApplicationProject_sucks.Models;
 
 namespace WebApplicationProject_sucks.Controllers
 {
-    public class ProfessionalsController : UsersController
+    public class ProfessionalsController : Controller
     {
         private MyDB db = new MyDB();
+
+        // GET: Professionals
+        public ActionResult Index()
+        {
+            var professionals = db.Professionals.Include(p => p.Profession).Include(p => p.User);
+            return View(professionals.ToList());
+        }
+
+        // GET: Professionals/Details/5
+        public ActionResult Details(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Professional professional = db.Professionals.Find(id);
+            if (professional == null)
+            {
+                return HttpNotFound();
+            }
+            return View(professional);
+        }
+
+        // GET: Professionals/Create
+        public ActionResult Create()
+        {
+            ViewBag.Profession_Name = new SelectList(db.Professions, "Profession_Name", "Profession_Name");
+            ViewBag.UserName = new SelectList(db.Users, "UserName", "FirstName");
+            return View();
+        }
 
         // POST: Professionals/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -24,13 +54,13 @@ namespace WebApplicationProject_sucks.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = db.Users.Find(professional.UserName);
-                db.Users.Find(professional.UserName).;
+                db.Professionals.Add(professional);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.Profession_Name = new SelectList(db.Professions, "Profession_Name", "Profession_Name", professional.Profession_Name);
+            ViewBag.UserName = new SelectList(db.Users, "UserName", "FirstName", professional.UserName);
             return View(professional);
         }
 
@@ -41,12 +71,13 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Professional professional = (Professional)db.Users.Find(id);
+            Professional professional = db.Professionals.Find(id);
             if (professional == null)
             {
                 return HttpNotFound();
             }
             ViewBag.Profession_Name = new SelectList(db.Professions, "Profession_Name", "Profession_Name", professional.Profession_Name);
+            ViewBag.UserName = new SelectList(db.Users, "UserName", "FirstName", professional.UserName);
             return View(professional);
         }
 
@@ -55,7 +86,7 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserName,FirstName,Gender,BirthDay,Email,Password,Profession_Name,Description,Score")] Professional professional)
+        public ActionResult Edit([Bind(Include = "UserName,Profession_Name,Description,Score")] Professional professional)
         {
             if (ModelState.IsValid)
             {
@@ -64,6 +95,7 @@ namespace WebApplicationProject_sucks.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Profession_Name = new SelectList(db.Professions, "Profession_Name", "Profession_Name", professional.Profession_Name);
+            ViewBag.UserName = new SelectList(db.Users, "UserName", "FirstName", professional.UserName);
             return View(professional);
         }
 
@@ -74,12 +106,12 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //Professional professional = db.Users.Find(id);
-            //if (professional == null)
+            Professional professional = db.Professionals.Find(id);
+            if (professional == null)
             {
                 return HttpNotFound();
             }
-            //return View(professional);
+            return View(professional);
         }
 
         // POST: Professionals/Delete/5
@@ -87,8 +119,8 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            //Professional professional = db.Users.Find(id);
-            //db.Users.Remove(professional);
+            Professional professional = db.Professionals.Find(id);
+            db.Professionals.Remove(professional);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
