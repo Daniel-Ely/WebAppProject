@@ -364,6 +364,11 @@
     <Content Include="Views\ProfessionalPendings\Details.cshtml" />
     <Content Include="Views\ProfessionalPendings\Edit.cshtml" />
     <Content Include="Views\ProfessionalPendings\Index.cshtml" />
+    <Content Include="Views\Posts\Create.cshtml" />
+    <Content Include="Views\Posts\Delete.cshtml" />
+    <Content Include="Views\Posts\Details.cshtml" />
+    <Content Include="Views\Posts\Edit.cshtml" />
+    <Content Include="Views\Posts\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
