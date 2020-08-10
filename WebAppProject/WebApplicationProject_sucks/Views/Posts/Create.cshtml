@@ -84,6 +84,9 @@
             return false;
         }
     </script>
+    @{ 
+        var v = "2";
+    }
     <link rel="stylesheet" href="~/Content/creatPost.css?ver=<?php echo rand(111,999)?" type="text/css" />
     <meta name="viewport" content="width=device-width" />
     <title>Create</title>
@@ -98,26 +101,20 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "enter the post title" } })
         </div>
         <div class="form-group">
             <!--text editor , tinymce-->
             <textarea id="mytextarea" name="mytextarea">Hello, World!</textarea>
         </div>
+
         @Html.HiddenFor(model => model.Date, DateTime.Today)
         @Html.HiddenFor(model => model.NumOfRating, 0)
+
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "enter a description for your post" } })
         </div>
-        <div id="content">
-            @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control", placeholder = "this is content" } })
-        </div>
+        @Html.HiddenFor(model => model.AddHtmlScript(v))
         <div class="form-group">
             <input type="submit" value="Create" onclick="mySave()" class="btn btn-default" />
         </div>
