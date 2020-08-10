@@ -219,6 +219,7 @@
     <Compile Include="Controllers\QuestionRoomsController.cs" />
     <Compile Include="Controllers\QuestRoomCommentsController.cs" />
     <Compile Include="Controllers\RoomToCategoriesController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TextsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\UserToCategoriesController.cs" />
@@ -369,6 +370,7 @@
     <Content Include="Views\Posts\Details.cshtml" />
     <Content Include="Views\Posts\Edit.cshtml" />
     <Content Include="Views\Posts\Index.cshtml" />
+    <Content Include="Views\Test\tinymce.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

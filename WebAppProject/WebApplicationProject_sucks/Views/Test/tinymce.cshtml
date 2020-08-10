@@ -1,5 +1,4 @@
-﻿@model WebApplicationProject_sucks.Models.Post
-
+﻿
 @{
     Layout = null;
 }
@@ -10,7 +9,8 @@
 <head>
     <script src="~/PlugIn/tinymce/tinymce.min.js"></script>
     <script src="~/PlugIn/tinymce/jquery.tinymce.min.js"></script>
-    <!--tinymce init-->
+    <script type="text/javascript" src="~/Scripts/getData.js"></script>
+    <!---->
     <script>
         tinymce.init({
             selector: '#mytextarea',
@@ -76,52 +76,24 @@
             ]
         });
     </script>
-    <!-- submit button func-->
-    <script>
-        function mySave() {
-            var myContent = tinymce.get("mytextarea").getContent();
-            document.getElementById("demo").innerHTML = myContent;
-            return false;
-        }
-    </script>
-    <link rel="stylesheet" href="~/Content/creatPost.css?ver=<?php echo rand(111,999)?" type="text/css" />
     <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
+    <title>tinymce</title>
 </head>
 <body>
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Post</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-        </div>
-        <div class="form-group">
-            <!--text editor , tinymce-->
-            <textarea id="mytextarea" name="mytextarea">Hello, World!</textarea>
-        </div>
-        @Html.HiddenFor(model => model.Date, DateTime.Today)
-        @Html.HiddenFor(model => model.NumOfRating, 0)
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div id="content">
-            @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control", placeholder = "this is content" } })
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Create" onclick="mySave()" class="btn btn-default" />
-        </div>
+    <form id="get-Data-Form" method="post">
+        <textarea id="mytextarea" class="tinymce"></textarea>
+        <button onclick="mySave()">Save</button>
+        <script>
+            function mySave()
+            {
+                var myContent = tinymce.get("mytextarea").getContent();
+                document.getElementById("demo").innerHTML = myContent;
+                return false;
+            }
+        </script>
+        <p id="demo"></p>
+    </form>
+    <div id="dataConteiner"> 
     </div>
-    }
 </body>
 </html>

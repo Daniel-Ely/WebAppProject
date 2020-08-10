@@ -9,6 +9,7 @@ namespace WebApplicationProject_sucks.Models
     {
         [Key]public int PostID { get; set; }
 
+        [Required()]
         public string Title { get; set; }
 
         public DateTime Date { get; set; }

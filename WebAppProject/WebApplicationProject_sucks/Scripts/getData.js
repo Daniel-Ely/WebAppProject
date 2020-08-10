@@ -1,10 +1,10 @@
 $(document).ready(function(){
 
-	$("#get-data-form").submit(function(e){
+    $("#get-Data-Form").submit(function(e){
 
-		var content = tinymce.get("texteditor").getContent();
+        var content = tinymce.get("mytextarea").getContent();
 
-		$("#data-container").html(content);
+        $("#dataConteiner").html(content);
 
 		return false;
 
