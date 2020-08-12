@@ -7,7 +7,8 @@ namespace WebApplicationProject_sucks.Models
 {
     public class Post
     {
-        [Key]public int PostID { get; set; }
+        [Key]
+        public int PostID { get; set; }
 
         public string Title { get; set; }
 
@@ -24,7 +25,7 @@ namespace WebApplicationProject_sucks.Models
         public virtual ICollection<Item> Content { get; set; }
 
         public virtual ICollection<PostComment> Comments { get; set; }
-
+        
         [ForeignKey("ProfessionalPage")]
         public int PageID { get; set; }
         public ProfessionalPage ProfessionalPage { get; set; }

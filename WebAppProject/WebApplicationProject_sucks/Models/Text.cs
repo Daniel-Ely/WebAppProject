@@ -7,7 +7,7 @@ namespace WebApplicationProject_sucks.Models
     {
 
         public string[] Location { get; set; }
-       [Key] public int TextID { get; set; }
+        [Key] public int TextID { get; set; }
 
         public string Content { get; set; }
     }

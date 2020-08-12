@@ -19,14 +19,18 @@
         @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-       
-        
+
+
         <p id="demo"></p>
 
         <script>
             var v = sessionStorage.getItem('UserName');
-            document.getElementById("demo").innerHTML = v;
+            document.getElementById("demo").innerHTML = v;        
         </script>
+
+
+
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
