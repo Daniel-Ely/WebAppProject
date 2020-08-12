@@ -1,0 +1,71 @@
+﻿@model WebApplicationProject_sucks.Models.User
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+    <link rel="stylesheet" href="~/Content/Register.css?ver=<?php echo rand(111,999)?" type="text/css" />
+</head>
+<body>
+    <h2>Register</h2>
+    @using (Html.BeginForm())
+    {
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="imgcontainer">
+            <img src="~/src/Owl family.png" alt="Avatar" class="avatar"><br />
+        </div>
+        <div class="validations">
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter user name", @id = "UserNameId" } })
+
+        </div>
+        <div class="form-group">
+            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter first name" } })
+
+        </div>
+        <div class="form-group">
+            @Html.DropDownListFor(model => model.Gender, new List<SelectListItem>
+                {
+                new SelectListItem { Text = "Male", Value = "Male"},
+                new SelectListItem { Text = "Female", Value = "Female"},
+                new SelectListItem { Text = "Other", Value = "Other"}
+                }, "Select your Gender")
+        </div>
+        <div class="form-group">
+            @Html.EditorFor(model => model.BirthDay, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Email address" } })
+        </div>
+        <div class="form-group">
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
+        </div>
+
+         <script>
+         function setUserName() {
+
+             session['UserName'] = $("#UserName").val();
+             //sessionStorage.setItem('UserName', $("#UserName").val());
+             location.href = '../ProfessionalPendings/Create';
+             }
+
+     </script>
+
+        <div class="form-group">
+            <input type="submit" value="Register" class="btn btn-default" />
+
+            <input type="submit" value="Register as a professional creator" onclick="setUserName()" />
+        </div>
+    </div>
+    }
+</body>
+</html>
