@@ -63,24 +63,38 @@
 
         <script>
             function setUserName() {
-                sessionStorage.setItem('UserName', $("#UserName").val());
-              //  location.href = '../ProfessionalPendings/Create';
-                document.location.href = '../ProfessionalPendings/Create';
+                sessionStorage.setItem('UserName', $("#UserName").val()); //saves the username for session
+                window.location.replace("../ProfessionalPendings/Create");//navigates to another page
+                //  var theURL = window.location.pathname;
+                //  return theURL.replace("/Users/", "/ProfessionalPendings/");
+
             }
-           </script>
+        </script>
+
+
+        <script>
+            function SubmitProfessional() {
+                document.getElementById().action = 'action1.php';
+                document.target = 'frame_result1';
+                document.submit();
+             
+            }
+        </script>
 
 
 
         <div class="form-group">
             <input type="submit" value="Register" class="btn btn-default" />
 
-      
 
+            <!-- sends the data to the DB, saves session and nagivates -->>
             <input type="submit" value="Register as a professional creator" onclick="setUserName()" />
 
 
         </div>
+        /**/
     </div>
     }
-</body>
-</html>
+/**/
+</body >
+</html >
