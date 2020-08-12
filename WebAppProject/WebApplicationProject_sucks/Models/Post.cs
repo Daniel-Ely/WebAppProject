@@ -10,6 +10,7 @@ namespace WebApplicationProject_sucks.Models
         [Key]
         public int PostID { get; set; }
 
+        [Required()]
         public string Title { get; set; }
 
         public DateTime Date { get; set; }
@@ -31,6 +32,13 @@ namespace WebApplicationProject_sucks.Models
         public ProfessionalPage ProfessionalPage { get; set; }
 
         public virtual ICollection<PostToCategory> Categories { get; set; }
+
+        public void AddHtmlScript(string content)
+        {
+            HTMLScript hs = new HTMLScript();
+            hs.Content = content;
+            this.Content.Add(hs);
+        }
 
     }
 }
