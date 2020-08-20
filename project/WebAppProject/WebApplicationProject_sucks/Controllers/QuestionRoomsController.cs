@@ -53,7 +53,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 db.QuestionRooms.Add(questionRoom);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
             }
 
             return View(questionRoom);
