@@ -10,7 +10,9 @@
 <head>
     <script src="~/PlugIn/tinymce/tinymce.min.js"></script>
     <script src="~/PlugIn/tinymce/jquery.tinymce.min.js"></script>
-    <!--tinymce init-->
+    <!--
+        tinymce init Feature boot
+    -->
     <script>
         tinymce.init({
             selector: '#mytextarea',
@@ -78,27 +80,24 @@
     </script>
     <!-- submit button func-->
     <script>
-        function mySave() {
+        function mySave()
+        {
             var myContent = tinymce.get("mytextarea").getContent();
-            document.getElementById("demo").innerHTML = myContent;
             return false;
         }
-
     </script>
-
-    @{
-        var v = "2";
-    }
     <link rel="stylesheet" href="~/Content/creatPost.css?ver=<?php echo rand(111,999)?" type="text/css" />
     <meta name="viewport" content="width=device-width" />
     <title>Create</title>
 </head>
+
 <body>
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
+    
         <h4>Post</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -106,7 +105,10 @@
             @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "enter the post title" } })
         </div>
         <div class="form-group">
-            <!--text editor , tinymce-->
+            <!--
+                text editor , 
+                tinymce post content    
+            -->
             <textarea id="mytextarea" name="mytextarea">Hello, World!</textarea>
         </div>
         @Html.HiddenFor(model => model.Date, DateTime.Today)
@@ -114,9 +116,8 @@
         <div class="form-group">
             @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "enter a description for your post" } })
         </div>
-        @Html.HiddenFor(model => model.AddHtmlScript(v))
         <div class="form-group">
-            <input type="submit" value="Create" onclick="mySave()" class="btn btn-default" />
+            <input type="submit" value="Create" class="btn btn-default" />
         </div>
     </div>
     }
