@@ -1,4 +1,5 @@
-﻿@model WebApplicationProject_sucks.Models.ProfessionalPending
+﻿@using WebApplicationProject_sucks.Models;
+@model Tuple<ProfessionalPending, List<Category>>
 
 @{
     Layout = null;
@@ -18,40 +19,44 @@
     {
         @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-
-
-      
-
-        <p id="demo">hey and welcome: @(Session["UserName"])</p>
-
-
-        <script>
-           /* var v = sessionStorage.getItem('UserName');
-            document.getElementById("demo").innerHTML = v;*/
-        </script>
+        <div class="form-horizontal">
 
 
 
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <p id="demo">hey and welcome: @(Session["UserName"])</p>
 
-        <div class="form-group">
-            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Describe your specialty" } })
+
+            <script>
+                           /* var v = sessionStorage.getItem('UserName');
+                            document.getElementById("demo").innerHTML = v;*/
+            </script>
+
+
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.EditorFor(tuple=>tuple.Item1.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Describe your specialty" } })
+            </div>
+
+            <div class="form-group">
+                @{
+                    List<SelectListItem> listOfCategories = new List<SelectListItem>();
+                    foreach (var item in Model.Item2)
+                    {
+                        listOfCategories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
+                    }
+                }
+                @Html.ListBoxFor(tuple => tuple.Item1.ProfessionalCategories, listOfCategories, "Select your specialties")
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Send for verification" class="btn btn-default" />
+            </div>
+            @Html.ActionLink("Cancel", "Index")
         </div>
-
-        <div class="form-group">
-            @Html.DropDownListFor(model=>model.ProfessionalCategories, new List<SelectListItem>
-                   {
-
-                   } , "Select your specialties")
-        </div>
-
-        <div class="form-group">
-            <input type="submit" value="Send for verification" class="btn btn-default" />
-        </div>
-        @Html.ActionLink("Cancel", "Index")
-    </div>
     }
 
 </body>
