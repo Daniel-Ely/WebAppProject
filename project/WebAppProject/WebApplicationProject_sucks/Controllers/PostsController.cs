@@ -49,17 +49,19 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PostID,Title,Date,Rating,NumOfRating,Description,PageID")] Post post)
+        public ActionResult Create([Bind(Include = "PostID,Title,Date,Rating,NumOfRating,Description,PageID,Content")] Post post)
         {
             if (ModelState.IsValid)
             {
+
                 db.Posts.Add(post);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.PageID = new SelectList(db.ProfessionalPages, "ProffesionalPageID", "NameOfPage", post.PageID);
-            return View(post);
+            //return View(post);
+            return RedirectToAction("Index");
         }
 
         // GET: Posts/Edit/5
@@ -128,6 +130,19 @@ namespace WebApplicationProject_sucks.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        [HttpPost]
+        public void AddHtmlScript(string content , int id)
+        {
+            HTMLScript hs = new HTMLScript();
+            hs.Content = content;
+            //
+            Post post = db.Posts.Find(id);
+            if (ModelState.IsValid)
+            {
+                post.Content.Add(hs);
+                db.SaveChanges();
+            }
         }
     }
 }
