@@ -22,6 +22,14 @@ namespace WebApplicationProject_sucks.Controllers
             return View(professionalPendings.ToList());
         }
 
+        //public ActionResult IndexTuple()
+        //{
+          //  ViewBag.Message = "Welcome to my demo!";
+          //  var tupleModel = new Tuple<ProfessionalPending, List<Category>>(GetProfessionalPending(), GetCategory());
+          //  return View(tupleModel);
+      //  }
+
+
         // GET: ProfessionalPendings/Details/5
         public ActionResult Details(string id)
         {
