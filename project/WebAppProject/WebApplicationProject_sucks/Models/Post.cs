@@ -32,12 +32,7 @@ namespace WebApplicationProject_sucks.Models
 
         public virtual ICollection<PostToCategory> Categories { get; set; }
 
-        public void AddHtmlScript(string content)
-        {
-            HTMLScript hs = new HTMLScript();
-            hs.Content = content;
-            this.Content.Add(hs);
-        }
+       
 
     }
 }
