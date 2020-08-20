@@ -47,20 +47,33 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public void Create([Bind(Include = "UserName,FirstName,Gender,BirthDay,Email,Password,isProfessional")] User user)
+        //this is going to take the boolean attribute as well since it matches with its name 
+        //JS is going to execute accordingly before this action takes place.
+        public ActionResult Create([Bind(Include = "UserName,FirstName,Gender,BirthDay,Email,Password")] User user,string isProfessional)
         {
             if (ModelState.IsValid)
-            {//we just want to save the entry to the DB in both cases. 
+            {//we just want to save the entry to the DB in both cases.  Process is the same 
                 db.Users.Add(user);
                 db.SaveChanges();
-             //   return RedirectToAction("Index");
+
+                if (isProfessional == "1")
+                {
+                    Session["UserName"] = user.UserName;//saves the user name for context
+ //  return RedirectToAction("Index");
+                    return View("../ProfessionalPendings/Create");//refer to the the additional               
+                }
+
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+
+
             }
-
-         
-
-            return;
+            return View(user);
         }
 
+  
         // GET: Users/Edit/5
         public ActionResult Edit(string id)
         {

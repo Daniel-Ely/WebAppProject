@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\WebAppProject"
+    "\\WebAppProject",
+    "\\WebAppProject\\WebApplicationProject_sucks",
+    "\\WebAppProject\\WebApplicationProject_sucks\\Controllers",
+    "\\WebAppProject\\WebApplicationProject_sucks\\Models"
   ],
-  "SelectedNode": "\\WebAppProject\\WebApplicationProject_sucks.sln",
+  "SelectedNode": "\\WebAppProject\\WebApplicationProject_sucks\\Models\\Professional.cs",
   "PreviewInSolutionExplorer": false
 }
