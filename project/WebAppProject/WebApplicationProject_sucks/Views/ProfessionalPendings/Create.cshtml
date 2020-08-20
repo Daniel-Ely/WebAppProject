@@ -41,16 +41,27 @@
             </div>
 
             <div class="form-group">
+
+
+
+                <!-- TODO: assign the UserName value in the hiddenfor attribute-->
+
+
                 @{
                     MyDB db = new MyDB();
 
                     List<SelectListItem> listOfCategories = new List<SelectListItem>();
-                    foreach(var item in db.Categories)
+
+      //  Html.ListBoxFor(model => model.SelectedIDArray, new MultiSelectList(db.Categories, "Name"), new { id = "multiSelectDropDown", multiple = "multiple" });
+
+
+
+                    foreach (var item in db.Categories)
                     {
                         listOfCategories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
                     }
                 }
-                @Html.ListBoxFor(model=>model.ProfessionalCategories, listOfCategories, "Select your specialties")
+                @Html.ListBoxFor(model => model.ProfessionalCategories, listOfCategories, "Select your specialties")
             </div>
 
             <div class="form-group">
