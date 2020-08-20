@@ -47,16 +47,18 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserName,FirstName,Gender,BirthDay,Email,Password,isProfessional")] User user)
+        public void Create([Bind(Include = "UserName,FirstName,Gender,BirthDay,Email,Password,isProfessional")] User user)
         {
             if (ModelState.IsValid)
-            {
+            {//we just want to save the entry to the DB in both cases. 
                 db.Users.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+             //   return RedirectToAction("Index");
             }
 
-            return View(user);
+         
+
+            return;
         }
 
         // GET: Users/Edit/5

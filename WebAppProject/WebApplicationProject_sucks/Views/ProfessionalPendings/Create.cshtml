@@ -21,11 +21,11 @@
     <div class="form-horizontal">
 
 
-        <p id="demo"></p>
+        <p id="demo">yo</p>
 
         <script>
-            var v = sessionStorage.getItem('UserName');
-            document.getElementById("demo").innerHTML = v;        
+            var v = sessionStorage.getItem('UserName').toString();
+            document.getElementById("demo").innerText = v;        
         </script>
 
 
