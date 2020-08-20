@@ -371,6 +371,11 @@
     <Content Include="Views\Posts\Edit.cshtml" />
     <Content Include="Views\Posts\Index.cshtml" />
     <Content Include="Views\Test\tinymce.cshtml" />
+    <Content Include="Views\Professions\Create.cshtml" />
+    <Content Include="Views\Professions\Delete.cshtml" />
+    <Content Include="Views\Professions\Details.cshtml" />
+    <Content Include="Views\Professions\Edit.cshtml" />
+    <Content Include="Views\Professions\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
