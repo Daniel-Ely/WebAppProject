@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -50,18 +51,37 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserName,Profession_Name,Description")] ProfessionalPending professionalPending)
+        public ActionResult Create([Bind(Include = "UserName,Profession_Name,Description")] ProfessionalPending professionalPending,string[] selectedOptions,HttpPostedFileBase[] applyFiles)
         {
             if (ModelState.IsValid)
             {
+                for (int i = 0; i < selectedOptions.Length; i++)
+                {//MtM relationship
+                    db.PendingToCategories.Add(new PendingToCategory(professionalPending.UserName, selectedOptions[i]));
+                }
+
+                //formatting our files            
+                for (int i = 0; i < applyFiles.Length; i++)
+                {//converting each file to a byte array
+                    MemoryStream target = new MemoryStream();
+                    applyFiles[i].InputStream.CopyTo(target);
+                    byte[] content=target.ToArray();
+                    //TODO: check if we need more manipulation before saving the byte array                             
+                    PendingFile file = new PendingFile(db.PendingFiles.Count(), content, professionalPending.UserName);
+                    db.PendingFiles.Add(file);
+                }
+
+                //sealing  and adding pending-professional to the DB
                 db.ProfessionalPendings.Add(professionalPending);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Profession_Name = new SelectList(db.Professions, "Profession_Name", "Profession_Name", professionalPending.Profession_Name);
-            ViewBag.UserName = new SelectList(db.Users, "UserName", "FirstName", professionalPending.UserName);
+          //  ViewBag.Profession_Name = new SelectList(db.Professions, "Profession_Name", "Profession_Name", professionalPending.Profession_Name);
+          //ViewBag.UserName = new SelectList(db.Users, "UserName", "FirstName", professionalPending.UserName);
             return View(professionalPending);
+
         }
 
         // GET: ProfessionalPendings/Edit/5

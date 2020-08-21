@@ -20,7 +20,7 @@ namespace WebApplicationProject_sucks.Controllers
         {
             return View(db.Users.ToList());
         }
-
+        
         // GET: Users/Details/5
         public ActionResult Details(string id)
         {
@@ -49,17 +49,22 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateAntiForgeryToken]
         //this is going to take the boolean attribute as well since it matches with its name 
         //JS is going to execute accordingly before this action takes place.
-        public ActionResult Create([Bind(Include = "UserName,FirstName,Gender,BirthDay,Email,Password")] User user,string isProfessional)
+        public ActionResult Create([Bind(Include = "UserName,FirstName,Gender,BirthDay,Email,Password")] User user,string isProfessional, string[] selectedOptions)
         {
+   
             if (ModelState.IsValid)
             {//we just want to save the entry to the DB in both cases.  Process is the same 
                 db.Users.Add(user);
+                for (int i=0;i<selectedOptions.Length;i++)
+                {//MtM relationship
+                    db.UserToCategories.Add(new UserToCategory(user.UserName, selectedOptions[i]));
+                }
                 db.SaveChanges();
+
 
                 if (isProfessional == "1")
                 {
                     Session["UserName"] = user.UserName;//saves the user name for context
- //  return RedirectToAction("Index");
                     return View("../ProfessionalPendings/Create");//refer to the the additional               
                 }
 
@@ -68,10 +73,31 @@ namespace WebApplicationProject_sucks.Controllers
                     return RedirectToAction("Index");
                 }
 
-
             }
+            
             return View(user);
         }
+        public ActionResult LogIn(string username,string password)
+        {
+            foreach (var user in db.Users)
+            {
+                if(user.UserName==username && user.Password==password)
+                {//successful login
+                    Session["UserName"] = username;
+                   return Redirect("../Controllers/HomePage/Home");
+                }
+                else
+                {//login failed
+                 
+                 //ModelState.AddModelError("password", "The user name or password provided is incorrect.");
+                }
+                
+            }
+
+            return View();
+        }
+
+
 
   
         // GET: Users/Edit/5

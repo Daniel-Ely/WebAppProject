@@ -9,6 +9,13 @@ namespace WebApplicationProject_sucks.Models
 {
     public class ProfessionalToCategory
     {
+   
+        public ProfessionalToCategory(string userName, string categoryname)
+        {
+            this.P_UserName = userName;
+            this.CategoryName = categoryname;
+        }
+        
         [Key]
         [Column(Order = 0)]
         [ForeignKey("Professional")]

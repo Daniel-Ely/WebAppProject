@@ -14,18 +14,16 @@ namespace WebApplicationProject_sucks.Models
         public string UserName {set; get;}
         public User User { get; set; }
         
-
         [ForeignKey("Profession")]
         public string Profession_Name { get; set; }
         public Profession Profession { get; set; }
-
 
         public string Description { get; set; }//education related- requires approvement
 
         //categories
         public virtual ICollection<ProfessionalToCategory> ProfessionalCategories { get; set; }
 
-        public List<byte[]> ApplyFiles {set; get;}
-
+        //application files
+        public virtual ICollection<PendingFile> ApplyFiles { get; set; }
     }
 }

@@ -16,28 +16,30 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-     <div class="form-horizontal">
+    <div class="form-horizontal">
 
         <div class="imgcontainer">
             <img src="~/src/Owl.png" alt="Avatar" class="avatar">
         </div>
 
-        <div class="container">
-            <input type="text" name="username" placeholder="Enter user name" required>
+        <div class="validations">
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
         </div>
 
         <div class="container">
-            <input type="password" name="password" placeholder="Enter password" required>
+
+            @Html.TextBox("username", "", new { placeholder = "Enter user name", required = "required" });
         </div>
 
-        <div class="remember">
-              <input type="checkbox" checked="checked" name="remember">
-              <label>Remember me</label>
+
+        <div class="container">
+            @Html.TextBox("password", "", new { placeholder = "Enter password", required = "required" });
         </div>
+
+
 
         <input type="submit" value="Log In" class="btn btn-default" /><br />
         <button type="button" class="cancelbtn">Cancel</button>
-        <a href="#"> @Html.ActionLink("Forgot password?", "LogIn")</a>
 
 
     </div>

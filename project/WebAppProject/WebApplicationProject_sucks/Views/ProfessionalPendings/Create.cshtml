@@ -19,15 +19,16 @@
         @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        
+
         <p id="demo">hey and welcome: @(Session["UserName"])</p>
 
 
-        @Html.HiddenFor(model => model.UserName, new {Value= Session["UserName"] })
+        @Html.HiddenFor(model => model.UserName, new { Value = Session["UserName"] })
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
+
             @{
                 MyDB db = new MyDB();
 
@@ -52,10 +53,15 @@
                     listOfCategories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
                 }
             }
-            @Html.ListBoxFor(model => model.ProfessionalCategories, listOfCategories, "Select your specialties")
+            <label>Select your specialties</label>
+            @Html.ListBox("selectedOptions", listOfCategories)
         </div>
 
-        <input type="file" id="ApplyFiles" name="ApplyFiles" multiple><br><br>
+
+          @{/*Html.TextBox("applyFiles", new { type = "file" })*/}
+
+
+        <input type="file" id="applyFiles" name="applyFiles" multiple> <br><br>
 
         <div class="form-group">
             <input type="submit" value="Send for verification" class="btn btn-default" />

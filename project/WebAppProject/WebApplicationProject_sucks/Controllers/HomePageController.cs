@@ -11,6 +11,7 @@ namespace WebApplicationProject_sucks.Controllers
         // GET: HomePage
         public ActionResult Home()
         {
+     
             return View();
         }
         public ActionResult Register()

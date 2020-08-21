@@ -28,5 +28,7 @@ namespace WebApplicationProject_sucks
         public DbSet<Professional> Professionals { get; set; }
         public DbSet<ProfessionalPending> ProfessionalPendings { get; set; }
         public DbSet<Admin> Admins { get; set; }
+        public DbSet<PendingFile> PendingFiles { get; set; }
+        public DbSet<PendingToCategory> PendingToCategories { get; set; }
     }
 }
