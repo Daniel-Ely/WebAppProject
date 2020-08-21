@@ -47,7 +47,7 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AdminName,user")] Admin admin)
+        public ActionResult Create([Bind(Include = "AdminName,Password")] Admin admin)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AdminName,user")] Admin admin)
+        public ActionResult Edit([Bind(Include = "AdminName,Password")] Admin admin)
         {
             if (ModelState.IsValid)
             {

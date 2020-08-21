@@ -25,9 +25,8 @@ namespace WebApplicationProject_sucks
         public DbSet<PostComment> PostComments { get; set; }
         public DbSet<Profession> Professions { get; set; }
         public DbSet<ProfessionToCategory> ProfessionToCategories { get; set; }
+        public DbSet<Professional> Professionals { get; set; }
         public DbSet<ProfessionalPending> ProfessionalPendings { get; set; }
         public DbSet<Admin> Admins { get; set; }
-
-        public DbSet<Professional> Professionals { get; set; }
     }
 }

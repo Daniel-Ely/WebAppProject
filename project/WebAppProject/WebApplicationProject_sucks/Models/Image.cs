@@ -8,7 +8,7 @@ namespace WebApplicationProject_sucks.Models
     public class Image : Item
     {
         public string ImageTitle { get; set; }
-        public HttpPostedFileBase ImageData { get; set; }
+        public byte[] ImageData { get; set; }
         public string[] Size { get; set; }
         public string[] Location { get; set; }
 

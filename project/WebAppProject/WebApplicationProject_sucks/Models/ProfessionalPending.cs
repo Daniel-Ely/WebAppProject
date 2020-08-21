@@ -25,7 +25,7 @@ namespace WebApplicationProject_sucks.Models
         //categories
         public virtual ICollection<ProfessionalToCategory> ProfessionalCategories { get; set; }
 
-        public List<HttpPostedFileBase> ApplyFiles {set; get;}
+        public List<byte[]> ApplyFiles {set; get;}
 
     }
 }
