@@ -14,18 +14,16 @@
 </head>
 <body>
     <h4>Professional Addition</h4>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Create", "ProfessionalPendings", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
 
-
-
-
         <p id="demo">hey and welcome: @(Session["UserName"])</p>
 
 
+        @Html.HiddenFor(model => model.UserName, new {Value= Session["UserName"] })
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -57,10 +55,7 @@
             @Html.ListBoxFor(model => model.ProfessionalCategories, listOfCategories, "Select your specialties")
         </div>
 
-
-        @Html.TextBoxFor(model => model.ApplyFiles, new { type = "file" })
-
-
+        <input type="file" id="ApplyFiles" name="ApplyFiles" multiple><br><br>
 
         <div class="form-group">
             <input type="submit" value="Send for verification" class="btn btn-default" />

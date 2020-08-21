@@ -26,6 +26,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.ApplyFiles)
+            </th>
             <th></th>
         </tr>
     
@@ -40,10 +44,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
+
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.UserName }) |
-                @Html.ActionLink("Details", "Details", new { id=item.UserName }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.UserName })
+                @Html.DisplayFor(modelItem => item.ApplyFiles)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.UserName }) |
+                @Html.ActionLink("Details", "Details", new { id = item.UserName }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.UserName })
             </td>
         </tr>
     }

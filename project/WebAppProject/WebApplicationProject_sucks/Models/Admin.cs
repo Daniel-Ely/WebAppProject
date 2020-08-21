@@ -11,6 +11,6 @@ namespace WebApplicationProject_sucks.Models
         [Key]
         public string AdminName{get; set;}
         [DataType(DataType.Password)]
-        public string user { get; set;}
+        public string User { get; set;}
     }
 }

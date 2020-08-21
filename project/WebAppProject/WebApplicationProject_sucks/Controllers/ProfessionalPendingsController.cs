@@ -21,14 +21,7 @@ namespace WebApplicationProject_sucks.Controllers
             var professionalPendings = db.ProfessionalPendings.Include(p => p.Profession).Include(p => p.User);
             return View(professionalPendings.ToList());
         }
-
-        //public ActionResult IndexTuple()
-        //{
-          //  ViewBag.Message = "Welcome to my demo!";
-          //  var tupleModel = new Tuple<ProfessionalPending, List<Category>>(GetProfessionalPending(), GetCategory());
-          //  return View(tupleModel);
-      //  }
-
+        
 
         // GET: ProfessionalPendings/Details/5
         public ActionResult Details(string id)
@@ -58,7 +51,7 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserName,Profession_Name,Description")] ProfessionalPending professionalPending)
+        public ActionResult Create([Bind(Include = "UserName,Profession_Name,Description")] ProfessionalPending professionalPending, List<byte[]> ApplyFiles)
         {
             if (ModelState.IsValid)
             {
