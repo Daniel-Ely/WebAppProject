@@ -2,10 +2,7 @@
   "ExpandedNodes": [
     "",
     "\\WebAppProject",
-    "\\WebAppProject\\WebApplicationProject_sucks",
-    "\\WebAppProject\\WebApplicationProject_sucks\\Controllers",
-    "\\WebAppProject\\WebApplicationProject_sucks\\Models"
+    "\\WebAppProject\\WebApplicationProject_sucks"
   ],
-  "SelectedNode": "\\WebAppProject\\WebApplicationProject_sucks\\Models\\Professional.cs",
   "PreviewInSolutionExplorer": false
 }
