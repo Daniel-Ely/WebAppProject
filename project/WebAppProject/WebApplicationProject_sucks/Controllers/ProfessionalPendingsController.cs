@@ -21,7 +21,6 @@ namespace WebApplicationProject_sucks.Controllers
             var professionalPendings = db.ProfessionalPendings.Include(p => p.Profession).Include(p => p.User);
             return View(professionalPendings.ToList());
         }
-        
 
         // GET: ProfessionalPendings/Details/5
         public ActionResult Details(string id)

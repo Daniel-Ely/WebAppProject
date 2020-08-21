@@ -1,59 +1,42 @@
 ﻿@model WebApplicationProject_sucks.Models.ProfessionalPending
 
 @{
-    Layout = null;
+    ViewBag.Title = "Details";
 }
 
-<!DOCTYPE html>
+<h2>Details</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
-    <div>
-        <h4>ProfessionalPending</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Profession.Profession_Name)
-            </dt>
+<div>
+    <h4>ProfessionalPending</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Profession.Profession_Name)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Profession.Profession_Name)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Profession.Profession_Name)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.User.FirstName)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.FirstName)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.User.FirstName)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.User.FirstName)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Description)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Description)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
 
-         
-
-            <dd>
-                @Html.DisplayFor(model => model.ApplyFiles)
-            </dd>
-
-
-
-
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.UserName }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-</body>
-</html>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UserName }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

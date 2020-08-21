@@ -10,7 +10,9 @@ namespace WebApplicationProject_sucks.Models
     {
         [Key]
         public string AdminName{get; set;}
+
         [DataType(DataType.Password)]
-        public string User { get; set;}
+        [Required(ErrorMessage = "Password is Required")]
+        public string Password { get; set; }
     }
 }
