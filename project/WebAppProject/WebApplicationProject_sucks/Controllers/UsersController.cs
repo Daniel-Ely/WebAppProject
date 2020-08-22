@@ -80,23 +80,28 @@ namespace WebApplicationProject_sucks.Controllers
         
         public ActionResult LogIn(string username,string password)
         {
+          
             foreach (var user in db.Users)
             {
                 if(user.UserName==username && user.Password==password)
                 {//successful login
                     Session["UserName"] = username;
                     Session.Timeout = 10;//in minutues 
-                    return Redirect("../Controllers/HomePage/Home");
-                }
-                else
-                {//login failed
-                 
-                 //ModelState.AddModelError("password", "The user name or password provided is incorrect.");
-                }
-                
+                    return Redirect("../HomePage/Home");
+                }              
             }
+            //login failed
+            ViewBag.ErrorMessage = "The user name or password provided is incorrect.";
+            //ModelState.AddModelError("", "The user name or password provided is incorrect.");
 
             return View();
+        }
+
+
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            return Redirect("../HomePage/Home");
         }
 
 

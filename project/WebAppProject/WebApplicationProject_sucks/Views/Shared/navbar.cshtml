@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "navbar";
+}
+
+<div class="navbar">
+
+    @if (Session["UserName"] == null)
+    {
+        <a href="" class="active">Home</a>
+        <a href="#">@Html.ActionLink("Log in", "../Users/LogIn")</a>
+        <a href="#">@Html.ActionLink("Register", "../Users/Create")</a>
+    }
+
+    else
+    {
+        <a href="" class="active">Home</a>
+        <a href="#">@Html.ActionLink("Log out", "../Users/LogOut")</a>
+        <a href="#">@Html.ActionLink("Ask a new question", "../QuestionRooms/Create")</a>
+        <a href="" class="right">Welcome! @Session["UserName"]</a>
+    }
+
+</div>
+}
+
+
+

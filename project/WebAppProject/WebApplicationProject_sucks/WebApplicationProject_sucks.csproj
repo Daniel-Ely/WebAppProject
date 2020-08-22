@@ -385,6 +385,7 @@
     <Content Include="Views\PendingToCategories\Index.cshtml" />
     <Content Include="Views\HomePage\GuestHome.cshtml" />
     <Content Include="Views\HomePage\UserHome.cshtml" />
+    <Content Include="Views\Shared\navbar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -79,7 +79,6 @@
         function mySave() {
             var myContent = tinymce.get("mytextarea").getContent();
             document.getElementsByName("Title").innerHTML = myContent;
-            return false;
         }
 
     </script>
@@ -93,41 +92,49 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <h4>Question Room</h4>
+    <div class="form-horizontal">
+        <h4>Question Room</h4>
 
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div class="form-group">
-                <!--text editor , tinymce-->
-                <textarea id="mytextarea" name="mytextarea">Hello, World!</textarea>
-               
-                @Html.HiddenFor(model=>model.Title, new { htmlAttributes = new { @class = "form-control", @name = "Title" } })
-            </div>
+        <div class="form-group">
+            <!--text editor , tinymce-->
 
-            <div class="form-group">
-                @{
-                    MyDB db = new MyDB();
+            <textarea id="mytextarea" name="mytextarea">Write your question...</textarea>
 
-                    List<SelectListItem> listOfCategories = new List<SelectListItem>();
-                    foreach (var item in db.Categories)
-                    {
-                        listOfCategories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
-                    }
-                }
-                <!--selected categories-->
-                <label>Select the categories for this question room </label><br>
-                @Html.ListBox("selectedOptions", listOfCategories)
-            </div>
-            <!--creator name-->
-            <div class="form-group">
-                @Html.HiddenFor(model=>model.CreatorName, new { htmlAttributes = new { @class = "form-control", @value = @Session["UserName"] } })
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Create" onclick="mySave()" class="btn btn-default" />
-            </div>
         </div>
+
+        <!--question content-->
+        <div class="form-group">
+            <!--the name is already set to Title-->
+            @Html.HiddenFor(model => model.Title)
+        </div>
+
+        <!--creator name-->
+        <div class="form-group">
+            @Html.HiddenFor(model => model.CreatorName, new { @Value = Session["UserName"] })
+        </div>
+
+        <div class="form-group">
+            @{
+                MyDB db = new MyDB();
+
+                List<SelectListItem> listOfCategories = new List<SelectListItem>();
+                foreach (var item in db.Categories)
+                {
+                    listOfCategories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
+                }
+            }
+            <!--selected categories-->
+            <label>Select the categories for this question room </label><br>
+            @Html.ListBox("selectedOptions", listOfCategories)
+        </div>
+
+
+        <div class="form-group">
+            <input type="submit" value="Create" onclick="mySave()" class="btn btn-default" />
+        </div>
+    </div>
     }
 
 

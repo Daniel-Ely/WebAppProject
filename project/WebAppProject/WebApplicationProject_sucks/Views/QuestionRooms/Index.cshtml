@@ -21,7 +21,7 @@
                 @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Creator)
+                @Html.DisplayNameFor(model => model.CreatorName)
             </th>
             <th></th>
         </tr>
@@ -32,7 +32,7 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Creator)
+                @Html.DisplayFor(modelItem => item.CreatorName)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.QuestionRoomID }) |

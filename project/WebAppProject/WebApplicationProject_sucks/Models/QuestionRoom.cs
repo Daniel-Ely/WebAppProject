@@ -15,7 +15,6 @@ namespace WebApplicationProject_sucks.Models
         [ForeignKey("User")]
         public string CreatorName { get; set; }
         public User User { get; set; }
-
      
         public virtual ICollection<RoomToCategory> Categories { get; set; }
 

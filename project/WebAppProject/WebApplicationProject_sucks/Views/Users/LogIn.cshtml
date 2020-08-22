@@ -23,9 +23,13 @@
         </div>
 
         <div class="validations">
-            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-        </div>
 
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+          
+                @ViewBag.ErrorMessage
+
+                    
+        </div>
         <div class="container">
 
             @Html.TextBox("username", "", new { placeholder = "Enter user name", required = "required" });
