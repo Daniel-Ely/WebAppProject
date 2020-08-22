@@ -80,6 +80,7 @@
     <script>
         function mySave() {
             var myContent = tinymce.get("mytextarea").getContent();
+           
             document.getElementsByName("Title").innerHTML = myContent;
             return false;
         }

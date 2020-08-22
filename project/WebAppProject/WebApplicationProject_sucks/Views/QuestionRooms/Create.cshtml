@@ -78,7 +78,8 @@
     <script>
         function mySave() {
             var myContent = tinymce.get("mytextarea").getContent();
-            document.getElementsByName("Title").innerHTML = myContent;
+            alert(myContent);
+            document.getElementById("Title").value = myContent;
         }
 
     </script>
