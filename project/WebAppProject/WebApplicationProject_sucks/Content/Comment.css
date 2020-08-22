@@ -113,3 +113,13 @@ input[type="file"] {
 .custom-input-file:hover .uploadPhoto {
     display: block;
 }
+
+h4 {
+    display: inline-block;
+    position: absolute;
+    text-align: center;
+}
+
+.CreatorName{
+    text-align:center;
+}

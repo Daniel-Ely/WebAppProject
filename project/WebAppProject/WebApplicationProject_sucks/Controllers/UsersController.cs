@@ -70,7 +70,7 @@ namespace WebApplicationProject_sucks.Controllers
 
                 else
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("../HomePage/Home");
                 }
 
             }

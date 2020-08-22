@@ -50,7 +50,7 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "QuestCommentID,RoomID,UserName,Date")] QuestRoomComment questRoomComment)
+        public ActionResult Create([Bind(Include = "QuestCommentID,RoomID,UserName,Date,Content")] QuestRoomComment questRoomComment)
         {
             if (ModelState.IsValid)
             {
@@ -59,8 +59,7 @@ namespace WebApplicationProject_sucks.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RoomID = new SelectList(db.QuestionRooms, "QuestionRoomID", "Title", questRoomComment.RoomID);
-            ViewBag.UserName = new SelectList(db.Users, "UserName", "FirstName", questRoomComment.UserName);
+       
             return View(questRoomComment);
         }
 
