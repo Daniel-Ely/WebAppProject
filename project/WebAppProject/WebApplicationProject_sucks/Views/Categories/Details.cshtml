@@ -6,12 +6,22 @@
 
 <h2>Details</h2>
 
-<div>
     <h4>Category</h4>
     <hr />
-    <dl class="dl-horizontal">
-    </dl>
-</div>
+
+        @{
+            var room = Model.Rooms.GetEnumerator();
+            while (room.MoveNext())
+            {               
+            <tr>
+            <td>
+                <label> @Html.ActionLink(room.Current.QuestionRoom.Title, "../QuestionRooms/Details/"+ room.Current.QuestionRoom.QuestionRoomID) </label>>
+            </td>
+       
+            </tr>
+            }
+        }
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Name }) |
     @Html.ActionLink("Back to List", "Index")

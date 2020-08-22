@@ -17,8 +17,11 @@
         <a href="" class="active">Home</a>
         <a href="#">@Html.ActionLink("Log out", "../Users/LogOut")</a>
         <a href="#">@Html.ActionLink("Ask a new question", "../QuestionRooms/Create")</a>
-        <a href="" class="right">Welcome! @Session["UserName"]</a>
-    }
+        <a href="#">@Html.ActionLink("Move to Categories", "../Categories/Index")</a>
+
+      
+<a href="" class="right">Welcome! @Session["UserName"]</a>
+}
 
 </div>
 }

@@ -55,8 +55,10 @@ namespace WebApplicationProject_sucks.Controllers
                 questionRoom.QuestionRoomID = db.QuestionRooms.Count();
                 for (int i = 0; i < selectedOptions.Length; i++)
                 {//MtM of category-room relationship 
+                    
                     db.RoomToCategories.Add(new RoomToCategory(questionRoom.QuestionRoomID, selectedOptions[i]));
                 }
+
 
                 db.QuestionRooms.Add(questionRoom);
                 db.SaveChanges();
