@@ -79,10 +79,8 @@
     <!-- submit button func-->
     <script>
         function mySave() {
-            var myContent = tinymce.get("mytextarea").getContent();
-           
-            document.getElementsByName("Title").innerHTML = myContent;
-            return false;
+            var myContent = tinymce.get("mytextarea").getContent();               
+            document.getElementById("Title").value = myContent;
         }
 
     </script>
@@ -95,27 +93,41 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        
+
     <div class="form-horizontal">
         <h4>QuestionRoom</h4>
+
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.QuestionRoomID)
+
+        <!--Used to tell the edit function which room shall be edited-->
+        <!--we dont need to pass the categories since its recorded in another table!-->
+
+        @Html.HiddenFor(Model => Model.QuestionRoomID)
+        @Html.HiddenFor(Model => Model.CreatorName)
+
 
         <div class="form-group">
             <!--text editor , tinymce-->
-            <textarea id="mytextarea" name="mytextarea">Hello, World!</textarea>
-            @Html.HiddenFor(model => model.Comments,new { htmlAttributes = new { @class = "form-control", @name = "Title" } })
 
+            <textarea id="mytextarea" name="mytextarea">@Html.Raw(Model.Title)</textarea>
+
+        </div>
+        <!--question content-->
+        <div class="form-group">
+            <!--the name is already set to Title-->
+            @Html.HiddenFor(model => model.Title)
         </div>
 
         <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-default" />
+            <input type="submit" value="Create" onclick="mySave()" class="btn btn-default" />
         </div>
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
     </div>
-    }
-    
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
+                }
 </body>
 </html>

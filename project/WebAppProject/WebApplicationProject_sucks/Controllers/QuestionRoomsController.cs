@@ -89,7 +89,7 @@ namespace WebApplicationProject_sucks.Controllers
         public ActionResult Edit([Bind(Include = "QuestionRoomID,Title,CreatorName")] QuestionRoom questionRoom)
         {
             if (ModelState.IsValid)
-            {
+            {              
                 db.Entry(questionRoom).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
