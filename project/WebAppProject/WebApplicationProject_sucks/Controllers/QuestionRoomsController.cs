@@ -47,13 +47,22 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "QuestionRoomID,Title,Creator")] QuestionRoom questionRoom)
+        public ActionResult Create([Bind(Include = "Title,CreatorName")] QuestionRoom questionRoom,string[]selectedOptions)
         {
+            //TODO: rebuild the DB again 
+            //TODO: handle the login section
             if (ModelState.IsValid)
             {
+                questionRoom.QuestionRoomID = db.QuestionRooms.Count();
+
+                for (int i = 0; i < selectedOptions.Length; i++)
+                {//MtM of category-room relationship 
+                    db.RoomToCategories.Add(new RoomToCategory(questionRoom.QuestionRoomID, selectedOptions[i]));
+                }
+
                 db.QuestionRooms.Add(questionRoom);
                 db.SaveChanges();
-                //return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
 
             return View(questionRoom);

@@ -1,6 +1,4 @@
-﻿
-@model IEnumerable<WebApplicationProject_sucks.Models.Post>
-@{
+﻿@{
     Layout = null;
 }
 
@@ -14,23 +12,13 @@
 </head>
 <body>
 
+<!--here we place the content that differs-->
 
-    
-    <div class="header">
-        <h1>Soul Owl</h1>
-    </div>
-
-    <div class="navbar">
-        <a href="#" class="active">Home</a>
-        <a href="#">@Html.ActionLink("Log in", "../Users/LogIn")</a>
-        <a href="#">@Html.ActionLink("Register", "../Users/Create")</a>
-        <a href="#" class="right">Link</a>
-     
-    </div>
 
     <div class="row">
+
         <div class="side">
-            <h2>About Me</h2>
+            <h2>About us</h2>
             <h5>Photo of me:</h5>
             <div class="fakeimg" style="height:200px;">Image</div>
             <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
@@ -40,6 +28,7 @@
             <div class="fakeimg" style="height:60px;">Image</div><br>
             <div class="fakeimg" style="height:60px;">Image</div>
         </div>
+
         <div class="main">
             <h2>TITLE HEADING</h2>
             <h5>Title description, Dec 7, 2017</h5>
@@ -48,17 +37,16 @@
             <div class=" bla">
                 <h3>Titel</h3>
                 <h5>publish date , mounth 0 , 0000</h5>
-                <p>descreption...</p>
+                <p>description...</p>
             </div>
         </div>
     </div>
 
+
+
     <div class="footer">
         <h2>Footer</h2>
     </div>
-
-
-
 
 </body>
 </html>

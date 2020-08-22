@@ -9,6 +9,12 @@ namespace WebApplicationProject_sucks.Models
 {
     public class RoomToCategory
     {
+        public RoomToCategory(int roomID, string categoryname)
+        {
+            this.QuestionRoomID = roomID;
+            this.CategoryName = categoryname;          
+        }
+
         [Key]
         [Column(Order = 0)]
         [ForeignKey("QuestionRoom")]

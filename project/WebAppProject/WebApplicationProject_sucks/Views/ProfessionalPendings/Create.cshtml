@@ -1,8 +1,11 @@
 ﻿@model WebApplicationProject_sucks.Models.ProfessionalPending
+
 @{
     Layout = null;
 }
+
 <!DOCTYPE html>
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -15,44 +18,57 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
+    <div class="form-horizontal">
 
-            <p id="demo">hey and welcome: @(Session["UserName"])</p>
+        <p id="demo">hey and welcome: @(Session["UserName"])</p>
 
-            @Html.HiddenFor(model => model.UserName, new { Value = Session["UserName"] })
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @{
-                    MyDB db = new MyDB();
 
-                    List<SelectListItem> listOfProfessions = new List<SelectListItem>();
-                    foreach (var item in db.Professions)
-                    {
-                        listOfProfessions.Add(new SelectListItem { Text = item.Profession_Name, Value = item.Profession_Name });
-                    }
+        @Html.HiddenFor(model => model.UserName, new { Value = Session["UserName"] })
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+
+            @{
+                MyDB db = new MyDB();
+
+                List<SelectListItem> listOfProfessions = new List<SelectListItem>();
+                foreach (var item in db.Professions)
+                {
+                    listOfProfessions.Add(new SelectListItem { Text = item.Profession_Name, Value = item.Profession_Name });
                 }
-                @Html.DropDownListFor(model => model.Profession_Name, listOfProfessions, "Select your profession")
-            </div>
-            <div class="form-group">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Describe your specialty" } })
-            </div>
-            <div class="form-group">
-                @{
-
-                    List<SelectListItem> listOfCategories = new List<SelectListItem>();
-                    foreach (var item in db.Categories)
-                    {
-                        listOfCategories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
-                    }
-                }
-                @Html.ListBoxFor(model => model.ProfessionalCategories, listOfCategories, "Select your specialties")
-            </div>
-            <input type="file" id="ApplyFiles" name="ApplyFiles" multiple><br><br>
-            <div class="form-group">
-                <input type="submit" value="Send for verification" class="btn btn-default" />
-            </div>
-            @Html.ActionLink("Cancel", "Index")
+            }
+            @Html.DropDownListFor(model => model.Profession_Name, listOfProfessions, "Select your profession")
         </div>
+        <div class="form-group">
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Describe your specialty" } })
+        </div>
+
+        <div class="form-group">
+            @{
+
+                List<SelectListItem> listOfCategories = new List<SelectListItem>();
+                foreach (var item in db.Categories)
+                {
+                    listOfCategories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
+                }
+            }
+            <label>Select your specialties</label>
+            @Html.ListBox("selectedOptions", listOfCategories)
+        </div>
+
+
+          @{/*Html.TextBox("applyFiles", new { type = "file" })*/}
+
+
+        <input type="file" id="applyFiles" name="applyFiles" multiple> <br><br>
+
+        <div class="form-group">
+            <input type="submit" value="Send for verification" class="btn btn-default" />
+        </div>
+        @Html.ActionLink("Cancel", "Index")
+    </div>
     }
+
 </body>
 </html>

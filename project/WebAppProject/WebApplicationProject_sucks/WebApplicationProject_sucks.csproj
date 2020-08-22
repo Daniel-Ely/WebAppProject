@@ -207,6 +207,7 @@
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\PageToCategoriesController.cs" />
+    <Compile Include="Controllers\PendingToCategoriesController.cs" />
     <Compile Include="Controllers\PostCommentsController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\PostToCategoriesController.cs" />
@@ -228,6 +229,8 @@
     </Compile>
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\PendingFile.cs" />
+    <Compile Include="Models\PendingToCategory.cs" />
     <Compile Include="Models\ProfessionalPending.cs" />
     <Compile Include="Models\Profession.cs" />
     <Compile Include="Models\Clip.cs" />
@@ -298,8 +301,7 @@
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\HomePage\Home.cshtml" />
-    <Content Include="Views\HomePage\LogIn.cshtml" />
-    <Content Include="Views\HomePage\Register.cshtml" />
+    <Content Include="Views\Users\LogIn.cshtml" />
     <Content Include="Views\HTMLScripts\Create.cshtml" />
     <Content Include="Views\HTMLScripts\Delete.cshtml" />
     <Content Include="Views\HTMLScripts\Details.cshtml" />
@@ -376,6 +378,13 @@
     <Content Include="Views\Professions\Details.cshtml" />
     <Content Include="Views\Professions\Edit.cshtml" />
     <Content Include="Views\Professions\Index.cshtml" />
+    <Content Include="Views\PendingToCategories\Create.cshtml" />
+    <Content Include="Views\PendingToCategories\Delete.cshtml" />
+    <Content Include="Views\PendingToCategories\Details.cshtml" />
+    <Content Include="Views\PendingToCategories\Edit.cshtml" />
+    <Content Include="Views\PendingToCategories\Index.cshtml" />
+    <Content Include="Views\HomePage\GuestHome.cshtml" />
+    <Content Include="Views\HomePage\UserHome.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

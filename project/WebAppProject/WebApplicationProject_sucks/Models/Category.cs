@@ -12,7 +12,7 @@ namespace WebApplicationProject_sucks.Models
         public virtual ICollection<ProfessionalToCategory> Professionals { get; set; }
         public virtual ICollection<ProfessionalToCategory> ProfessionalPages { get; set; }
         public virtual ICollection<RoomToCategory> Rooms { get; set; }
-
+        
         public virtual ICollection<UserToCategory> Users { get; set; }
         public virtual ICollection<PostToCategory> Posts { get; set; }
 
