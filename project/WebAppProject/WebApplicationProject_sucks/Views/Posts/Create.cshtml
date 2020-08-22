@@ -10,9 +10,7 @@
 <head>
     <script src="~/PlugIn/tinymce/tinymce.min.js"></script>
     <script src="~/PlugIn/tinymce/jquery.tinymce.min.js"></script>
-    <!--
-        tinymce init Feature boot
-    -->
+    <!--tinymce init-->
     <script>
         tinymce.init({
             selector: '#mytextarea',
@@ -79,13 +77,15 @@
         });
     </script>
     <!-- submit button func-->
+    <!--question content-->
     <script>
-        function mySave()
-        {
+        function mySave() {
             var myContent = tinymce.get("mytextarea").getContent();
-            return false;
+            document.getElementById("Content").value = myContent;
         }
+
     </script>
+
     <link rel="stylesheet" href="~/Content/creatPost.css?ver=<?php echo rand(111,999)?" type="text/css" />
     <meta name="viewport" content="width=device-width" />
     <title>Create</title>
@@ -97,27 +97,49 @@
         @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-    
+
         <h4>Post</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="form-group">
             @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "enter the post title" } })
         </div>
-        <div class="form-group">
-            <!--
-                text editor , 
-                tinymce post content    
-            -->
-            <textarea id="mytextarea" name="mytextarea">Hello, World!</textarea>
-        </div>
-        @Html.HiddenFor(model => model.Date, DateTime.Today)
-        @Html.HiddenFor(model => model.NumOfRating, 0)
+
         <div class="form-group">
             @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "enter a description for your post" } })
         </div>
+
         <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <textarea id="mytextarea" name="mytextarea">Hello, World!</textarea>
+            @Html.HiddenFor(model => model.Content)
+        </div>
+
+        <label>Select all of the matching categories</label>
+        <div class="form-group">
+
+            @{
+                MyDB db = new MyDB();
+                List<SelectListItem> listOfCategories = new List<SelectListItem>();
+                foreach (var item in db.Categories)
+                {
+                    listOfCategories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
+                }
+            }
+
+            @Html.ListBox("selectedOptions", listOfCategories)
+
+        </div>
+
+
+
+        @Html.HiddenFor(model => model.Date, DateTime.Today)
+        @Html.HiddenFor(model => model.NumOfRating, 0)
+        @Html.HiddenFor(model => model.Rating, 0)
+        @Html.HiddenFor(model => model.PageID, new { Value = Session["ProffesionalPageID"] })
+
+        <div class="form-group">
+            <input type="submit" value="Create" onclick="mySave()" class="btn btn-default" />
         </div>
     </div>
     }

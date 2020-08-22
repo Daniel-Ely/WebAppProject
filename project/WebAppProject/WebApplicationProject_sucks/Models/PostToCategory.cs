@@ -9,6 +9,17 @@ namespace WebApplicationProject_sucks.Models
 {
     public class PostToCategory
     {
+
+        public PostToCategory(int postId, string categoryname)
+        {
+            this.PostID = postId;
+            this.CategoryName = categoryname;
+        }
+        public PostToCategory()
+        {
+
+        }
+
         [Key]
         [Column(Order = 0)]
         [ForeignKey("Post")]

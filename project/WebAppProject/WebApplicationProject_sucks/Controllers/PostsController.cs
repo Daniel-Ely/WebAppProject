@@ -49,19 +49,26 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PostID,Title,Date,Rating,NumOfRating,Description,PageID,Content")] Post post)
+        public ActionResult Create([Bind(Include = "PostID,Title,Date,Rating,NumOfRating,Description,PageID,Content")] Post post, string[] selectedOptions)
         {
+
+
             if (ModelState.IsValid)
             {
+                post.PostID = db.Posts.Count();
+                for (int i = 0; i < selectedOptions.Length; i++)
+                {//MtM of category-post relationship 
+
+                    db.PostToCategories.Add(new PostToCategory(post.PostID, selectedOptions[i]));
+                }
+
 
                 db.Posts.Add(post);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PageID = new SelectList(db.ProfessionalPages, "ProffesionalPageID", "NameOfPage", post.PageID);
-            //return View(post);
-            return RedirectToAction("Index");
+            return View(post);
         }
 
         // GET: Posts/Edit/5
@@ -85,7 +92,7 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PostID,Title,Date,Rating,NumOfRating,Description,PageID")] Post post)
+        public ActionResult Edit([Bind(Include = "PostID,Title,Description,Content")] Post post)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +100,7 @@ namespace WebApplicationProject_sucks.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PageID = new SelectList(db.ProfessionalPages, "ProffesionalPageID", "NameOfPage", post.PageID);
+            
             return View(post);
         }
 
