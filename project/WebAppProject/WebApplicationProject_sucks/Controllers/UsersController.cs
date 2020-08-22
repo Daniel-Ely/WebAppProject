@@ -49,7 +49,7 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateAntiForgeryToken]
         //this is going to take the boolean attribute as well since it matches with its name 
         //JS is going to execute accordingly before this action takes place.
-        public ActionResult Create([Bind(Include = "UserName,FirstName,Gender,BirthDay,Email,Password")] User user,string isProfessional)
+        public ActionResult Create([Bind(Include = "UserName,FirstName,Gender,BirthDay,Email,Password,iterests")] User user,string isProfessional)
         {
             if (ModelState.IsValid)
             {//we just want to save the entry to the DB in both cases.  Process is the same 
