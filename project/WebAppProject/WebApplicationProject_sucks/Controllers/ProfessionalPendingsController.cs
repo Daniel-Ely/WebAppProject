@@ -57,6 +57,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 for (int i = 0; i < selectedOptions.Length; i++)
                 {//MtM relationship
+                    //TODO: figure out if we need more adding (to the icollection)
                     db.PendingToCategories.Add(new PendingToCategory(professionalPending.UserName, selectedOptions[i]));
                 }
 

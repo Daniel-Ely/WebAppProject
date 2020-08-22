@@ -14,6 +14,10 @@ namespace WebApplicationProject_sucks.Models
             this.QuestionRoomID = roomID;
             this.CategoryName = categoryname;          
         }
+        public RoomToCategory()
+        {
+           
+        }
 
         [Key]
         [Column(Order = 0)]
