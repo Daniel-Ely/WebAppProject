@@ -383,6 +383,8 @@
     <Content Include="Views\PendingToCategories\Details.cshtml" />
     <Content Include="Views\PendingToCategories\Edit.cshtml" />
     <Content Include="Views\PendingToCategories\Index.cshtml" />
+    <Content Include="Views\HomePage\GuestHome.cshtml" />
+    <Content Include="Views\HomePage\UserHome.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

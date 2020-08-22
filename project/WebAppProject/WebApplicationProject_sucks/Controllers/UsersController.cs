@@ -64,7 +64,7 @@ namespace WebApplicationProject_sucks.Controllers
 
                 if (isProfessional == "1")
                 {
-                    Session["UserName"] = user.UserName;//saves the user name for context
+                    Session["UserName"] = user.UserName;//saves the user name for context                   
                     return View("../ProfessionalPendings/Create");//refer to the the additional               
                 }
 
@@ -77,6 +77,7 @@ namespace WebApplicationProject_sucks.Controllers
             
             return View(user);
         }
+        
         public ActionResult LogIn(string username,string password)
         {
             foreach (var user in db.Users)
@@ -84,7 +85,8 @@ namespace WebApplicationProject_sucks.Controllers
                 if(user.UserName==username && user.Password==password)
                 {//successful login
                     Session["UserName"] = username;
-                   return Redirect("../Controllers/HomePage/Home");
+                    Session.Timeout = 10;//in minutues 
+                    return Redirect("../Controllers/HomePage/Home");
                 }
                 else
                 {//login failed
