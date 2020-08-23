@@ -12,10 +12,14 @@
         @{           
             var room = Model.Rooms.GetEnumerator();
             while (room.MoveNext())
-            {               
+            {
             <tr>
             <td>
-                <label> @Html.ActionLink(room.Current.QuestionRoom.Title, "../QuestionRooms/Details/"+ room.Current.QuestionRoom.QuestionRoomID) </label>>
+                @{MyDB db = new MyDB();
+                    var title = db.QuestionRooms.Where(d => d.QuestionRoomID == room.Current.QuestionRoomID).ToList().ElementAt(0).Title;
+                    string linkToQR = "../../QuestionRooms/Details/" + room.Current.QuestionRoomID;
+                }
+                <a href=@linkToQR >@Html.Raw(title)</a>
             </td>
        
             </tr>
