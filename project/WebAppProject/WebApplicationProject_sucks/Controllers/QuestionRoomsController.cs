@@ -74,11 +74,11 @@ namespace WebApplicationProject_sucks.Controllers
         public ActionResult CreateComment(string RoomID,string CommentContent,string CommentCreator)
         {
             int commentID = db.Comments.Count();
-            QuestRoomComment comment = new QuestRoomComment(commentID,int.Parse(RoomID),CommentContent,CommentCreator, DateTime.Today);
+            QuestRoomComment comment = new QuestRoomComment(commentID, Int32.Parse(RoomID), CommentContent,CommentCreator, DateTime.Today.Date);
             db.Comments.Add(comment);
             db.SaveChanges();
 
-            return View();
+            return Redirect("../QuestionRooms/Details/"+Int32.Parse(RoomID));
 
         }
 
