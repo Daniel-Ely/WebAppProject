@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace WebApplicationProject_sucks.Models
 {
@@ -28,8 +29,8 @@ namespace WebApplicationProject_sucks.Models
         public int RoomID { get; set; }
         public QuestionRoom QuestionRoom { get; set; }
 
+        [AllowHtml]
         public string Content { get; set; }
-
 
 
         [ForeignKey("User")]

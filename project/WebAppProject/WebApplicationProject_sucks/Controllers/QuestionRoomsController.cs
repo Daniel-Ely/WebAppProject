@@ -68,10 +68,10 @@ namespace WebApplicationProject_sucks.Controllers
             return View(questionRoom);
         }
 
-        public ActionResult CreateComment(int QuestionRoomID,string CommentContent,string CommentCreator)
+        public ActionResult CreateComment(int RoomID,string CommentContent,string CommentCreator)
         {
             int commentID = db.Comments.Count();
-            QuestRoomComment comment = new QuestRoomComment(commentID,QuestionRoomID,CommentContent,CommentCreator, DateTime.Today);
+            QuestRoomComment comment = new QuestRoomComment(commentID,RoomID,CommentContent,CommentCreator, DateTime.Today);
             db.Comments.Add(comment);
             db.SaveChanges();
 
