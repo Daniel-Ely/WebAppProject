@@ -9,6 +9,13 @@ namespace WebApplicationProject_sucks.Models
 {
     public class PageToCategory
     {
+        public PageToCategory() { }
+        public PageToCategory(int professionalPageID, string categoryname)
+        {
+            this.ProfessionalPageID = professionalPageID;
+            this.CategoryName = categoryname;
+        }
+
         [Key]
         [Column(Order = 0)]
         [ForeignKey("ProfessionalPage")]
