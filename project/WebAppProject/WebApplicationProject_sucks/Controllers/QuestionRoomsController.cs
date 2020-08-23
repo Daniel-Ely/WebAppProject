@@ -68,6 +68,18 @@ namespace WebApplicationProject_sucks.Controllers
             return View(questionRoom);
         }
 
+        public ActionResult CreateComment(int QuestionRoomID,string CommentContent,string CommentCreator)
+        {
+            int commentID = db.Comments.Count();
+            QuestRoomComment comment = new QuestRoomComment(commentID,QuestionRoomID,CommentContent,CommentCreator, DateTime.Today);
+            db.Comments.Add(comment);
+            db.SaveChanges();
+
+            return View();
+
+        }
+
+
         // GET: QuestionRooms/Edit/5
         public ActionResult Edit(int? id)
         {
