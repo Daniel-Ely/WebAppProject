@@ -96,8 +96,9 @@
 </head>
 <body>
 
-    @using (Html.BeginForm("CreateComment", "QuestionRooms", FormMethod.Post))
-    {
+    @using (Html.BeginForm("CreateComment", "QuestionRooms"))
+    { 
+    
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div>
@@ -160,14 +161,14 @@
                     <!--comment content-->
                     <!--the name is already set to Title-->
                     
-                    @Html.Hidden("CommentContent")
+                    @Html.Hidden("CommentContent", new { @id = "CommentContent" })
                 </div>
 
             <!--creator name-->
             <div class="form-group">
                 @Html.Hidden("CommentCreator", new { @Value = Session["UserName"] })
             </div>
-
+            
 
 
             <div class="col-md-offset-2 col-md-10">
@@ -181,7 +182,7 @@
             @Html.ActionLink("Back to List", "Index")
         </p>
 
-
+    
     }
 
 </body>
