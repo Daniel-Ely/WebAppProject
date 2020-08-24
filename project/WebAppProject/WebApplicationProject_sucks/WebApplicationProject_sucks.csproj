@@ -200,7 +200,7 @@
     <Content Include="Content\AdminBootstrap\blank.html" />
     <Content Include="Content\AdminBootstrap\buttons.html" />
     <Content Include="Content\AdminBootstrap\cards.html" />
-    <Content Include="Content\AdminBootstrap\charts.html" />
+    <None Include="Views\Admin\AdminStatistics.cshtml" />
     <Content Include="Content\AdminBootstrap\css\sb-admin-2.css" />
     <Content Include="Content\AdminBootstrap\css\sb-admin-2.min.css" />
     <Content Include="Content\AdminBootstrap\forgot-password.html" />
@@ -215,6 +215,7 @@
     <Content Include="Content\AdminBootstrap\js\sb-admin-2.min.js" />
     <Content Include="Content\AdminBootstrap\login.html" />
     <Content Include="Content\AdminBootstrap\register.html" />
+    <Content Include="Views\Admin\ConfirmPendings.cshtml" />
     <None Include="Views\HomePage\AdminHome.cshtml" />
     <Content Include="Content\AdminBootstrap\utilities-animation.html" />
     <Content Include="Content\AdminBootstrap\utilities-border.html" />
@@ -1881,6 +1882,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ClipsController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
@@ -2038,11 +2040,6 @@
     <Content Include="Views\UserToCategories\Details.cshtml" />
     <Content Include="Views\UserToCategories\Edit.cshtml" />
     <Content Include="Views\UserToCategories\Index.cshtml" />
-    <Content Include="Views\Admins\Create.cshtml" />
-    <Content Include="Views\Admins\Delete.cshtml" />
-    <Content Include="Views\Admins\Details.cshtml" />
-    <Content Include="Views\Admins\Edit.cshtml" />
-    <Content Include="Views\Admins\Index.cshtml" />
     <Content Include="Views\ProfessionalPendings\Create.cshtml" />
     <Content Include="Views\ProfessionalPendings\Delete.cshtml" />
     <Content Include="Views\ProfessionalPendings\Details.cshtml" />
@@ -2067,7 +2064,6 @@
     <Content Include="Views\HomePage\GuestHome.cshtml" />
     <Content Include="Views\HomePage\UserHome.cshtml" />
     <Content Include="Views\Shared\navbar.cshtml" />
-    <Content Include="Views\Users\AdminPage.cshtml" />
     <Content Include="Content\AdminBootstrap\.browserslistrc" />
     <Content Include="Content\AdminBootstrap\.travis.yml" />
     <Content Include="Content\AdminBootstrap\LICENSE" />
@@ -2255,8 +2251,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Home\" />
-    <Folder Include="Views\LogIn\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

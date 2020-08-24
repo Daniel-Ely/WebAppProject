@@ -38,7 +38,7 @@ namespace WebApplicationProject_sucks.Controllers
             }
             return View(user);
         }
-
+        
         // GET: Users/Create
         public ActionResult Create()
         {
@@ -111,7 +111,10 @@ namespace WebApplicationProject_sucks.Controllers
             return Redirect("../HomePage/Home");
         }
        
-            
+        public ActionResult AdminStatistics()
+        {
+            return View();
+        }
 
 
 
