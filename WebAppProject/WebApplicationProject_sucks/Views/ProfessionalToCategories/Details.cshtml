@@ -1,0 +1,42 @@
+﻿@model WebApplicationProject_sucks.Models.ProfessionalToCategory
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>ProfessionalToCategory</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Category.Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Category.Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Professional.FirstName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Professional.FirstName)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
