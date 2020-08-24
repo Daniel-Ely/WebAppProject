@@ -23,11 +23,15 @@ namespace WebApplicationProject_sucks.Models
         public string CategoryName { get; set; }
         public Category Category { get; set; }
 
+        public int NumOfVisits { set; get; }
 
+        public DateTime LastTouched { get; set; }
         public UserToCategory(string username, string categoryname)
         {
             this.UserName = username;
             this.CategoryName = categoryname;
+            this.NumOfVisits = 0;
+            this.LastTouched = DateTime.Today;
         }
     }
 }

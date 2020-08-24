@@ -9,10 +9,13 @@ using System.Web.Mvc;
 using WebApplicationProject_sucks;
 using WebApplicationProject_sucks.Models;
 
+
+
 namespace WebApplicationProject_sucks.Controllers
 {
     public class UsersController : Controller
     {
+        private static int MaxCategories = 10;
         private MyDB db = new MyDB();
 
         // GET: Users
@@ -55,6 +58,10 @@ namespace WebApplicationProject_sucks.Controllers
             if (ModelState.IsValid)
             {//we just want to save the entry to the DB in both cases.  Process is the same 
                 db.Users.Add(user);
+                if (selectedOptions.Length > MaxCategories)
+                {
+                    return View(user);
+                }
                 for (int i=0;i<selectedOptions.Length;i++)
                 {//MtM relationship
                     db.UserToCategories.Add(new UserToCategory(user.UserName, selectedOptions[i]));

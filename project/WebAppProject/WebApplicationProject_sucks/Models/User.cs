@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -34,7 +35,8 @@ namespace WebApplicationProject_sucks.Models
         //
         //Intrests
         //
-        public virtual ICollection<UserToCategory> Interests { get; set; }
+        //[Required(ErrorMessage = "Choose at least one category")]
+        public virtual ICollection<UserToCategory> Interests {get; set;}
         //
         //Email
         //

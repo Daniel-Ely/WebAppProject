@@ -23,6 +23,7 @@ namespace WebApplicationProject_sucks.Controllers
         }
 
         // GET: Posts/Details/5
+        [UserActivityFilter]
         public ActionResult Details(int? id)
         {
             if (id == null)
