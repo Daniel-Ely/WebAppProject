@@ -84,7 +84,6 @@ namespace WebApplicationProject_sucks.Controllers
             
             return View(user);
         }
-        [LogInFilter]
         public ActionResult LogIn(string username,string password)
         {
             foreach (var user in db.Users)

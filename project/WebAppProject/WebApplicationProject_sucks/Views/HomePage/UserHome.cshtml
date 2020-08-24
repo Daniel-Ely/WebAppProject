@@ -38,18 +38,19 @@
 
             @{
                 MyDB db = new MyDB();
+                var user = db.Users.Find(Session["UserName"]);
                 int postNum = 0;
-                var Intrest = Model.Interests.OrderBy(i => i.LastTouched).ThenBy(i => i.NumOfVisits);
+                var Intrest = user.Interests.OrderBy(i => i.LastTouched).ThenBy(i => i.NumOfVisits);
                 foreach (var item in Intrest)
                 {
-                    var Qroom = db.QuestionRooms.Where(q => ((q.Categories.Where(c => c.CategoryName == item.CategoryName)).Count() > 0)).ToList();
+                    var Qroom = db.QuestionRooms.OrderBy(q=>q.DatePublished).Where(q => ((q.Categories.Where(c => c.CategoryName == item.CategoryName)).Count() > 0)).ToList();
                     foreach (var iteam2 in Qroom)
                     {
                         <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
-                        <div class=" bla">
-                            <h3>@iteam2.Title</h3>
+                        <div class="postAndQroom">
+                            <h3>@Html.Raw(iteam2.Title)</h3>
                             <h5>publish date , @iteam2.DatePublished.Month  @iteam2.DatePublished.Day,  @iteam2.DatePublished.Year</h5>
-                            <p>@iteam2.Title</p>
+                            <p>@Html.Raw(iteam2.Title)</p>
                         </div>
 
                     }

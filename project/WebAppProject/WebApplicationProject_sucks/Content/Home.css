@@ -78,6 +78,8 @@ body {
 
 /* Main column */
 .main {
+    text-align:left;
+    display:inline-block;
     -ms-flex: 70%; /* IE10 */
     flex: 70%;
     background-color: white;

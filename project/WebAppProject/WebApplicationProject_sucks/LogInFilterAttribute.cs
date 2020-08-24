@@ -13,21 +13,23 @@ namespace WebApplicationProject_sucks
         MyDB db = new MyDB();
         public override void OnResultExecuted(ResultExecutedContext filterContext)
         {
-            string userId = filterContext.HttpContext.Session["UserName"].ToString();
-            User user = db.Users.Find(userId);
-            if (user.Interests.Count > 10)
+            if (filterContext.HttpContext.Session["UserName"] != null)
             {
-                foreach (UserToCategory uTc in user.Interests)
+                string userId = filterContext.HttpContext.Session["UserName"].ToString();
+                User user = db.Users.Find(userId);
+                if (user.Interests.Count > 10)
                 {
-                    if (user.Interests.Count <= 10) break;
-                    if (uTc.LastTouched.Month < (DateTime.Today.Month - validity_Month))
+                    foreach (UserToCategory uTc in user.Interests)
                     {
-                        db.UserToCategories.Remove(uTc);
-                        db.SaveChanges();
+                        if (user.Interests.Count <= 10) break;
+                        if (uTc.LastTouched.Month < (DateTime.Today.Month - validity_Month))
+                        {
+                            db.UserToCategories.Remove(uTc);
+                            db.SaveChanges();
+                        }
                     }
                 }
             }
-
         }
     }
 }
