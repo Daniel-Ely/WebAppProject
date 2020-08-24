@@ -195,11 +195,11 @@
     <Content Include="src\logIn.bmp" />
     <Content Include="src\Owl family.png" />
     <Content Include="src\Owl.png" />
+    <Content Include="src\QutionRoomOwl.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AdminsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ClipsController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
@@ -229,7 +229,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="LogInFilterAttribute.cs" />
-    <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\PendingFile.cs" />
     <Compile Include="Models\PendingToCategory.cs" />

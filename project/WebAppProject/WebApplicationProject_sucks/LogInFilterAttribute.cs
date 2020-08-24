@@ -11,7 +11,7 @@ namespace WebApplicationProject_sucks
     {
         private readonly int validity_Month = 1; 
         MyDB db = new MyDB();
-        public override void OnActionExecuted(ActionExecutedContext filterContext)
+        public override void OnResultExecuted(ResultExecutedContext filterContext)
         {
             string userId = filterContext.HttpContext.Session["UserName"].ToString();
             User user = db.Users.Find(userId);

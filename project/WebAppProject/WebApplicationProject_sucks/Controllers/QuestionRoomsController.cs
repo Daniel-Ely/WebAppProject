@@ -60,7 +60,7 @@ namespace WebApplicationProject_sucks.Controllers
                     db.RoomToCategories.Add(new RoomToCategory(questionRoom.QuestionRoomID, selectedOptions[i]));
                 }
 
-
+                questionRoom.DatePublished = DateTime.Today;
                 db.QuestionRooms.Add(questionRoom);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -74,9 +74,9 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateComment(string RoomID,string CommentContent,string CommentCreator)
         {
-            int commentID = db.Comments.Count();
+            int commentID = db.QustionRoomComments.Count();
             QuestRoomComment comment = new QuestRoomComment(commentID, Int32.Parse(RoomID), CommentContent,CommentCreator, DateTime.Today.Date);
-            db.Comments.Add(comment);
+            db.QustionRoomComments.Add(comment);
             db.SaveChanges();
 
             return Redirect("../QuestionRooms/Details/"+Int32.Parse(RoomID));

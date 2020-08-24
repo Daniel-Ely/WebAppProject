@@ -10,7 +10,7 @@ namespace WebApplicationProject_sucks
     public class MyDB:DbContext
     {
         public DbSet<HTMLScript> HTMLScripts { set; get; }
-        public DbSet<QuestRoomComment> Comments{ set; get; }
+        public DbSet<QuestRoomComment> QustionRoomComments{ set; get; }
         public DbSet<Post> Posts { set; get; }
         public DbSet<ProfessionalPage> ProfessionalPages { set; get; }
         public DbSet<QuestionRoom> QuestionRooms { set; get; }

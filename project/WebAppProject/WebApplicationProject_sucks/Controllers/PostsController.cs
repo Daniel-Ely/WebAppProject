@@ -123,7 +123,7 @@ namespace WebApplicationProject_sucks.Controllers
         public ActionResult CreateReating(string userName, int PostId, int Rating)
         {
             UserToPostRatingsController uTR = new UserToPostRatingsController();
-            return uTR.Create(new UserToPostRating(userName, PostId, Rating););
+            return uTR.Create(new UserToPostRating(userName, PostId, Rating));
         }
         protected override void Dispose(bool disposing)
         {

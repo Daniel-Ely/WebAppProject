@@ -87,7 +87,6 @@ namespace WebApplicationProject_sucks.Controllers
         [LogInFilter]
         public ActionResult LogIn(string username,string password)
         {
-          
             foreach (var user in db.Users)
             {
                 if(user.UserName==username && user.Password==password)
