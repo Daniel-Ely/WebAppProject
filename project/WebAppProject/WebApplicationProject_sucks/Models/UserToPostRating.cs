@@ -9,7 +9,7 @@ namespace WebApplicationProject_sucks.Models
 {
     public class UserToPostRating
     {
-        public int Rating { set; get; }
+        
         public UserToPostRating()
         {
 
@@ -21,7 +21,7 @@ namespace WebApplicationProject_sucks.Models
             this.PostId = PostId;
             this.UserName = userName;
         }
-      
+        public int Rating { set; get; }
         [Key]
         [Column(Order = 0)]
         [ForeignKey("Post")]

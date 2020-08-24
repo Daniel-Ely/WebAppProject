@@ -58,8 +58,7 @@ namespace WebApplicationProject_sucks.Controllers
                 return RedirectToAction("../../View/ProfessionalPages/Details");
             }
 
-            ViewBag.PageID = new SelectList(db.ProfessionalPages, "ProffesionalPageID", "NameOfPage", post.PageID);
-            return View(post);
+           return View(post);
         }
 
         // GET: Posts/Edit/5
@@ -120,11 +119,8 @@ namespace WebApplicationProject_sucks.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        public ActionResult CreateReating(string userName, int PostId, int Rating)
-        {
-            UserToPostRatingsController uTR = new UserToPostRatingsController();
-            return uTR.Create(new UserToPostRating(userName, PostId, Rating));
-        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -132,6 +128,41 @@ namespace WebApplicationProject_sucks.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+
+        [ValidateInput(false)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateRating(string userName, int PostId, int Rating)
+        {
+            UserToPostRating rate = new UserToPostRating(userName, PostId, Rating);
+            db.UserToPostRatings.Add(rate);
+            db.SaveChanges();
+            Post post = db.Posts.Where(d => d.PostID == PostId).ToList().ElementAt(0);
+            post.NumOfRating += 1;
+            db.SaveChanges();
+            int sum = 0;
+            foreach (var item in db.UserToPostRatings.Where(d => d.PostId == PostId).ToList())
+                sum += item.Rating;
+            post.Rating = sum / post.NumOfRating;
+            db.SaveChanges();
+            return Redirect("../Posts/Details/" + PostId);
+        }
+       
+
+        [ValidateInput(false)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateComment(string PostID, string CommentContent, string CommentCreator)
+        {
+            int commentID = db.PostComments.Count();
+            PostComment comment = new PostComment(commentID, Int32.Parse(PostID), CommentContent, CommentCreator, DateTime.Today);
+            db.PostComments.Add(comment);
+            db.SaveChanges();
+
+            return Redirect("../Posts/Details/" + Int32.Parse(PostID));
         }
     }
 }
