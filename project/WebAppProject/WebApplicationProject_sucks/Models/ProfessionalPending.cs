@@ -21,7 +21,7 @@ namespace WebApplicationProject_sucks.Models
         public string Description { get; set; }//education related- requires approvement
 
         //categories
-        public virtual ICollection<ProfessionalToCategory> ProfessionalCategories { get; set; }
+        public virtual ICollection<PendingToCategory> ProfessionalCategories { get; set; }
 
         //application files
         public virtual ICollection<PendingFile> ApplyFiles { get; set; }

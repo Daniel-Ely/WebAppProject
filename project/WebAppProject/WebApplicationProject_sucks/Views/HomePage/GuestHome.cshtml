@@ -13,21 +13,25 @@
         <h2>About us</h2>
 
     </div>
-    <table>
-
-
+    
         @{
 
             MyDB db = new MyDB();
             var listOfQR = db.QuestionRooms.OrderBy(d => d.DatePublished).ToList();
             for (int i = 0; i < 10 && i < listOfQR.Count; i++)
             {
+                <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left" sizes="5px">
+                <div class="postAndQroom">
+                    <p>@Html.Raw(listOfQR.ElementAt(i).Title)</p>
+                    <h3>@listOfQR.ElementAt(i).CreatorName</h3>
+                    <h5>publish date , @listOfQR.ElementAt(i).DatePublished.Month. @listOfQR.ElementAt(i).DatePublished.Day.  @listOfQR.ElementAt(i).DatePublished.Year</h5>
 
+                </div>
 
-                <tr>
+               /* <tr>
                     <td>@listOfQR.ElementAt(i).CreatorName</td>
                     <td>@Html.Raw(listOfQR.ElementAt(i).Title)</td>
-                </tr>
+                </tr>*/
 
             }
 
@@ -44,11 +48,7 @@
             }*/
         }
 
-    </table>
-
-
-
-
+   
 </body>
 </html>
 
