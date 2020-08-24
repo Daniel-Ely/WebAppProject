@@ -10,6 +10,7 @@ namespace WebApplicationProject_sucks.Models
     {
         [Key] public int QuestionRoomID { get; set; }
 
+        public DateTime DatePublished { set; get; }
 
         [Display(Name = "Question")]
         [AllowHtml]

@@ -11,131 +11,116 @@ using WebApplicationProject_sucks.Models;
 
 namespace WebApplicationProject_sucks.Controllers
 {
-    public class QuestionRoomsController : Controller
+    public class UserToPostRatingsController : Controller
     {
         private MyDB db = new MyDB();
 
-        // GET: QuestionRooms
+        // GET: UserToPostRatings
         public ActionResult Index()
         {
-            return View(db.QuestionRooms.ToList());
+            var userToPostRatings = db.UserToPostRatings.Include(u => u.Post).Include(u => u.User);
+            return View(userToPostRatings.ToList());
         }
 
-        // GET: QuestionRooms/Details/5
-        [UserActivityFilter]
+        // GET: UserToPostRatings/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuestionRoom questionRoom = db.QuestionRooms.Find(id);
-            if (questionRoom == null)
+            UserToPostRating userToPostRating = db.UserToPostRatings.Find(id);
+            if (userToPostRating == null)
             {
                 return HttpNotFound();
             }
-            return View(questionRoom);
+            return View(userToPostRating);
         }
 
-        // GET: QuestionRooms/Create
+        // GET: UserToPostRatings/Create
         public ActionResult Create()
         {
+            ViewBag.PostId = new SelectList(db.Posts, "PostID", "Title");
+            ViewBag.UserName = new SelectList(db.Users, "UserName", "FirstName");
             return View();
         }
 
-        // POST: QuestionRooms/Create
+        // POST: UserToPostRatings/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Title,CreatorName")] QuestionRoom questionRoom,string[]selectedOptions)
+        public ActionResult Create([Bind(Include = "PostId,UserName,Rating")] UserToPostRating userToPostRating)
         {
-   
             if (ModelState.IsValid)
             {
-                questionRoom.QuestionRoomID = db.QuestionRooms.Count();
-                for (int i = 0; i < selectedOptions.Length; i++)
-                {//MtM of category-room relationship 
-                    
-                    db.RoomToCategories.Add(new RoomToCategory(questionRoom.QuestionRoomID, selectedOptions[i]));
-                }
-
-                questionRoom.DatePublished = DateTime.Today;
-                db.QuestionRooms.Add(questionRoom);
+                db.UserToPostRatings.Add(userToPostRating);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(questionRoom);
+            ViewBag.PostId = new SelectList(db.Posts, "PostID", "Title", userToPostRating.PostId);
+            ViewBag.UserName = new SelectList(db.Users, "UserName", "FirstName", userToPostRating.UserName);
+            return View(userToPostRating);
         }
 
-        [ValidateInput(false)]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateComment(string RoomID,string CommentContent,string CommentCreator)
-        {
-            int commentID = db.QustionRoomComments.Count();
-            QuestRoomComment comment = new QuestRoomComment(commentID, Int32.Parse(RoomID), CommentContent,CommentCreator, DateTime.Today.Date);
-            db.QustionRoomComments.Add(comment);
-            db.SaveChanges();
-
-            return Redirect("../QuestionRooms/Details/"+Int32.Parse(RoomID));
-        }
-
-
-        // GET: QuestionRooms/Edit/5
+        // GET: UserToPostRatings/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuestionRoom questionRoom = db.QuestionRooms.Find(id);
-            if (questionRoom == null)
+            UserToPostRating userToPostRating = db.UserToPostRatings.Find(id);
+            if (userToPostRating == null)
             {
                 return HttpNotFound();
             }
-            return View(questionRoom);
+            ViewBag.PostId = new SelectList(db.Posts, "PostID", "Title", userToPostRating.PostId);
+            ViewBag.UserName = new SelectList(db.Users, "UserName", "FirstName", userToPostRating.UserName);
+            return View(userToPostRating);
         }
 
-        // POST: QuestionRooms/Edit/5
+        // POST: UserToPostRatings/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "QuestionRoomID,Title,CreatorName")] QuestionRoom questionRoom)
+        public ActionResult Edit([Bind(Include = "PostId,UserName,Rating")] UserToPostRating userToPostRating)
         {
             if (ModelState.IsValid)
-            {              
-                db.Entry(questionRoom).State = EntityState.Modified;
+            {
+                db.Entry(userToPostRating).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(questionRoom);
+            ViewBag.PostId = new SelectList(db.Posts, "PostID", "Title", userToPostRating.PostId);
+            ViewBag.UserName = new SelectList(db.Users, "UserName", "FirstName", userToPostRating.UserName);
+            return View(userToPostRating);
         }
 
-        // GET: QuestionRooms/Delete/5
+        // GET: UserToPostRatings/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuestionRoom questionRoom = db.QuestionRooms.Find(id);
-            if (questionRoom == null)
+            UserToPostRating userToPostRating = db.UserToPostRatings.Find(id);
+            if (userToPostRating == null)
             {
                 return HttpNotFound();
             }
-            return View(questionRoom);
+            return View(userToPostRating);
         }
 
-        // POST: QuestionRooms/Delete/5
+        // POST: UserToPostRatings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            QuestionRoom questionRoom = db.QuestionRooms.Find(id);
-            db.QuestionRooms.Remove(questionRoom);
+            UserToPostRating userToPostRating = db.UserToPostRatings.Find(id);
+            db.UserToPostRatings.Remove(userToPostRating);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

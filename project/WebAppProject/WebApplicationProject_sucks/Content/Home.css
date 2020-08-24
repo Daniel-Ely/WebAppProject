@@ -78,6 +78,8 @@ body {
 
 /* Main column */
 .main {
+    text-align:left;
+    display:inline-block;
     -ms-flex: 70%; /* IE10 */
     flex: 70%;
     background-color: white;
@@ -99,7 +101,8 @@ singlePost {
     background: #ddd;
 }
 img.avatar {
-    width:25%;
+    height:5%;
+   
     padding-right:5%;
 }
 

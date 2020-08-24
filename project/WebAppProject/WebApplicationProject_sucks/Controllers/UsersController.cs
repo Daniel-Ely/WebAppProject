@@ -58,7 +58,7 @@ namespace WebApplicationProject_sucks.Controllers
             if (ModelState.IsValid)
             {//we just want to save the entry to the DB in both cases.  Process is the same 
                 db.Users.Add(user);
-                if (selectedOptions.Length > MaxCategories)
+                if (selectedOptions.Length > MaxCategories) // in case the user choose to much categories of intrest 
                 {
                     return View(user);
                 }
@@ -84,10 +84,8 @@ namespace WebApplicationProject_sucks.Controllers
             
             return View(user);
         }
-        
         public ActionResult LogIn(string username,string password)
         {
-          
             foreach (var user in db.Users)
             {
                 if(user.UserName==username && user.Password==password)
@@ -103,8 +101,6 @@ namespace WebApplicationProject_sucks.Controllers
 
             return View();
         }
-
-
         public ActionResult LogOut()
         {
             Session.Abandon();
@@ -175,6 +171,21 @@ namespace WebApplicationProject_sucks.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        //increase in 1 the NumOfVisits and updateds the LastTouched date
+        public void categoryWasViewd(string CategoryName , string userName)
+        {
+            UserToCategory userCategory = db.UserToCategories.Where(d=> d.CategoryName == CategoryName && d.UserName == userName).ToList().ElementAt(0);
+            userCategory.NumOfVisits++;
+            userCategory.LastTouched = DateTime.Today;
+            db.SaveChanges();
+        }
+        //
+        public void newCategoryWasViewd(string categoryName , string userName)
+        {
+            db.UserToCategories.Add(new UserToCategory(userName, categoryName ,1));
+            db.SaveChanges();
+        }
+
 
         protected override void Dispose(bool disposing)
         {

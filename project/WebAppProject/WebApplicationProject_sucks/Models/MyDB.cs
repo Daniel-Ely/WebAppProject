@@ -10,7 +10,7 @@ namespace WebApplicationProject_sucks
     public class MyDB:DbContext
     {
         public DbSet<HTMLScript> HTMLScripts { set; get; }
-        public DbSet<QuestRoomComment> Comments{ set; get; }
+        public DbSet<QuestRoomComment> QustionRoomComments{ set; get; }
         public DbSet<Post> Posts { set; get; }
         public DbSet<ProfessionalPage> ProfessionalPages { set; get; }
         public DbSet<QuestionRoom> QuestionRooms { set; get; }
@@ -29,5 +29,7 @@ namespace WebApplicationProject_sucks
         public DbSet<ProfessionalPending> ProfessionalPendings { get; set; }
         public DbSet<PendingFile> PendingFiles { get; set; }
         public DbSet<PendingToCategory> PendingToCategories { get; set; }
+
+        public System.Data.Entity.DbSet<WebApplicationProject_sucks.Models.UserToPostRating> UserToPostRatings { get; set; }
     }
 }

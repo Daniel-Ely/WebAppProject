@@ -9,7 +9,7 @@ namespace WebApplicationProject_sucks.Models
 {
     public class PostComment
     {
-       
+        public PostComment() { }
         public PostComment(int commentID, int postID, string commentContent, string commentCreator, DateTime date)
         {
             this.PostCommentID = commentID;

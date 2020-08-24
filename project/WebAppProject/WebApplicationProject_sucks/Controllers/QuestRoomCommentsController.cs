@@ -18,7 +18,7 @@ namespace WebApplicationProject_sucks.Controllers
         // GET: QuestRoomComments
         public ActionResult Index()
         {
-            var comments = db.Comments.Include(q => q.QuestionRoom).Include(q => q.User);
+            var comments = db.QustionRoomComments.Include(q => q.QuestionRoom).Include(q => q.User);
             return View(comments.ToList());
         }
 
@@ -29,7 +29,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuestRoomComment questRoomComment = db.Comments.Find(id);
+            QuestRoomComment questRoomComment = db.QustionRoomComments.Find(id);
             if (questRoomComment == null)
             {
                 return HttpNotFound();
@@ -54,12 +54,11 @@ namespace WebApplicationProject_sucks.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Comments.Add(questRoomComment);
+                db.QustionRoomComments.Add(questRoomComment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-       
             return View(questRoomComment);
         }
 
@@ -70,7 +69,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuestRoomComment questRoomComment = db.Comments.Find(id);
+            QuestRoomComment questRoomComment = db.QustionRoomComments.Find(id);
             if (questRoomComment == null)
             {
                 return HttpNotFound();
@@ -105,7 +104,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuestRoomComment questRoomComment = db.Comments.Find(id);
+            QuestRoomComment questRoomComment = db.QustionRoomComments.Find(id);
             if (questRoomComment == null)
             {
                 return HttpNotFound();
@@ -118,8 +117,8 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            QuestRoomComment questRoomComment = db.Comments.Find(id);
-            db.Comments.Remove(questRoomComment);
+            QuestRoomComment questRoomComment = db.QustionRoomComments.Find(id);
+            db.QustionRoomComments.Remove(questRoomComment);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
