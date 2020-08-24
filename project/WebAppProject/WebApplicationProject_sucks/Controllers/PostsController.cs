@@ -23,6 +23,7 @@ namespace WebApplicationProject_sucks.Controllers
         }
 
         // GET: Posts/Details/5
+        [UserActivityFilter]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -69,6 +70,21 @@ namespace WebApplicationProject_sucks.Controllers
             }
 
             return View(post);
+        }
+
+
+        [ValidateInput(false)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateComment(string PostID, string CommentContent, string CommentCreator)
+        {
+            int commentID = db.PostComments.Count();
+            PostComment comment = new PostComment(commentID, Int32.Parse(PostID), CommentContent, CommentCreator, DateTime.Today.Date);
+            db.PostComments.Add(comment);
+            db.SaveChanges();
+
+            return Redirect("../Posts/Details/" + Int32.Parse(PostID));
+
         }
 
         // GET: Posts/Edit/5

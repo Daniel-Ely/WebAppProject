@@ -20,8 +20,9 @@ namespace WebApplicationProject_sucks.Controllers
         {
             return View(db.QuestionRooms.ToList());
         }
-        
+
         // GET: QuestionRooms/Details/5
+        [UserActivityFilter]
         public ActionResult Details(int? id)
         {
             if (id == null)
