@@ -13,27 +13,19 @@
 </head>
 <body>
     <div>
-        <h4>ProfessionalPage</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.User.FirstName)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.User.FirstName)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.NameOfPage)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.NameOfPage)
-            </dd>
-    
-        </dl>
+        @Html.Partial("../../Partitial/ProfessionalPageDetails")
     </div>
+    @{
+        MyDB db = new MyDB();
+        var isP = db.Users.Where(d => d.UserName ==Session["UserName"].ToString()).ToList().ElementAt(0).isProfessional;
+        if(isP)
+        {
+            <a href="../../Posts/Create">Add a new post to your professional page</a>
+        }
+       
+
+    }
+    
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.ProffesionalPageID }) |
         @Html.ActionLink("Back to List", "Index")

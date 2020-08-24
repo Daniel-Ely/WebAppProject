@@ -22,5 +22,10 @@ namespace WebApplicationProject_sucks.Controllers
         {
             return View();
         }
+
+        public ActionResult AdminHome()
+        {
+            return View();
+        }
     }
 }
