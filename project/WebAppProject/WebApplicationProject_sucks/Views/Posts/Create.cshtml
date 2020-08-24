@@ -82,6 +82,7 @@
         function mySave() {
             var myContent = tinymce.get("mytextarea").getContent();
             document.getElementById("Content").value = myContent;
+
         }
 
     </script>
@@ -139,7 +140,8 @@
         @Html.HiddenFor(model => model.PageID, new { Value = Session["ProffesionalPageID"] })
 
         <div class="form-group">
-            <input type="submit" value="Create" onclick="mySave()" class="btn btn-default" />
+            <input type="submit" value="Add to my professional page" onclick="mySave()" class="btn btn-default" />
+            <a href="../../ProfessionalPages/Details">Cancel</a>
         </div>
     </div>
     }

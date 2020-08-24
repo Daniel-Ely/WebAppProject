@@ -13,36 +13,19 @@
 </head>
 <body>
     <div>
-        <h4>ProfessionalPage</h4>
-        <hr />
-        <div class="dl-horizontal">
-
-            @Html.DisplayFor(model => model.User.FirstName)
-
-            @Html.DisplayFor(model => model.NameOfPage)
-            @{
-                var post = Model.Posts.GetEnumerator();
-                while (post.MoveNext())
-                {
-                    <div>
-                    @{MyDB db = new MyDB();
-                        var title = db.Posts.Where(d => d.PostID == post.Current.PostID).ToList().ElementAt(0).Title;
-                        var description = db.Posts.Where(d => d.PostID == post.Current.PostID).ToList().ElementAt(0).Description;
-                        string linkToQR = "../../Posts/Details/" + post.Current.PostID;
-                    }
-                    
-                    <a href=@linkToQR>
-                   <table><tr>
-                         <td>@Html.Raw(title)</td>
-                         <td>@Html.Raw(description)</td>
-                   </tr></table>
-                    
-                    </a>
-                </div>
-                }
-            }
-        </div>
+        @Html.Partial("../../Partitial/ProfessionalPageDetails")
     </div>
+    @{
+        MyDB db = new MyDB();
+        var isP = db.Users.Where(d => d.UserName ==Session["UserName"].ToString()).ToList().ElementAt(0).isProfessional;
+        if(isP)
+        {
+            <a href="../../Posts/Create">Add a new post to your professional page</a>
+        }
+       
+
+    }
+    
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.ProffesionalPageID }) |
         @Html.ActionLink("Back to List", "Index")
