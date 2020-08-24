@@ -18,9 +18,7 @@ namespace WebApplicationProject_sucks.Controllers
         {
             return View();
         }
-
-      
-
+    
         public ActionResult ConfirmPendings(IEnumerable<string> acceptedPendings)
         {
             MyDB db = new MyDB();
