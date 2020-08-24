@@ -49,11 +49,15 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProffesionalPageID,NameOfPage,UserName")] ProfessionalPage professionalPage)
+        public ActionResult Create([Bind(Include = "ProffesionalPageID,NameOfPage,UserName")] ProfessionalPage professionalPage, string[] selectedOptions)
         {
             if (ModelState.IsValid)
             {
                 db.ProfessionalPages.Add(professionalPage);
+                for (int i = 0; i < selectedOptions.Length; i++)
+                {//MtM relationship
+                    db.PageToCategories.Add(new PageToCategory(professionalPage.ProffesionalPageID, selectedOptions[i]));
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
