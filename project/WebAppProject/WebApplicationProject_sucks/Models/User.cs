@@ -51,8 +51,12 @@ namespace WebApplicationProject_sucks.Models
         //Profile image
         //
         public Image ProfileImage { get; set; }
-
+        
         public bool isProfessional { get; set; }
+        
+        //theres no need for admin model since we dont hold any additional data
+        //hard-coded insertion to DB
+        public bool isAdmin { get; set; }
 
     }
 }

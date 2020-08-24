@@ -30,6 +30,7 @@ namespace WebApplicationProject_sucks.Models
         public int PageID { get; set; }
         public ProfessionalPage ProfessionalPage { get; set; }
 
+        //It derives from the page categories!
         public virtual ICollection<PostToCategory> Categories { get; set; }
 
        

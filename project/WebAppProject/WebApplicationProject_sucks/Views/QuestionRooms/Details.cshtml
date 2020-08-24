@@ -103,14 +103,12 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div>
 
-
+        
         <div class="CreatorName">
             <h4> @Html.Raw(Model.Title)</h4>
             <h6>@Html.DisplayFor(model => model.CreatorName)</h6>
         </div>
         <hr />
-
-
 
         <!--Displaying all the comments in the room-->
         @foreach (var item in Model.Comments)
@@ -147,8 +145,6 @@
                 </div>
             </div>
 
-
-
         }
 
 
@@ -171,7 +167,6 @@
         </div>
 
        
-
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Send comment" onclick="mySave()" class="btn btn-default" />
         </div>

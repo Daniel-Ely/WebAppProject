@@ -227,7 +227,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\PendingFile.cs" />
     <Compile Include="Models\PendingToCategory.cs" />
