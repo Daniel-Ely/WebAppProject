@@ -23,7 +23,6 @@ namespace WebApplicationProject_sucks.Controllers
         }
 
         // GET: Posts/Details/5
-        [UserActivityFilter]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -50,41 +49,17 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PostID,Title,Date,Rating,NumOfRating,Description,PageID,Content")] Post post, string[] selectedOptions)
+        public ActionResult Create([Bind(Include = "PostID,Title,Date,Rating,NumOfRating,Description,PageID")] Post post)
         {
-
-
             if (ModelState.IsValid)
             {
-                post.PostID = db.Posts.Count();
-                for (int i = 0; i < selectedOptions.Length; i++)
-                {//MtM of category-post relationship 
-
-                    db.PostToCategories.Add(new PostToCategory(post.PostID, selectedOptions[i]));
-                }
-
-
                 db.Posts.Add(post);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
+            ViewBag.PageID = new SelectList(db.ProfessionalPages, "ProffesionalPageID", "NameOfPage", post.PageID);
             return View(post);
-        }
-
-
-        [ValidateInput(false)]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateComment(string PostID, string CommentContent, string CommentCreator)
-        {
-            int commentID = db.PostComments.Count();
-            PostComment comment = new PostComment(commentID, Int32.Parse(PostID), CommentContent, CommentCreator, DateTime.Today.Date);
-            db.PostComments.Add(comment);
-            db.SaveChanges();
-
-            return Redirect("../Posts/Details/" + Int32.Parse(PostID));
-
         }
 
         // GET: Posts/Edit/5
@@ -108,7 +83,7 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PostID,Title,Description,Content")] Post post)
+        public ActionResult Edit([Bind(Include = "PostID,Title,Date,Rating,NumOfRating,Description,PageID")] Post post)
         {
             if (ModelState.IsValid)
             {
@@ -116,7 +91,7 @@ namespace WebApplicationProject_sucks.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            
+            ViewBag.PageID = new SelectList(db.ProfessionalPages, "ProffesionalPageID", "NameOfPage", post.PageID);
             return View(post);
         }
 
@@ -145,7 +120,11 @@ namespace WebApplicationProject_sucks.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        public ActionResult CreateReating(string userName, int PostId, int Rating)
+        {
+            UserToPostRatingsController uTR = new UserToPostRatingsController();
+            return uTR.Create(new UserToPostRating(userName, PostId, Rating););
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -153,19 +132,6 @@ namespace WebApplicationProject_sucks.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-        [HttpPost]
-        public void AddHtmlScript(string content , int id)
-        {
-            HTMLScript hs = new HTMLScript();
-            hs.Content = content;
-            //
-            Post post = db.Posts.Find(id);
-            if (ModelState.IsValid)
-            {
-                post.Content.Add(hs);
-                db.SaveChanges();
-            }
         }
     }
 }

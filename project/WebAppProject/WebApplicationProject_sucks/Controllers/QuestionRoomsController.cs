@@ -80,7 +80,6 @@ namespace WebApplicationProject_sucks.Controllers
             db.SaveChanges();
 
             return Redirect("../QuestionRooms/Details/"+Int32.Parse(RoomID));
-
         }
 
 

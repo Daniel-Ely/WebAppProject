@@ -11,114 +11,116 @@ using WebApplicationProject_sucks.Models;
 
 namespace WebApplicationProject_sucks.Controllers
 {
-    public class QuestRoomCommentsController : Controller
+    public class UserToPostRatingsController : Controller
     {
         private MyDB db = new MyDB();
 
-        // GET: QuestRoomComments
+        // GET: UserToPostRatings
         public ActionResult Index()
         {
-            var comments = db.Comments.Include(q => q.QuestionRoom).Include(q => q.User);
-            return View(comments.ToList());
+            var userToPostRatings = db.UserToPostRatings.Include(u => u.Post).Include(u => u.User);
+            return View(userToPostRatings.ToList());
         }
 
-        // GET: QuestRoomComments/Details/5
+        // GET: UserToPostRatings/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuestRoomComment questRoomComment = db.Comments.Find(id);
-            if (questRoomComment == null)
+            UserToPostRating userToPostRating = db.UserToPostRatings.Find(id);
+            if (userToPostRating == null)
             {
                 return HttpNotFound();
             }
-            return View(questRoomComment);
+            return View(userToPostRating);
         }
 
-        // GET: QuestRoomComments/Create
+        // GET: UserToPostRatings/Create
         public ActionResult Create()
         {
-            ViewBag.RoomID = new SelectList(db.QuestionRooms, "QuestionRoomID", "Title");
+            ViewBag.PostId = new SelectList(db.Posts, "PostID", "Title");
             ViewBag.UserName = new SelectList(db.Users, "UserName", "FirstName");
             return View();
         }
 
-        // POST: QuestRoomComments/Create
+        // POST: UserToPostRatings/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "QuestCommentID,RoomID,UserName,Date,Content")] QuestRoomComment questRoomComment)
+        public ActionResult Create([Bind(Include = "PostId,UserName,Rating")] UserToPostRating userToPostRating)
         {
             if (ModelState.IsValid)
             {
-                db.Comments.Add(questRoomComment);
+                db.UserToPostRatings.Add(userToPostRating);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(questRoomComment);
+            ViewBag.PostId = new SelectList(db.Posts, "PostID", "Title", userToPostRating.PostId);
+            ViewBag.UserName = new SelectList(db.Users, "UserName", "FirstName", userToPostRating.UserName);
+            return View(userToPostRating);
         }
 
-        // GET: QuestRoomComments/Edit/5
+        // GET: UserToPostRatings/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuestRoomComment questRoomComment = db.Comments.Find(id);
-            if (questRoomComment == null)
+            UserToPostRating userToPostRating = db.UserToPostRatings.Find(id);
+            if (userToPostRating == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.RoomID = new SelectList(db.QuestionRooms, "QuestionRoomID", "Title", questRoomComment.RoomID);
-            ViewBag.UserName = new SelectList(db.Users, "UserName", "FirstName", questRoomComment.UserName);
-            return View(questRoomComment);
+            ViewBag.PostId = new SelectList(db.Posts, "PostID", "Title", userToPostRating.PostId);
+            ViewBag.UserName = new SelectList(db.Users, "UserName", "FirstName", userToPostRating.UserName);
+            return View(userToPostRating);
         }
 
-        // POST: QuestRoomComments/Edit/5
+        // POST: UserToPostRatings/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "QuestCommentID,RoomID,UserName,Date")] QuestRoomComment questRoomComment)
+        public ActionResult Edit([Bind(Include = "PostId,UserName,Rating")] UserToPostRating userToPostRating)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(questRoomComment).State = EntityState.Modified;
+                db.Entry(userToPostRating).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.RoomID = new SelectList(db.QuestionRooms, "QuestionRoomID", "Title", questRoomComment.RoomID);
-            ViewBag.UserName = new SelectList(db.Users, "UserName", "FirstName", questRoomComment.UserName);
-            return View(questRoomComment);
+            ViewBag.PostId = new SelectList(db.Posts, "PostID", "Title", userToPostRating.PostId);
+            ViewBag.UserName = new SelectList(db.Users, "UserName", "FirstName", userToPostRating.UserName);
+            return View(userToPostRating);
         }
 
-        // GET: QuestRoomComments/Delete/5
+        // GET: UserToPostRatings/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuestRoomComment questRoomComment = db.Comments.Find(id);
-            if (questRoomComment == null)
+            UserToPostRating userToPostRating = db.UserToPostRatings.Find(id);
+            if (userToPostRating == null)
             {
                 return HttpNotFound();
             }
-            return View(questRoomComment);
+            return View(userToPostRating);
         }
 
-        // POST: QuestRoomComments/Delete/5
+        // POST: UserToPostRatings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            QuestRoomComment questRoomComment = db.Comments.Find(id);
-            db.Comments.Remove(questRoomComment);
+            UserToPostRating userToPostRating = db.UserToPostRatings.Find(id);
+            db.UserToPostRatings.Remove(userToPostRating);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

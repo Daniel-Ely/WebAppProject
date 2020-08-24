@@ -10,7 +10,7 @@ namespace WebApplicationProject_sucks.Models
 {
     public class UserToCategory
     {
-    
+        public UserToCategory() { }
         [Key]
         [Column(Order = 0)]
         [ForeignKey("User")]
@@ -31,6 +31,13 @@ namespace WebApplicationProject_sucks.Models
             this.UserName = username;
             this.CategoryName = categoryname;
             this.NumOfVisits = 0;
+            this.LastTouched = DateTime.Today;
+        }
+        public UserToCategory(string username, string categoryname , int viewed)
+        {
+            this.UserName = username;
+            this.CategoryName = categoryname;
+            this.NumOfVisits = viewed;
             this.LastTouched = DateTime.Today;
         }
     }

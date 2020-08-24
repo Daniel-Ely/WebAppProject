@@ -15,6 +15,7 @@ namespace WebApplicationProject_sucks.Controllers
     {
         private MyDB db = new MyDB();
 
+        
         // GET: UserToCategories
         public ActionResult Index()
         {
@@ -50,7 +51,7 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserName,CategoryName")] UserToCategory userToCategory)
+        public ActionResult Create([Bind(Include = "UserName,CategoryName,NumOfVisits,LastTouched")] UserToCategory userToCategory)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +87,7 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserName,CategoryName")] UserToCategory userToCategory)
+        public ActionResult Edit([Bind(Include = "UserName,CategoryName,NumOfVisits,LastTouched")] UserToCategory userToCategory)
         {
             if (ModelState.IsValid)
             {
