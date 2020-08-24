@@ -101,7 +101,8 @@ singlePost {
     background: #ddd;
 }
 img.avatar {
-    width:25%;
+    height:5%;
+   
     padding-right:5%;
 }
 
