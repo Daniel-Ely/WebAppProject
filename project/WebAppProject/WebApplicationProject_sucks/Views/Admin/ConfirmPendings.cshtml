@@ -25,6 +25,13 @@
     <!-- Custom styles for this page -->
     <link href="~/Content/AdminBootstrap/vendor/datatables/dataTables.bootstrap4.min.css?ver=<?php echo rand(111,999)?" rel="stylesheet">
 
+    <style>
+      
+        table {
+            border-spacing: 5px;
+        }
+    </style>
+
 </head>
 <body>
     @using (Html.BeginForm("ConfirmPendings", "Admin"))
@@ -64,7 +71,7 @@
                             @foreach(var item in db.ProfessionalPendings)
                             {
                             <tr>
-                                <td><input type="checkbox" name=acceptedPendings id="@item.Profession_Name" value="" /></td>
+                                <td><input type="checkbox" name=acceptedPendings  value="@item.Profession_Name" /></td>
 
                                 <td>@item.UserName</td>
                                 <td>@item.Profession_Name</td>

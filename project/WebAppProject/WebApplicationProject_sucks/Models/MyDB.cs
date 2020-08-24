@@ -30,6 +30,6 @@ namespace WebApplicationProject_sucks
         public DbSet<PendingFile> PendingFiles { get; set; }
         public DbSet<PendingToCategory> PendingToCategories { get; set; }
 
-        public System.Data.Entity.DbSet<WebApplicationProject_sucks.Models.UserToPostRating> UserToPostRatings { get; set; }
+      //  public System.Data.Entity.DbSet<WebApplicationProject_sucks.Models.UserToPostRating> UserToPostRatings { get; set; }
     }
 }

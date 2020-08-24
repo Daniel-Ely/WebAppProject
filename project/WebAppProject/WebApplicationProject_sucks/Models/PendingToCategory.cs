@@ -16,6 +16,11 @@ namespace WebApplicationProject_sucks.Models
             this.CategoryName = categoryname;
         }
 
+        public PendingToCategory()
+        {
+
+        }
+
         [Key]
         [Column(Order = 0)]
         [ForeignKey("ProfessionalPending")]

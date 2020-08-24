@@ -9,7 +9,7 @@ namespace WebApplicationProject_sucks.Controllers
     public class HomePageController : Controller
     {
         // GET: HomePage
-        [LogInFilter]
+       // [LogInFilter]
         public ActionResult Home()
         {
               return View();

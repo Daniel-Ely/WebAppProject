@@ -26,7 +26,7 @@ namespace WebApplicationProject_sucks.Models
 
         public virtual ICollection<PostComment> Comments { get; set; }
 
-        public virtual ICollection<UserToPostRating> AllRatings { get; set; }
+        //public virtual ICollection<UserToPostRating> AllRatings { get; set; }
 
         [ForeignKey("ProfessionalPage")]
         public int PageID { get; set; }

@@ -132,7 +132,7 @@ namespace WebApplicationProject_sucks.Controllers
 
 
 
-        [ValidateInput(false)]
+      /*  [ValidateInput(false)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateRating(string userName, int PostId, int Rating)
@@ -149,7 +149,7 @@ namespace WebApplicationProject_sucks.Controllers
             post.Rating = sum / post.NumOfRating;
             db.SaveChanges();
             return Redirect("../Posts/Details/" + PostId);
-        }
+        }*/
        
 
         [ValidateInput(false)]
