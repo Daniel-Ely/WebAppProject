@@ -66,7 +66,7 @@ namespace WebApplicationProject_sucks.Controllers
 
                 db.Posts.Add(post);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("../../View/ProfessionalPages/Details");
             }
 
             return View(post);
