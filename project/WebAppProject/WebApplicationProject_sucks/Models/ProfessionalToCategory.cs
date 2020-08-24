@@ -15,12 +15,7 @@ namespace WebApplicationProject_sucks.Models
             this.P_UserName = userName;
             this.CategoryName = categoryname;
         }
-
-        public ProfessionalToCategory()
-        {
-
-        }
-
+        
         [Key]
         [Column(Order = 0)]
         [ForeignKey("Professional")]

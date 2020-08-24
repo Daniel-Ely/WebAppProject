@@ -1,0 +1,97 @@
+﻿body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: smaller;
+    text-align: center;
+    background-image: url(../src/logIn.bmp);
+    background-size: 100% 100%;
+    background-size: cover;
+}
+
+.imgcontainer {
+    display:inline-block;
+    float:right;
+    text-align:right;
+}
+
+img.avatar {
+    margin-top:3%;
+   float:right;
+   width:55%;
+}
+
+.validations{
+    text-align:left;
+    color:darkred;
+}
+h2 {
+    margin-top : 5%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.form-horizontal {
+    display: inline-block;
+    width: 30%;
+    height: 80%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 25px;
+}
+.form-group {
+    display: inline-block;
+    width: 100%;
+    text-align:center;
+}
+
+/* Full-width input fields */
+input,
+select
+{
+    width: 70%;
+    padding: 12px 20px;
+    margin: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.btn-default {
+    width:30%;
+    margin-right:35%;
+    margin-left:35%;
+}
+
+.icon {
+    float:left;
+    padding: 15px;
+    background: black;
+    color: white;
+    min-width: 50px;
+    text-align: center;
+}
+
+/* Set a style for the submit button */
+.registerbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+    .registerbtn:hover {
+        opacity: 1;
+    }
+
+/* Add a blue text color to links */
+a {
+    color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+    background-color: #f1f1f1;
+    text-align: center;
+}

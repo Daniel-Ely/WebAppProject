@@ -1,0 +1,50 @@
+﻿
+@model WebApplicationProject_sucks.Models.User
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="~/Content/Register.css?ver=<?php echo rand(111,999)?" type="text/css">
+    <title>Log In</title>
+</head>
+<body>
+    <h2>Log In</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+     <div class="form-horizontal">
+
+        <div class="imgcontainer">
+            <img src="~/src/Owl.png" alt="Avatar" class="avatar">
+        </div>
+
+        <div class="container">
+            <input type="text" name="username" placeholder="Enter user name" required>
+        </div>
+
+        <div class="container">
+            <input type="password" name="password" placeholder="Enter password" required>
+        </div>
+
+        <div class="remember">
+              <input type="checkbox" checked="checked" name="remember">
+              <label>Remember me</label>
+        </div>
+
+        <input type="submit" value="Log In" class="btn btn-default" /><br />
+        <button type="button" class="cancelbtn">Cancel</button>
+        <a href="#">Forgot password?</a>
+
+
+    </div>
+    }
+
+</body>
+</html>
+
+
+

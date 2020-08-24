@@ -29,11 +29,6 @@ namespace WebApplicationProject_sucks.Models
             this.P_UserName = pendingUser;
         }
 
-        public PendingFile()
-        {
-
-        }
-
     }
 
 }
