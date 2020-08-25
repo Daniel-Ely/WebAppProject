@@ -48,7 +48,7 @@ namespace WebApplicationProject_sucks.Controllers
                         foreach (var pendingFile in db.PendingFiles)
                         {                          
                             db.PendingFiles.Remove(pendingFile);
-                        }
+                        }s
                         professional.Score = 0;
                         //after getting all the necessary data and removing relationships connections, lets remove 
                         //the entry in the pendingProfessional!
