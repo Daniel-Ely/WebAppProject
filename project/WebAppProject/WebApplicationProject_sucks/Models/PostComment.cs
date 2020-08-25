@@ -14,7 +14,7 @@ namespace WebApplicationProject_sucks.Models
         {
             this.PostCommentID = commentID;
             this.PostID = postID;
-            this.Content = commentContent;
+            this.PostCommentContent = commentContent;
             this.UserName = commentCreator;
             this.Date = date;
         }
@@ -25,7 +25,7 @@ namespace WebApplicationProject_sucks.Models
         public int PostID { get; set;}
         public Post Post { get; set; }
 
-        public string Content { get; set; }
+        public string PostCommentContent { get; set; }
 
         [ForeignKey("User")]
         public string UserName { get; set; }

@@ -99,6 +99,7 @@ namespace WebApplicationProject_sucks.Controllers
             ViewBag.ErrorMessage = "The user name or password provided is incorrect.";
             //ModelState.AddModelError("", "The user name or password provided is incorrect.");
 
+
             return View();
         }
         public ActionResult LogOut()

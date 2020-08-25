@@ -27,5 +27,9 @@ namespace WebApplicationProject_sucks.Controllers
         {
             return View();
         }
+        public ActionResult TestTheSearch()
+        {
+            return View();
+        }
     }
 }

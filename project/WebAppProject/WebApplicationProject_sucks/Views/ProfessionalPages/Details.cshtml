@@ -9,26 +9,63 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
+    <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
+
 </head>
 <body>
-    <div>
-        @Html.Partial("../../Partitial/ProfessionalPageDetails")
+    <div class=" titleOfPage">
+        @Html.DisplayFor(model => model.NameOfPage)
+        @Html.DisplayFor(model => model.UserName)
+        <hr />
     </div>
-    @{
-        MyDB db = new MyDB();
-        var isP = db.Users.Where(d => d.UserName ==Session["UserName"].ToString()).ToList().ElementAt(0).isProfessional;
-        if(isP)
-        {
-            <a href="../../Posts/Create">Add a new post to your professional page</a>
-        }
-       
+    <div class="row">
 
-    }
-    
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ProffesionalPageID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+        <div class="main">
+
+
+            @{
+                MyDB db = new MyDB();
+                var post = Model.Posts.GetEnumerator();
+                while (post.MoveNext())
+                {
+
+                    var title = db.Posts.Where(d => d.PostID == post.Current.PostID).ToList().ElementAt(0).Title;
+                    var date = db.Posts.Where(d => d.PostID == post.Current.PostID).ToList().ElementAt(0).Date;
+                    var description = db.Posts.Where(d => d.PostID == post.Current.PostID).ToList().ElementAt(0).Description;
+                    string linkToQR = "../../Posts/Details/" + post.Current.PostID;
+
+
+                        <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
+                        <div class="postAndQroom">
+                            <a href=@linkToQR>
+                                <h3>@Html.Raw(title)</h3>
+                                <h5>publish date , @date.Month  @date.Day,  @date.Year</h5>
+                                <p>@Html.Raw(description)</p>
+                            </a>
+                        </div><br />
+                }
+            }
+
+        </div>
+
+        <div class="side">
+            @{
+                string user = Session["UserName"].ToString();
+                var isP = db.Users.Where(d => d.UserName == user).ToList().ElementAt(0).isProfessional;
+                if (isP)
+                {
+                    <a href="../../Posts/Create">Add a new post to your professional page</a><br />
+                    <a href="../Edit">Edit this professional page </a>
+                }
+            }
+
+        </div>
+    </div>
+
+    @{Session["ProfessionalPageID"] = Model.ProfessionalPageID;}
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ProfessionalPageID }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
 </body>
 </html>

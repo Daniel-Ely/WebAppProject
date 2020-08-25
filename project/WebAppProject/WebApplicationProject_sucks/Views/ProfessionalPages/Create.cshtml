@@ -9,6 +9,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
     <title>Create</title>
 </head>
 <body>
@@ -30,9 +31,10 @@
             @{
                 MyDB db = new MyDB();
                 List<SelectListItem> listOfCategories = new List<SelectListItem>();
-                foreach (var item in db.Categories)
+                string user = Session["UserName"].ToString();
+                foreach (var item in db.ProfessionalToCategories.Where(d=>d.P_UserName==user).ToList())
                 {
-                    listOfCategories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
+                    listOfCategories.Add(new SelectListItem { Text = item.CategoryName, Value = item.CategoryName });
                 }
             }
 

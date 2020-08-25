@@ -2,9 +2,13 @@
 @{
     ViewBag.Title = "navbar";
 }
+<script>
+    function search()
+    {
 
+    }
+</script >
 <div class="navbar">
-
     @if (Session["UserName"] == null)
     {
         <a href="" class="active">Home</a>
@@ -18,10 +22,15 @@
         <a href="#">@Html.ActionLink("Log out", "../Users/LogOut")</a>
         <a href="#">@Html.ActionLink("Ask a new question", "../QuestionRooms/Create")</a>
         <a href="#">@Html.ActionLink("Move to Categories", "../Categories/Index")</a>
+        <input type="text"
+               name="searchBar"
+               id="searchBar"
+               placeholder="search for a post" />
+        
 
-      
-<a href="" class="right">Welcome! @Session["UserName"]</a>
-}
+
+        <a href="" class="right">Welcome! @Session["UserName"]</a>
+    }
 
 </div>
 }

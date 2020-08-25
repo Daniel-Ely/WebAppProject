@@ -1783,6 +1783,7 @@
     <Content Include="Content\Log_in.css" />
     <Content Include="Content\Professional.css" />
     <Content Include="Content\Register.css" />
+    <Content Include="Content\search.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -2049,6 +2050,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Content\Home.css" />
+    <Content Include="Scripts\searchBar.js" />
     <Content Include="src\landScape_soulOwl.jpg" />
     <Content Include="src\logIn.bmp" />
     <Content Include="src\Owl family.png" />
@@ -2229,7 +2231,6 @@
     <Content Include="Views\Posts\Details.cshtml" />
     <Content Include="Views\Posts\Edit.cshtml" />
     <Content Include="Views\Posts\Index.cshtml" />
-    <Content Include="Views\Test\tinymce.cshtml" />
     <Content Include="Views\Professions\Create.cshtml" />
     <Content Include="Views\Professions\Delete.cshtml" />
     <Content Include="Views\Professions\Details.cshtml" />
@@ -2246,6 +2247,7 @@
     <Content Include="Views\Admin\AdminStatistics.cshtml" />
     <Content Include="Views\Admin\ConfirmPendings.cshtml" />
     <Content Include="Views\HomePage\AdminHome.cshtml" />
+    <Content Include="Views\HomePage\TestTheSearch.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2255,6 +2257,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Home\" />
+    <Folder Include="Views\LogIn\" />
+    <Folder Include="Views\Search\" />
     <Folder Include="Views\UserToPostRatings\" />
   </ItemGroup>
   <ItemGroup>
