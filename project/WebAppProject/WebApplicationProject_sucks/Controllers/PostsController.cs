@@ -61,7 +61,7 @@ namespace WebApplicationProject_sucks.Controllers
                 }
                 
                 db.SaveChanges();
-                return RedirectToAction("../View/ProfessionalPages/Details/"+post.ProfessionalPageID);
+                return RedirectToAction("../ProfessionalPages/Details/"+post.ProfessionalPageID);
             }
 
            return View(post);
@@ -161,14 +161,24 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateInput(false)]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateComment(string PostID, string CommentContent, string CommentCreator)
+        public ActionResult CreateComment([Bind(Include = "PostID,PostCommentContent,UserName")] PostComment pC)
         {
-            int commentID = db.PostComments.Count();
-            PostComment comment = new PostComment(commentID, Int32.Parse(PostID), CommentContent, CommentCreator, DateTime.Today);
-            db.PostComments.Add(comment);
+            pC.Date = DateTime.Today;
+            db.PostComments.Add(pC);
             db.SaveChanges();
+            Session["PostCommentContent"] = null;
+            return Redirect("../Posts/Details/" + pC.PostID);
+        }
 
-            return Redirect("../Posts/Details/" + Int32.Parse(PostID));
+        [ValidateInput(false)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddCommentOrRate([Bind(Include = "PostID,PostCommentContent,UserName")] PostComment pC, [Bind(Include = "Rating,UserName,PostId")] UserToPostRating uTPR)
+        {
+            if (pC.PostID.ToString() != null && pC.PostCommentContent != null && pC.UserName != null)
+               return CreateComment(pC);
+            else
+               return CreateRating(uTPR);
         }
     }
 }

@@ -18,7 +18,7 @@
 
 </head>
 <body>
-        @using (Html.BeginForm("CreateComment", "Posts"))
+        @using (Html.BeginForm("AddCommentOrRate", "Posts"))
         {
 
             @Html.AntiForgeryToken()
@@ -30,7 +30,8 @@
             <h3> @Html.Raw(Model.Title)</h3>
             @{
                 MyDB db = new MyDB();
-                <h5>@db.ProfessionalPages.Where(d => d.ProfessionalPageID == Model.ProfessionalPageID).ToList().ElementAt(0).UserName</h5>
+                string CreatorName = db.ProfessionalPages.Where(d => d.ProfessionalPageID == Model.ProfessionalPageID).ToList().ElementAt(0).UserName;
+               <h5>@CreatorName</h5>
             }
             <h6>@Html.DisplayFor(model => model.Date)</h6>
             <hr />
@@ -43,90 +44,88 @@
 
                 @Html.Raw(Model.Content)
                 <br />
-
+                @Html.Hidden("UserName", Session["UserName"])
                 @{
 
-                <div class="rating">
-                    <label>Pepole that rate this post</label>
-                    @Model.NumOfRating
-                </div> 
+                    <div class="rating">
+                        <label>Pepole that rate this post</label>
+                        @Model.NumOfRating
+                    </div>
 
                     string userN = Session["UserName"].ToString();
-                    if (db.UserToPostRatings.Where(d => d.UserName == userN && d.PostId == Model.PostID).ToList().Count==0)
+                    if (db.UserToPostRatings.Where(d => d.UserName == userN && d.PostId == Model.PostID).ToList().Count == 0)
 
                     {
-                        <input type="number" placeholder="Rate this post between 1 to 10" name="Rating" id="Rating" min="1" max="10" />
-                        var pathToSendRate = "/Posts/CreateRating";
-
-                        <a href="~/Controllers/PostsController/CreateRating">Send your rate</a>
+                        <ul>
+                            <li><input type="number" placeholder="Rate this post between 1 to 10" name="Rating" id="Rating" min="1" max="10" /></li>
+                            <li><input type="submit" placeholder="Send your rate" class="btn btn-default" /><br /></li>
+                        </ul>
+                        
+                        
                     }
 
                 }<!---->
-                
 
-                    <br /><br />
 
-                    <!--Show all the comments-->
-                    @foreach (var item in db.PostComments)
-                    {
+                <br /><br />
 
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm-10 col-sm-offset-1" id="logout">
-                                    <div class="tab-content">
-                                        <div class="tab-pane active" id="comments-logout">
-                                            <ul class="media-list">
-                                                <li class="media">
-                                                    <a class="pull-left" href="#">
-                                                        <img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg" alt="profile">
-                                                    </a>
-                                                    <div class="media-body">
-                                                        <div class="well well-lg">
-                                                            <h4 class="media-heading text-uppercase reviews"> @Html.DisplayFor(modelItem => item.UserName) </h4>
-                                                            <ul class="media-date text-uppercase reviews list-inline">
-                                                                <li class="dd">@Html.DisplayFor(modelItem => item.Date.Day)</li>
-                                                                <li class="mm">@Html.DisplayFor(modelItem => item.Date.Month)</li>
-                                                                <li class="aaaa">@Html.DisplayFor(modelItem => item.Date.Year)</li>
-                                                            </ul>
-                                                            <p class="media-comment">
-                                                                @Html.Raw(item.Content)
+                <!--Show all the comments-->
+                @foreach (var item in db.PostComments.Where(d=>d.PostID==Model.PostID).ToList())
+                {
 
-                                                            </p>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-10 col-sm-offset-1" id="logout">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="comments-logout">
+                                        <ul class="media-list">
+                                            <li class="media">
+                                                <a class="pull-left" href="#">
+                                                    <img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg" alt="profile">
+                                                </a>
+                                                <div class="media-body">
+                                                    <div class="well well-lg">
+                                                        <ul>
+                                                            <li><h4 class="media-heading text-uppercase reviews"> @Html.DisplayFor(modelItem => item.UserName) </h4></li>
+                                                            <li>
+                                                                <ul class="media-date text-uppercase reviews list-inline">
+                                                                    <li class="dd">@Html.DisplayFor(modelItem => item.Date.Day)</li>
+                                                                    <li class="mm">@Html.DisplayFor(modelItem => item.Date.Month)</li>
+                                                                    <li class="aaaa">@Html.DisplayFor(modelItem => item.Date.Year)</li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                        <p class="media-comment">
+                                                            @item.PostCommentContent
 
-                                                        </div>
+                                                        </p>
+
                                                     </div>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                    }
-
-                    <!--commetns fo post-->
-                    @Html.Hidden("PostID", Model.PostID)
-
-                    @Html.Editor("CommentContent",new { placeholder ="Write a comment"})
-                    
-                    <!--creator name-->
-                    <div class="form-group">
-                        @Html.Hidden("CommentCreator", Session["UserName"])
                     </div>
 
-                   
-                        @{var pathToAddComment = "../Posts/CreateReating?userName=" + Session["UserName"] + "&PostID=" + Model.PostID + "&Rating=" + "rating";
+                }
 
-                            <a href=@pathToAddComment>Send your comment</a>}
-                   
-                </div>
+                <!--commetns fo post-->
+                @Html.Hidden("PostID", Model.PostID)
+
+                @Html.Editor("PostCommentContent", new { placeholder = "Write a comment" })
+            
+                <input type="submit" placeholder="Send your rate" class="btn btn-default" /><br />
+               
+
+            </div>
                 
 
             <div class="side">
                 @{
-                    string user = Session["UserName"].ToString();
-                    var isP = db.Users.Where(d => d.UserName == user).ToList().ElementAt(0).isProfessional;
+                    var isP = db.Users.Where(d => d.UserName == userN).ToList().ElementAt(0).isProfessional;
                     if (isP)
                     {
                         <a href="../Edit">Edit this post </a>
