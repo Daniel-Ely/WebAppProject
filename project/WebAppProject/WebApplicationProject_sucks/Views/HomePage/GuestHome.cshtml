@@ -38,7 +38,8 @@
                         for (int i = 0; i < 10 && i < listOfPS.Count; i++)
                         {
                             <tr>
-                                <td>@db.ProfessionalPages.Where(d => d.ProfessionalPageID == listOfPS.ElementAt(i).PageID).ToList().ElementAt(0).UserName</td>
+                                @{int pageid=listOfPS.ElementAt(i).ProfessionalPageID;
+                                <td> @db.ProfessionalPages.Where(d => d.ProfessionalPageID == pageid).ToList().ElementAt(0).UserName</td>}
                                 <td>@Html.Raw(listOfPS.ElementAt(i).Title)</td>
                                 <td>@listOfPS.ElementAt(i).Description</td>
                             </tr>

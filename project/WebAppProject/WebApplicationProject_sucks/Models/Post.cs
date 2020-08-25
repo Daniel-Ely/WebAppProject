@@ -30,7 +30,7 @@ namespace WebApplicationProject_sucks.Models
         //public virtual ICollection<UserToPostRating> AllRatings { get; set; }
 
         [ForeignKey("ProfessionalPage")]
-        public int PageID { get; set; }
+        public int ProfessionalPageID { get; set; }
         public ProfessionalPage ProfessionalPage { get; set; }
 
         //It derives from the page categories!

@@ -20,23 +20,25 @@
                 var post = Model.Posts.GetEnumerator();
                 while (post.MoveNext())
                 {
-                    <div>
-                        @{MyDB db = new MyDB();
-                            var title = db.Posts.Where(d => d.PostID == post.Current.PostID).ToList().ElementAt(0).Title;
-                            var description = db.Posts.Where(d => d.PostID == post.Current.PostID).ToList().ElementAt(0).Description;
-                            string linkToQR = "../Posts/Details/" + post.Current.PostID;
-                        }
+            <div>
+                @{MyDB db = new MyDB();
+                    var title = db.Posts.Where(d => d.PostID == post.Current.PostID).ToList().ElementAt(0).Title;
+                    var date = db.Posts.Where(d => d.PostID == post.Current.PostID).ToList().ElementAt(0).Date;
+                    var description = db.Posts.Where(d => d.PostID == post.Current.PostID).ToList().ElementAt(0).Description;
+                    string linkToQR = "../Posts/Details/" + post.Current.PostID;
+                }
 
-                        <a href=@linkToQR>
-                            <table>
-                                <tr>
-                                    <td>@Html.Raw(title)</td>
-                                    <td>@Html.Raw(description)</td>
-                                </tr>
-                            </table>
-
+                
+                <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
+                <div class="postAndQroom">
+                    <a href=@linkToQR>
+                        <h3>@Html.Raw(title)</h3>
+                        <h5>publish date , @date.Month  @date.Day,  @date.Year</h5>
+                        <p>@Html.Raw(description)</p>
                         </a>
-                    </div>
+                </div>
+
+            </div>
                 }
             }
         </div>

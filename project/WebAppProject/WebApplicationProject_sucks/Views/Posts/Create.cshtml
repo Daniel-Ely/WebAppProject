@@ -122,7 +122,8 @@
             @{
                 MyDB db = new MyDB();
                 List<SelectListItem> listOfCategories = new List<SelectListItem>();
-                var list = db.PageToCategories.Where(d => d.ProfessionalPageID == Model.PageID).ToList();
+                int pageid = Int32.Parse(Session["ProfessionalPageID"].ToString());
+                var list = db.PageToCategories.Where(d => d.ProfessionalPageID ==pageid).ToList();
                 foreach (var item in list)
                 {
                     listOfCategories.Add(new SelectListItem { Text = item.CategoryName, Value = item.CategoryName });
@@ -133,7 +134,7 @@
 
         </div>
 
-        @Html.HiddenFor(model => model.PageID, new { Value = Session["ProfessionalPageID"] })
+        @Html.HiddenFor(model => model.ProfessionalPageID, new { Value = pageid })
 
         <div class="form-group">
             <input type="submit" value="Add to my professional page" onclick="mySave()" class="btn btn-default" /><br />

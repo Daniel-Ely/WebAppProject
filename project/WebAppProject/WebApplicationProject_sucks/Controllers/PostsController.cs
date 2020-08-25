@@ -49,7 +49,7 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Title,Content,Description")] Post post, string[] selectedOptions)
+        public ActionResult Create([Bind(Include = "Title,Content,Description,ProfessionalPageID")] Post post, string[] selectedOptions)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +61,7 @@ namespace WebApplicationProject_sucks.Controllers
                 }
                 
                 db.SaveChanges();
-                return RedirectToAction("../View/ProfessionalPages/Details");
+                return RedirectToAction("../View/ProfessionalPages/Details/"+post.ProfessionalPageID);
             }
 
            return View(post);
@@ -79,7 +79,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.PageID = new SelectList(db.ProfessionalPages, "ProfessionalPageID", "NameOfPage", post.PageID);
+            ViewBag.ProfessionalPageID = new SelectList(db.ProfessionalPages, "ProfessionalPageID", "NameOfPage", post.ProfessionalPageID);
             return View(post);
         }
 
@@ -96,7 +96,7 @@ namespace WebApplicationProject_sucks.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PageID = new SelectList(db.ProfessionalPages, "ProffesionalPageID", "NameOfPage", post.PageID);
+            ViewBag.ProfessionalPageID = new SelectList(db.ProfessionalPages, "ProfessionalPageID", "NameOfPage", post.ProfessionalPageID);
             return View(post);
         }
 
@@ -141,20 +141,20 @@ namespace WebApplicationProject_sucks.Controllers
       [ValidateInput(false)]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateRating(string userName, int PostId, int Rating)
+        public ActionResult CreateRating( [Bind(Include = "Rating,UserName,PostId")] UserToPostRating uTPR)
         {
-            UserToPostRating rate = new UserToPostRating(userName, PostId, Rating);
-            db.UserToPostRatings.Add(rate);
+            
+            db.UserToPostRatings.Add(uTPR);
             db.SaveChanges();
-            Post post = db.Posts.Where(d => d.PostID == PostId).ToList().ElementAt(0);
+            Post post = db.Posts.Where(d => d.PostID == uTPR.PostId).ToList().ElementAt(0);
             post.NumOfRating += 1;
             db.SaveChanges();
             int sum = 0;
-            foreach (var item in db.UserToPostRatings.Where(d => d.PostId == PostId).ToList())
+            foreach (var item in db.UserToPostRatings.Where(d => d.PostId == uTPR.PostId).ToList())
                 sum += item.Rating;
             post.Rating = sum / post.NumOfRating;
             db.SaveChanges();
-            return Redirect("../Posts/Details/" + PostId);
+            return Redirect("../Posts/Details/" + uTPR.PostId);
         }
        
 
