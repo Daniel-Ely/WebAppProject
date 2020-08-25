@@ -8,45 +8,48 @@
     <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
 </head>
 <body>
+    <div class="row">
+        <div class="side">
+            <h2>About us</h2>
 
-    <div class="side">
-        <h2>About us</h2>
+        </div>
+        <div class="main">
+            <table>
+                @{
 
+                    MyDB db = new MyDB();
+                    if (db.QuestionRooms.ToList().Count > 0)
+                    {
+                        var listOfQR = db.QuestionRooms.OrderBy(d => d.DatePublished).ToList();
+                        for (int i = 0; i < 10 && i < listOfQR.Count; i++)
+                        {
+
+
+                            <tr>
+                                <td>@listOfQR.ElementAt(i).CreatorName</td>
+                                <td>@Html.Raw(listOfQR.ElementAt(i).Title)</td>
+                            </tr>
+
+                        }
+                    }
+                    if (db.Posts.ToList().Count > 0)
+                    {
+                        var listOfPS = db.Posts.OrderBy(d => d.Date).ThenBy(d => d.NumOfRating).ThenBy(d => d.Rating).ToList();
+                        for (int i = 0; i < 10 && i < listOfPS.Count; i++)
+                        {
+                            <tr>
+                                <td>@db.ProfessionalPages.Where(d => d.ProfessionalPageID == listOfPS.ElementAt(i).PageID).ToList().ElementAt(0).UserName</td>
+                                <td>@Html.Raw(listOfPS.ElementAt(i).Title)</td>
+                                <td>@listOfPS.ElementAt(i).Description</td>
+                            </tr>
+                        }
+
+                    }
+                }
+
+            </table>
+        </div>
     </div>
-    <table>
-
-
-        @{
-
-            MyDB db = new MyDB();
-            var listOfQR = db.QuestionRooms.OrderBy(d => d.DatePublished).ToList();
-            for (int i = 0; i < 10 && i < listOfQR.Count; i++)
-            {
-
-
-                <tr>
-                    <td>@listOfQR.ElementAt(i).CreatorName</td>
-                    <td>@Html.Raw(listOfQR.ElementAt(i).Title)</td>
-                </tr>
-
-            }
-
-            /*var listOfPS = db.Posts.OrderBy(d => d.Date).ThenBy(d => d.NumOfRating).ThenBy(d => d.Rating).ToList();
-            for (int i = 0; i < 10 && i < listOfPS.Count; i++)
-            {
-                <tr>
-                    <td>@db.ProfessionalPages.Where(d => d.ProffesionalPageID == listOfPS.ElementAt(i).PageID).ToList().ElementAt(0).UserName</td>
-                    <td>@Html.Raw(listOfPS.ElementAt(i).Title)</td>
-                    <td>@listOfPS.ElementAt(i).Description</td>
-                </tr>
-
-
-            }*/
-        }
-
-    </table>
-
-
 
 
 </body>

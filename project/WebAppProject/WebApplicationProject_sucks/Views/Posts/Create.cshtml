@@ -122,9 +122,10 @@
             @{
                 MyDB db = new MyDB();
                 List<SelectListItem> listOfCategories = new List<SelectListItem>();
-                foreach (var item in db.Categories)
+                var list = db.PageToCategories.Where(d => d.ProfessionalPageID == Model.PageID).ToList();
+                foreach (var item in list)
                 {
-                    listOfCategories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
+                    listOfCategories.Add(new SelectListItem { Text = item.CategoryName, Value = item.CategoryName });
                 }
             }
 
@@ -132,16 +133,11 @@
 
         </div>
 
-
-
-        @Html.HiddenFor(model => model.Date, DateTime.Today)
-        @Html.HiddenFor(model => model.NumOfRating, 0)
-        @Html.HiddenFor(model => model.Rating, 0)
-        @Html.HiddenFor(model => model.PageID, new { Value = Session["ProffesionalPageID"] })
+        @Html.HiddenFor(model => model.PageID, new { Value = Session["ProfessionalPageID"] })
 
         <div class="form-group">
-            <input type="submit" value="Add to my professional page" onclick="mySave()" class="btn btn-default" />
-            <a href="../../ProfessionalPages/Details">Cancel</a>
+            <input type="submit" value="Add to my professional page" onclick="mySave()" class="btn btn-default" /><br />
+            <a href="../ProfessionalPages/Details">Cancel</a>
         </div>
     </div>
     }

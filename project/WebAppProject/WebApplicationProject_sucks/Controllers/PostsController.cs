@@ -49,13 +49,19 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PostID,Title,Date,Rating,NumOfRating,Description,PageID")] Post post)
+        public ActionResult Create([Bind(Include = "Title,Content,Description")] Post post, string[] selectedOptions)
         {
             if (ModelState.IsValid)
             {
+                post.Date = DateTime.Today;
                 db.Posts.Add(post);
+                for (int i = 0; i < selectedOptions.Length; i++)
+                {//MtM relationship
+                    db.PostToCategories.Add(new PostToCategory(post.PostID, selectedOptions[i]));
+                }
+                
                 db.SaveChanges();
-                return RedirectToAction("../../View/ProfessionalPages/Details");
+                return RedirectToAction("../View/ProfessionalPages/Details");
             }
 
            return View(post);
@@ -73,7 +79,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.PageID = new SelectList(db.ProfessionalPages, "ProffesionalPageID", "NameOfPage", post.PageID);
+            ViewBag.PageID = new SelectList(db.ProfessionalPages, "ProfessionalPageID", "NameOfPage", post.PageID);
             return View(post);
         }
 
@@ -132,7 +138,7 @@ namespace WebApplicationProject_sucks.Controllers
 
 
 
-      /*  [ValidateInput(false)]
+      [ValidateInput(false)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateRating(string userName, int PostId, int Rating)
@@ -149,7 +155,7 @@ namespace WebApplicationProject_sucks.Controllers
             post.Rating = sum / post.NumOfRating;
             db.SaveChanges();
             return Redirect("../Posts/Details/" + PostId);
-        }*/
+        }
        
 
         [ValidateInput(false)]
