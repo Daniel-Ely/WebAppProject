@@ -37,12 +37,17 @@ namespace WebApplicationProject_sucks.Controllers
                         professional.Profession_Name = pendingDetails.Profession_Name;
                         professional.Description = pendingDetails.Description;
 
-
+                        
                         foreach (var pendingCategory in db.PendingToCategories)
                         {
                             ProfessionalToCategory acceptedCategory = new ProfessionalToCategory(userName, pendingCategory.CategoryName);
                             db.ProfessionalToCategories.Add(acceptedCategory);
                             db.PendingToCategories.Remove(pendingCategory);
+                        }
+
+                        foreach (var pendingFile in db.PendingFiles)
+                        {                          
+                            db.PendingFiles.Remove(pendingFile);
                         }
                         professional.Score = 0;
                         //after getting all the necessary data and removing relationships connections, lets remove 
@@ -57,7 +62,7 @@ namespace WebApplicationProject_sucks.Controllers
             }
             return View();
         }
-
+        
         public FileContentResult GetApplyFile(string PendingName,int FileNum)
         {
             MyDB db = new MyDB();

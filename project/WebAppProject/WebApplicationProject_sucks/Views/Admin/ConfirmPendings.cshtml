@@ -71,14 +71,14 @@
                             @foreach(var item in db.ProfessionalPendings)
                             {
                             <tr>
-                                <td><input type="checkbox" name=acceptedPendings  value="@item.Profession_Name" /></td>
+                                <td><input type="checkbox" name=acceptedPendings  value="@item.UserName" /></td>
 
                                 <td>@item.UserName</td>
                                 <td>@item.Profession_Name</td>
                                 <td>@item.Description</td>
                                 <!--a whole table to present categories inside the cell!-->
                                 <!-- one row, all categories in a row-->
-
+                            
                                 <td>
                                     <table>
                                         <tr>
