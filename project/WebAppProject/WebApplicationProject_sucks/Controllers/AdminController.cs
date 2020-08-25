@@ -64,10 +64,10 @@ namespace WebApplicationProject_sucks.Controllers
         }
         
         public FileContentResult GetApplyFile(string PendingName,int FileNum)
-        {
+        {//TODO: restrict the files uploading to .pdf only
             MyDB db = new MyDB();
             var file=db.PendingFiles.Where(d => d.P_UserName == PendingName && d.FileID == FileNum).ToList().ElementAt(0);
-            return File(file.FileContent,".docx");
+            return File(file.FileContent,".pdf");
         }
     }
 

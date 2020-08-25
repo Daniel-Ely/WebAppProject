@@ -100,7 +100,7 @@
                                         foreach (var file in item.ApplyFiles)
                                         {
                                             var fileNum = file.FileID;
-                                            var path = "../GetApplyFile/?PendingName=" + pendingName + "&FileNum=" + fileNum;
+                                            var path = "../Admin/GetApplyFile?PendingName=" + pendingName + "&FileNum=" + fileNum;
                                             <a a target="_blank" rel="noopener noreferrer" href=@path>#@fileNum application file</a>
                                             var files = item.ApplyFiles;
                                         }
