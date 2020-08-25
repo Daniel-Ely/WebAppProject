@@ -37,12 +37,17 @@ namespace WebApplicationProject_sucks.Controllers
                         professional.Profession_Name = pendingDetails.Profession_Name;
                         professional.Description = pendingDetails.Description;
 
-
+                        
                         foreach (var pendingCategory in db.PendingToCategories)
                         {
                             ProfessionalToCategory acceptedCategory = new ProfessionalToCategory(userName, pendingCategory.CategoryName);
                             db.ProfessionalToCategories.Add(acceptedCategory);
                             db.PendingToCategories.Remove(pendingCategory);
+                        }
+
+                        foreach (var pendingFile in db.PendingFiles)
+                        {                          
+                            db.PendingFiles.Remove(pendingFile);
                         }
                         professional.Score = 0;
                         //after getting all the necessary data and removing relationships connections, lets remove 
@@ -57,12 +62,12 @@ namespace WebApplicationProject_sucks.Controllers
             }
             return View();
         }
-
+        
         public FileContentResult GetApplyFile(string PendingName,int FileNum)
-        {
+        {//TODO: restrict the files uploading to .pdf only
             MyDB db = new MyDB();
             var file=db.PendingFiles.Where(d => d.P_UserName == PendingName && d.FileID == FileNum).ToList().ElementAt(0);
-            return File(file.FileContent,".docx");
+            return File(file.FileContent,".pdf");
         }
     }
 

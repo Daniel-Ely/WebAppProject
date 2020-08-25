@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "ProfessionalHome";
+}
+
+<html>
+<head>
+    <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
+</head>
+<body>
+
+   
+    <div class="row">
+
+        <div class="main">
+            @Html.Partial("UserHome")
+        </div>
+        <div class="side">
+
+            <a href="../ProfessionalPages/Create">Create a new professional page</a><br />
+            <a href="../ProfessionalPages/Index">My professional pages</a><br />
+            <a href="">Show my views and others statistic data</a>
+
+        </div>
+    </div>
+
+
+</body>
+</html>

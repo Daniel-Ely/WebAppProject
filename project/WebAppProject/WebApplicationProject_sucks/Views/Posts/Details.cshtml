@@ -9,92 +9,16 @@
 <html>
 <head>
 
-    <script src="~/PlugIn/tinymce/tinymce.min.js"></script>
-    <script src="~/PlugIn/tinymce/jquery.tinymce.min.js"></script>
-    <!--tinymce init-->
-    <script>
-        tinymce.init({
-            selector: '#mytextarea',
-            /* theme of the editor */
-
-
-            /* width and height of the editor */
-            width: "100%",
-            height: 300,
-
-            /* display statusbar*/
-            statubar: true,
-
-            /* plugin */
-            plugins: [
-                "advlist autolink link image lists charmap print preview hr anchor pagebreak",
-                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-                "save table contextmenu directionality emoticons template paste textcolor"
-            ],
-
-            /* toolbar */
-            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
-
-            /* style */
-            style_formats: [
-                {
-                    title: "Headers", items: [
-                        { title: "Header 1", format: "h1" },
-                        { title: "Header 2", format: "h2" },
-                        { title: "Header 3", format: "h3" },
-                        { title: "Header 4", format: "h4" },
-                        { title: "Header 5", format: "h5" },
-                        { title: "Header 6", format: "h6" }
-                    ]
-                },
-                {
-                    title: "Inline", items: [
-                        { title: "Bold", icon: "bold", format: "bold" },
-                        { title: "Italic", icon: "italic", format: "italic" },
-                        { title: "Underline", icon: "underline", format: "underline" },
-                        { title: "Strikethrough", icon: "strikethrough", format: "strikethrough" },
-                        { title: "Superscript", icon: "superscript", format: "superscript" },
-                        { title: "Subscript", icon: "subscript", format: "subscript" },
-                        { title: "Code", icon: "code", format: "code" }
-                    ]
-                },
-                {
-                    title: "Blocks", items: [
-                        { title: "Paragraph", format: "p" },
-                        { title: "Blockquote", format: "blockquote" },
-                        { title: "Div", format: "div" },
-                        { title: "Pre", format: "pre" }
-                    ]
-                },
-                {
-                    title: "Alignment", items: [
-                        { title: "Left", icon: "alignleft", format: "alignleft" },
-                        { title: "Center", icon: "aligncenter", format: "aligncenter" },
-                        { title: "Right", icon: "alignright", format: "alignright" },
-                        { title: "Justify", icon: "alignjustify", format: "alignjustify" }
-                    ]
-                }
-            ]
-        });
-    </script>
-    <!-- submit button func-->
-    <!--question content-->
-    <script>
-        function mySave() {
-            var myContent = tinymce.get("mytextarea").getContent();
-            document.getElementById("CommentContent").value = myContent;
-        }
-       
-    </script>
-
+    
     <meta name="viewport" content="width=device-width" />
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="~/Content/Comment.css?ver=<?php echo rand(111,999)?" type="text/css" />
     <link rel="stylesheet" href="~/Content/creatPost.css?ver=<?php echo rand(111,999)?" type="text/css" />
+    <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
 
 </head>
 <body>
-        @using (Html.BeginForm("CreateComment", "Posts"))
+        @using (Html.BeginForm("AddCommentOrRate", "Posts"))
         {
 
             @Html.AntiForgeryToken()
@@ -102,102 +26,118 @@
     <div class="dl-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-
-
-        <div class="CreatorName">
+        <div class="titleOfPost">
             <h3> @Html.Raw(Model.Title)</h3>
-            @{MyDB db = new MyDB();
-                <h5>db.ProfessionalPages.Where(d => d.ProffesionalPageID == Model.PageID).ToList().ElementAt(0).UserName;</h5>
-                }
-                <h6>@Html.DisplayFor(model => model.Date)</h6>
-            </div>
-            <hr />
-
-            @Html.Raw(Model.Content)
-
-
             @{
-                @Model.NumOfRating;
-                if (db.UserToPostRatings.Where(d => d.UserName == Session["UserName"].ToString() && d.PostId == Model.PostID) == null)
-
-                {
-                    <input type="number" value="Rate this post between 1 to 10" name="rating" min="1" max="10" />
-                    var pathToSendRate = "/CreateRating/?userName=" + Session["UserName"] + "&PostID=" + Model.PostID + "&Rating=" + "rating";
-
-                   <a  href=pathToSendRate>Send your rate</a>
-                }
-
+                MyDB db = new MyDB();
+                string CreatorName = db.ProfessionalPages.Where(d => d.ProfessionalPageID == Model.ProfessionalPageID).ToList().ElementAt(0).UserName;
+               <h5>@CreatorName</h5>
             }
+            <h6>@Html.DisplayFor(model => model.Date)</h6>
+            <hr />
+        </div>
+        
+    </div>
+        <div class="row">
 
-            <!--Show all the comments-->
-            @foreach (var item in db.PostComments)
-            {
+            <div class="main">
 
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-10 col-sm-offset-1" id="logout">
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="comments-logout">
-                                    <ul class="media-list">
-                                        <li class="media">
-                                            <a class="pull-left" href="#">
-                                                <img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg" alt="profile">
-                                            </a>
-                                            <div class="media-body">
-                                                <div class="well well-lg">
-                                                    <h4 class="media-heading text-uppercase reviews"> @Html.DisplayFor(modelItem => item.UserName) </h4>
-                                                    <ul class="media-date text-uppercase reviews list-inline">
-                                                        <li class="dd">@Html.DisplayFor(modelItem => item.Date.Day)</li>
-                                                        <li class="mm">@Html.DisplayFor(modelItem => item.Date.Month)</li>
-                                                        <li class="aaaa">@Html.DisplayFor(modelItem => item.Date.Year)</li>
-                                                    </ul>
-                                                    <p class="media-comment">
-                                                        @Html.Raw(item.Content)
+                @Html.Raw(Model.Content)
+                <br />
+                @Html.Hidden("UserName", Session["UserName"])
+                @{
 
-                                                    </p>
+                    <div class="rating">
+                        <label>Pepole that rate this post</label>
+                        @Model.NumOfRating
+                    </div>
 
+                    string userN = Session["UserName"].ToString();
+                    if (db.UserToPostRatings.Where(d => d.UserName == userN && d.PostId == Model.PostID).ToList().Count == 0)
+
+                    {
+                        <ul>
+                            <li><input type="number" placeholder="Rate this post between 1 to 10" name="Rating" id="Rating" min="1" max="10" /></li>
+                            <li><input type="submit" placeholder="Send your rate" class="btn btn-default" /><br /></li>
+                        </ul>
+                        
+                        
+                    }
+
+                }<!---->
+
+
+                <br /><br />
+
+                <!--Show all the comments-->
+                @foreach (var item in db.PostComments.Where(d=>d.PostID==Model.PostID).ToList())
+                {
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-10 col-sm-offset-1" id="logout">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="comments-logout">
+                                        <ul class="media-list">
+                                            <li class="media">
+                                                <a class="pull-left" href="#">
+                                                    <img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg" alt="profile">
+                                                </a>
+                                                <div class="media-body">
+                                                    <div class="well well-lg">
+                                                        <ul>
+                                                            <li><h4 class="media-heading text-uppercase reviews"> @Html.DisplayFor(modelItem => item.UserName) </h4></li>
+                                                            <li>
+                                                                <ul class="media-date text-uppercase reviews list-inline">
+                                                                    <li class="dd">@Html.DisplayFor(modelItem => item.Date.Day)</li>
+                                                                    <li class="mm">@Html.DisplayFor(modelItem => item.Date.Month)</li>
+                                                                    <li class="aaaa">@Html.DisplayFor(modelItem => item.Date.Year)</li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                        <p class="media-comment">
+                                                            @item.PostCommentContent
+
+                                                        </p>
+
+                                                    </div>
                                                 </div>
-                                            </div>
                                             </li>
                                         </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-            }
+                }
 
+                <!--commetns fo post-->
+                @Html.Hidden("PostID", Model.PostID)
 
+                @Html.Editor("PostCommentContent", new { placeholder = "Write a comment" })
+            
+                <input type="submit" placeholder="Send your rate" class="btn btn-default" /><br />
+               
 
-
-            <!--commetns fo post-->
-            @Html.Hidden("PostID", Model.PostID)
-
-            <div class="form-group">
-                <!--text editor , tinymce-->
-
-                <textarea id="mytextarea" name="mytextarea">Add a comment...</textarea>
-                <!--comment content-->
-                <!--the name is already set to Title-->
-
-                @Html.Hidden("CommentContent", new { @id = "CommentContent" })
             </div>
+                
 
-            <!--creator name-->
-            <div class="form-group">
-                @Html.Hidden("CommentCreator", Session["UserName"])
-            </div>
+            <div class="side">
+                @{
+                    var isP = db.Users.Where(d => d.UserName == userN).ToList().ElementAt(0).isProfessional;
+                    if (isP)
+                    {
+                        <a href="../Edit">Edit this post </a>
+                    }
 
 
-            <div class="col-md-offset-2 col-md-10">
+                }
 
-               @{var pathToAddComment = "/CreateReating/?userName=" + Session["UserName"] + "&PostID=" + Model.PostID + "&Rating=" + "rating";
-
-                <a href=pathToAddComment>Send your comment</a>}
             </div>
 
         </div>
+   
 }
 
             <p>

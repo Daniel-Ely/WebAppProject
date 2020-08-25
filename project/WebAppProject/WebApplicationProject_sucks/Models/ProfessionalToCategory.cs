@@ -9,7 +9,7 @@ namespace WebApplicationProject_sucks.Models
 {
     public class ProfessionalToCategory
     {
-   
+        public ProfessionalToCategory() { }
         public ProfessionalToCategory(string userName, string categoryname)
         {
             this.P_UserName = userName;

@@ -7,7 +7,7 @@ namespace WebApplicationProject_sucks.Models
 {
     public class ProfessionalPage
     {
-        [Key] public int ProffesionalPageID { get; set; }
+        [Key] public int ProfessionalPageID { get; set; }
         
         public string NameOfPage { get; set; }
 

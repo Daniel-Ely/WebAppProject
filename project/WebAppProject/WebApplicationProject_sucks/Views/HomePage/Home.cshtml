@@ -12,22 +12,34 @@
     <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
 </head>
 <body>
-    
+
     <div class="header">
         <h1>Soul Owl</h1>
     </div>
 
     @Html.Partial("../Shared/navbar")
 
-    @{
+    @{ MyDB db = new MyDB();
+
         if (Session["UserName"] == null)
         {
             @Html.Partial("../HomePage/GuestHome")
         }
+
         else
         {
-            @Html.Partial("../HomePage/UserHome")
+            string user = Session["UserName"].ToString();
+            if (db.Users.Where(d => d.UserName == user).ToList().ElementAt(0).isProfessional)
+            {
+                @Html.Partial("../HomePage/ProfessionalHome")
+            }
+            else
+            {
+                @Html.Partial("../HomePage/UserHome")
+            }
         }
+
+
 
     }
 

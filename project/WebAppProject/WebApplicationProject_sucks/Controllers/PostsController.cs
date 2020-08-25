@@ -49,13 +49,19 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PostID,Title,Date,Rating,NumOfRating,Description,PageID")] Post post)
+        public ActionResult Create([Bind(Include = "Title,Content,Description,ProfessionalPageID")] Post post, string[] selectedOptions)
         {
             if (ModelState.IsValid)
             {
+                post.Date = DateTime.Today;
                 db.Posts.Add(post);
+                for (int i = 0; i < selectedOptions.Length; i++)
+                {//MtM relationship
+                    db.PostToCategories.Add(new PostToCategory(post.PostID, selectedOptions[i]));
+                }
+                
                 db.SaveChanges();
-                return RedirectToAction("../../View/ProfessionalPages/Details");
+                return RedirectToAction("../ProfessionalPages/Details/"+post.ProfessionalPageID);
             }
 
            return View(post);
@@ -73,7 +79,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.PageID = new SelectList(db.ProfessionalPages, "ProffesionalPageID", "NameOfPage", post.PageID);
+            ViewBag.ProfessionalPageID = new SelectList(db.ProfessionalPages, "ProfessionalPageID", "NameOfPage", post.ProfessionalPageID);
             return View(post);
         }
 
@@ -90,7 +96,7 @@ namespace WebApplicationProject_sucks.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PageID = new SelectList(db.ProfessionalPages, "ProffesionalPageID", "NameOfPage", post.PageID);
+            ViewBag.ProfessionalPageID = new SelectList(db.ProfessionalPages, "ProfessionalPageID", "NameOfPage", post.ProfessionalPageID);
             return View(post);
         }
 
@@ -132,37 +138,47 @@ namespace WebApplicationProject_sucks.Controllers
 
 
 
-      /*  [ValidateInput(false)]
+      [ValidateInput(false)]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateRating(string userName, int PostId, int Rating)
+        public ActionResult CreateRating( [Bind(Include = "Rating,UserName,PostId")] UserToPostRating uTPR)
         {
-            UserToPostRating rate = new UserToPostRating(userName, PostId, Rating);
-            db.UserToPostRatings.Add(rate);
+            
+            db.UserToPostRatings.Add(uTPR);
             db.SaveChanges();
-            Post post = db.Posts.Where(d => d.PostID == PostId).ToList().ElementAt(0);
+            Post post = db.Posts.Where(d => d.PostID == uTPR.PostId).ToList().ElementAt(0);
             post.NumOfRating += 1;
             db.SaveChanges();
             int sum = 0;
-            foreach (var item in db.UserToPostRatings.Where(d => d.PostId == PostId).ToList())
+            foreach (var item in db.UserToPostRatings.Where(d => d.PostId == uTPR.PostId).ToList())
                 sum += item.Rating;
             post.Rating = sum / post.NumOfRating;
             db.SaveChanges();
-            return Redirect("../Posts/Details/" + PostId);
-        }*/
+            return Redirect("../Posts/Details/" + uTPR.PostId);
+        }
        
 
         [ValidateInput(false)]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateComment(string PostID, string CommentContent, string CommentCreator)
+        public ActionResult CreateComment([Bind(Include = "PostID,PostCommentContent,UserName")] PostComment pC)
         {
-            int commentID = db.PostComments.Count();
-            PostComment comment = new PostComment(commentID, Int32.Parse(PostID), CommentContent, CommentCreator, DateTime.Today);
-            db.PostComments.Add(comment);
+            pC.Date = DateTime.Today;
+            db.PostComments.Add(pC);
             db.SaveChanges();
+            Session["PostCommentContent"] = null;
+            return Redirect("../Posts/Details/" + pC.PostID);
+        }
 
-            return Redirect("../Posts/Details/" + Int32.Parse(PostID));
+        [ValidateInput(false)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddCommentOrRate([Bind(Include = "PostID,PostCommentContent,UserName")] PostComment pC, [Bind(Include = "Rating,UserName,PostId")] UserToPostRating uTPR)
+        {
+            if (pC.PostID.ToString() != null && pC.PostCommentContent != null && pC.UserName != null)
+               return CreateComment(pC);
+            else
+               return CreateRating(uTPR);
         }
     }
 }
