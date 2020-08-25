@@ -1,4 +1,5 @@
-﻿@model WebApplicationProject_sucks.Models.User
+﻿@using WebApplicationProject_sucks.Models
+@model WebApplicationProject_sucks.Models.User
 @{
     Layout = null;
 }
@@ -12,13 +13,17 @@
     <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
 </head>
 <body>
-
-    <!--here we place the content that differs-->
-
+    @{ MyDB db = new MyDB();
+        <!--in order to load the list to javaScript that is responsibale for the searchBar-->
+        foreach (var item in db.QuestionRooms)
+        {
+            <div class="Title" value=@item.Title></div>
+        }
+    }
 
     <div class="row">
-
         <div class="side">
+            <!-- the side panel with our info :)-->
             <h2>About us</h2>
             <h5>Photo of me:</h5>
             <div class="fakeimg" style="height:200px;">Image</div>
@@ -29,42 +34,48 @@
             <div class="fakeimg" style="height:60px;">Image</div><br>
             <div class="fakeimg" style="height:60px;">Image</div>
         </div>
-
+        <!-- the main area-->
         <div class="main">
-            <h2>TITLE HEADING</h2>
-            <h5>Title description, Dec 7, 2017</h5>
-
-            <br>
-
-            @{
-                MyDB db = new MyDB();
-                var user = db.Users.Find(Session["UserName"]);
-                int postNum = 0;
-                var Intrest = user.Interests.OrderBy(i => i.LastTouched).ThenBy(i => i.NumOfVisits);
-                foreach (var item in Intrest)
-                {
-                    var Qroom = db.QuestionRooms.OrderBy(q=>q.DatePublished).Where(q => ((q.Categories.Where(c => c.CategoryName == item.CategoryName)).Count() > 0)).ToList();
-                    foreach (var iteam2 in Qroom)
+            <div class="row">
+                <mybtn>all</mybtn>
+                @{
+                    var user = db.Users.Find(Session["UserName"]);
+                    var Intrest = user.Interests.OrderBy(i => i.LastTouched).ThenBy(i => i.NumOfVisits);
+                    foreach (var item in Intrest)
                     {
-                        <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
-                        <div class="postAndQroom">
-                            <h3>@Html.Raw(iteam2.Title)</h3>
-                            <h5>publish date , @iteam2.DatePublished.Month  @iteam2.DatePublished.Day,  @iteam2.DatePublished.Year</h5>
-                            <p>@Html.Raw(iteam2.Title)</p>
-                        </div>
-
+                        <mybtn value=@item.CategoryName>@item.CategoryName</mybtn>
                     }
                 }
-            }
+                <br>
+            </div>
+            <ul id="charactersList">this is my list</ul>
+            <ul class="allPost" id="PostList">
+                @{
+                    <!--
+                    --the statisc segestion of Qroom and posts
+                    -->
+                    foreach (var item in Intrest)
+                    {
+                        var Qrooms = db.QuestionRooms.OrderBy(q => q.DatePublished).Where(q => ((q.Categories.Where(c => c.CategoryName == item.CategoryName)).Count() > 0)).ToList();
+                        foreach (var iteam2 in Qrooms)
+                        {
+                            <!--each Qroom-->
+                            <li class="post">
+                                <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
+                                <h2>@Html.Raw(iteam2.Title)</h2>
+                                <h5>publish date , @iteam2.DatePublished.Month  @iteam2.DatePublished.Day,  @iteam2.DatePublished.Year</h5>
+                            </li>
+                        }
+                    }
+                }
+            </ul>
         </div>
-        </div>
-
-
+    </div>
 
     <div class="footer">
         <h2>Footer</h2>
     </div>
     <h1>welcome to your begining page</h1>
-
+    <script src="~/Scripts/searchBar.js"></script>
 </body>
 </html>

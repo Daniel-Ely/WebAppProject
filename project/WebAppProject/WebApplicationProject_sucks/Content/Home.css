@@ -1,7 +1,22 @@
 ﻿* {
     box-sizing: border-box;
 }
-
+.post {
+    margin: 0 auto;
+    max-width: 300px;
+    border: solid 2px #ccc;
+    padding: 12px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+mybtn {
+    border-radius: 25px;
+    border-style: outset;
+    background-color: antiquewhite;
+    padding-left: 5%;
+    padding-right: 5%;
+}
 /* Style the body */
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -75,19 +90,58 @@ body {
     background-color: #f1f1f1;
     padding: 20px;
 }
+.character {
+    list-style-type: none;
+    background-color: #eaeaea;
+    border-radius: 3px;
+    padding: 10px 20px;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-areas: 'name image' 'house image';
+    text-align: left;
+    box-sizing: border-box;
+}
+.post {
+    list-style-type: none;
+    background-color: #eaeaea;
+    border-radius: 3px;
+    padding: 10px 20px;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-areas: 'name image' 'house image';
+    text-align: left;
+    box-sizing: border-box;
+}
+.character > h2 {
+    grid-area: name;
+    margin-bottom: 0px;
+}
 
+.character > img {
+    max-height: 100px;
+    grid-area: image;
+}
 /* Main column */
 .main {
-    text-align:left;
-    display:inline-block;
-    -ms-flex: 70%; /* IE10 */
     flex: 70%;
+    padding: 10%;
+    margin: 0 auto;
+    text-align: center;
     background-color: white;
-    padding: 20px;
-    line-height : 20%;
 }
-singlePost {
+#charactersList {
+    padding-inline-start: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-gap: 20px;
 }
+.allPost{
+    padding-inline-start: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-gap: 20px;
+}
+
 /* Fake image, just for this example */
 .fakeimg {
     background-color: #aaa;
@@ -100,9 +154,9 @@ singlePost {
     text-align: center;
     background: #ddd;
 }
-img.avatar {
-    width:25%;
-    padding-right:5%;
+img {
+    max-height: 100px;
+    grid-area: image;
 }
 
 /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */

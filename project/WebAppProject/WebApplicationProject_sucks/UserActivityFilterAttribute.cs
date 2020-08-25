@@ -11,15 +11,15 @@ namespace WebApplicationProject_sucks
     public class UserActivityFilterAttribute : ActionFilterAttribute
     {
         private MyDB db = new MyDB();
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        public override void OnActionExecuting(ActionExecutingContext filterContext)//the fillter is activated after sending a comment to! -> comment increses the priority as well!!
         {
             UsersController usersController = new UsersController();
             //
             //getting the Qroom/Post id and the current user
             //
             var contentid = filterContext.Controller.ValueProvider.GetValue("Id").AttemptedValue;
-            var userId = filterContext.HttpContext.Session["UserName"];
-            User user = db.Users.Find(userId);
+            string userId = filterContext.HttpContext.Session["UserName"].ToString();
+            User user = db.Users.Where(d=>d.UserName == userId).ToList().ElementAt(0);
             //
             //getting the controller in order to know if the user enterd a post or a Qroom
             //
