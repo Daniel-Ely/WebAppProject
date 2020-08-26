@@ -19,14 +19,14 @@ namespace WebApplicationProject_sucks.Controllers
             return View();
         }
     
-        public ActionResult ConfirmPendings(IEnumerable<string> acceptedPendings)
+        public ActionResult ConfirmPendings(IEnumerable<string> Pendings)
         {
             MyDB db = new MyDB();
-            if (acceptedPendings != null)
+            if (Pendings != null)
             {
-                for (int i = 0; i < acceptedPendings.Count(); i++)
+                for (int i = 0; i < Pendings.Count(); i++)
                 {
-                    var userName = acceptedPendings.ElementAt(i);
+                    var userName = Pendings.ElementAt(i);
                     var user = db.Users.Find(userName);
                     var pendingDetails = db.ProfessionalPendings.Find(userName);
                     if (user != null)
@@ -36,19 +36,17 @@ namespace WebApplicationProject_sucks.Controllers
                         professional.UserName = userName;
                         professional.Profession_Name = pendingDetails.Profession_Name;
                         professional.Description = pendingDetails.Description;
-
                         
-                        foreach (var pendingCategory in db.PendingToCategories)
+                        //only the associated pending categories!
+                        foreach (var pendingCategory in pendingDetails.ProfessionalCategories)
                         {
                             ProfessionalToCategory acceptedCategory = new ProfessionalToCategory(userName, pendingCategory.CategoryName);
-                            db.ProfessionalToCategories.Add(acceptedCategory);
-                            db.PendingToCategories.Remove(pendingCategory);
+                            db.ProfessionalToCategories.Add(acceptedCategory);                          
                         }
+                  
+                        pendingDetails.ProfessionalCategories.Clear();
+                        pendingDetails.ApplyFiles.Clear();
 
-                        foreach (var pendingFile in db.PendingFiles)
-                        {                          
-                            db.PendingFiles.Remove(pendingFile);
-                        }s
                         professional.Score = 0;
                         //after getting all the necessary data and removing relationships connections, lets remove 
                         //the entry in the pendingProfessional!
@@ -62,7 +60,28 @@ namespace WebApplicationProject_sucks.Controllers
             }
             return View();
         }
-        
+
+        public ActionResult DisposePending(string PendingName)
+        {
+            MyDB db = new MyDB();
+               
+                    var user = db.Users.Find(PendingName);
+                    var pendingDetails = db.ProfessionalPendings.Find(PendingName);
+
+                    if (user != null)
+                    {                                
+                    pendingDetails.ProfessionalCategories.Clear();
+                    pendingDetails.ApplyFiles.Clear();
+
+                        //after removing relationships connections, lets remove 
+                        //the entry in the pendingProfessional!
+                        db.ProfessionalPendings.Remove(pendingDetails);                     
+                        db.SaveChanges();
+                    }
+                          
+            return View("../Admin/ConfirmPendings");
+        }
+
         public FileContentResult GetApplyFile(string PendingName,int FileNum)
         {//TODO: restrict the files uploading to .pdf only
             MyDB db = new MyDB();
