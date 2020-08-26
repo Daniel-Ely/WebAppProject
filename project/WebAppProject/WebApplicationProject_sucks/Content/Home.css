@@ -38,13 +38,21 @@ body {
     }
 
 /* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
-.navbar {
-    overflow: hidden;
-    background-color: #333;
-    position: sticky;
-    position: -webkit-sticky;
-    top: 0;
-}
+    .navbar {
+        font-size: 1vw;
+        overflow: hidden;
+        background-color: #333;
+        position: sticky;
+        position: -webkit-sticky;
+        top: 0;
+    }
+    .navbar .row {
+        display: -ms-flexbox; /* IE10 */
+        display: flex;
+        -ms-flex-wrap: wrap; /* IE10 */
+        flex-wrap: wrap;
+    }
+    
 
     /* Style the navigation bar links */
     .navbar a {
@@ -55,6 +63,26 @@ body {
         padding: 14px 20px;
         text-decoration: none;
     }
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.sideBar {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
 
 
         /* Right-aligned link */
@@ -73,10 +101,10 @@ body {
             background-color: #666;
             color: white;
         }
-       .navbar #searchBar {
-            padding-top:5%;
-            padding-bottom:5%;
-            width: 60%;
+        .navbar text {
+            padding-top: 5%;
+            padding-bottom: 5%;
+            width:40%;
             border-radius: 25px;
         }
 
