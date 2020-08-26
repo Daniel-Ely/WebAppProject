@@ -148,5 +148,22 @@ namespace WebApplicationProject_sucks.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult DeleteQR([Bind(Include = "QuestionRoomID")] QuestionRoom qr)
+        {
+            if (qr.QuestionRoomID == 0)
+                return Redirect("/QuestionRooms/Index" );
+            foreach(var item in db.QustionRoomComments.Where(d=>d.RoomID==qr.QuestionRoomID).ToList())
+            {
+                db.QustionRoomComments.Remove(item);
+            }
+            QuestionRoom qR = db.QuestionRooms.Find(qr.QuestionRoomID);
+            db.QuestionRooms.Remove(qR);
+            db.SaveChanges();
+            return Redirect("/QuestionRooms/Index");
+
+        }
+
+
     }
 }
