@@ -110,7 +110,7 @@
         <hr />
 
         <!--Displaying all the comments in the room-->
-        @foreach (var item in Model.Comments)
+        @foreach (var item in Model.Comments.Where(d=>d.QuestCommentID==Model.QuestionRoomID))
         {
 
             <div class="container">
@@ -118,8 +118,8 @@
                     <div class="col-sm-10 col-sm-offset-1" id="logout">
                         <div class="tab-content">
                             <div class="tab-pane active" id="comments-logout">
-                                <ul class="media-list">
-                                    <li class="media">
+                                
+                                   
                                         <a class="pull-left" href="#">
                                             <img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg" alt="profile">
                                         </a>

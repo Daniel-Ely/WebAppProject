@@ -2248,6 +2248,7 @@
     <Content Include="Views\Admin\ConfirmPendings.cshtml" />
     <Content Include="Views\HomePage\AdminHome.cshtml" />
     <Content Include="Views\HomePage\TestTheSearch.cshtml" />
+    <Content Include="Views\HomePage\ProfessionalHome.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
