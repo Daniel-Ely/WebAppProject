@@ -134,5 +134,26 @@ namespace WebApplicationProject_sucks.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult DeletePost([Bind(Include = "PostID,ProfessionalPageID")] Post p)
+        {
+            if (p.PostID.ToString() == null || p.ProfessionalPageID.ToString() == null)
+                return Redirect("../ProfessionalPages/Edit/" + p.ProfessionalPageID);
+            foreach(var item in db.PostComments.Where(d=>d.PostID==p.PostID).ToList())
+            {
+                var controller = DependencyResolver.Current.GetService<PostsController>();
+                controller.DeleteComment(item);
+            }
+            foreach(var item in db.UserToPostRatings.Where(d=>d.PostId==p.PostID).ToList())
+            {
+                db.UserToPostRatings.Remove(item);
+            }
+            Post post = db.Posts.Find(p.PostID);
+            db.Posts.Remove(post);
+            db.SaveChanges();
+            return Redirect("../ProfessionalPages/Delete/" + p.ProfessionalPageID);
+
+        }
+
     }
 }

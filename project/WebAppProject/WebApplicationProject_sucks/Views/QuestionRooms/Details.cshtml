@@ -108,9 +108,9 @@
             <h6>@Html.DisplayFor(model => model.CreatorName)</h6>
         </div>
         <hr />
-
+        @{ MyDB db = new MyDB();}
         <!--Displaying all the comments in the room-->
-        @foreach (var item in Model.Comments.Where(d=>d.QuestCommentID==Model.QuestionRoomID))
+        @foreach (var item in db.QustionRoomComments.Where(d=>d.RoomID==Model.QuestionRoomID))
         {
 
             <div class="container">
