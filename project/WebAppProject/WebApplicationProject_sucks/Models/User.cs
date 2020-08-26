@@ -56,7 +56,7 @@ namespace WebApplicationProject_sucks.Models
         //
         //Profile image
         //
-        public Image ProfileImage { get; set; }
+        public byte[] ProfileImage { get; set; }
         
         public bool isProfessional { get; set; }
         

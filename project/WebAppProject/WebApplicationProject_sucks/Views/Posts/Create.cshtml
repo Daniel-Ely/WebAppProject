@@ -123,7 +123,7 @@
                 MyDB db = new MyDB();
                 List<SelectListItem> listOfCategories = new List<SelectListItem>();
                 int pageid = Int32.Parse(Session["ProfessionalPageID"].ToString());
-                var list = db.PageToCategories.Where(d => d.ProfessionalPageID ==pageid).ToList();
+                var list = db.PageToCategories.Where(d => d.ProfessionalPageID == pageid).ToList();
                 foreach (var item in list)
                 {
                     listOfCategories.Add(new SelectListItem { Text = item.CategoryName, Value = item.CategoryName });

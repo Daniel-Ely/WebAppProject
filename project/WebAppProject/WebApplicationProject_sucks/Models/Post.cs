@@ -20,7 +20,7 @@ namespace WebApplicationProject_sucks.Models
 
         public int NumOfRating { get; set; }
         public string Description { get; set; }
-        public Image Thumbnail { get; set; }
+        public byte[] Thumbnail { get; set; }
 
         [AllowHtml]
         public string Content { get; set; }

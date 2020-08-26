@@ -19,14 +19,14 @@
     </div>
 
     @Html.Partial("../Shared/navbar")
-
+      
     @{ MyDB db = new MyDB();
 
         if (Session["UserName"] == null)
         {
             @Html.Partial("../HomePage/GuestHome")
         }
-
+        
         else
         {
             string user = Session["UserName"].ToString();
@@ -41,7 +41,7 @@
         }
 
 
-
+        
     }
 
     <div class="footer">

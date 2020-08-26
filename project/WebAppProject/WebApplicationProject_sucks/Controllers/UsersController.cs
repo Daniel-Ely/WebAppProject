@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
@@ -54,9 +55,9 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateAntiForgeryToken]
         //this is going to take the boolean attribute as well since it matches with its name 
         //JS is going to execute accordingly before this action takes place.
-        public ActionResult Create([Bind(Include = "UserName,FirstName,Gender,BirthDay,Email,Password")] User user,string isProfessional, string[] selectedOptions)
+        public ActionResult Create([Bind(Include = "UserName,FirstName,Gender,BirthDay,Email,Password")] User user,string isProfessional, string[] selectedOptions, HttpPostedFileBase ProfileImage)
         {
-   
+
             if (ModelState.IsValid)
             {//we just want to save the entry to the DB in both cases.  Process is the same 
                 byte[] salt = getSalt();
@@ -67,9 +68,17 @@ namespace WebApplicationProject_sucks.Controllers
                 {
                     return View(user);
                 }
-                for (int i=0;i<selectedOptions.Length;i++)
+                for (int i = 0; i < selectedOptions.Length; i++)
                 {//MtM relationship
                     db.UserToCategories.Add(new UserToCategory(user.UserName, selectedOptions[i]));
+                }
+                //converting each file to a byte array
+                if (ProfileImage != null)
+                {
+                    MemoryStream target = new MemoryStream();
+                    ProfileImage.InputStream.CopyTo(target);
+                    byte[] content = target.ToArray();
+                    user.ProfileImage = content;
                 }
                 db.SaveChanges();
 

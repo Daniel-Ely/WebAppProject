@@ -49,7 +49,7 @@
         <div class="form-group">
             @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
         </div>
-        
+
 
         <div class="form-group">
             <label>Select all of your inerests</label>
@@ -61,33 +61,36 @@
                     listOfCategories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
                 }
             }
-     
-            @Html.ListBox("selectedOptions",listOfCategories)
+
+            @Html.ListBox("selectedOptions", listOfCategories)
 
         </div>
-
-
-        <!-- we can change it when the send button is hit because it executes before our manipulation!-->
-        @Html.TextArea("isProfessional", "0", new { style = "display: none;", @id = "isProfessional" });
-
-        <script>
-            function toggleProfessional() {
-                document.getElementById("isProfessional").value = "1";
-            }
-        </script>
-        
 
         <div class="form-group">
-            <input type="submit" value="Register" class="btn btn-default" />
+            <input type="file" id="Thumbnail" name="Thumbnail" multiple> <br><br>
+        </div>
 
-            <input type="submit" value="Register as a professional creator" onclick="toggleProfessional()" />
+            <!-- we can change it when the send button is hit because it executes before our manipulation!-->
+            @Html.TextArea("isProfessional", "0", new { style = "display: none;", @id = "isProfessional" });
+
+            <script>
+                function toggleProfessional() {
+                    document.getElementById("isProfessional").value = "1";
+                }
+            </script>
+
+
+            <div class="form-group">
+                <input type="submit" value="Register" class="btn btn-default" />
+
+                <input type="submit" value="Register as a professional creator" onclick="toggleProfessional()" />
+            </div>
+
+
         </div>
 
 
-    </div>
-
-
-    }
+        }
 
 
 
