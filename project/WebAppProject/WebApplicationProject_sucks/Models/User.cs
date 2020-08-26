@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using WebApplicationProject_sucks.Attributes;
 
 namespace WebApplicationProject_sucks.Models
 {
@@ -31,6 +32,7 @@ namespace WebApplicationProject_sucks.Models
         [Required(ErrorMessage = "Birthday is Required")]
         [Display(Name = "Birthday")]
         [DataType(DataType.Date)]
+        [Birthday]
         public DateTime BirthDay { get; set; }
         //
         //Intrests
@@ -42,6 +44,7 @@ namespace WebApplicationProject_sucks.Models
         //
         [Required(ErrorMessage = "Email address is Required")]
         [Display(Name = "Email address")]
+        [Email]
         public string Email { get; set; }
         //
         //password
@@ -49,6 +52,7 @@ namespace WebApplicationProject_sucks.Models
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Password is Required")]
         public string Password { get; set; }
+        public byte[] salt { get; set; }
         //
         //Profile image
         //

@@ -1781,6 +1781,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Comment.css" />
     <Content Include="Content\Log_in.css" />
+    <Content Include="Content\navbar.css" />
     <Content Include="Content\Professional.css" />
     <Content Include="Content\Register.css" />
     <Content Include="Content\search.css" />
@@ -2060,6 +2061,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Attributes\Birthday.cs" />
+    <Compile Include="Attributes\Email.cs" />
+    <Compile Include="Attributes\Password.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ClipsController.cs" />
@@ -2089,7 +2093,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="LogInFilterAttribute.cs" />
+    <Compile Include="Filtters\LogInFilterAttribute.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\PendingFile.cs" />
     <Compile Include="Models\PendingToCategory.cs" />
@@ -2116,7 +2120,7 @@
     <Compile Include="Models\UserToCategory.cs" />
     <Compile Include="Models\UserToPostRating.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserActivityFilterAttribute.cs" />
+    <Compile Include="Filtters\UserActivityFilterAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -2247,7 +2251,7 @@
     <Content Include="Views\Admin\AdminStatistics.cshtml" />
     <Content Include="Views\Admin\ConfirmPendings.cshtml" />
     <Content Include="Views\HomePage\AdminHome.cshtml" />
-    <Content Include="Views\HomePage\TestTheSearch.cshtml" />
+    <Content Include="Views\HomePage\SearchPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

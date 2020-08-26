@@ -4,6 +4,8 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using WebApplicationProject_sucks;
@@ -57,6 +59,9 @@ namespace WebApplicationProject_sucks.Controllers
    
             if (ModelState.IsValid)
             {//we just want to save the entry to the DB in both cases.  Process is the same 
+                byte[] salt = getSalt();
+                user.salt = salt;
+                user.Password = Convert.ToBase64String(GenerateSaltedHash(Encoding.ASCII.GetBytes(user.Password), salt));
                 db.Users.Add(user);
                 if (selectedOptions.Length > MaxCategories) // in case the user choose to much categories of intrest 
                 {
@@ -86,9 +91,11 @@ namespace WebApplicationProject_sucks.Controllers
         }
         public ActionResult LogIn(string username,string password)
         {
+            if(username==null && password==null) return View();
             foreach (var user in db.Users)
             {
-                if(user.UserName==username && user.Password==password)
+                string Submitedpassword = Convert.ToBase64String(GenerateSaltedHash(Encoding.ASCII.GetBytes(password), user.salt));
+                if (user.UserName==username && Submitedpassword == user.Password)
                 {//successful login
                     Session["UserName"] = username;
                     Session.Timeout = 10;//in minutues 
@@ -107,12 +114,7 @@ namespace WebApplicationProject_sucks.Controllers
             Session.Abandon();
             return Redirect("../HomePage/Home");
         }
-       
-            
 
-
-
-  
         // GET: Users/Edit/5
         public ActionResult Edit(string id)
         {
@@ -193,5 +195,59 @@ namespace WebApplicationProject_sucks.Controllers
             }
             base.Dispose(disposing);
         }
+        //
+        //password mangmand methods
+        //
+        public static bool CompareByteArrays(byte[] array1, byte[] array2)
+        {
+            if (array1.Length != array2.Length)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < array1.Length; i++)
+            {
+                if (array1[i] != array2[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        static byte[] GenerateSaltedHash(byte[] plainText, byte[] salt)
+        {
+            HashAlgorithm algorithm = new SHA256Managed();
+
+            byte[] plainTextWithSaltBytes = new byte[plainText.Length + salt.Length];
+
+            for (int i = 0; i < plainText.Length; i++)
+            {
+                plainTextWithSaltBytes[i] = plainText[i];
+            }
+            for (int i = 0; i < salt.Length; i++)
+            {
+                plainTextWithSaltBytes[plainText.Length + i] = salt[i];
+            }
+
+            return algorithm.ComputeHash(plainTextWithSaltBytes);
+        }
+        private static byte[] getSalt()
+        {
+            var random = new RNGCryptoServiceProvider();
+
+            // Maximum length of salt
+            var max_length = 32;
+
+            // Empty salt array
+            var salt = new byte[max_length];
+
+            // Build the random bytes
+            random.GetNonZeroBytes(salt);
+
+            // Return the string encoded salt
+            return salt;
+        }
+
     }
 }
