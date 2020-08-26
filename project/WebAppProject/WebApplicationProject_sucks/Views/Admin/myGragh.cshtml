@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "myGragh";
+}
+
+<h2>myGragh</h2>
+<head>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    
+</head>
+<body>
+    @{
+        MyDB db = new MyDB();
+        var Mcount = 0;
+        var Fcount = 0;
+        var Ocount = 0;
+        foreach (var u in db.Users)
+        {
+            if (u.Gender == "Other")
+            {
+                Ocount++;
+            }
+            else if (u.Gender == "Female")
+            {
+                Fcount++;
+            }
+            else
+            {
+                Mcount++;
+            }
+        }
+        Session["Male"] = Mcount;
+        <div id="Male" name="Male" value=@Mcount>this is : @Mcount</div>
+        <div id="Female" name="Female" value=@Fcount>this is : @Fcount</div>
+        <b id="Other" name="Other" value=@Ocount>this is : @Ocount</b>
+    }
+    <div id="my_dataviz"></div>
+    <script src="~/Scripts/UserSexPie.js"></script>
+</body>
+

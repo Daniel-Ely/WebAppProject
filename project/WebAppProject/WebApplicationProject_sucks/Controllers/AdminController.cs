@@ -18,7 +18,12 @@ namespace WebApplicationProject_sucks.Controllers
             
             return View();
         }
-    
+        public ActionResult myGragh()
+        {
+
+            return View();
+        }
+
         public ActionResult ConfirmPendings(IEnumerable<string> Pendings)
         {
             MyDB db = new MyDB();

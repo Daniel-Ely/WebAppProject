@@ -2052,6 +2052,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Content\Home.css" />
     <Content Include="Scripts\searchBar.js" />
+    <Content Include="Scripts\UserSexPie.js" />
     <Content Include="src\landScape_soulOwl.jpg" />
     <Content Include="src\logIn.bmp" />
     <Content Include="src\Owl family.png" />
@@ -2252,6 +2253,7 @@
     <Content Include="Views\Admin\ConfirmPendings.cshtml" />
     <Content Include="Views\HomePage\AdminHome.cshtml" />
     <Content Include="Views\HomePage\SearchPage.cshtml" />
+    <Content Include="Views\Admin\myGragh.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

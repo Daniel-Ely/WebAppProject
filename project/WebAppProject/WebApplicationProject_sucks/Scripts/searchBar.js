@@ -21,7 +21,7 @@ function load()
     //
     for (i = 0; i < RoomList.length ; i++)
     {
-        var v = RoomList.item(i).attributes.getNamedItem("value");;
+        var v = RoomList.item(i).attributes.getNamedItem("value");
         hpCharacters.push({
             "Title": v.value,
             "image": '/src/QutionRoomOwl.png'
