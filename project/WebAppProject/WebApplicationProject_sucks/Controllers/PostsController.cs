@@ -189,12 +189,10 @@ namespace WebApplicationProject_sucks.Controllers
             byte[] image = db.Users.Where(d => d.UserName == UserName).ToList().ElementAt(0).ProfileImage;
             if (image == null)
             {
-               
-            }
-            else
-            {
+                image=System.IO.File.ReadAllBytes(Server.MapPath("../src/Owl.jpg"));               
+            }           
                 return File(image, "image/jpg");
-            }
+            
         }
         
     }
