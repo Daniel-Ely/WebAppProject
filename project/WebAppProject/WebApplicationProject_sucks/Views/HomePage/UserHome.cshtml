@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
 </head>
 <body>
+    
     @{ MyDB db = new MyDB();
         <!--in order to load the list to javaScript that is responsibale for the searchBar-->
         foreach (var item in db.QuestionRooms)
@@ -20,81 +21,94 @@
             <div class="Title" value=@item.Title></div>
         }
     }
+  
+    <!--
+      the main area
+    -->
+    <div class="row">
 
+        <!-- the main area-->
+        <div class="main">
             <div class="row">
-
-                <!-- the main area-->
-                <div class="main">
-                    <div class="row">
-                        <mybtn>all</mybtn>
-                        @{
-                            var user = db.Users.Find(Session["UserName"]);
-                            var Intrest = user.Interests.OrderBy(i => i.LastTouched).ThenBy(i => i.NumOfVisits);
-                            foreach (var item in Intrest)
-                            {
-                                <mybtn value=@item.CategoryName>@item.CategoryName</mybtn>
-                            }
-                        }
-                        <br>
-                    </div>
-                    <ul id="charactersList">this is my list</ul>
-                    <ul class="allPost" id="PostList">
-                        @{
-                            <!--
-                --the statisc segestion of Qroom and posts
-                -->
-                            foreach (var item in Intrest)
-                            {
-                                if (db.QuestionRooms.ToList().Count > 0)
-                                {
-                                    var Qrooms = db.QuestionRooms.OrderBy(q => q.DatePublished).Where(q => ((q.Categories.Where(c => c.CategoryName == item.CategoryName)).Count() > 0)).ToList();
-                                    foreach (var iteam2 in Qrooms)
-                                    {
-                                        <!--each Qroom-->
-                                        <li class="post">
-                                            @{string linkToQR = "../QuestionRooms/Details/" + iteam2.QuestionRoomID;}
-                                            <a href=@linkToQR>
-                                                <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
-                                                <h2>@Html.Raw(iteam2.Title)</h2>
-                                                <h5>publish date , @iteam2.DatePublished.Month.@iteam2.DatePublished.Day.@iteam2.DatePublished.Year</h5>
-                                            </a>
-                                        </li>
-                                    }
-                                }
-
-                                if (db.QuestionRooms.ToList().Count > 0)
-                                {
-                                    var posts = db.Posts.OrderBy(p => p.Date).Where(p => ((p.Categories.Where(c => c.CategoryName == item.CategoryName)).Count() > 0)).ToList();
-                                    foreach (var iteam2 in posts)
-                                    {
-
-                                        <li class="post">
-                                            <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
-                                            @{string linkToPost = "../Posts/Details/" + iteam2.PostID;}
-                                            <a href=@linkToPost>
-                                                <h3>@iteam2.Title</h3>
-                                                <h5>publish date , @iteam2.Date.Month  @iteam2.Date.Day,  @iteam2.Date.Year</h5>
-                                                <p>@iteam2.Description</p>
-                                            </a>
-                                            <br />
-                                        </li>
-
-                                    }
-                                }
-                            }
-                        }
-                        }
-                    </ul>
-                </div>
-
-                <div class="side">
-                    <!-- the side panel with our info :)-->
-                
-                    <a href="../Categories/Index">Categories</a><br />
-                    <a href="../QuestionRooms/Index">Question Rooms</a><br />
-                    <a href="../ProfessionalPages/Index">Professional Pages</a><br />
-                </div>
+                <!--category buttons-->
+                <mybtn>all</mybtn>
+                @{
+                    var user = db.Users.Find(Session["UserName"]);
+                    var Intrest = user.Interests.OrderBy(i => i.LastTouched).ThenBy(i => i.NumOfVisits);
+                    foreach (var item in Intrest)
+                    {
+                        <mybtn value=@item.CategoryName>@item.CategoryName</mybtn>
+                    }
+                }
+                <br>
             </div>
+            <ul id="charactersList">this is my list</ul>
+            <ul class="allPost" id="PostList">
+                @{
+                    <!--
+                    --the statisc segestion of Qroom and posts
+                    -->
+                    foreach (var item in Intrest)
+                    {
+                        if (db.QuestionRooms.ToList().Count > 0)
+                        {
+                            var Qrooms = db.QuestionRooms.OrderBy(q => q.DatePublished).Where(q => ((q.Categories.Where(c => c.CategoryName == item.CategoryName)).Count() > 0)).ToList();
+                            foreach (var iteam2 in Qrooms)
+                            {
+                                <!--each Qroom-->
+                                <li class="post">
+                                    @{string linkToQR = "../QuestionRooms/Details/" + iteam2.QuestionRoomID;}
+                                    <a href=@linkToQR>
+                                        <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
+                                        <h2>@Html.Raw(iteam2.Title)</h2>
+                                        <h5>publish date , @iteam2.DatePublished.Month.@iteam2.DatePublished.Day.@iteam2.DatePublished.Year</h5>
+                                    </a>
+                                </li>
+                            }
+                        }
+
+                        if (db.QuestionRooms.ToList().Count > 0)
+                        {
+                            var posts = db.Posts.OrderBy(p => p.Date).Where(p => ((p.Categories.Where(c => c.CategoryName == item.CategoryName)).Count() > 0)).ToList();
+                            foreach (var iteam2 in posts)
+                            {
+
+                                <li class="post">
+                                    <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
+                                    @{string linkToPost = "../Posts/Details/" + iteam2.PostID;}
+                                    <a href=@linkToPost>
+                                        <h3>@iteam2.Title</h3>
+                                        <h5>publish date , @iteam2.Date.Month  @iteam2.Date.Day,  @iteam2.Date.Year</h5>
+                                        <p>@iteam2.Description</p>
+                                    </a>
+                                    <br />
+                                </li>
+
+                            }
+                        }
+                    }
+                }
+                }
+            </ul>
+        </div>
+
+        <div class="side">
+            <!-- the side panel with our info :)-->
+
+            <a href="../Categories/Index">Categories</a><br />
+            <a href="../QuestionRooms/Index">Question Rooms</a><br />
+            <a href="../ProfessionalPages/Index">Professional Pages</a><br />
+        </div>
+    </div>
     <script src="~/Scripts/searchBar.js"></script>
+    <script>
+        //hide the search tab when not focused     
+
+        window.onclick = function (event) {
+            if (document.activeElement != document.getElementById("searchBar")) {
+                document.getElementById("myDropdown").style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
