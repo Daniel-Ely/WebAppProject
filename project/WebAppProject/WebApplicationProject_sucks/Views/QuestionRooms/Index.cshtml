@@ -16,29 +16,20 @@
         @Html.ActionLink("Create New", "Create")
     </p>
     <table class="table">
-        <tr>
-            <th>
-
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatorName)
-            </th>
-            <th></th>
-        </tr>
+       
     
     @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                @Html.Raw(item.Title)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreatorName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.QuestionRoomID }) |
-                @Html.ActionLink("Details", "Details", new { id=item.QuestionRoomID }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.QuestionRoomID })
-            </td>
+              
+                @Html.ActionLink("Details", "Details", new { id=item.QuestionRoomID }) 
+                
         </tr>
     }
     
