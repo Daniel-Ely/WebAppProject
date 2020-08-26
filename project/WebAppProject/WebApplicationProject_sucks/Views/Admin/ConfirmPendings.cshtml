@@ -53,6 +53,7 @@
                                 <th>Description</th>
                                 <th>Categories</th>
                                 <th>Apply Files</th>
+                                <th></th>
 
                             </tr>
                         </thead>
@@ -64,21 +65,23 @@
                                 <th>Description</th>
                                 <th>Categories</th>
                                 <th>Apply Files</th>
+                                <th></th>
                             </tr>
                         </tfoot>
                         <tbody>
+                            
                             @{MyDB db = new MyDB(); }
-                            @foreach(var item in db.ProfessionalPendings)
+                            @foreach (var item in db.ProfessionalPendings)
                             {
                             <tr>
-                                <td><input type="checkbox" name=acceptedPendings  value="@item.UserName" /></td>
+                                <td><input type="checkbox" name=Pendings value="@item.UserName" /></td>
 
                                 <td>@item.UserName</td>
                                 <td>@item.Profession_Name</td>
                                 <td>@item.Description</td>
                                 <!--a whole table to present categories inside the cell!-->
                                 <!-- one row, all categories in a row-->
-                            
+
                                 <td>
                                     <table>
                                         <tr>
@@ -106,11 +109,17 @@
                                         }
 
                                     }
-                                    
+
+                                </td>
+
+                                <td>
+                                   @{ var Disposepath = "../Admin/DisposePending?PendingName=" + pendingName;
+                                    <a href=@Disposepath>X</a>
+                                       }
                                 </td>
 
                             </tr><!--row for each pending in the table-->
-                            }
+                                        }
 
                         </tbody>
                     </table>
@@ -120,6 +129,9 @@
 
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Accept selected pendings" class="btn btn-default" />
+          
+        
+
         </div>
 
         <!-- Bootstrap core JavaScript-->
