@@ -38,14 +38,16 @@ body {
     }
 
 /* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
-    .navbar {
-        font-size: 1vw;
-        overflow: hidden;
-        background-color: #333;
-        position: sticky;
-        position: -webkit-sticky;
-        top: 0;
-    }
+.navbar {
+    font-size: 1vw;
+    overflow: auto;
+    height: 100%;
+    background-color: #333;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+
+}
     .navbar .row {
         display: -ms-flexbox; /* IE10 */
         display: flex;

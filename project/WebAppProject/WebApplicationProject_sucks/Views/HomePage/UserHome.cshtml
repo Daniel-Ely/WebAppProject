@@ -105,18 +105,13 @@
     </div>
     <script src="~/Scripts/searchBar.js"></script>
     <script>
+        //hide the search tab when not focused     
+
         window.onclick = function (event) {
-            if (!event.target.matches('.searchBar'))
-            {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
+            if (document.activeElement != document.getElementById("searchBar")) {
+                document.getElementById("myDropdown").style.display = 'none';
             }
+        }
     </script>
 </body>
 </html>
