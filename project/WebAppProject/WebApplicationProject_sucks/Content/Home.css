@@ -119,8 +119,6 @@ img {
     font-size: 1vw;
     overflow: hidden;
     background-color: #333;
-    position: sticky;
-    position: -webkit-sticky;
     top: 0;
 }
     .navbar .row {
@@ -139,8 +137,15 @@ img {
         padding: 14px 20px;
         text-decoration: none;
     }
-
-/* Right-aligned link */
+    .navbar button {
+        float: left;
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+    }
+        /* Right-aligned link */
         .navbar a.right {
             float: right;
         }
@@ -157,11 +162,29 @@ img {
             color: white;
         }
 
-    .navbar text {
-        padding-top: 5%;
-        padding-bottom: 5%;
+    .navbar #searchBar {
+        float: unset;
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+        align-self: center;
         width: 40%;
-        border-radius: 25px;
+    }
+    .navbar #dropdown {
+        flex-direction:column;
+        display:flex;
+    }
+    .navbar .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        overflow: auto;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        grid-template-columns: 3fr 1fr;
     }
 
 /*
@@ -178,15 +201,6 @@ img {
 .character > h2 {
     grid-area: name;
     margin-bottom: 0px;
-}
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
 }
 .character > img {
     max-height: 100px;
