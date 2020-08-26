@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
 </head>
 <body>
-
+    
     <div class="header">
         <h1>Soul Owl</h1>
     </div>
@@ -21,7 +21,7 @@
     @Html.Partial("../Shared/navbar")
       
     @{ MyDB db = new MyDB();
-
+        
         if (Session["UserName"] == null)
         {
             @Html.Partial("../HomePage/GuestHome")
