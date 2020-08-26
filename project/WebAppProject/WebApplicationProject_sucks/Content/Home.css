@@ -188,3 +188,6 @@ img {
 .titleOfPage{
     text-align:center;
 }
+ul{
+    list-style-type:none;
+}

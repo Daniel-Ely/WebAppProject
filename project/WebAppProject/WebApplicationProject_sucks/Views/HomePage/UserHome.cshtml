@@ -21,61 +21,80 @@
         }
     }
 
-    <div class="row">
-        <div class="side">
-            <!-- the side panel with our info :)-->
-            <h2>About us</h2>
-            <h5>Photo of me:</h5>
-            <div class="fakeimg" style="height:200px;">Image</div>
-            <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-            <h3>More Text</h3>
-            <p>Lorem ipsum dolor sit ame.</p>
-            <div class="fakeimg" style="height:60px;">Image</div><br>
-            <div class="fakeimg" style="height:60px;">Image</div><br>
-            <div class="fakeimg" style="height:60px;">Image</div>
-        </div>
-        <!-- the main area-->
-        <div class="main">
             <div class="row">
-                <mybtn>all</mybtn>
-                @{
-                    var user = db.Users.Find(Session["UserName"]);
-                    var Intrest = user.Interests.OrderBy(i => i.LastTouched).ThenBy(i => i.NumOfVisits);
-                    foreach (var item in Intrest)
-                    {
-                        <mybtn value=@item.CategoryName>@item.CategoryName</mybtn>
-                    }
-                }
-                <br>
-            </div>
-            <ul id="charactersList">this is my list</ul>
-            <ul class="allPost" id="PostList">
-                @{
-                    <!--
-                    --the statisc segestion of Qroom and posts
-                    -->
-                    foreach (var item in Intrest)
-                    {
-                        var Qrooms = db.QuestionRooms.OrderBy(q => q.DatePublished).Where(q => ((q.Categories.Where(c => c.CategoryName == item.CategoryName)).Count() > 0)).ToList();
-                        foreach (var iteam2 in Qrooms)
-                        {
-                            <!--each Qroom-->
-                            <li class="post">
-                                <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
-                                <h2>@Html.Raw(iteam2.Title)</h2>
-                                <h5>publish date , @iteam2.DatePublished.Month  @iteam2.DatePublished.Day,  @iteam2.DatePublished.Year</h5>
-                            </li>
-                        }
-                    }
-                }
-            </ul>
-        </div>
-    </div>
 
-    <div class="footer">
-        <h2>Footer</h2>
-    </div>
-    <h1>welcome to your begining page</h1>
+                <!-- the main area-->
+                <div class="main">
+                    <div class="row">
+                        <mybtn>all</mybtn>
+                        @{
+                            var user = db.Users.Find(Session["UserName"]);
+                            var Intrest = user.Interests.OrderBy(i => i.LastTouched).ThenBy(i => i.NumOfVisits);
+                            foreach (var item in Intrest)
+                            {
+                                <mybtn value=@item.CategoryName>@item.CategoryName</mybtn>
+                            }
+                        }
+                        <br>
+                    </div>
+                    <ul id="charactersList">this is my list</ul>
+                    <ul class="allPost" id="PostList">
+                        @{
+                            <!--
+                --the statisc segestion of Qroom and posts
+                -->
+                            foreach (var item in Intrest)
+                            {
+                                if (db.QuestionRooms.ToList().Count > 0)
+                                {
+                                    var Qrooms = db.QuestionRooms.OrderBy(q => q.DatePublished).Where(q => ((q.Categories.Where(c => c.CategoryName == item.CategoryName)).Count() > 0)).ToList();
+                                    foreach (var iteam2 in Qrooms)
+                                    {
+                                        <!--each Qroom-->
+                                        <li class="post">
+                                            @{string linkToQR = "../QuestionRooms/Details/" + iteam2.QuestionRoomID;}
+                                            <a href=@linkToQR>
+                                                <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
+                                                <h2>@Html.Raw(iteam2.Title)</h2>
+                                                <h5>publish date , @iteam2.DatePublished.Month.@iteam2.DatePublished.Day.@iteam2.DatePublished.Year</h5>
+                                            </a>
+                                        </li>
+                                    }
+                                }
+
+                                if (db.QuestionRooms.ToList().Count > 0)
+                                {
+                                    var posts = db.Posts.OrderBy(p => p.Date).Where(p => ((p.Categories.Where(c => c.CategoryName == item.CategoryName)).Count() > 0)).ToList();
+                                    foreach (var iteam2 in posts)
+                                    {
+
+                                        <li class="post">
+                                            <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
+                                            @{string linkToPost = "../Posts/Details/" + iteam2.PostID;}
+                                            <a href=@linkToPost>
+                                                <h3>@iteam2.Title</h3>
+                                                <h5>publish date , @iteam2.Date.Month  @iteam2.Date.Day,  @iteam2.Date.Year</h5>
+                                                <p>@iteam2.Description</p>
+                                            </a>
+                                            <br />
+                                        </li>
+
+                                    }
+                                }
+                            }
+                        }
+                        }
+                    </ul>
+                </div>
+
+                <div class="side">
+                    <!-- the side panel with our info :)-->
+                
+                    <a href="../Categories/Index">Categories</a><br />
+                    <a href="../QuestionRooms/Index">Question Rooms</a><br />
+                    <a href="../ProfessionalPages/Index">Professional Pages</a><br />
+                </div>
+            </div>
     <script src="~/Scripts/searchBar.js"></script>
 </body>
 </html>

@@ -52,7 +52,7 @@
             @{
                 string user = Session["UserName"].ToString();
                 var isP = db.Users.Where(d => d.UserName == user).ToList().ElementAt(0).isProfessional;
-                if (isP)
+                if (isP && db.ProfessionalPages.Where(d => d.UserName == user && d.ProfessionalPageID == Model.ProfessionalPageID).ToList().Count > 0)
                 {
                     <a href="../../Posts/Create">Add a new post to your professional page</a><br />
                     <a href="../Edit">Edit this professional page </a>
