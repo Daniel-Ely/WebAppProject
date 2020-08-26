@@ -14,7 +14,7 @@
 </head>
 <body>
     <h2>Register</h2>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Create","Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
     <div class="form-horizontal">
@@ -67,7 +67,8 @@
         </div>
 
         <div class="form-group">
-            <input type="file" id="Thumbnail" name="Thumbnail" multiple> <br><br>
+            <label>You can add a profile image type:png</label>
+            <input type="file" id="ProfileImage" name="ProfileImage" accept=".png" > <br><br>
         </div>
 
             <!-- we can change it when the send button is hit because it executes before our manipulation!-->

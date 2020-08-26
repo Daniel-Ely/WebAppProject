@@ -79,19 +79,22 @@
     <!-- submit button func-->
     <!--question content-->
     <script>
-        function mySave() {
-            var myContent = tinymce.get("mytextarea").getContent();
-            document.getElementById("Content").value = myContent;
+        function Delete(ele) {
+            var id = ele.id;
+            
+            document.getElementById("PostCommentID").value = id;
+            
         }
 
     </script>
 
     <link rel="stylesheet" href="~/Content/creatPost.css?ver=<?php echo rand(111,999)?" type="text/css" />
+    <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
     <meta name="viewport" content="width=device-width" />
     <title>Edit</title>
 </head>
 <body>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("DeleteComment","Posts"))
     {
         @Html.AntiForgeryToken()
         
@@ -99,28 +102,56 @@
         <h4>Post</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.PostID)
+        @{ MyDB db = new MyDB();
+            int id = Int32.Parse(Session["PostID"].ToString());}
+        @foreach (var item in db.PostComments.Where(d => d.PostID == id).ToList())
+        {
 
-        <div class="form-group">
-            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @Value = Session["Title"] } })
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1" id="logout">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="comments-logout">
 
-        </div>
+                                <a class="pull-left" href="#">
+                                    <img class="media-object img-circle" src='@Url.Action("ShowImage", "Posts", new { UserName = item.UserName })' alt="profile">
+                                </a>
 
-        <div class="form-group">
-            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @Value = Session["Description"] } })
+                                <div class="media-body">
+                                    <div class="well well-lg">
+                                        <h4 class="media-heading text-uppercase reviews"> @Html.DisplayFor(modelItem => item.UserName) </h4>
+                                        <ul class="media-date text-uppercase reviews list-inline">
+                                            <li class="dd">@Html.DisplayFor(modelItem => item.Date.Day)</li>
+                                            <li class="mm">@Html.DisplayFor(modelItem => item.Date.Month)</li>
+                                            <li class="aaaa">@Html.DisplayFor(modelItem => item.Date.Year)</li>
+                                        </ul>
+                                        <br />
+                                        <p class="media-comment">
+                                            @item.PostCommentContent
 
-        </div>
+                                        </p>
+                                        <br />
+                                        @Html.HiddenFor(model=>model.PostID,Session["PostID"])
+                                        @Html.Hidden("PostCommentID")
+                                        <input type="submit" value=" Delete this comment" id=@item.PostCommentID onclick="Delete(this)" />
 
-        <div class="form-group">
-            <textarea id="mytextarea" name="mytextarea">@Html.Raw(Model.Content)</textarea>
-            @Html.HiddenFor(model => model.Content)
-        </div>
+                                    </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" onclick="mySave()" class="btn btn-default" />
-            </div>
-        </div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+        }
+
+        
     </div>
     }
     

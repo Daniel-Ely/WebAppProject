@@ -189,11 +189,23 @@ namespace WebApplicationProject_sucks.Controllers
             byte[] image = db.Users.Where(d => d.UserName == UserName).ToList().ElementAt(0).ProfileImage;
             if (image == null)
             {
-                image=System.IO.File.ReadAllBytes(Server.MapPath("../src/Owl.jpg"));               
+                image=System.IO.File.ReadAllBytes(Server.MapPath("../src/Owl.png"));               
             }           
                 return File(image, "image/jpg");
             
         }
-        
+
+        public ActionResult DeleteComment([Bind(Include = "PostID,PostCommentID")] PostComment pC)
+        {
+            if (pC.PostCommentID.ToString() == null || pC.PostID.ToString() == null)
+                return Redirect("../Posts/Edit/" + pC.PostID);
+            PostComment postC = db.PostComments.Find(pC.PostCommentID);
+            db.PostComments.Remove(postC);
+            db.SaveChanges();
+            return Redirect("../Posts/Edit/" + pC.PostID);
+           
+        }
+
+
     }
 }
