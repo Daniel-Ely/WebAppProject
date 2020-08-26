@@ -8,41 +8,148 @@
 
 <html>
 <head>
+    <script src="~/PlugIn/tinymce/tinymce.min.js"></script>
+    <script src="~/PlugIn/tinymce/jquery.tinymce.min.js"></script>
+    <!--tinymce init-->
+    <script>
+        tinymce.init({
+            selector: '#mytextarea',
+            /* theme of the editor */
+
+
+            /* width and height of the editor */
+            width: "100%",
+            height: 300,
+
+            /* display statusbar*/
+            statubar: true,
+
+            /* plugin */
+            plugins: [
+                "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                "save table contextmenu directionality emoticons template paste textcolor"
+            ],
+
+            /* toolbar */
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
+
+            /* style */
+            style_formats: [
+                {
+                    title: "Headers", items: [
+                        { title: "Header 1", format: "h1" },
+                        { title: "Header 2", format: "h2" },
+                        { title: "Header 3", format: "h3" },
+                        { title: "Header 4", format: "h4" },
+                        { title: "Header 5", format: "h5" },
+                        { title: "Header 6", format: "h6" }
+                    ]
+                },
+                {
+                    title: "Inline", items: [
+                        { title: "Bold", icon: "bold", format: "bold" },
+                        { title: "Italic", icon: "italic", format: "italic" },
+                        { title: "Underline", icon: "underline", format: "underline" },
+                        { title: "Strikethrough", icon: "strikethrough", format: "strikethrough" },
+                        { title: "Superscript", icon: "superscript", format: "superscript" },
+                        { title: "Subscript", icon: "subscript", format: "subscript" },
+                        { title: "Code", icon: "code", format: "code" }
+                    ]
+                },
+                {
+                    title: "Blocks", items: [
+                        { title: "Paragraph", format: "p" },
+                        { title: "Blockquote", format: "blockquote" },
+                        { title: "Div", format: "div" },
+                        { title: "Pre", format: "pre" }
+                    ]
+                },
+                {
+                    title: "Alignment", items: [
+                        { title: "Left", icon: "alignleft", format: "alignleft" },
+                        { title: "Center", icon: "aligncenter", format: "aligncenter" },
+                        { title: "Right", icon: "alignright", format: "alignright" },
+                        { title: "Justify", icon: "alignjustify", format: "alignjustify" }
+                    ]
+                }
+            ]
+        });
+    </script>
+    <!-- submit button func-->
+    <!--question content-->
+    <script>
+        function Delete(ele) {
+            var id = ele.id;
+            document.getElementById("PostID").value = id;
+
+        }
+
+    </script>
+
+    <link rel="stylesheet" href="~/Content/creatPost.css?ver=<?php echo rand(111,999)?" type="text/css" />
+    <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
     <meta name="viewport" content="width=device-width" />
-    <title>Delete</title>
 </head>
 <body>
-    <h3>Are you sure you want to delete this?</h3>
+    
     <div>
-        <h4>ProfessionalPage</h4>
+
+        @Html.DisplayFor(model => model.User.FirstName)
+
+        @Html.DisplayFor(model => model.NameOfPage)
         <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.User.FirstName)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.User.FirstName)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.NameOfPage)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.NameOfPage)
-            </dd>
-    
-        </dl>
-    
-        @using (Html.BeginForm()) {
+
+        @using (Html.BeginForm("DeletePost", "ProfessionalPages"))
+        {
             @Html.AntiForgeryToken()
-    
-            <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
-                @Html.ActionLink("Back to List", "Index")
+
+
+            <div class="form-horizontal">
+              
+                @{ MyDB db = new MyDB();
+                    int id = Int32.Parse(Session["ProfessionalPageID"].ToString());}
+                @foreach (var item in db.Posts.Where(d => d.ProfessionalPageID == id).ToList())
+                {
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-10 col-sm-offset-1" id="logout">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="comments-logout">
+
+                                        <a class="pull-left" href="#">
+                                            <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
+                                        </a>
+
+                                        <div class="media-body">
+                                            <div class="well well-lg">
+                                                <h3>@item.Title</h3>
+                                                <h5>publish date , @item.Date.Month .@item.Date.Day .@item.Date.Year</h5>
+                                                <p>@item.Description</p>
+                                                <br />
+                                                
+                                                @Html.HiddenFor(model => model.ProfessionalPageID, Session["ProfessionalPageID"])
+                                                @Html.Hidden("PostID")
+                                                <input type="submit" value=" Delete this comment" id=@item.PostID onclick="Delete(this)" />
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    }
             </div>
-        }
-    </div>
+          }
+        </div>
 </body>
 </html>
