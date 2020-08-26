@@ -38,14 +38,14 @@
                 <script>
                     /* When the user clicks on the button,
                     toggle between hiding and showing the dropdown content */
-                    function dropDwon() {
+                    function dropDown() {
                         document.getElementById("myDropdown").classList.toggle("show");
-                        document.getElementById("myDropdown").display("block");
+                        document.getElementById("myDropdown").style.display = 'block';
                     }
                 </script>
                 <div class="dropdown">
-
-                    <input type="text" name="searchBar" id="searchBar" clss="searchBar" placeholder="search for a post" onclick="dropDwon()" />
+                    
+                    <input type="text" name="searchBar" id="searchBar" clss="searchBar" placeholder="search for a post" onclick="dropDown()" />
                     <div id="myDropdown" class="dropdown-content">
                         filter by category:
                         @{
