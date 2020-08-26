@@ -185,7 +185,7 @@ namespace WebApplicationProject_sucks.Controllers
 
 
        public FileContentResult ShowImage(string UserName)
-       {<
+       {
             byte[] image = db.Users.Where(d => d.UserName == UserName).ToList().ElementAt(0).ProfileImage;
             if (image == null)
             {

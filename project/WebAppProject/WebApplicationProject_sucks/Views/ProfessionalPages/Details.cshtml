@@ -51,9 +51,10 @@
         <div class="side">
             @{
                 string user = Session["UserName"].ToString();
-                var isP = db.Users.Where(d => d.UserName == user).ToList().ElementAt(0).isProfessional;
-                int size = db.ProfessionalPages.Where(d => d.UserName == user && d.ProfessionalPageID == Model.ProfessionalPageID).ToList().Count;
-                if (isP && size > 0)
+                //checking whether the  user is professional and the current page belongs to them.
+                var permitted = (db.Users.Where(d => d.UserName == user).ToList().ElementAt(0).isProfessional)&& (Model.UserName == user);         
+           
+                if (permitted)
                 {
                     <a href="../../Posts/Create">Add a new post to your professional page</a><br />
                     <a href="../Edit">Edit this professional page </a>
