@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -180,5 +181,21 @@ namespace WebApplicationProject_sucks.Controllers
             else
                return CreateRating(uTPR);
         }
+
+
+
+       public FileContentResult ShowImage(string UserName)
+       {
+            byte[] image = db.Users.Where(d => d.UserName == UserName).ToList().ElementAt(0).ProfileImage;
+            if (image == null)
+            {
+               
+            }
+            else
+            {
+                return File(image, "image/jpg");
+            }
+        }
+        
     }
 }
