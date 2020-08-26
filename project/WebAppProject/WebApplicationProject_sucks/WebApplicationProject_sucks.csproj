@@ -2253,6 +2253,7 @@
     <Content Include="Views\Admin\ConfirmPendings.cshtml" />
     <Content Include="Views\HomePage\AdminHome.cshtml" />
     <Content Include="Views\HomePage\SearchPage.cshtml" />
+    <Content Include="Views\HomePage\ProfessionalHome.cshtml" />
     <Content Include="Views\Admin\myGragh.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -35,39 +35,43 @@
                     string linkToQR = "../../Posts/Details/" + post.Current.PostID;
 
 
-                        <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
-                        <div class="postAndQroom">
-                            <a href=@linkToQR>
-                                <h3>@Html.Raw(title)</h3>
-                                <h5>publish date , @date.Month  @date.Day,  @date.Year</h5>
-                                <p>@Html.Raw(description)</p>
-                            </a>
-                        </div><br />
+                    <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
+                    <div class="postAndQroom">
+                        <a href=@linkToQR>
+                            <h3>@Html.Raw(title)</h3>
+                            <h5>publish date , @date.Month  @date.Day,  @date.Year</h5>
+                            <p>@Html.Raw(description)</p>
+                        </a>
+                    </div><br />
                 }
             }
 
         </div>
 
-        <div class="side">
-            @{
-                string user = Session["UserName"].ToString();
-                //checking whether the  user is professional and the current page belongs to them.
-                var permitted = (db.Users.Where(d => d.UserName == user).ToList().ElementAt(0).isProfessional)&& (Model.UserName == user);         
-           
-                if (permitted)
-                {
+
+        @{
+            string user = Session["UserName"].ToString();
+            //checking whether the  user is professional and the current page belongs to them.
+            var permitted = (db.Users.Where(d => d.UserName == user).ToList().ElementAt(0).isProfessional) && (Model.UserName == user);
+
+            if (permitted)
+            {
+                <div class="side">
+                    @Html.ActionLink("Edit this professional page", "Edit", new { id = Model.ProfessionalPageID }) <br />
                     <a href="../../Posts/Create">Add a new post to your professional page</a><br />
-                    <a href="../Edit">Edit this professional page </a>
-                }
+                    @Html.ActionLink("Back to all of my professional pages", "Index")
+                </div>
             }
+            
+        }
 
-        </div>
+
     </div>
 
-    @{Session["ProfessionalPageID"] = Model.ProfessionalPageID;}
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.ProfessionalPageID }) |
-            @Html.ActionLink("Back to List", "Index")
-        </p>
+    @{
+        Session["ProfessionalPageID"] = Model.ProfessionalPageID;
+    }
+
+
 </body>
 </html>

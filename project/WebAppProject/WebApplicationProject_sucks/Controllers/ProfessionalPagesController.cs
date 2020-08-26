@@ -87,15 +87,16 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProffesionalPageID,NameOfPage,UserName")] ProfessionalPage professionalPage)
+        public ActionResult Edit([Bind(Include = "ProffesionalPageID,NameOfPage")] ProfessionalPage professionalPage)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(professionalPage).State = EntityState.Modified;
+                ProfessionalPage p = db.ProfessionalPages.Where(d => d.ProfessionalPageID == professionalPage.ProfessionalPageID).ToList().ElementAt(0);
+                p.NameOfPage = professionalPage.NameOfPage;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details/"+ professionalPage.ProfessionalPageID);
             }
-            ViewBag.UserName = new SelectList(db.Users, "UserName", "FirstName", professionalPage.UserName);
+          
             return View(professionalPage);
         }
 

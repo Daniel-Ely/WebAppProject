@@ -33,11 +33,11 @@
                             }
                         }
                     </ul>
-                            }
+                 }
 
-                            if (db.Posts.ToList().Count > 0)
-                            {
-                                var listOfPS = db.Posts.OrderBy(d => d.Date).ThenBy(d => d.NumOfRating).ThenBy(d => d.Rating).ToList();
+                  if (db.Posts.ToList().Count > 0)
+                   {
+                     var listOfPS = db.Posts.OrderBy(d => d.Date).ThenBy(d => d.NumOfRating).ThenBy(d => d.Rating).ToList();
                     <ul>
                         @{ for (int i = 0; i < 10 && i < listOfPS.Count; i++)
                             {
@@ -50,17 +50,13 @@
                                         <h5>publish date , @listOfPS.ElementAt(i).Date.Month.@listOfPS.ElementAt(i).Date.Day.@listOfPS.ElementAt(i).Date.Year</h5>
                                         <h4>@listOfPS.ElementAt(i).Description</h4>
                                    </li>
-                                            }
-                                        }
-                            </ul>
+                            }
+                         }
+                      </ul>
 
-                        }
-                        }
-
-
-                        }
-
-                    </div>
+                  }
+               }
+         </div>
     </div>
 
 

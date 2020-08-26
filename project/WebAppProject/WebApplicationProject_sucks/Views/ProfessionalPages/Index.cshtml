@@ -35,9 +35,8 @@
                 @Html.DisplayFor(modelItem => item.NameOfPage)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.ProfessionalPageID }) |
-                @Html.ActionLink("Details", "Details", new { id=item.ProfessionalPageID }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.ProfessionalPageID })
+               
+                @Html.ActionLink("Details", "Details", new { id=item.ProfessionalPageID }) 
             </td>
         </tr>
     }
