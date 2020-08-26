@@ -2255,6 +2255,7 @@
     <Content Include="Views\HomePage\SearchPage.cshtml" />
     <Content Include="Views\HomePage\ProfessionalHome.cshtml" />
     <Content Include="Views\Admin\myGragh.cshtml" />
+    <Content Include="Views\HomePage\filterResults.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

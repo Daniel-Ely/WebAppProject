@@ -70,7 +70,7 @@ body {
     hyphens: auto;
 }
 
-mybtn {
+.mybtn {
     border-radius: 25px;
     border-style: outset;
     background-color: antiquewhite;
@@ -177,8 +177,8 @@ img {
         display:flex;
     }
     .navbar .dropdown-content {
-        display:
-        position:relative;
+        display:block;
+        position:inherit;
         background-color: #f1f1f1;
         min-width: 160px;
         overflow: auto;
