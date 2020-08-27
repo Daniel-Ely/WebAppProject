@@ -22,8 +22,10 @@
         var ContentList = ViewData["ContentList"] as List<AllContent>;
         foreach (var item in ContentList)
         {
+            <div class="ID" value=@item.AllContentID></div>
             <div class="Title" value=@item.Title></div>
             <div class="Content" value=@item.Content></div>
+            <div class="Date" value=@item.Date></div>
         }
     }
 
@@ -36,15 +38,7 @@
         <div class="main">
             <div class="row">
                 <!--category buttons-->
-                <input type="button" id="all" value="all" onclick="">
-                @{
-                    var user = db.Users.Find(Session["UserName"]);
-                    var Intrest = user.Interests.OrderBy(i => i.LastTouched).ThenBy(i => i.NumOfVisits);
-                    foreach (var item in Intrest)
-                    {
-                        <input id="@item.CategoryName" value=@item.CategoryName>
-                    }
-                }
+
                 <br>
             </div>
 
@@ -53,7 +47,8 @@
                     <!--
                     --the statisc segestion of Qroom and posts
                     -->
-
+                    var user = db.Users.Find(Session["UserName"]);
+                    var Intrest = user.Interests.OrderBy(i => i.LastTouched).ThenBy(i => i.NumOfVisits);
                     foreach (var item in Intrest)
                     {
 
@@ -75,9 +70,7 @@
 
                     }
                 }
-                }
-                }
-                }
+
             </ul>
         </div>
 
@@ -98,14 +91,6 @@
                 document.getElementById("myDropdown").style.display = 'none';
             }
         }
-        @Html.Hidden("categoryName");
-        function filtterByCategory(e)
-        {
-            var categoryName = e.id.toStrong();
-            sessionStorage.setItem("categoryName", categoryName);
-            document.getElementById("categoryName").value = categoryName;
-        }
-
     </script>
 </body>
 </html>

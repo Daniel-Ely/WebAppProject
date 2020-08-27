@@ -28,5 +28,6 @@ namespace WebApplicationProject_sucks
         public DbSet<PendingFile> PendingFiles { get; set; }
         public DbSet<PendingToCategory> PendingToCategories { get; set; }
        public DbSet<UserToPostRating> UserToPostRatings { get; set; }
+        public DbSet<Location> Locations { get; set; }
     }
 }

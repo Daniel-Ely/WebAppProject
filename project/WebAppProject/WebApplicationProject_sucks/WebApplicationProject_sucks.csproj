@@ -2044,6 +2044,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\getData.js" />
+    <Content Include="Scripts\GoogleMap.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -2071,6 +2072,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\FirstController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
+    <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\PageToCategoriesController.cs" />
     <Compile Include="Controllers\PendingToCategoriesController.cs" />
     <Compile Include="Controllers\PostCommentsController.cs" />
@@ -2232,7 +2234,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\First\" />
+    <Folder Include="Views\Home\" />
+    <Folder Include="Views\Locations\" />
+    <Folder Include="Views\LogIn\" />
     <Folder Include="Views\Search\" />
     <Folder Include="Views\UserToPostRatings\" />
   </ItemGroup>

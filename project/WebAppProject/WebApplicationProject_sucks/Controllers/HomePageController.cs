@@ -28,7 +28,10 @@ namespace WebApplicationProject_sucks.Controllers
         // [LogInFilter]
         public ActionResult Home()
         {
-            FilterdSearch();
+            if(ViewData["ContentList"] == null )
+            {
+                FilterdSearch("all" , "all" , "all");
+            }
             return View();
         }
         public ActionResult Register()
@@ -47,31 +50,12 @@ namespace WebApplicationProject_sucks.Controllers
         {
             return View();
         }
-        public ActionResult FirstTimeInThisSystem()
+        public ActionResult FilterdSearch(string categoryName, string contentType , string creatorName)
         {
-            return View();
-        }
-        public ActionResult ChoiseBetweenAdminToUser()
-        {
-            return View();
-        }
-        public ActionResult Choise()
-        {
-            if (Session["User"].ToString() == "true")
-                return Redirect("../HomePage/Home");
-            return Redirect("../HomePage/AdminHome");
-        }
-        public ActionResult FilterdSearch()
-        {
-            var category = Session["categoryName"];
-            var contentType = Session["contentType"];
-            var creatorName = Session["creatorName"];
-            List<AllContent> allContent = null;
-            List<AllContent> list = new List<AllContent>();
-            AllContent[] ArrayallContent;
-
+            List<AllContent> allContent = new List<AllContent>();
+       
             //in case the user didnt choose to filter by ContentType(Post/ Question rom)
-            if (contentType == null)
+            if (contentType == "all" || contentType=="")
             {
                 allContent = db.QuestionRooms.AsEnumerable().OrderBy(q => q.DatePublished).Select(q => new AllContent
                 {
@@ -79,6 +63,7 @@ namespace WebApplicationProject_sucks.Controllers
                     Content = q.Title,
                     Date = q.DatePublished,
                     QCategories = q.Categories,
+                    PCategories = new List<PostToCategory>(),
                     AllContentID = q.QuestionRoomID,
                     CreatorName=q.CreatorName
                 }).Union(db.Posts.AsEnumerable().OrderBy(p => p.Date).Select(p => new AllContent
@@ -86,6 +71,7 @@ namespace WebApplicationProject_sucks.Controllers
                     Title = p.Title,
                     Content = p.Description,
                     Date = p.Date,
+                    QCategories = new List<RoomToCategory>(),
                     PCategories = p.Categories,
                     Img = p.Thumbnail,
                     CreatorName = (db.ProfessionalPages.Where(p1 => p1.ProfessionalPageID == p.ProfessionalPageID)).ToArray()[0].UserName,
@@ -93,47 +79,48 @@ namespace WebApplicationProject_sucks.Controllers
                 })).ToList();
 
             }
-            else if (contentType.GetType().Equals(typeof(QuestionRoom))) // in Case the user choose ONLY question rooms
+            else if (contentType == "Question-rooms") // in Case the user choose ONLY question rooms
             {
-
-                ArrayallContent = db.QuestionRooms.OrderBy(q => q.DatePublished).Select(q => new AllContent
+                allContent = db.QuestionRooms.AsEnumerable().OrderBy(q => q.DatePublished).Select(q => new AllContent
                 {
                     Title = "Question room",
                     Content = q.Title,
                     Date = q.DatePublished,
                     QCategories = q.Categories,
+                    PCategories = new List<PostToCategory>(),
                     CreatorName = q.CreatorName,
                     AllContentID = q.QuestionRoomID
-                }).ToArray();
+                }).ToList();
             }
             else // in case the user choose ONLY posts
             {
-                ArrayallContent = db.Posts.OrderBy(p => p.Date).Select(p => new AllContent
+                allContent = db.Posts.AsEnumerable().OrderBy(p => p.Date).Select(p => new AllContent
                 {
                     Title = p.Title,
                     Content = p.Description,
                     Date = p.Date,
+                    QCategories = new List<RoomToCategory>(),
                     PCategories = p.Categories,
                     Img = p.Thumbnail,
                     CreatorName = db.ProfessionalPages.Find(p.ProfessionalPageID).UserName,
                     AllContentID = p.PostID
-                }).ToArray();
+                }).ToList();
             }
             //
             var listByCategory = allContent;
             var listByCreator = allContent;
             //
-            if (category != null)//in case the user choose a category
+            if (categoryName != "all" && categoryName != "")//in case the user choose a category
             {
-                listByCategory = allContent.Where(q => (q.QCategories.Where(c => c.CategoryName == category.ToString()).Count() > 0) || q.PCategories.Where(c => c.CategoryName == category.ToString()).Count() > 0).ToList();
+                listByCategory = allContent.Where(q => (q.QCategories.Where(c => c.CategoryName == categoryName.ToString()).Count() > 0) || q.PCategories.Where(c => c.CategoryName == categoryName.ToString()).Count() > 0).ToList();
             }
             //
-            if (creatorName != null)//in case the user choose a creatorName
+            if (creatorName != "all" && creatorName != "")//in case the user choose a creatorName
             {
                 listByCreator = allContent.Where(q => q.CreatorName == creatorName.ToString()).ToList();
             }
             ViewData["ContentList"] = listByCategory.Where(c => listByCreator.Where(q => q.AllContentID == c.AllContentID).Count() > 0).ToList();
-            return Redirect("../HomePage/UserHome");
+            return View("Home");
         }
        
     }

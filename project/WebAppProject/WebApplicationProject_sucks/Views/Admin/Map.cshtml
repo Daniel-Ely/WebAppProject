@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <style>
@@ -10,28 +11,55 @@
     </style>
 </head>
 <body>
+    @{
+        MyDB db = new MyDB();
+        foreach (var pos in db.Locations)
+        {
+            <div name="long" value=@pos.Long></div>
+            <div name="lat" value=@pos.Lat></div>
+            <div name="address" value=@pos.Address></div>
+}
+    }
     <h3>My Google Maps Demo</h3>
     <!--The div element for the map -->
     <div id="map"></div>
     <script>
-// Initialize and add the map
-function initMap() {
-  // The location of Uluru
-  var uluru = {lat: -25.344, lng: 131.036};
-  // The map, centered at Uluru
-  var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: uluru});
-  // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: uluru, map: map});
-}
+        var longs = document.getElementsByName('long');
+        var lats = document.getElementsByName('lat');
+        var addresses = document.getElementsByName('address');
+        // Initialize and add the map
+        function initMap() {
+            // The location of Uluru
+            var uluru = { lat: -25.344, lng: 131.036 };
+            // The map, centered at Uluru
+            var map = new google.maps.Map(
+                document.getElementById('map'), { zoom: 4, center: uluru });
+            // The marker, positioned at Uluru
+            var marker = new google.maps.Marker({ position: uluru, map: map });
+            // Display multiple markers on a map
+            var infoWindow = new google.maps.InfoWindow(), marker, i;
+
+            // Loop through our array of markers & place each one on the map
+            for (var i = 0; i < longs.length; i++)
+            {
+                var long = longs.item(i).attributes.getNamedItem("value").nodeValue;
+                var lat = lats.item(i).attributes.getNamedItem("value").nodeValue;
+                var position = new google.maps.LatLng(long, lat);
+                bounds.extend(position);
+                marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    title: addresses.item(i).attributes.getNamedItem("value").nodeValue;
+                });
+
+            }
     </script>
     <!--Load the API from the specified URL
     * The async attribute allows the browser to render the page while the API loads
     * The key parameter will contain your own API key (which is not needed for this tutorial)
     * The callback parameter executes the initMap() function
     -->
-    <script defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIA0D9YIyMHx-eOr9LmfU06OB9tGEhBcA&callback=initMap">
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIA0D9YIyMHx-eOr9LmfU06OB9tGEhBcA&callback=initMap">
     </script>
 </body>
 </html>
