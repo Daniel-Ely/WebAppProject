@@ -2071,7 +2071,6 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\FirstController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
-    <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\PageToCategoriesController.cs" />
     <Compile Include="Controllers\PendingToCategoriesController.cs" />
     <Compile Include="Controllers\PostCommentsController.cs" />
@@ -2087,7 +2086,6 @@
     <Compile Include="Controllers\QuestRoomCommentsController.cs" />
     <Compile Include="Controllers\RoomToCategoriesController.cs" />
     <Compile Include="Controllers\TestController.cs" />
-    <Compile Include="Controllers\TextsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\UserToCategoriesController.cs" />
     <Compile Include="Controllers\UserToPostRatingsController.cs" />
@@ -2113,7 +2111,6 @@
     <Compile Include="Models\ProfessionalPage.cs" />
     <Compile Include="Models\QuestionRoom.cs" />
     <Compile Include="Models\RoomToCategory.cs" />
-    <Compile Include="Models\Text.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserToCategory.cs" />
     <Compile Include="Models\UserToPostRating.cs" />

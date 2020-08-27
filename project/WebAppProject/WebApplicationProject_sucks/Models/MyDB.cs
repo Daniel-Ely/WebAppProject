@@ -9,7 +9,6 @@ namespace WebApplicationProject_sucks
 {
     public class MyDB:DbContext
     {
-        public DbSet<HTMLScript> HTMLScripts { set; get; }
         public DbSet<QuestRoomComment> QustionRoomComments{ set; get; }
         public DbSet<Post> Posts { set; get; }
         public DbSet<ProfessionalPage> ProfessionalPages { set; get; }
@@ -21,7 +20,6 @@ namespace WebApplicationProject_sucks
         public DbSet<PageToCategory> PageToCategories { set; get; }
         public DbSet<RoomToCategory> RoomToCategories { set; get; }
         public DbSet<Category> Categories { set; get; }
-        public DbSet<Item> Items { get; set; }
         public DbSet<PostComment> PostComments { get; set; }
         public DbSet<Profession> Professions { get; set; }
         public DbSet<ProfessionToCategory> ProfessionToCategories { get; set; }
