@@ -50,6 +50,11 @@ namespace WebApplicationProject_sucks.Controllers
         {
             return View();
         }
+        public ActionResult FirstTimeInThisSystem()
+        {
+            return View();
+        }
+
         public ActionResult FilterdSearch(string categoryName, string contentType , string creatorName)
         {
             List<AllContent> allContent = new List<AllContent>();

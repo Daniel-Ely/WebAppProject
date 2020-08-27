@@ -2223,8 +2223,8 @@
     <Content Include="Views\Admin\myGragh.cshtml" />
     <Content Include="Views\HomePage\filterResults.cshtml" />
     <Content Include="Views\Admin\Map.cshtml" />
-    <Content Include="Views\HomePage\FirstTimeInThisSystem.cshtml" />
     <Content Include="Views\HomePage\ChoiseBetweenAdminToUser.cshtml" />
+    <Content Include="Views\HomePage\FirstTimeInThisSystem.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
