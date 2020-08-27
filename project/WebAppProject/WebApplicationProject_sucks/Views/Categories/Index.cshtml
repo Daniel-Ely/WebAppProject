@@ -31,7 +31,11 @@
 
 </table>
 @{
-    if (Session["Admin"].ToString() == "true")
+    if (Session["UserName"] == null)
+    {
+        <a href="../HomePage/FirstTimeInThisSystem">Back to create categories and professions</a>
+    }
+    else if (Session["Admin"].ToString() == "true")
     {
         <a href="../HomePage/FirstTimeInThisSystem">Back to create categories and professions</a>
 
