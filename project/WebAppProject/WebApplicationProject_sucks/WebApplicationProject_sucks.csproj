@@ -2043,6 +2043,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\getData.js" />
+    <Content Include="Scripts\GoogleMap.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -2073,6 +2074,7 @@
     <Compile Include="Controllers\HTMLScriptsController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
+    <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\PageToCategoriesController.cs" />
     <Compile Include="Controllers\PendingToCategoriesController.cs" />
     <Compile Include="Controllers\PostCommentsController.cs" />
@@ -2097,6 +2099,7 @@
     </Compile>
     <Compile Include="Filtters\LogInFilterAttribute.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Location.cs" />
     <Compile Include="Models\PendingFile.cs" />
     <Compile Include="Models\PendingToCategory.cs" />
     <Compile Include="Models\ProfessionalPending.cs" />
@@ -2268,6 +2271,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Home\" />
+    <Folder Include="Views\Locations\" />
     <Folder Include="Views\LogIn\" />
     <Folder Include="Views\Search\" />
     <Folder Include="Views\UserToPostRatings\" />

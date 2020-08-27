@@ -71,12 +71,16 @@ body {
 }
 
 .mybtn {
-    border-radius: 25px;
+    border-radius: 50px;
     border-style: outset;
-    background-color: antiquewhite;
+    background-color: transparent;
     padding-left: 5%;
     padding-right: 5%;
 }
+    .mybtn:hover {
+        color: #000000;
+        background-color: #FFFFFF;
+    }
 /* Main column */
 .main {
     flex: 70%;
@@ -118,6 +122,7 @@ img {
 .navbar {
     font-size: 1vw;
     overflow: hidden;
+    height:10%;
     background-color: #333;
     top: 0;
 }
@@ -140,7 +145,7 @@ img {
     .navbar button {
         float: left;
         display: block;
-        color: white;
+        color: black;
         text-align: center;
         padding: 14px 20px;
         text-decoration: none;
@@ -152,7 +157,7 @@ img {
 
 /* Change color on hover */
         .navbar a:hover {
-            background-color: #ddd;
+            background-color: white;
             color: black;
         }
 
@@ -165,7 +170,7 @@ img {
     .navbar #searchBar {
         float: unset;
         display: block;
-        color: white;
+        color: black;
         text-align: center;
         padding: 14px 20px;
         text-decoration: none;
@@ -175,17 +180,22 @@ img {
     .navbar #dropdown {
         flex-direction:column;
         display:flex;
+        align-self:center;
+    }
+    .navbar .mySidebar {
+        display:none;
     }
     .navbar .dropdown-content {
-        display:block;
-        position:inherit;
-        background-color: #f1f1f1;
+        align-self: center;
+        display: none;
+        background-color: rgba(1,1,1,0.5);
+        border-color: ivory;
         min-width: 160px;
-        overflow: auto;
+        overflow: visible;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
         grid-template-columns: 3fr 1fr;
-        width:inherit
+        width: 40%;
     }
 
 
