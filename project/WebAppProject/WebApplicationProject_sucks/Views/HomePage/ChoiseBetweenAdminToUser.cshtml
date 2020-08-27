@@ -1,0 +1,47 @@
+﻿
+@model WebApplicationProject_sucks.Models.User
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="~/Content/Log_in.css?ver=<?php echo rand(111,999)?" type="text/css">
+    <title>Log In</title>
+</head>
+<body>
+    <h2>AS WHO?</h2>
+
+    @using (Html.BeginForm("Choise", "HomePage"))
+    {
+        @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+
+        <div class="imgcontainer">
+            <img src="~/src/Owl.png" alt="Avatar" class="avatar">
+        </div>
+
+        <div class="validations">
+
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+            @ViewBag.ErrorMessage
+
+
+        </div>
+
+
+       
+        <input type="submit" value="As user" class="btn btn-default" onclick=@{Session["User"] = "true";} />
+        <input type="submit" value="As admin" class="btn btn-default" onclick=@{Session["Admin"] = "true";} />
+
+
+    </div>
+    }
+
+</body>
+</html>
+
+
+

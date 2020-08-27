@@ -6,27 +6,39 @@
 
 <h2>Details</h2>
 
-    <h4>Category</h4>
-    <hr />
+<h4>Category</h4>
+<hr />
 
-        @{           
-            var room = Model.Rooms.GetEnumerator();
-            while (room.MoveNext())
-            {
-            <tr>
+@{
+    var room = Model.Rooms.GetEnumerator();
+    while (room.MoveNext())
+    {
+        <tr>
             <td>
                 @{MyDB db = new MyDB();
                     var title = db.QuestionRooms.Where(d => d.QuestionRoomID == room.Current.QuestionRoomID).ToList().ElementAt(0).Title;
                     string linkToQR = "../../QuestionRooms/Details/" + room.Current.QuestionRoomID;
                 }
-                <a href=@linkToQR >@Html.Raw(title)</a>
+                <a href=@linkToQR>@Html.Raw(title)</a>
             </td>
-       
-            </tr>
-            }
-        }
 
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Name }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+        </tr>
+    }
+    var ppage = Model.ProfessionalPages.GetEnumerator();
+    while (ppage.MoveNext())
+    {
+        <tr>
+            <td>
+                @{MyDB db = new MyDB();
+                    int id = db.ProfessionalPages.Where(p => p.UserName == ppage.Current.P_UserName).ToList().ElementAt(0).ProfessionalPageID;
+                    var nameOfPage = db.ProfessionalPages.Where(d => d.ProfessionalPageID == id).ToList().ElementAt(0).NameOfPage;
+                    string linkToQR = "../../ProfessionalPages/Details/" + id;
+                }
+                <a href=@linkToQR>@Html.Raw(nameOfPage)</a>
+            </td>
+
+        </tr>
+    }
+}
+<a href="../Categories/Index">Back to categories</a>
+
