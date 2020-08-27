@@ -58,9 +58,9 @@ namespace WebApplicationProject_sucks.Controllers
         {
             return View();
         }
-        public ActionResult Choise()
+        public ActionResult Choise(string IsAdmin)
         {
-            if (Session["User"].ToString() == "true")
+            if (IsAdmin == "false")
                 return Redirect("../HomePage/Home");
             return Redirect("../HomePage/AdminHome");
         }

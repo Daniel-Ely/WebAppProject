@@ -6,6 +6,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script>
+        function Admin() {
+            document.getElementById("IsAdmin").value = "true";
+        }
+        function User() {
+            document.getElementById("IsAdmin").value = "false";
+        }
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="~/Content/Log_in.css?ver=<?php echo rand(111,999)?" type="text/css">
     <title>Log In</title>
@@ -32,9 +40,9 @@
             </div>
 
 
-
-            <input type="submit" value="As user" class="btn btn-default" onclick=@{Session["User"] = "true";} />
-            <input type="submit" value="As admin" class="btn btn-default" onclick=@{Session["Admin"] = "true";} />
+            @Html.Hidden("IsAdmin")
+            <input type="submit" value="As user" class="btn btn-default" onclick="User()" />
+            <input type="submit" value="As admin" class="btn btn-default" onclick="Admin()"/>
 
 
         </div>
