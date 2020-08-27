@@ -12,29 +12,11 @@
     <title>Delete</title>
 </head>
 <body>
-    <h3>Are you sure you want to delete this?</h3>
-    <div>
+    
         <h4>QuestionRoom</h4>
         <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Title)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Title)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.CreatorName)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.CreatorName)
-            </dd>
-    
-        </dl>
-    
+         @Html.DisplayFor(model => model.Title)
+        
         @using (Html.BeginForm()) {
             @Html.AntiForgeryToken()
     
@@ -43,6 +25,5 @@
                 @Html.ActionLink("Back to List", "Index")
             </div>
         }
-    </div>
 </body>
 </html>
