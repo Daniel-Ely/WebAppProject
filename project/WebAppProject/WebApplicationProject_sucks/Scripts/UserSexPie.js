@@ -52,10 +52,6 @@ svg
     .enter()
     .append('text')
     .text(function (d) { return d.data.key})
-    .attr("transform", function (d) {
-        return "translate(" + pos.centroid(d) + ") " +
-            "rotate(" + getAngle(d) + ")";
-    }).attr("dy", 5) 
     .style("text-anchor", "start")
     .style("font-size", 17)
 

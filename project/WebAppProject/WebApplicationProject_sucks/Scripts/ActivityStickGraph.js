@@ -1,7 +1,7 @@
-﻿var professionData = { ProList: document.getElementsByName('ProfessionName') }
-var countData = { CountList: document.getElementsByName('ProfessionCount') }
+﻿const professionData = document.getElementsByName('ProfessionName');
+const countData = document.getElementsByName('ProfessionCount');
 
-let data = [];
+var data = [];
 
 
 //.attributes.getNamedItem("value").nodeValue
@@ -48,4 +48,3 @@ for (var i = 0; i < professionData.length; i++)
         .attr("y", function (d) { return yScale(d.value); })
         .attr("width", xScale.bandwidth())
         .attr("height", function (d) { return height - yScale(d.value); });
-});

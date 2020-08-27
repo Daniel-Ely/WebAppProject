@@ -18,16 +18,16 @@
         @Html.AntiForgeryToken()
         
     <div class="form-horizontal">
-        <h4>ProfessionalPage</h4>
+        <h4>New Professional Page</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.EditorFor(model => model.NameOfPage, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.NameOfPage, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter page name" } })
 
         </div>
 
         <div class="form-group">
-            <label>Select all the relevant categories </label>
+            <label>Select all the relevant categories </label><br />
             @{
                 MyDB db = new MyDB();
                 List<SelectListItem> listOfCategories = new List<SelectListItem>();
@@ -48,13 +48,12 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
+                <a href="../HomePage/Home">Cancel</a>
             </div>
         </div>
     </div>
     }
     
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
+   
 </body>
 </html>
