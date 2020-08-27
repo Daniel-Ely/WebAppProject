@@ -2072,7 +2072,6 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\FirstController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
-    <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\PageToCategoriesController.cs" />
     <Compile Include="Controllers\PendingToCategoriesController.cs" />
@@ -2089,7 +2088,6 @@
     <Compile Include="Controllers\QuestRoomCommentsController.cs" />
     <Compile Include="Controllers\RoomToCategoriesController.cs" />
     <Compile Include="Controllers\TestController.cs" />
-    <Compile Include="Controllers\TextsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\UserToCategoriesController.cs" />
     <Compile Include="Controllers\UserToPostRatingsController.cs" />
@@ -2115,7 +2113,6 @@
     <Compile Include="Models\ProfessionalPage.cs" />
     <Compile Include="Models\QuestionRoom.cs" />
     <Compile Include="Models\RoomToCategory.cs" />
-    <Compile Include="Models\Text.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserToCategory.cs" />
     <Compile Include="Models\UserToPostRating.cs" />
@@ -2228,6 +2225,7 @@
     <Content Include="Views\Admin\Map.cshtml" />
     <Content Include="Views\HomePage\FirstTimeInThisSystem.cshtml" />
     <Content Include="Views\HomePage\ChoiseBetweenAdminToUser.cshtml" />
+    <Content Include="Views\Locations\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2238,7 +2236,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Home\" />
-    <Folder Include="Views\Locations\" />
     <Folder Include="Views\LogIn\" />
     <Folder Include="Views\Search\" />
     <Folder Include="Views\UserToPostRatings\" />
