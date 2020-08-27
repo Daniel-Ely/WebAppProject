@@ -1,4 +1,5 @@
 ﻿@using WebApplicationProject_sucks.Models
+@using WebApplicationProject_sucks.Controllers
 @model WebApplicationProject_sucks.Models.User
 @{
     Layout = null;
@@ -13,15 +14,18 @@
     <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
 </head>
 <body>
-    
-    
+
+
     @{ MyDB db = new MyDB();
         <!--in order to load the list to javaScript that is responsibale for the searchBar-->
-        foreach (var item in ViewBag["listOfCategory"])
+
+        var ContentList = ViewData["ContentList"] as List<AllContent>;
+        foreach (var item in ContentList)
         {
             <div class="Title" value=@item.Title></div>
+            <div class="Content" value=@item.Content></div>
         }
-        }
+    }
 
     <!--
       the main area
@@ -43,51 +47,35 @@
                 }
                 <br>
             </div>
-            
+
             <ul class="allPost" id="charactersList">
                 @{
                     <!--
                     --the statisc segestion of Qroom and posts
                     -->
+
                     foreach (var item in Intrest)
                     {
-                        if (db.QuestionRooms.ToList().Count > 0) //check to see there are Qrooms
-                        {
-                            var Qrooms = db.QuestionRooms.OrderBy(q => q.DatePublished).Where(q => ((q.Categories.Where(c => c.CategoryName == item.CategoryName)).Count() > 0)).ToList();
-                            foreach (var iteam2 in Qrooms)
-                            {
-                                <!--each Qroom-->
-                                <li class="post">
-                                    @{string linkToQR = "../QuestionRooms/Details/" + iteam2.QuestionRoomID;}
-                                    <a href=@linkToQR>
-                                        <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
-                                        <h2>@Html.Raw(iteam2.Title)</h2>
-                                        <h5>publish date , @iteam2.DatePublished.Month.@iteam2.DatePublished.Day.@iteam2.DatePublished.Year</h5>
-                                    </a>
-                                </li>
-                            }
-                        }
 
-                        if (db.QuestionRooms.ToList().Count > 0)
+                        var Qrooms = db.QuestionRooms.Where(q => ((q.Categories.Where(c => c.CategoryName == item.CategoryName)).Count() > 0)).ToList();
+                        foreach (var iteam2 in Qrooms)
                         {
-                            var posts = db.Posts.OrderBy(p => p.Date).Where(p => ((p.Categories.Where(c => c.CategoryName == item.CategoryName)).Count() > 0)).ToList();
-                            foreach (var iteam2 in posts)
-                            {
-
-                                <li class="post">
+                            <!--each Qroom-->
+                            <li class="post">
+                                @{string linkToQR = "../QuestionRooms/Details/" + iteam2.QuestionRoomID;}
+                                <a href=@linkToQR>
                                     <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
-                                    @{string linkToPost = "../Posts/Details/" + iteam2.PostID;}
-                                    <a href=@linkToPost>
-                                        <h3>@iteam2.Title</h3>
-                                        <h5>publish date , @iteam2.Date.Month  @iteam2.Date.Day,  @iteam2.Date.Year</h5>
-                                        <p>@iteam2.Description</p>
-                                    </a>
-                                    <br />
-                                </li>
-
-                            }
+                                    <h2>@Html.Raw(iteam2.Title)</h2>
+                                    <h5>publish date , @iteam2.DatePublished.Month.@iteam2.DatePublished.Day.@iteam2.DatePublished.Year</h5>
+                                </a>
+                            </li>
                         }
+
+
+
                     }
+                }
+                }
                 }
                 }
             </ul>

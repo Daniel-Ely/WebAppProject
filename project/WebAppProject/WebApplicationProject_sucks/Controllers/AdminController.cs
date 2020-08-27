@@ -7,6 +7,7 @@ using WebApplicationProject_sucks.Models;
 
 namespace WebApplicationProject_sucks.Controllers
 {
+
     public class AdminController : Controller
     {
         //we use an empty controller to match and load views
@@ -19,6 +20,11 @@ namespace WebApplicationProject_sucks.Controllers
             return View();
         }
         public ActionResult myGragh()
+        {
+
+            return View();
+        }
+        public ActionResult Map()
         {
 
             return View();

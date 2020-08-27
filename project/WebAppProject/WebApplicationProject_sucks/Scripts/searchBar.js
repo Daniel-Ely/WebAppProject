@@ -1,7 +1,8 @@
 ﻿
 const charactersList = document.getElementById('charactersList');
 const searchBar = document.getElementById('searchBar');
-var RoomList = document.getElementsByClassName('Title');
+var ContentTitleList = document.getElementsByClassName('Title');
+var ContentList = document.getElementsByClassName('Content');
 var filterdRoomList = document.getElementsByClassName('Title');
 let hpCharacters = [];
 
@@ -22,9 +23,11 @@ function load()
     //
     for (i = 0; i < RoomList.length ; i++)
     {
-        var v = RoomList.item(i).attributes.getNamedItem("value");
+        var v = ContentTitleList.item(i).attributes.getNamedItem("value");
+        var e = ContentList.item(i).attributes;
         hpCharacters.push({
             "Title": v.nodeValue,
+            "Content": e.nodeValue,
             "image": '/src/QutionRoomOwl.png'
         })
     }
@@ -39,6 +42,7 @@ const displayCharacters = (characters) => {
             return `
             <li class="character">
                 <h2>${character.Title}</h2>
+                <p>"${character.Content}"</p>
                 <img src="${character.image}"></img>
             </li>
         `;

@@ -51,13 +51,13 @@
                     <div class="dropdown" id="dropdown" name="dropdown">
                         <input type="text" name="searchBar" id="searchBar" clss="searchBar" placeholder="search for a post" onclick="dropDown()" />
                         <div id="myDropdown" class="dropdown-content">
-                            filter by category:
+                            <b>filter by category:</b>
                             @{
                                 MyDB db = new MyDB();
                                 db.Categories.OrderBy(q => q.Name);
                                 foreach (var q in db.Categories)
                                 {
-                                    <input type="button" class="mybtn" id="@q.Name" onclick="categoryFilter(this)">@q.Name<input>;
+                                    <input type="button" class="mybtn" id=@q.Name onclick="categoryFilter(this)" value=@q.Name>;
                                 }
                             }
                             <br>
@@ -77,15 +77,16 @@
                             @Html.Hidden("categrotyName");
                         </div>
                     </div>
-
+                    <!-- end of SearchBar-->
                     <a href="" class="right">Welcome! @Session["UserName"]</a>
                     <script>
                         function categoryFilter(e) {
                             document.getElementById("categrotyName").value = e.id;
                         }
                     </script>
+
+                                    }
                                 }
-            }
 
         </div>
                                 }
