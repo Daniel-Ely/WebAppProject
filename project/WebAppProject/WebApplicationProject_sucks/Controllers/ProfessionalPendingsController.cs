@@ -61,7 +61,7 @@ namespace WebApplicationProject_sucks.Controllers
                     db.PendingToCategories.Add(new PendingToCategory(professionalPending.UserName, selectedOptions[i]));
                 }
 
-                //formatting our files            
+                //formatting our files           
                 for (int i = 0; i < applyFiles.Length; i++)
                 {//converting each file to a byte array
                     MemoryStream target = new MemoryStream();
