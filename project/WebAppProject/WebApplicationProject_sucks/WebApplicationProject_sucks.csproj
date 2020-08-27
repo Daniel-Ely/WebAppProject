@@ -2070,6 +2070,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ClipsController.cs" />
+    <Compile Include="Controllers\FirstController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
     <Compile Include="Controllers\HTMLScriptsController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
@@ -2259,6 +2260,8 @@
     <Content Include="Views\Admin\myGragh.cshtml" />
     <Content Include="Views\HomePage\filterResults.cshtml" />
     <Content Include="Views\Admin\Map.cshtml" />
+    <Content Include="Views\HomePage\FirstTimeInThisSystem.cshtml" />
+    <Content Include="Views\HomePage\ChoiseBetweenAdminToUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2268,6 +2271,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\First\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\LogIn\" />
     <Folder Include="Views\Search\" />
