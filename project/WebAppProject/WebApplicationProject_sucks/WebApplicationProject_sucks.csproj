@@ -54,6 +54,7 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -2257,6 +2258,7 @@
     <Content Include="Views\HomePage\ProfessionalHome.cshtml" />
     <Content Include="Views\Admin\myGragh.cshtml" />
     <Content Include="Views\HomePage\filterResults.cshtml" />
+    <Content Include="Views\Admin\Map.cshtml" />
     <Content Include="Views\HomePage\FirstTimeInThisSystem.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
