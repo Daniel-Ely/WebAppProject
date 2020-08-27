@@ -15,8 +15,7 @@ namespace WebApplicationProject_sucks.Controllers
         //(CRUD actions for Admin are done hard-codedly)
   
         public ActionResult AdminStatistics()
-        {
-            
+        {         
             return View();
         }
         public ActionResult myGragh()

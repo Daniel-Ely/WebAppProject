@@ -34,8 +34,6 @@ let csvContent = "data:text/csv;charset=utf-8,"
 var encodedUri = encodeURI(csvContent);
 
 
-
-
 // set the dimensions and margins of the graph
 var margin = { top: 30, right: 30, bottom: 70, left: 60 },
     width = 460 - margin.left - margin.right,
@@ -51,11 +49,8 @@ var svg = d3.select("#barChart")
         "translate(" + margin.left + "," + margin.top + ")");
 
 
-
-
 // Parse the Data
 d3.csv(encodedUri, function (data) {
-
 
 
     // sort data
@@ -81,7 +76,7 @@ d3.csv(encodedUri, function (data) {
         .range([height, 0]);
     svg.append("g")
         .call(d3.axisLeft(y));
-
+    
     // Bars
     svg.selectAll("mybar")
         .data(data)
@@ -94,6 +89,8 @@ d3.csv(encodedUri, function (data) {
         .attr("fill", "#69b3a2");
 
 })
+
+alert("hi")
 
 
 

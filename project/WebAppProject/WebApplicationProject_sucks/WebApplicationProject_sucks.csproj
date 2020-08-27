@@ -2236,7 +2236,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Home\" />
-    <Folder Include="Views\LogIn\" />
     <Folder Include="Views\Search\" />
     <Folder Include="Views\UserToPostRatings\" />
   </ItemGroup>

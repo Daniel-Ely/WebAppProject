@@ -12,11 +12,14 @@
 </head>
 <body>
     @{
-
         MyDB db = new MyDB();
-        var Mcount = db.Users.Where(d => d.Gender == "Male").Count();
-        var Fcount = db.Users.Where(d => d.Gender == "Female").Count();
-        var Ocount = db.Users.Where(d => d.Gender == "Other").Count();
+
+        if (db!=null)
+        {
+
+            var Mcount = db.Users.Where(d => d.Gender == "Male").Count();
+            var Fcount = db.Users.Where(d => d.Gender == "Female").Count();
+            var Ocount = db.Users.Where(d => d.Gender == "Other").Count();
 
 
         <div id="Male" name="Male" value=@Mcount>this is : @Mcount</div>
@@ -24,14 +27,14 @@
         <b id="Other" name="Other" value=@Ocount>this is : @Ocount</b>
 
 
-        var professionCount = db.Professionals.GroupBy(g => g.Profession_Name).Select(g => new { Pro = g.Key, Count = g.Count() }).ToList();
-        foreach (var entry in professionCount)
-        {
+            var professionCount = db.Professionals.GroupBy(g => g.Profession_Name).Select(g => new { Pro = g.Key, Count = g.Count() }).ToList();
+            foreach (var entry in professionCount)
+            {
             <div  name="ProfessionName" hidden="hidden" value=@entry.Pro></div>
             <div  name="ProfessionCount" hidden="hidden" value=@entry.Count></div>
-        }
+            }
 
-    }
+        }
 
 
     <div id="my_dataviz"></div>
@@ -39,5 +42,6 @@
 
     <script src="~/Scripts/UserSexPie.js"></script>
     <script src="~/Scripts/ActivityStickGraph.js"></script>
+        }
 </body>
 
