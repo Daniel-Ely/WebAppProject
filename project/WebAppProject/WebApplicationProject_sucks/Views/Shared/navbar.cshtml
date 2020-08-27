@@ -47,11 +47,11 @@
 
             else
             {
-                
+
                 //side bar
-                
+
                 <input type="button" class="sidebar_open" onclick="open_side()" value=☰ />
-                
+
                 <a href="" class="active">Home</a>
                 <a href="#">@Html.ActionLink("Log out", "../Users/LogOut")</a>
                 <!-- search bar and drop dwon -->
@@ -103,18 +103,18 @@
                 </div>
                 <!-- end of SearchBar-->
                 <a href="" class="right">Welcome! @Session["UserName"]</a>
+                <div class="mySidebar" id="mySidebar">
+                    <button onclick="close_side()" class="">Close &times;</button>
+                    <a href="#">@Html.ActionLink("Ask a new question", "../QuestionRooms/Create")</a>
+                    <a href="#">@Html.ActionLink("Move to Categories", "../Categories/Index")</a>
+                </div>
 
-
-            }
+                            }
         }
 
     </div>
-        <div class="mySidebar" id="mySidebar">
-            <button onclick="close_side()" class="">Close &times;</button>
-            <a href="#">@Html.ActionLink("Ask a new question", "../QuestionRooms/Create")</a>
-            <a href="#">@Html.ActionLink("Move to Categories", "../Categories/Index")</a>
-        </div>
-    }
+                            }
+
 </body>
 
 

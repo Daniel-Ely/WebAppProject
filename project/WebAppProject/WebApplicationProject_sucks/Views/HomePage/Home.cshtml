@@ -8,6 +8,7 @@
 
 <html>
 <head>
+   
     <meta name="viewport" content="width=device-width" />
     <title>Home</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css%22%3E" />
@@ -18,17 +19,6 @@
     <div class="header">
         <h1>Soul Owl</h1>
     </div>
-
-    @if (Session["UserName"] == null)
-    {
-    MyDB db2 = new MyDB();
-    if (db2.Categories.ToList().Count == 0 && db2.Professions.ToList().Count == 0)
-    {
-    <textarea name="first" id="first"></textarea>
-    <input type="submit" value="send" id="First" onclick="Send(this)" />
-    return;
-    }
-    }
 
     @Html.Partial("../Shared/navbar")
 
