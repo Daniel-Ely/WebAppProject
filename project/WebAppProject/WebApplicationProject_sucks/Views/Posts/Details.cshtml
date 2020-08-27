@@ -136,10 +136,16 @@
                     @Html.ActionLink("Back to your professional page", "Details", new { id = Model.ProfessionalPageID })
                 </div>
             }
-            else
+            else if (Session["ProfessionalPageID"] != null)
             {
                 <div class="side">
                     @Html.ActionLink("Back to professional page", "Details", new { id = Model.ProfessionalPageID })
+                </div>
+            }
+            else
+            {
+                <div class="side">
+                    <a href="../HomePage/Home">Back to home page</a>
                 </div>
             }
 

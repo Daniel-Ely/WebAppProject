@@ -76,7 +76,7 @@ namespace WebApplicationProject_sucks.Controllers
                 db.ProfessionalPendings.Add(professionalPending);
                 db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("../HomePage/Home");
             }
 
           //  ViewBag.Profession_Name = new SelectList(db.Professions, "Profession_Name", "Profession_Name", professionalPending.Profession_Name);

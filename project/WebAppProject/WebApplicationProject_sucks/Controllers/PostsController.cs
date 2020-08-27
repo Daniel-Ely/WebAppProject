@@ -176,10 +176,11 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddCommentOrRate([Bind(Include = "PostID,PostCommentContent,UserName")] PostComment pC, [Bind(Include = "Rating,UserName,PostId")] UserToPostRating uTPR)
         {
-            if (pC.PostID.ToString() != null && pC.PostCommentContent != null && pC.UserName != null)
-               return CreateComment(pC);
-            else
-               return CreateRating(uTPR);
+            if (pC.PostCommentContent != null)
+                return CreateComment(pC);
+            else if (uTPR.Rating.ToString() != null)
+                return CreateRating(uTPR);
+            else return Redirect("../Posts/Details/" + pC.PostID);
         }
 
 

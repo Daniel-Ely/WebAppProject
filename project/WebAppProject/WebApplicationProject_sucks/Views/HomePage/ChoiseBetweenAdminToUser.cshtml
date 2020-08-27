@@ -16,32 +16,30 @@
     @using (Html.BeginForm("Choise", "HomePage"))
     {
         @Html.AntiForgeryToken()
-    <div class="form-horizontal">
+        <div class="form-horizontal">
 
-        <div class="imgcontainer">
-            <img src="~/src/Owl.png" alt="Avatar" class="avatar">
+            <div class="imgcontainer">
+                <img src="~/src/Owl.png" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="validations">
+
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                @ViewBag.ErrorMessage
+
+
+            </div>
+
+
+
+            <input type="submit" value="As user" class="btn btn-default" onclick=@{Session["User"] = "true";} />
+            <input type="submit" value="As admin" class="btn btn-default" onclick=@{Session["Admin"] = "true";} />
+
+
         </div>
-
-        <div class="validations">
-
-            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-
-            @ViewBag.ErrorMessage
-
-
-        </div>
-
-
-       
-        <input type="submit" value="As user" class="btn btn-default" onclick=@{Session["User"] = "true";} />
-        <input type="submit" value="As admin" class="btn btn-default" onclick=@{Session["Admin"] = "true";} />
-
-
-    </div>
     }
 
 </body>
 </html>
-
-
 

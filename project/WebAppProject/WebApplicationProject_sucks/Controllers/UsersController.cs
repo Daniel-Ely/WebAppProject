@@ -89,10 +89,7 @@ namespace WebApplicationProject_sucks.Controllers
                     return View("../ProfessionalPendings/Create");//refer to the the additional               
                 }
 
-                else
-                {
-                    return RedirectToAction("../HomePage/Home");
-                }
+                return RedirectToAction("../HomePage/Home");
 
             }
             
