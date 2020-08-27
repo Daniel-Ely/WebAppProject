@@ -154,8 +154,7 @@
     </div>
     }
     
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
+    @{ string link = "../Posts/Details/" + Session["PostID"];}
+    <a href=@link>Back to post</a>
 </body>
 </html>

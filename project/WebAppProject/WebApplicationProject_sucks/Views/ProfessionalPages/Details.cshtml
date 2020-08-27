@@ -50,7 +50,7 @@
         </div>
         
 
-        @{/*
+        @{
             string user = Session["UserName"].ToString();
             //checking whether the  user is professional and the current page belongs to them.
             var permitted = (db.Users.Where(d => d.UserName == user).ToList().ElementAt(0).isProfessional) && (Model.UserName == user);
@@ -64,7 +64,7 @@
                     @Html.ActionLink("Back to all of my professional pages", "Index")
                 </div>
             }
-            */
+            
         }
 
 
