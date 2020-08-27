@@ -1,96 +1,79 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "navbar";
 }
-
 <script>
     function open() {
         document.getElementById("mySidebar").style.display = "block";
     }
-
     function close() {
         document.getElementById("mySidebar").style.display = "none";
     }
 </script>
 <body>
-    @using (Html.BeginForm("DeletePost", "HomePage"))
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="navbar">
-            @{
-                if (Session["UserName"] == null)
-                {
-                    <a href="" class="active">Home</a>
-                    <a href="#">@Html.ActionLink("Log in", "../Users/LogIn")</a>
-                    <a href="#">@Html.ActionLink("Register", "../Users/Create")</a>
-                }
-
-                else
-                {
-                    <button class="sidebar_open" onclick="open()">☰</button>
-                    <a href="" class="active">Home</a>
-                    //
-                    //side bar
-                    //
-                    <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
-                        <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
-                        <a href="#">@Html.ActionLink("Ask a new question", "../QuestionRooms/Create")</a>
-                        <a href="#">@Html.ActionLink("Move to Categories", "../Categories/Index")</a>
-                    </div>
-                    <a href="#">@Html.ActionLink("Log out", "../Users/LogOut")</a>
-                    <!-- search bar and drop dwon -->
-                    <script>
-                        /* When the user clicks on the button,
-                        toggle between hiding and showing the dropdown content */
-                        function dropDown() {
-                            document.getElementById("myDropdown").classList.toggle("show");
-                            document.getElementById("myDropdown").style.display = 'block';
-                        }
-                    </script>
-                    <div class="dropdown" id="dropdown" name="dropdown">
-                        <input type="text" name="searchBar" id="searchBar" clss="searchBar" placeholder="search for a post" onclick="dropDown()" />
-                        <div id="myDropdown" class="dropdown-content">
-                            filter by category:
-                            @{
-                                MyDB db = new MyDB();
-                                db.Categories.OrderBy(q => q.Name);
-                                foreach (var q in db.Categories)
-                                {
-                                    <input type="button" class="mybtn" id="@q.Name" onclick="categoryFilter(this)">@q.Name<input>;
-                                }
-                            }
-                            <br>
-                            filter by typeOf content:
-                            <div class="row">
-                                <mybtn>Qution rooms</mybtn>
-                                <mybtn>Posts</mybtn>
-                            </div>
-                            filter by ContentCreators :
-                            @{
-                                db.Professionals.OrderBy(q => q.Score);
-                                foreach (var q in db.Professionals)
-                                {
-                                    <mybtn>@q.UserName</mybtn>
-                                }
-                            }
-                            @Html.Hidden("categrotyName");
-                        </div>
-                    </div>
-
-                    <a href="" class="right">Welcome! @Session["UserName"]</a>
-                    <script>
-                        function categoryFilter(e) {
-                            document.getElementById("categrotyName").value = e.id;
-                        }
-                    </script>
-                                }
+    <div class="navbar">
+        @{
+             if (Session["UserName"] == null)
+            {
+                <a href="" class="active">Home</a>
+                <a href="#">@Html.ActionLink("Log in", "../Users/LogIn")</a>
+                <a href="#">@Html.ActionLink("Register", "../Users/Create")</a>
+                
             }
 
-        </div>
-                                }
-    </body>
-        
+            else
+            {
+                <button class="sidebar_open" onclick="open()">☰</button>
+                <a href="" class="active">Home</a>
+                //
+                //side bar
+                //
+                <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
+                    <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+                    <a href="#">@Html.ActionLink("Ask a new question", "../QuestionRooms/Create")</a>
+                    <a href="#">@Html.ActionLink("Move to Categories", "../Categories/Index")</a>
+                </div>
+                <a href="#">@Html.ActionLink("Log out", "../Users/LogOut")</a>
+                <!-- search bar and drop dwon -->
+                <script>
+                    /* When the user clicks on the button,
+                    toggle between hiding and showing the dropdown content */
+                    function dropDown() {
+                        document.getElementById("myDropdown").classList.toggle("show");
+                        document.getElementById("myDropdown").style.display = 'block';
+                    }
+                </script>
+                <div class="dropdown" id="dropdown" name="dropdown">
+                    <input type="text" name="searchBar" id="searchBar" clss="searchBar" placeholder="search for a post" onclick="dropDown()" />
+                    <div id="myDropdown" class="dropdown-content">
+                        filter by category:
+                        @{
+                            MyDB db = new MyDB();
+                            db.Categories.OrderBy(q => q.Name);
+                            foreach (var q in db.Categories)
+                            {
+                                <mybtn>@q.Name</mybtn>
+                            }
+                        }
+                        <br>
+                        filter by typeOf content:
+                        <div class="row">
+                            <mybtn>Qution rooms</mybtn>
+                            <mybtn>Posts</mybtn>
+                        </div>
+                        filter by ContentCreators :
+                        @{
+                            db.Professionals.OrderBy(q => q.Score);
+                            foreach (var q in db.Professionals)
+                            {
+                                <mybtn>@q.UserName</mybtn>
+                            }
+                        }
+                    </div>
+                </div>
 
+                <a href="" class="right">Welcome! @Session["UserName"]</a>
 
-
+            }
+        }
+    </div>
+</body>

@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "FirstTimeInThisSystem";
+}
+
+<h2>FirstTimeInThisSystem</h2>
+<html>
+<body>
+    <a href="../Categories/Create">Add category</a><br />
+    <a href="../Professions/Create">Add profession</a>
+</body>
+</html>
+
+<a href="../HomePage/Home">Back to home page</a>
+@{ string user = Session["UserName"].ToString();
+    if (user != null)
+    {
+        MyDB db = new MyDB();
+        if (db.Users.Where(d => d.UserName == user).ToList().ElementAt(0).isAdmin)
+        {
+            <a href="../HomePage/AdminHome">Back to home page</a>
+        }
+    }
+}

@@ -35,7 +35,11 @@ namespace WebApplicationProject_sucks.Controllers
         {
             return View();
         }
-        public ActionResult FilterdSearch()
+        public ActionResult FirstTimeInThisSystem()
+        {
+            return View();
+        }
+        /*public ActionResult FilterdSearch()
         {
             var category = Session["categoryName"].ToString();
             var contentType = Session["contentType"];
@@ -57,7 +61,7 @@ namespace WebApplicationProject_sucks.Controllers
                 listCreator = db.QuestionRooms.Where(q => q.CreatorName == creatorName).ToList();
             }
             ViewBag.data["QroomList"] = listCategory.Join(listContent, m => m.QuestionRoomID);
-        }
-       
+        }*/
+
     }
 }

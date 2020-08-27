@@ -13,15 +13,14 @@
     <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
 </head>
 <body>
-    
-    
+
     @{ MyDB db = new MyDB();
         <!--in order to load the list to javaScript that is responsibale for the searchBar-->
-        foreach (var item in ViewBag["listOfCategory"])
+        foreach (var item in db.QuestionRooms)
         {
             <div class="Title" value=@item.Title></div>
         }
-        }
+    }
 
     <!--
       the main area
@@ -32,26 +31,26 @@
         <div class="main">
             <div class="row">
                 <!--category buttons-->
-                <input type="button" id="all" value="all" onclick="">
+                <mybtn>all</mybtn>
                 @{
                     var user = db.Users.Find(Session["UserName"]);
                     var Intrest = user.Interests.OrderBy(i => i.LastTouched).ThenBy(i => i.NumOfVisits);
                     foreach (var item in Intrest)
                     {
-                        <input id="@item.CategoryName" value=@item.CategoryName>
+                        <mybtn value=@item.CategoryName>@item.CategoryName</mybtn>
                     }
                 }
                 <br>
             </div>
-            
-            <ul class="allPost" id="charactersList">
+            <ul id="charactersList">this is my list</ul>
+            <ul class="allPost" id="PostList">
                 @{
                     <!--
                     --the statisc segestion of Qroom and posts
                     -->
                     foreach (var item in Intrest)
                     {
-                        if (db.QuestionRooms.ToList().Count > 0) //check to see there are Qrooms
+                        if (db.QuestionRooms.ToList().Count > 0)
                         {
                             var Qrooms = db.QuestionRooms.OrderBy(q => q.DatePublished).Where(q => ((q.Categories.Where(c => c.CategoryName == item.CategoryName)).Count() > 0)).ToList();
                             foreach (var iteam2 in Qrooms)
@@ -110,14 +109,6 @@
                 document.getElementById("myDropdown").style.display = 'none';
             }
         }
-        @Html.Hidden("categoryName");
-        function filtterByCategory(e)
-        {
-            var categoryName = e.id.toStrong();
-            sessionStorage.setItem("categoryName", categoryName);
-            document.getElementById("categoryName").value = categoryName;
-        }
-
     </script>
 </body>
 </html>

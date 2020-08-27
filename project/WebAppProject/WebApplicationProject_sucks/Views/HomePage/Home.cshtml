@@ -7,46 +7,66 @@
 
 <html>
 <head>
+    <script>
+        function Send(ele) {
+            ele.value = document.getElementById("first").value;
+        }
+    </script>
     <meta name="viewport" content="width=device-width" />
     <title>Home</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
 </head>
 <body>
-    
-    <div class="header">
-        <h1>Soul Owl</h1>
-    </div>
+    @using (Html.BeginForm("VerifyFirstAdmin", "First"))
+    {
+        @Html.AntiForgeryToken()
 
-    @Html.Partial("../Shared/navbar")
-      
-    @{ MyDB db = new MyDB();
-        
+        <div class="header">
+            <h1>Soul Owl</h1>
+        </div>
         if (Session["UserName"] == null)
         {
-            @Html.Partial("../HomePage/GuestHome")
+            MyDB db2 = new MyDB();
+            if (db2.Categories.ToList().Count == 0 && db2.Professions.ToList().Count == 0)
+            {
+                <textarea name="first" id="first"></textarea>
+                <input type="submit" value="send" id="First" onclick="Send(this)"/>
+            }
         }
-        
+
         else
         {
-            string user = Session["UserName"].ToString();
-            if (db.Users.Where(d => d.UserName == user).ToList().ElementAt(0).isProfessional)
-            {
-                @Html.Partial("../HomePage/ProfessionalHome")
-            }
-            else
-            {
-                @Html.Partial("../HomePage/UserHome")
-            }
+            Html.Partial("../Shared/navbar");
         }
 
+         MyDB db = new MyDB();
 
-        
-    }
+            if (Session["UserName"] == null)
+            {
+                @Html.Partial("../HomePage/GuestHome")
+            }
 
-    <div class="footer">
-        <h2>Soul Owl</h2>
-    </div>
+            else
+            {
+                string user = Session["UserName"].ToString();
+                if (db.Users.Where(d => d.UserName == user).ToList().ElementAt(0).isProfessional)
+                {
+                    @Html.Partial("../HomePage/ProfessionalHome")
+                }
+                else
+                {
+                    @Html.Partial("../HomePage/UserHome")
+                }
+            }
 
-</body>
+
+
+        }
+
+        <div class="footer">
+            <h2>Soul Owl</h2>
+        </div>
+            }
+    </body>
 </html>
