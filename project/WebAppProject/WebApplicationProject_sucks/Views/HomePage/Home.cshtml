@@ -1,4 +1,5 @@
-﻿@using System.Web.Mvc.Html;
+﻿
+@using System.Web.Mvc.Html;
 @{
     Layout = null;
 }
@@ -7,66 +8,57 @@
 
 <html>
 <head>
-    <script>
-        function Send(ele) {
-            ele.value = document.getElementById("first").value;
-        }
-    </script>
     <meta name="viewport" content="width=device-width" />
     <title>Home</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css%22%3E" />
     <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
 </head>
 <body>
-    @using (Html.BeginForm("VerifyFirstAdmin", "First"))
-    {
-        @Html.AntiForgeryToken()
 
-        <div class="header">
-            <h1>Soul Owl</h1>
-        </div>
+    <div class="header">
+        <h1>Soul Owl</h1>
+    </div>
+
+    @if (Session["UserName"] == null)
+    {
+    MyDB db2 = new MyDB();
+    if (db2.Categories.ToList().Count == 0 && db2.Professions.ToList().Count == 0)
+    {
+    <textarea name="first" id="first"></textarea>
+    <input type="submit" value="send" id="First" onclick="Send(this)" />
+    return;
+    }
+    }
+
+    @Html.Partial("../Shared/navbar")
+
+    @{ MyDB db = new MyDB();
+
         if (Session["UserName"] == null)
         {
-            MyDB db2 = new MyDB();
-            if (db2.Categories.ToList().Count == 0 && db2.Professions.ToList().Count == 0)
-            {
-                <textarea name="first" id="first"></textarea>
-                <input type="submit" value="send" id="First" onclick="Send(this)"/>
-            }
+            @Html.Partial("../HomePage/GuestHome")
         }
 
         else
         {
-            Html.Partial("../Shared/navbar");
-        }
-
-         MyDB db = new MyDB();
-
-            if (Session["UserName"] == null)
+            string user = Session["UserName"].ToString();
+            if (db.Users.Where(d => d.UserName == user).ToList().ElementAt(0).isProfessional)
             {
-                @Html.Partial("../HomePage/GuestHome")
+                @Html.Partial("../HomePage/ProfessionalHome")
             }
-
             else
             {
-                string user = Session["UserName"].ToString();
-                if (db.Users.Where(d => d.UserName == user).ToList().ElementAt(0).isProfessional)
-                {
-                    @Html.Partial("../HomePage/ProfessionalHome")
-                }
-                else
-                {
-                    @Html.Partial("../HomePage/UserHome")
-                }
+                @Html.Partial("../HomePage/UserHome")
             }
-
-
-
         }
 
-        <div class="footer">
-            <h2>Soul Owl</h2>
-        </div>
-            }
-    </body>
+
+
+    }
+
+    <div class="footer">
+        <h2>Soul Owl</h2>
+    </div>
+
+</body>
 </html>

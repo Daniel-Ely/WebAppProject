@@ -108,6 +108,8 @@ namespace WebApplicationProject_sucks.Controllers
                 {//successful login
                     Session["UserName"] = username;
                     Session.Timeout = 10;//in minutues 
+                    if (db.Users.Where(d => d.UserName == username).ToList().ElementAt(0).isAdmin)
+                        return Redirect("../HomePage/ChoiseBetweenAdminToUser");
                     return Redirect("../HomePage/Home");
                 }              
             }
