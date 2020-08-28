@@ -2223,10 +2223,9 @@
     <Content Include="Views\Admin\myGragh.cshtml" />
     <Content Include="Views\HomePage\filterResults.cshtml" />
     <Content Include="Views\Admin\Map.cshtml" />
-    <Content Include="Views\HomePage\ChoiseBetweenAdminToUser.cshtml" />
     <Content Include="Views\HomePage\FirstTimeInThisSystem.cshtml" />
-    <Content Include="Views\HomePage\ChoiseBetweenAdminToUser.cshtml" />
     <Content Include="Views\Locations\Create.cshtml" />
+    <Content Include="Views\HomePage\ChoiseBetweenAdminToUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2237,7 +2236,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Home\" />
-    <Folder Include="Views\LogIn\" />
     <Folder Include="Views\Search\" />
     <Folder Include="Views\UserToPostRatings\" />
   </ItemGroup>

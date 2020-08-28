@@ -61,7 +61,7 @@ namespace WebApplicationProject_sucks.Controllers
                     db.PendingToCategories.Add(new PendingToCategory(professionalPending.UserName, selectedOptions[i]));
                 }
 
-                //formatting our files            
+                //formatting our files           
                 for (int i = 0; i < applyFiles.Length; i++)
                 {//converting each file to a byte array
                     MemoryStream target = new MemoryStream();
@@ -76,7 +76,7 @@ namespace WebApplicationProject_sucks.Controllers
                 db.ProfessionalPendings.Add(professionalPending);
                 db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("../HomePage/Home");
             }
 
           //  ViewBag.Profession_Name = new SelectList(db.Professions, "Profession_Name", "Profession_Name", professionalPending.Profession_Name);

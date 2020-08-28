@@ -54,6 +54,18 @@ namespace WebApplicationProject_sucks.Controllers
         {
             return View();
         }
+        public ActionResult ChoiseBetweenAdminToUser()
+        {
+            return View();
+        }
+        public ActionResult Choise(string IsAdmin)
+        {
+            if (IsAdmin == "false")
+                return Redirect("../HomePage/Home");
+            return Redirect("../HomePage/AdminHome");
+        }
+
+
 
         public ActionResult FilterdSearch(string categoryName, string contentType , string creatorName)
         {

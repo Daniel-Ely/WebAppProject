@@ -74,12 +74,16 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateComment(string RoomID,string CommentContent,string CommentCreator)
         {
-            int commentID = db.QustionRoomComments.Count();
-            QuestRoomComment comment = new QuestRoomComment(commentID, Int32.Parse(RoomID), CommentContent,CommentCreator, DateTime.Today.Date);
-            db.QustionRoomComments.Add(comment);
-            db.SaveChanges();
+            if (CommentContent != null)
+            {
+                int commentID = db.QustionRoomComments.Count();
+                QuestRoomComment comment = new QuestRoomComment(commentID, Int32.Parse(RoomID), CommentContent, CommentCreator, DateTime.Today.Date);
+                db.QustionRoomComments.Add(comment);
+                db.SaveChanges();
+            }
 
-            return Redirect("../QuestionRooms/Details/"+Int32.Parse(RoomID));
+            return Redirect("../QuestionRooms/Details/" + Int32.Parse(RoomID));
+           
         }
 
 

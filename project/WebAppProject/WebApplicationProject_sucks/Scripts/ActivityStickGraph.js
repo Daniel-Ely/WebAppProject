@@ -1,10 +1,8 @@
 ﻿const professionData = document.getElementsByName('ProfessionName');
 const countData = document.getElementsByName('ProfessionCount');
+alert(professionData);
 
 var data = [];
-
-
-//.attributes.getNamedItem("value").nodeValue
 
 
 var xScale = d3.scaleBand().range([0, width]).padding(0.4),
@@ -21,19 +19,51 @@ var g = svg.append("g")
 for (var i = 0; i < professionData.length; i++)
 {
     data.push({
-        "profession": professionData.item(i).attributes.getNamedItem("value").nodeValue,
-       "count": countData.item(i).attributes.getNamedItem("value").nodeValue,
+        profession: professionData.item(i).nodeValue,
+        count: countData.item(i).nodeValue
+       //count: countData.item(i).attributes.getNamedItem("value").nodeValue,
     })
 }
 
-//convert the data to csv file
-let csvContent = "data:text/csv;charset=utf-8,"
-    + data.map(e => e.join(",")).join("\n");
+
+let csv
+
+// Loop the array of objects
+for (let row = 0; row < data.length; row++) {
+    let keysAmount = Object.keys(data[row]).length
+    let keysCounter = 0
+
+    // If this is the first row, generate the headings
+    if (row === 0) {
+        // Loop each property of the object
+        for (let key in data[row]) {
+
+            // This is to not add a comma at the last cell
+            // The '\r\n' adds a new line
+            csv += key + (keysCounter + 1 < keysAmount ? ',' : '\r\n')
+            keysCounter++
+        }
+    } else {
+        for (let key in data[row]) {
+            csv += data[row][key] + (keysCounter + 1 < keysAmount ? ',' : '\r\n')
+            keysCounter++
+        }
+    }
+    keysCounter = 0
+}
 
 
-var encodedUri = encodeURI(csvContent);
+// Once we are done looping, download the .csv by creating a link
+let link = document.createElement('a')
+link.id = 'download-csv'
+link.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(csv));
+link.setAttribute('download', 'yourfiletextgoeshere.csv');
+document.body.appendChild(link)
+document.querySelector('#download-csv').click()
 
 
+
+alert(link);
 
 
 // set the dimensions and margins of the graph
@@ -51,13 +81,10 @@ var svg = d3.select("#barChart")
         "translate(" + margin.left + "," + margin.top + ")");
 
 
-
-
 // Parse the Data
 d3.csv(encodedUri, function (data) {
 
-
-
+  
     // sort data
     data.sort(function (b, a) {
         return a.Value - b.Value;
@@ -81,7 +108,7 @@ d3.csv(encodedUri, function (data) {
         .range([height, 0]);
     svg.append("g")
         .call(d3.axisLeft(y));
-
+    
     // Bars
     svg.selectAll("mybar")
         .data(data)
@@ -94,6 +121,7 @@ d3.csv(encodedUri, function (data) {
         .attr("fill", "#69b3a2");
 
 })
+
 
 
 
