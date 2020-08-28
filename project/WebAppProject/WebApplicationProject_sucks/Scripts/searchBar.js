@@ -5,6 +5,8 @@ var ContentTitleList = document.getElementsByClassName('Title');
 var ContentList = document.getElementsByClassName('Content');
 var idList = document.getElementsByClassName('ID');
 var DateList = document.getElementsByClassName('Date');
+var NameList = document.getElementsByClassName('Name');
+
 
 let hpCharacters = [];
 
@@ -29,13 +31,15 @@ function load()
         var e = ContentList.item(i).attributes.getNamedItem("value");
         var id = idList.item(i).attributes.getNamedItem("value");
         var date = DateList.item(i).attributes.getNamedItem("value");
+        var name = NameList.item(i).attributes.getNamedItem("value");
 
         hpCharacters.push({
             "Id": id.nodeValue,
             "Title": v.nodeValue,
             "Content": e.nodeValue,
-            "Date": date,
-            "image": '/src/QutionRoomOwl.png'
+            "Date": date.nodeValue,
+            "image": '/src/QutionRoomOwl.png',
+            "Name": name.nodeValue
         })
     }
     displayCharacters(hpCharacters);
@@ -46,14 +50,14 @@ function load()
 const displayCharacters = (characters) => {
     const htmlString = characters
         .map((character) => {
-            if (character.Title == "Question")
+            if (character.Title == "Question room")
             return `
                             <li class="character">
                                <a href="../QuestionRooms/Details/${character.Id}">
+                                   <h5>by ${character.Name}  ${character.Date}</h5>
                                    <img src="${character.image}"></img>
                                     <h2>${character.Title}</h2>
                                      <p>${character.Content}</p>
-                                    <h5>publish date ,  ${character.Date.Month}.${character.Date.Day}.${character.Date.Year}</h5>
                                 </a>
                             </li>
         `;
@@ -61,10 +65,10 @@ const displayCharacters = (characters) => {
                 return `
                             <li class="character">
                                 <a href="../Posts/Details/${character.Id}">
-                                   <img src="${character.image}"></img>
+                                   <h5>by ${character.Name}  ${character.Date}</h5>
+                                   <img src="${character.image}"></img>  
                                     <h2>${character.Title}</h2>
                                     <p>${character.Content}</p>
-                                    <h5>publish date ,  ${character.Date.Month}.${character.Date.Day}.${character.Date.Year}</h5>
                                 </a>
                             </li>
         `;
