@@ -2,9 +2,10 @@
 @{
     ViewBag.Title = "navbar";
 }
-<script>
-   
-</script>
+<!DOCTYPE html>
+
+<html>
+<head>
 <script>
     //SideBar
     function open_side() {
@@ -31,92 +32,97 @@
     }
 
 </script>
+</head>
 <body>
     @using (Html.BeginForm("FilterdSearch", "HomePage"))
     {
         @Html.AntiForgeryToken()
 
-    <div class="navbar">
-        @{
             if (Session["UserName"] == null)
             {
-                <a href="" class="active">Home</a>
-                <a href="#">@Html.ActionLink("Log in", "../Users/LogIn")</a>
-                <a href="#">@Html.ActionLink("Register", "../Users/Create")</a>
+                <div class="navbar">
+                    <a href="" class="active">Home</a>
+                    <a href="#">@Html.ActionLink("Log in", "../Users/LogIn")</a>
+                    <a href="#">@Html.ActionLink("Register", "../Users/Create")</a>
+                </div>
             }
 
             else
             {
+                <div class="navbar">
 
-                //side bar
+                    <input type="button" class="sidebar_open" onclick="open_side()" value=☰ />
 
-                <input type="button" class="sidebar_open" onclick="open_side()" value=☰ />
-
-                <a href="" class="active">Home</a>
-                <a href="#">@Html.ActionLink("Log out", "../Users/LogOut")</a>
-                <!-- search bar and drop dwon -->
-                <div class="dropdown" id="dropdown" name="dropdown">
-                    <input type="text" name="searchBar" id="searchBar" clss="searchBar" placeholder="search for a post" onclick="dropDown()" />
-                    <div id="myDropdown" class="dropdown-content">
-                        <b>filter by category:</b>
-                        <br>
-                        @{
-                            var round = 0;
-                            MyDB db = new MyDB();
-                            db.Categories.OrderBy(q => q.Name);
-                            foreach (var q in db.Categories)
-                            {
-                                round++;
-                                if (round == 3)
+                    <a href="" class="active">Home</a>
+                    <a href="#">@Html.ActionLink("Log out", "../Users/LogOut")</a>
+                    <!-- search bar and drop dwon -->
+                    <div class="dropdown" id="dropdown" name="dropdown">
+                        <input type="text" name="searchBar" id="searchBar" clss="searchBar" placeholder="search for a post" onclick="dropDown()" />
+                        <div id="myDropdown" class="dropdown-content">
+                            <b>filter by category:</b>
+                            <br>
+                            @{
+                                var round = 0;
+                                MyDB db = new MyDB();
+                                db.Categories.OrderBy(q => q.Name);
+                                foreach (var q in db.Categories)
                                 {
-                                    round = 0;
-                                    <br>
+                                    round++;
+                                    if (round == 3)
+                                    {
+                                        round = 0;
+                                        <br>
+                                    }
+                                    <input type="submit" class="mybtn" id=@q.Name onclick="categoryFilter(this)" value=@q.Name>
                                 }
-                                <input type="submit" class="mybtn" id=@q.Name onclick="categoryFilter(this)" value=@q.Name>
                             }
-                        }
-                        <br>
-                        <b>filter by typeOf content:</b>
-                        <br>
-                        <div class="row">
-                            <input type="submit" class="mybtn" id="Question-rooms" onclick="contentTypeFilterFilter(this)" value="Question rooms">
-                            <input type="submit" class="mybtn" id="Post" onclick="contentTypeFilterFilter(this)" value="Post">
+                            <br>
+                            <b>filter by typeOf content:</b>
+                            <br>
+                            <div class="row">
+                                <input type="submit" class="mybtn" id="Question-rooms" onclick="contentTypeFilterFilter(this)" value="Question rooms">
+                                <input type="submit" class="mybtn" id="Post" onclick="contentTypeFilterFilter(this)" value="Post">
+                            </div>
+                            <b>filter by ContentCreators :</b>
+                            <br>
+                            @{
+                                foreach (var q in db.Users)
+                                {
+                                    if (round == 3)
+                                    {
+                                        round = 0;
+                                        <br>
+                                    }
+                                    <input type="submit" class="mybtn" id=@q.UserName onclick="creatorNameFilter(this)" value=@q.UserName>
+                                    round++;
+                                }
+                            }
+                            @Html.Hidden("categoryName")
+                            @Html.Hidden("contentType")
+                            @Html.Hidden("creatorName")
                         </div>
-                        <b>filter by ContentCreators :</b>
-                        <br>
-                        @{
-                            foreach (var q in db.Users)
-                            {
-                                if (round == 3)
-                                {
-                                    round = 0;
-                                    <br>
-                                }
-                                <input type="submit" class="mybtn" id=@q.UserName onclick="creatorNameFilter(this)" value=@q.UserName>
-                                round++;
-                            }
-                        }
-                        @Html.Hidden("categoryName")
-                        @Html.Hidden("contentType")
-                        @Html.Hidden("creatorName")
                     </div>
+                    <!-- end of SearchBar-->
+                    <a href="" class="right">Welcome! @Session["UserName"]</a>
                 </div>
-                <!-- end of SearchBar-->
-                <a href="" class="right">Welcome! @Session["UserName"]</a>
-                <div class="mySidebar" id="mySidebar">
-                    <button onclick="close_side()" class="">Close &times;</button>
+                <!-- side bar-->
+                <div class="mySidebar" id="mySidebar" style="display:none">
+                    <input type="button" onclick="close_side()" class="button" value="&times;">
+                    <!-- the side panel with our info :)-->
+
+                    <a href="../Categories/Index">Categories</a>
+                    <a href="../QuestionRooms/Index">Question Rooms</a>
+                    <a href="../ProfessionalPages/Index">Professional Pages</a>
                     <a href="#">@Html.ActionLink("Ask a new question", "../QuestionRooms/Create")</a>
                     <a href="#">@Html.ActionLink("Move to Categories", "../Categories/Index")</a>
                 </div>
 
-                            }
+            }
         }
-
-    </div>
-                            }
+    
 
 </body>
-
+</html>
 
 
 

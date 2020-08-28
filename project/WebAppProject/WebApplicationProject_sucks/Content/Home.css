@@ -24,15 +24,7 @@ body {
     .header h1 {
         font-size: 40px;
     }
-.sideBar {
-    margin: 0;
-    padding: 0;
-    width: 200px;
-    background-color: #f1f1f1;
-    position: fixed;
-    height: 100%;
-    overflow: auto;
-}
+
 /* Column container */
 .row {
     display: -ms-flexbox; /* IE10 */
@@ -142,13 +134,15 @@ img {
         padding: 14px 20px;
         text-decoration: none;
     }
-    .navbar button {
+    .navbar .sidebar_open {
         float: left;
         display: block;
-        color: black;
+        color: white;
+        background-color: transparent;
         text-align: center;
         padding: 14px 20px;
         text-decoration: none;
+        border-style: none;
     }
         /* Right-aligned link */
         .navbar a.right {
@@ -178,12 +172,9 @@ img {
         width: 40%;
     }
     .navbar #dropdown {
-        flex-direction:column;
-        display:flex;
-        align-self:center;
-    }
-    .navbar .mySidebar {
-        display:none;
+        flex-direction: column;
+        display: flex;
+        align-self: center;
     }
     .navbar .dropdown-content {
         align-self: center;
@@ -197,8 +188,43 @@ img {
         grid-template-columns: 3fr 1fr;
         width: 40%;
     }
+/*side bar*/
 
-
+.mySidebar {
+    height:auto;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: darkslategrey;
+    color:darkslategray;
+    position: unset;
+    height: 100%;
+    overflow: auto;
+}
+    .mySidebar a {
+        float: left;
+        color: white;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+    }
+    .mySidebar input{
+        border-style:none;
+        background-color:transparent;
+        color: white;
+        text-align: center;
+        width:100%;
+        padding: 14px 20px;
+        text-decoration: none;
+    }
+        .mySidebar input:hover {
+            background-color: aliceblue;
+            color: dimgray;
+        }
+        .mySidebar a:hover {
+            background-color: aliceblue;
+            color: dimgray;
+        }
     
 /*
     --

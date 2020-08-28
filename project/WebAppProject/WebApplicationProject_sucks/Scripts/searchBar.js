@@ -49,8 +49,7 @@ const displayCharacters = (characters) => {
             if (character.Title == "Question")
             return `
                             <li class="character">
-                               <a href="../Posts/Details/" + ${character.Id}>
-                                <a href=@linkToQR>
+                               <a href="../QuestionRooms/Details/${character.Id}">
                                    <img src="${character.image}"></img>
                                     <h2>${character.Title}</h2>
                                      <p>${character.Content}</p>
@@ -61,7 +60,7 @@ const displayCharacters = (characters) => {
             else
                 return `
                             <li class="character">
-                                <a href="../Posts/Details/" + ${character.Id}>
+                                <a href="../Posts/Details/${character.Id}">
                                    <img src="${character.image}"></img>
                                     <h2>${character.Title}</h2>
                                     <p>${character.Content}</p>
