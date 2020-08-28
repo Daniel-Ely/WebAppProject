@@ -50,7 +50,6 @@ const displayCharacters = (characters) => {
             return `
                             <li class="character">
                                <a href="../QuestionRooms/Details/${character.Id}">
-                                
                                    <img src="${character.image}"></img>
                                     <h2>${character.Title}</h2>
                                      <p>${character.Content}</p>
