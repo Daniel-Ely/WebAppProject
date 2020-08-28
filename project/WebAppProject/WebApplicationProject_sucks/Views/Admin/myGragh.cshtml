@@ -14,7 +14,7 @@
     @{
         MyDB db = new MyDB();
 
-        if (db!=null)
+        if (db != null)
         {
 
             var Mcount = db.Users.Where(d => d.Gender == "Male").Count();
@@ -22,26 +22,28 @@
             var Ocount = db.Users.Where(d => d.Gender == "Other").Count();
 
 
-        <div id="Male" name="Male" value=@Mcount>this is : @Mcount</div>
-        <div id="Female" name="Female" value=@Fcount>this is : @Fcount</div>
-        <b id="Other" name="Other" value=@Ocount>this is : @Ocount</b>
+            <div id="Male" name="Male" value=@Mcount>this is : @Mcount</div>
+            <div id="Female" name="Female" value=@Fcount>this is : @Fcount</div>
+            <b id="Other" name="Other" value=@Ocount>this is : @Ocount</b>
 
 
             var professionCount = db.Professionals.GroupBy(g => g.Profession_Name).Select(g => new { Pro = g.Key, Count = g.Count() }).ToList();
             foreach (var entry in professionCount)
             {
-            <div  name="ProfessionName" hidden="hidden" value=@entry.Pro></div>
-            <div  name="ProfessionCount" hidden="hidden" value=@entry.Count></div>
+                <div name="ProfessionName" hidden="hidden" value=@entry.Pro></div>
+                <div name="ProfessionCount" hidden="hidden" value=@entry.Count></div>
             }
-
+       
         }
+        
+        
+        <div id="my_dataviz"></div>
 
-    
-    <div id="my_dataviz"></div>
-    <svg id="barChart" width="600" height="500"></svg>
+        <div id="my_BarViz"></div>
+       <!-- <svg id="barChart" width="600" height="500"></svg>-->
 
-    <script src="~/Scripts/UserSexPie.js"></script>
-    <script src="~/Scripts/ActivityStickGraph.js"></script>
-        }
+        <script src="~/Scripts/UserSexPie.js"></script>
+        <script src="~/Scripts/ActivityStickGraph.js"></script>
+    }
 </body>
 
