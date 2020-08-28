@@ -42,18 +42,6 @@ svg
     .attr("stroke", "black")
     .style("stroke-width", "2px")
     .style("opacity", 0.7)
-// Get the angle on the arc and then rotate by -90 degrees
-var getAngle = function (d) {
-    return (180 / Math.PI * (d.startAngle + d.endAngle) / 2 - 90);
-};
-svg
-    .selectAll('mySlices')
-    .data(data_ready)
-    .enter()
-    .append('text')
-    .text(function (d) { return d.data.key})
-    .style("text-anchor", "start")
-    .style("font-size", 17)
 
 
 
