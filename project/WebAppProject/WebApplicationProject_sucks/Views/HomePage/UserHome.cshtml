@@ -23,8 +23,9 @@
         foreach (var item in ContentList)
         {
             <div class="ID" value=@item.AllContentID></div>
-            <div class="Title" value=@item.Title></div>
-            <div class="Content" value=@item.Content></div>
+            <div class="Title" value="@item.Title"></div>
+            <div class="Content" value="@item.Content"></div>
+            <div class="Date" value=@item.Date></div>
             <div class="Date" value=@item.Date></div>
         }
     }
