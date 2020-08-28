@@ -9,12 +9,13 @@
 <html>
 <head>
 
-    
+
     <meta name="viewport" content="width=device-width" />
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="~/Content/Comment.css?ver=<?php echo rand(111,999)?" type="text/css" />
     <link rel="stylesheet" href="~/Content/creatPost.css?ver=<?php echo rand(111,999)?" type="text/css" />
     <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
+    <link rel="stylesheet" href="~/Content/Register.css?ver=<?php echo rand(111,999)?" type="text/css" />
 
 </head>
 <body>
@@ -22,140 +23,140 @@
         {
 
             @Html.AntiForgeryToken()
-
-    <div class="dl-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        <div class="titleOfPost">
+            <div class="titleOfPost">
             <h3> @Html.Raw(Model.Title)</h3>
             @{
                 MyDB db = new MyDB();
                 string CreatorName = db.ProfessionalPages.Where(d => d.ProfessionalPageID == Model.ProfessionalPageID).ToList().ElementAt(0).UserName;
-               <h5>@CreatorName</h5>
+                <h5>@CreatorName</h5>
             }
             <h6>@Html.DisplayFor(model => model.Date)</h6>
             <hr />
         </div>
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         
-    </div>
-    <div class="row">
 
-        <div class="main">
 
-            @Html.Raw(Model.Content)
-            <br />
-            @Html.Hidden("UserName", Session["UserName"])
-            @{
+        <div class="row">
 
-                <div class="rating">
-                    <label>Pepole that rate this post</label>
-                    @Model.NumOfRating
-                    <label>Rate</label>
-                    @Model.Rating
-                </div>
+            <div class="main">
 
-                string userN = Session["UserName"].ToString();
-                if (db.UserToPostRatings.Where(d => d.UserName == userN && d.PostId == Model.PostID).ToList().Count == 0)
+                @Html.Raw(Model.Content)
+                <br />
+                @Html.Hidden("UserName", Session["UserName"])
+                @{
 
-                {
-                    <ul>
-                        <li><input type="number" placeholder="Rate this post between 1 to 10" name="Rating" id="Rating" min="1" max="10" /></li>
-                        <li><input type="submit" placeholder="Send your rate" class="btn btn-default" /><br /></li>
-                    </ul>
+                    <div class="rating">
+                        <label>Pepole that rate this post</label>
+                        @Model.NumOfRating
+                        <label>Rate</label>
+                        @Model.Rating
+                    </div>
 
+                    string userN = Session["UserName"].ToString();
+                    if (db.UserToPostRatings.Where(d => d.UserName == userN && d.PostId == Model.PostID).ToList().Count == 0)
+
+                    {
+                        <ul>
+                            <li><input type="number" placeholder="Rate this post between 1 to 10" name="Rating" id="Rating" min="1" max="10" /></li>
+                            <li><input type="submit" placeholder="Send your rate" class="btn btn-default" /><br /></li>
+                        </ul>
+
+
+                    }
 
                 }
 
-            }
 
+                <br /><br />
 
-            <br /><br />
+                <!--Show all the comments-->
+                @foreach (var item in db.PostComments.Where(d => d.PostID == Model.PostID).ToList())
+                {
 
-            <!--Show all the comments-->
-            @foreach (var item in db.PostComments.Where(d => d.PostID == Model.PostID).ToList())
-            {
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-10 col-sm-offset-1" id="logout">
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="comments-logout">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-10 col-sm-offset-1" id="logout">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="comments-logout">
 
 
 
-                                    <a class="pull-left" href="#">
-                                        <img class="media-object img-circle" src='@Url.Action("ShowImage", "Posts", new { UserName = item.UserName })' alt="profile">
-                                    </a>
+                                        <a class="pull-left" href="#">
+                                            <img class="media-object img-circle" src='@Url.Action("ShowImage", "Posts", new { UserName = item.UserName })' alt="profile">
+                                        </a>
 
 
-                                    <div class="media-body">
-                                        <div class="well well-lg">
-                                            <h4 class="media-heading text-uppercase reviews"> @Html.DisplayFor(modelItem => item.UserName) </h4>
-                                            <ul class="media-date text-uppercase reviews list-inline">
-                                                <li class="dd">@Html.DisplayFor(modelItem => item.Date.Day)</li>
-                                                <li class="mm">@Html.DisplayFor(modelItem => item.Date.Month)</li>
-                                                <li class="aaaa">@Html.DisplayFor(modelItem => item.Date.Year)</li>
-                                            </ul>
-                                            <br />
-                                            <p class="media-comment">
-                                                @item.PostCommentContent
+                                        <div class="media-body">
+                                            <div class="well well-lg">
+                                                <h4 class="media-heading text-uppercase reviews"> @Html.DisplayFor(modelItem => item.UserName) </h4>
+                                                <ul class="media-date text-uppercase reviews list-inline">
+                                                    <li class="dd">@Html.DisplayFor(modelItem => item.Date.Day)</li>
+                                                    <li class="mm">@Html.DisplayFor(modelItem => item.Date.Month)</li>
+                                                    <li class="aaaa">@Html.DisplayFor(modelItem => item.Date.Year)</li>
+                                                </ul>
+                                                <br />
+                                                <p class="media-comment">
+                                                    @item.PostCommentContent
 
-                                            </p>
+                                                </p>
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                }
+
+                <!--commetns fo post-->
+                @Html.Hidden("PostID", Model.PostID)
+
+                @Html.Editor("PostCommentContent", new { placeholder = "Write a comment" })
+
+                <input type="submit" placeholder="Send your rate" class="btn btn-default" /><br />
+
+
+            </div>
+
+
+
+            @{
+                string user = Session["UserName"].ToString();
+                var isP = db.Users.Where(d => d.UserName == userN).ToList().ElementAt(0).isProfessional;
+                var isC = db.ProfessionalPages.Where(d => d.ProfessionalPageID == Model.ProfessionalPageID).ToList().ElementAt(0);
+
+                if (isP && isC.UserName == user)
+                {
+            <div class="side">
+                @Html.ActionLink("Delete comments from this post", "Edit", new { id = Model.PostID }) <br /><br />
+                @{ string link = "/ProfessionalPages/Details/" + Model.ProfessionalPageID;}
+                <a href=@link>Back to my professional page</a> <br /><br />
+                <a href="/HomePage/Home">Back to home page</a>
+            </div>
+                }
+                else if (Session["ProfessionalPageID"] != null)
+                {
+            <div class="side">
+                @{string link = "/ProfessionalPages/Details/" + Model.ProfessionalPageID;}
+                <a href=@link>Back to professional page</a> <br /><br />
+                <a href="/HomePage/Home">Back to home page</a>
+            </div>
+                }
+                else
+                {
+                    <div class="side">
+                        <a href="/HomePage/Home">Back to home page</a>
+                    </div>
+                }
 
             }
-
-            <!--commetns fo post-->
-            @Html.Hidden("PostID", Model.PostID)
-
-            @Html.Editor("PostCommentContent", new { placeholder = "Write a comment" })
-
-            <input type="submit" placeholder="Send your rate" class="btn btn-default" /><br />
-
-
         </div>
-
-
-
-        @{
-            string user = Session["UserName"].ToString();
-            var isP = db.Users.Where(d => d.UserName == userN).ToList().ElementAt(0).isProfessional;
-            var isC = db.ProfessionalPages.Where(d => d.ProfessionalPageID == Model.ProfessionalPageID).ToList().ElementAt(0);
-
-            if (isP && isC.UserName == user)
-            {
-        <div class="side">
-            @Html.ActionLink("Delete comments from this post", "Edit", new { id = Model.PostID }) |
-            @{ string link = "/ProfessionalPages/Details/" + Model.ProfessionalPageID;}
-            <a href=@link>Back to my professional page</a>
-            <a href="/HomePage/Home">Back to home page</a>
-        </div>
-            }
-            else if (Session["ProfessionalPageID"] != null)
-            {
-                <div class="side">
-                    @{string link = "/ProfessionalPages/Details/" + Model.ProfessionalPageID;}
-                    <a href=@link>Back to professional page</a>
-                    <a href="/HomePage/Home">Back to home page</a>
-                </div>
-            }
-            else
-            {
-                <div class="side">
-                    <a href="/HomePage/Home">Back to home page</a>
-                </div>
-            }
-
-        }
     </div>
-   
 }
 @{ 
     Session["PostID"] = Model.PostID;

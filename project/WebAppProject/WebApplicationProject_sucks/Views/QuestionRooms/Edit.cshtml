@@ -79,13 +79,14 @@
     <!-- submit button func-->
     <script>
         function mySave() {
-            var myContent = tinymce.get("mytextarea").getContent();               
+            var myContent = tinymce.get("mytextarea").getContent();
             document.getElementById("Title").value = myContent;
         }
 
     </script>
 
     <link rel="stylesheet" href="~/Content/creatPost.css?ver=<?php echo rand(111,999)?" type="text/css" />
+    <link rel="stylesheet" href="~/Content/Register.css?ver=<?php echo rand(111,999)?" type="text/css" />
     <meta name="viewport" content="width=device-width" />
     <title>Question Room</title>
 </head>
@@ -93,40 +94,41 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>QuestionRoom</h4>
-
-
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        <!--Used to tell the edit function which room shall be edited-->
-        <!--we dont need to pass the categories since its recorded in another table!-->
-
-        @Html.HiddenFor(Model => Model.QuestionRoomID)
-        @Html.HiddenFor(Model => Model.CreatorName)
+        <h4>Question Room</h4>
+        <div class="form-horizontal">
 
 
-        <div class="form-group">
-            <!--text editor , tinymce-->
 
-            <textarea id="mytextarea" name="mytextarea">@Html.Raw(Model.Title)</textarea>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <!--Used to tell the edit function which room shall be edited-->
+            <!--we dont need to pass the categories since its recorded in another table!-->
+
+            @Html.HiddenFor(Model => Model.QuestionRoomID)
+            @Html.HiddenFor(Model => Model.CreatorName)
+
+
+            <div class="form-group">
+                <!--text editor , tinymce-->
+
+                <textarea id="mytextarea" name="mytextarea">@Html.Raw(Model.Title)</textarea>
+
+            </div>
+            <!--question content-->
+            <div class="form-group">
+                <!--the name is already set to Title-->
+                <label>Edit the title</label>
+                @Html.HiddenFor(model => model.Title)
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" onclick="mySave()" class="btn btn-default" />
+                @{ string link = "../Details/" + Session["QuestionRoomID"]}
+                <a href=@link>Cancel</a>
+            </div>
+
 
         </div>
-        <!--question content-->
-        <div class="form-group">
-            <!--the name is already set to Title-->
-            @Html.HiddenFor(model => model.Title)
-        </div>
-
-        <div class="form-group">
-            <input type="submit" value="Create" onclick="mySave()" class="btn btn-default" />
-            @{ string link= "../Details/" +Session["QuestionRoomID"]}
-            <a href=@link>Cancel</a>
-        </div>
-
-        
-    </div>
-                }
+    }
 </body>
 </html>
