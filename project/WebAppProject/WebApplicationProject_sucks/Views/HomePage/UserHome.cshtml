@@ -26,7 +26,7 @@
             <div class="Title" value="@item.Title"></div>
             <div class="Content" value="@item.Content"></div>
             <div class="Date" value=@item.Date></div>
-            <div class="Date" value=@item.Date></div>
+            <div class="Name" value=@item.CreatorName></div>
         }
     }
 
@@ -43,34 +43,7 @@
                 <br>
             </div>
 
-            <ul class="allPost" id="charactersList">
-                @{
-                    <!--
-                    --the statisc segestion of Qroom and posts
-                    -->
-                    var user = db.Users.Find(Session["UserName"]);
-                    var Intrest = user.Interests.OrderBy(i => i.LastTouched).ThenBy(i => i.NumOfVisits);
-                    foreach (var item in Intrest)
-                    {
-
-                        var Qrooms = db.QuestionRooms.Where(q => ((q.Categories.Where(c => c.CategoryName == item.CategoryName)).Count() > 0)).ToList();
-                        foreach (var iteam2 in Qrooms)
-                        {
-                            <!--each Qroom-->
-                            <li class="post">
-                                @{string linkToQR = "../QuestionRooms/Details/" + iteam2.QuestionRoomID;}
-                                <a href=@linkToQR>
-                                    <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
-                                    <h2>@Html.Raw(iteam2.Title)</h2>
-                                    <h5>publish date , @iteam2.DatePublished.Month.@iteam2.DatePublished.Day.@iteam2.DatePublished.Year</h5>
-                                </a>
-                            </li>
-                        }
-
-                    }
-                }
-
-            </ul>
+            <ul class="allPost" id="charactersList"></ul>
         </div>
 
     </div>

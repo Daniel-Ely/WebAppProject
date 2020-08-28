@@ -1,7 +1,7 @@
 ﻿//parse the data from view
 
-var professionList = document.getElementsByName('ProfessionName');
-var professionList = document.getElementsByName('ProfessionCount');
+var professionData = document.getElementsByName('ProfessionName');
+var countData = document.getElementsByName('ProfessionCount');
 
 
 var data = [];
@@ -9,9 +9,8 @@ var data = [];
 // set "dict" data
 for (var i = 0; i < professionData.length; i++) {
     data.push({
-        Profession: professionData.item(i).nodeValue,
-        Count: countData.item(i).nodeValue
-        //count: countData.item(i).attributes.getNamedItem("value").nodeValue,
+        Profession: professionData.item(i).attributes.getNamedItem("value").nodeValue,
+        Count: countData.item(i).attributes.getNamedItem("value").nodeValue,
     })
 }
 
@@ -30,8 +29,6 @@ var svg = d3.select("#my_BarViz")
     .append("g")
     .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
-
-
 
 
     // sort data

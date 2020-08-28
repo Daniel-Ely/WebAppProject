@@ -76,7 +76,7 @@ body {
 /* Main column */
 .main {
     flex: 70%;
-    padding: 10%;
+    padding: 2px;
     margin: 0 auto;
     text-align: center;
     background-color: white;
@@ -167,6 +167,7 @@ img {
         color: black;
         text-align: center;
         padding: 14px 20px;
+        padding-right:1px;
         text-decoration: none;
         align-self: center;
         width: 40%;
@@ -232,27 +233,36 @@ img {
     --
 */
 #charactersList {
-    padding-inline-start: 0;
-    display: inline-grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    grid-gap: 20px;
+    width:inherit;
+    display:grid;
+    padding-top:2px;
+    padding:5px;
+    grid-gap:5px;
     text-decoration:none;
+    background-color:white;
 }
-.character > img {
-    background-color:cadetblue;
-    width:30%;
-    max-height: 100px;
+.character img {
+    width: inherit;
+    object-fit: cover;
+    background-color: darkslategrey;
+}
+.character a {
+    width: inherit;
+    text-decoration: none;
+    color:dimgray;
+}
+.character h2 {
+   color:black;
 }
 .character {
+    width: 200px;
     list-style-type: none;
     background-color: white;
     border-radius: 3px;
-    padding: 10px 20px;
     flex-direction: column;
     display: flex;
     box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.4);
     text-align: center;
-    text-decoration: none;
 }
 /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 700px) {

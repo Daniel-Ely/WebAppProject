@@ -54,8 +54,8 @@ const displayCharacters = (characters) => {
             return `
                             <li class="character">
                                <a href="../QuestionRooms/Details/${character.Id}">
+                                  <img src="${character.image}"></img>
                                    <h5>by ${character.Name}  ${character.Date}</h5>
-                                   <img src="${character.image}"></img>
                                     <h2>${character.Title}</h2>
                                      <p>${character.Content}</p>
                                 </a>
@@ -65,8 +65,8 @@ const displayCharacters = (characters) => {
                 return `
                             <li class="character">
                                 <a href="../Posts/Details/${character.Id}">
+                                    <img src="${character.image}"></img>  
                                    <h5>by ${character.Name}  ${character.Date}</h5>
-                                   <img src="${character.image}"></img>  
                                     <h2>${character.Title}</h2>
                                     <p>${character.Content}</p>
                                 </a>

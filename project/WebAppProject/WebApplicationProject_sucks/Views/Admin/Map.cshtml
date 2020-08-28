@@ -30,11 +30,8 @@
         // Initialize and add the map
         function initMap() {
             var bounds = new google.maps.LatLngBounds();
-            // The location of Uluru
-            var uluru = { lat: -25.344, lng: 131.036 };
-            // The map, centered at Uluru
-            var map = new google.maps.Map(
-                document.getElementById('map'), { zoom: 4, center: uluru });
+            // The map,
+            var map = new google.maps.Map( document.getElementById('map'));
      
             // Display multiple markers on a map
             var infoWindow = new google.maps.InfoWindow(), marker, i;
@@ -65,7 +62,7 @@
     * The key parameter will contain your own API key (which is not needed for this tutorial)
     * The callback parameter executes the initMap() function
     -->
-    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIA0D9YIyMHx-eOr9LmfU06OB9tGEhBcA&callback=initMap">
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5nv7F4qNvhiysPtgryNysdd0xUVqD5eo&callback=initMap">
     </script>
 </body>
 </html>
