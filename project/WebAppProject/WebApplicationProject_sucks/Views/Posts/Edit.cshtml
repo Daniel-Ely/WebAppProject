@@ -98,7 +98,7 @@
         @Html.AntiForgeryToken()
         
     <div class="form-horizontal">
-        <h4>Post</h4>
+        <h4>Delete comments</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @{ MyDB db = new MyDB();
@@ -154,7 +154,7 @@
     </div>
     }
     
-    @{ string link = "../Posts/Details/" + Session["PostID"];}
+    @{ string link = "../Details/" + Session["PostID"];}
     <a href=@link>Back to post</a>
 </body>
 </html>

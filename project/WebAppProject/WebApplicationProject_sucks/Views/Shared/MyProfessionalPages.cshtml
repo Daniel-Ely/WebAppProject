@@ -1,0 +1,54 @@
+﻿@model IEnumerable<WebApplicationProject_sucks.Models.ProfessionalPage>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function mySave() {
+            document.getElementById("FromMy").value = "true";
+        }
+    </script>
+    <meta name="viewport" content="width=device-width" />
+    <title>My Professional Pages</title>
+</head>
+<body>
+    @using (Html.BeginForm("FromMy", "Shared"))
+    {
+        @Html.AntiForgeryToken()
+
+    <p>
+        @Html.Hidden("FromMy")
+        <input type="submit" value="Create new" onclick="mySave()" class="btn btn-default" /><br />
+    </p>
+        <table class="table">
+            @{ string user = Session["UserName"].ToString();
+                MyDB db = new MyDB();
+                if (db.ProfessionalPages.Where(d => d.UserName == user) != null)
+                {
+                    foreach (var item in db.ProfessionalPages.Where(d => d.UserName == user).ToList())
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NameOfPage)
+                            </td>
+                            <td>
+
+                                @{ string link = "/ProfessionalPages/Details/" + item.ProfessionalPageID;}
+                                <a href=@link>Details</a>
+                            </td>
+
+
+                        </tr>
+                                        }
+                                    }
+            }
+        </table>
+        <a href="../HomePage/Home">Back to home page</a>
+                                    }
+    </body>
+</html>

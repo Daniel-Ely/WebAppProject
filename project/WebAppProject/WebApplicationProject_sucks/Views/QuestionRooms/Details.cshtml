@@ -121,10 +121,11 @@
                             <div class="tab-content">
                                 <div class="tab-pane active" id="comments-logout">
 
-
                                     <a class="pull-left" href="#">
-                                        <img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg" alt="profile">
+                                        <img class="media-object img-circle" src='@Url.Action("ShowImage", "Posts", new { UserName = item.UserName })' alt="profile">
                                     </a>
+
+
                                     <div class="media-body">
                                         <div class="well well-lg">
                                             <h4 class="media-heading text-uppercase reviews"> @Html.DisplayFor(modelItem => item.UserName) </h4>
@@ -170,8 +171,8 @@
 
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Send comment" onclick="mySave()" class="btn btn-default" /><br />
-                <a href="../QuestionRooms/Index">Back to question rooms</a><br />
-                <a href="../HomePage/Home">Back to home page</a>
+                <a href="../Index">Back to question rooms</a><br />
+                <a href="/HomePage/Home">Back to home page</a>
             </div>
 
         </div>

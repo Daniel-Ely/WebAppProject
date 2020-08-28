@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class=" titleOfPage">
-        @Html.DisplayFor(model => model.NameOfPage)
+        @Html.DisplayFor(model => model.NameOfPage) | By
         @Html.DisplayFor(model => model.UserName)
         <hr />
     </div>
@@ -61,10 +61,17 @@
                      @Html.ActionLink("Edit this professional page", "Edit", new { id = Model.ProfessionalPageID }) <br />
                      <a href="../../Posts/Create">Add a new post to your professional page</a><br />
                     @Html.ActionLink("Delete posts from this professional page", "Delete", new { id = Model.ProfessionalPageID }) <br />
-                    @Html.ActionLink("Back to all of my professional pages", "Index")
+                     <a href="/Shared/MyProfessionalPages">Back to my professional pages</a>
                 </div>
             }
-            
+            else 
+            {
+                 <div class="side">
+                     @Html.ActionLink("Back to professional pages", "Index")<br />
+                     <a href="/HomePage/Home">Back to home page</a>
+                 </div>
+            }
+
         }
 
 

@@ -131,21 +131,25 @@
 
             if (isP && isC.UserName == user)
             {
-                <div class="side">
-                    @Html.ActionLink("Edit", "Edit", new { id = Model.PostID }) |
-                    @Html.ActionLink("Back to your professional page", "Details", new { id = Model.ProfessionalPageID })
-                </div>
+        <div class="side">
+            @Html.ActionLink("Delete comments from this post", "Edit", new { id = Model.PostID }) |
+            @{ string link = "/ProfessionalPages/Details/" + Model.ProfessionalPageID;}
+            <a href=@link>Back to my professional page</a>
+            <a href="/HomePage/Home">Back to home page</a>
+        </div>
             }
             else if (Session["ProfessionalPageID"] != null)
             {
                 <div class="side">
-                    @Html.ActionLink("Back to professional page", "Details", new { id = Model.ProfessionalPageID })
+                    @{string link = "/ProfessionalPages/Details/" + Model.ProfessionalPageID;}
+                    <a href=@link>Back to professional page</a>
+                    <a href="/HomePage/Home">Back to home page</a>
                 </div>
             }
             else
             {
                 <div class="side">
-                    <a href="../HomePage/Home">Back to home page</a>
+                    <a href="/HomePage/Home">Back to home page</a>
                 </div>
             }
 

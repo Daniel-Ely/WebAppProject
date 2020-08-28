@@ -59,6 +59,9 @@ namespace WebApplicationProject_sucks.Controllers
                     db.PageToCategories.Add(new PageToCategory(professionalPage.ProfessionalPageID, selectedOptions[i]));
                 }
                 db.SaveChanges();
+                if (Session["FromMy"] != null)
+                    if (Session["FromMy"].ToString() == "true")
+                        return Redirect("/Shared/MyProfessionalPages");
                 return RedirectToAction("Index");
             }
 
@@ -87,7 +90,7 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProffesionalPageID,NameOfPage")] ProfessionalPage professionalPage)
+        public ActionResult Edit([Bind(Include = "ProfessionalPageID,NameOfPage")] ProfessionalPage professionalPage)
         {
             if (ModelState.IsValid)
             {
