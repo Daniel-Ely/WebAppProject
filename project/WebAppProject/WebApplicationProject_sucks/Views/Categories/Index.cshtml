@@ -35,9 +35,16 @@
     {
         <a href="../HomePage/FirstTimeInThisSystem">Back to create categories and professions</a>
     }
-    else if (Session["IsAdmin"].ToString()=="true")
+    else if (Session["IsAdmin"] != null)
     {
-        <a href="../HomePage/FirstTimeInThisSystem">Back to create categories and professions</a>
+        if (Session["IsAdmin"].ToString() == "true")
+        {
+            <a href="../HomePage/FirstTimeInThisSystem">Back to create categories and professions</a>
+        }
+        else
+        {
+            <a href="../HomePage/Home">Back to home page</a>
+        }
 
     }
     else

@@ -2087,6 +2087,7 @@
     <Compile Include="Controllers\QuestionRoomsController.cs" />
     <Compile Include="Controllers\QuestRoomCommentsController.cs" />
     <Compile Include="Controllers\RoomToCategoriesController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\UserToCategoriesController.cs" />
@@ -2226,6 +2227,7 @@
     <Content Include="Views\HomePage\FirstTimeInThisSystem.cshtml" />
     <Content Include="Views\Locations\Create.cshtml" />
     <Content Include="Views\HomePage\ChoiseBetweenAdminToUser.cshtml" />
+    <Content Include="Views\Shared\MyProfessionalPages.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

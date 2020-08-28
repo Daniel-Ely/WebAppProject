@@ -9,39 +9,45 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/creatPost.css?ver=<?php echo rand(111,999)?" type="text/css" />
+    <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
+    <link rel="stylesheet" href="~/Content/Register.css?ver=<?php echo rand(111,999)?" type="text/css" />
     <title>Index</title>
 </head>
 <body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.User.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NameOfPage)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NameOfPage)
-            </td>
-            <td>
-               
-                @Html.ActionLink("Details", "Details", new { id=item.ProfessionalPageID }) 
-            </td>
-        </tr>
-    }
-    
-    </table>
-    <a href="../HomePage/Home">Back to home page</a>
+    <div class="form-horizontal">
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NameOfPage)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NameOfPage)
+                    </td>
+                    <td>
+
+                        @Html.ActionLink("Details", "Details", new { id = item.ProfessionalPageID })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <a href="../HomePage/Home">Back to home page</a>
+        </div>
 </body>
 </html>

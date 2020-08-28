@@ -85,6 +85,7 @@
 
     <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
     <link rel="stylesheet" href="~/Content/creatPost.css?ver=<?php echo rand(111,999)?" type="text/css" />
+    <link rel="stylesheet" href="~/Content/Register.css?ver=<?php echo rand(111,999)?" type="text/css" />
     <meta name="viewport" content="width=device-width" />
     <title>Question Room</title>
 </head>
@@ -92,46 +93,47 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
         <h4>Question Room</h4>
+        <div class="form-horizontal">
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            <!--text editor , tinymce-->
-            <textarea id="mytextarea" name="mytextarea">Write your question...</textarea>
-            <!--question content-->
-            <!--the name is already set to Title-->
-            @Html.HiddenFor(model => model.Title)
-        </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <!--creator name-->
-        <div class="form-group">
-            @Html.HiddenFor(model => model.CreatorName, new { @Value = Session["UserName"] })
-        </div>
+            <div class="form-group">
+                <!--text editor , tinymce-->
+                <label>Write the question or the subject</label>
+                <textarea id="mytextarea" name="mytextarea">Write your question...</textarea>
+                <!--question content-->
+                <!--the name is already set to Title-->
+                @Html.HiddenFor(model => model.Title)
+            </div>
 
-        <div class="form-group">
-            @{
-                MyDB db = new MyDB();
+            <!--creator name-->
+            <div class="form-group">
+                @Html.HiddenFor(model => model.CreatorName, new { @Value = Session["UserName"] })
+            </div>
 
-                List<SelectListItem> listOfCategories = new List<SelectListItem>();
-                foreach (var item in db.Categories)
-                {
-                    listOfCategories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
+            <div class="form-group">
+                @{
+                    MyDB db = new MyDB();
+
+                    List<SelectListItem> listOfCategories = new List<SelectListItem>();
+                    foreach (var item in db.Categories)
+                    {
+                        listOfCategories.Add(new SelectListItem { Text = item.Name, Value = item.Name });
+                    }
                 }
-            }
-            <!--selected categories-->
-            <label>Select the categories for this question room </label><br>
-            @Html.ListBox("selectedOptions", listOfCategories)
-        </div>
+                <!--selected categories-->
+                <label>Select the categories for this question room </label><br>
+                @Html.ListBox("selectedOptions", listOfCategories)
+            </div>
 
 
-        <div class="form-group">
-            <input type="submit" value="Create" onclick="mySave()" class="btn btn-default" /><br />
-            <a href="../QuestionRooms/Index">Cancel</a>
+            <div class="form-group">
+                <input type="submit" value="Create" onclick="mySave()" class="btn btn-default" /><br />
+                <a href="../Index">Cancel</a>
+            </div>
         </div>
-    </div>
     }
 
 

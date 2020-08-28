@@ -89,6 +89,7 @@
 
     <link rel="stylesheet" href="~/Content/creatPost.css?ver=<?php echo rand(111,999)?" type="text/css" />
     <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
+    <link rel="stylesheet" href="~/Content/Register.css?ver=<?php echo rand(111,999)?" type="text/css" />
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
 </head>
@@ -96,6 +97,7 @@
     @using (Html.BeginForm("DeleteQR", "QuestionRooms"))
     {
         @Html.AntiForgeryToken()
+    <div class="form-horizontal">
         <p>
             @Html.ActionLink("Create New", "Create")
         </p>
@@ -128,7 +130,9 @@
             }
 
         </table>
-    }
-    <a href="../HomePage/Home">Back to home page</a>
+        <a href="../HomePage/Home">Back to home page</a>
+        </div>
+        }
+
 </body>
 </html>

@@ -89,51 +89,46 @@
 
     <link rel="stylesheet" href="~/Content/creatPost.css?ver=<?php echo rand(111,999)?" type="text/css" />
     <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
+    <link rel="stylesheet" href="~/Content/Register.css?ver=<?php echo rand(111,999)?" type="text/css" />
     <meta name="viewport" content="width=device-width" />
 </head>
 <body>
-    
-    <div>
 
-        @Html.DisplayFor(model => model.User.FirstName)
+
+
+
+    @using (Html.BeginForm("DeletePost", "ProfessionalPages"))
+    {
+        @Html.AntiForgeryToken()
 
         @Html.DisplayFor(model => model.NameOfPage)
-        <hr />
+        <div class="form-horizontal">
 
-        @using (Html.BeginForm("DeletePost", "ProfessionalPages"))
-        {
-            @Html.AntiForgeryToken()
+            @{ MyDB db = new MyDB();
+                int id = Int32.Parse(Session["ProfessionalPageID"].ToString());}
+            @foreach (var item in db.Posts.Where(d => d.ProfessionalPageID == id).ToList())
+            {
 
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-10 col-sm-offset-1" id="logout">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="comments-logout">
 
-            <div class="form-horizontal">
-              
-                @{ MyDB db = new MyDB();
-                    int id = Int32.Parse(Session["ProfessionalPageID"].ToString());}
-                @foreach (var item in db.Posts.Where(d => d.ProfessionalPageID == id).ToList())
-                {
+                                    <a class="pull-left" href="#">
+                                        <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
+                                    </a>
 
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-10 col-sm-offset-1" id="logout">
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="comments-logout">
+                                    <div class="media-body">
+                                        <div class="well well-lg">
+                                            <h3>@item.Title</h3>
+                                            <h5>publish date , @item.Date.Month .@item.Date.Day .@item.Date.Year</h5>
+                                            <p>@item.Description</p>
+                                            <br />
 
-                                        <a class="pull-left" href="#">
-                                            <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
-                                        </a>
-
-                                        <div class="media-body">
-                                            <div class="well well-lg">
-                                                <h3>@item.Title</h3>
-                                                <h5>publish date , @item.Date.Month .@item.Date.Day .@item.Date.Year</h5>
-                                                <p>@item.Description</p>
-                                                <br />
-                                                
-                                                @Html.HiddenFor(model => model.ProfessionalPageID, Session["ProfessionalPageID"])
-                                                @Html.Hidden("PostID")
-                                                <input type="submit" value=" Delete this comment" id=@item.PostID onclick="Delete(this)" />
-
-                                            </div>
+                                            @Html.HiddenFor(model => model.ProfessionalPageID, Session["ProfessionalPageID"])
+                                            @Html.Hidden("PostID")
+                                            <input type="submit" value=" Delete this post" id=@item.PostID onclick="Delete(this)" />
 
                                         </div>
 
@@ -147,11 +142,14 @@
 
                     </div>
 
-                    }
-            </div>
-          }
+                </div>
+
+            }
+            @{ string link = "../Details/" + Session["ProfessionalPageID"];}
+            <a href=@link>Back to my professional page</a>
         </div>
-    @{ string link = "../ProfessionalPages/Details/" + Session["ProfessionalPageID"];}
-    <a href=@link>Back to my professional page</a>
+    }
+
+
 </body>
 </html>

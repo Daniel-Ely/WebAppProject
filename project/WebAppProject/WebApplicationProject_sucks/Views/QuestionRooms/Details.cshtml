@@ -11,6 +11,72 @@
 
     <script src="~/PlugIn/tinymce/tinymce.min.js"></script>
     <script src="~/PlugIn/tinymce/jquery.tinymce.min.js"></script>
+    <!--tinymce init-->
+    <script>
+        tinymce.init({
+            selector: '#mytextarea',
+            /* theme of the editor */
+
+
+            /* width and height of the editor */
+            width: "100%",
+            height: 300,
+
+            /* display statusbar*/
+            statubar: true,
+
+            /* plugin */
+            plugins: [
+                "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                "save table contextmenu directionality emoticons template paste textcolor"
+            ],
+
+            /* toolbar */
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
+
+            /* style */
+            style_formats: [
+                {
+                    title: "Headers", items: [
+                        { title: "Header 1", format: "h1" },
+                        { title: "Header 2", format: "h2" },
+                        { title: "Header 3", format: "h3" },
+                        { title: "Header 4", format: "h4" },
+                        { title: "Header 5", format: "h5" },
+                        { title: "Header 6", format: "h6" }
+                    ]
+                },
+                {
+                    title: "Inline", items: [
+                        { title: "Bold", icon: "bold", format: "bold" },
+                        { title: "Italic", icon: "italic", format: "italic" },
+                        { title: "Underline", icon: "underline", format: "underline" },
+                        { title: "Strikethrough", icon: "strikethrough", format: "strikethrough" },
+                        { title: "Superscript", icon: "superscript", format: "superscript" },
+                        { title: "Subscript", icon: "subscript", format: "subscript" },
+                        { title: "Code", icon: "code", format: "code" }
+                    ]
+                },
+                {
+                    title: "Blocks", items: [
+                        { title: "Paragraph", format: "p" },
+                        { title: "Blockquote", format: "blockquote" },
+                        { title: "Div", format: "div" },
+                        { title: "Pre", format: "pre" }
+                    ]
+                },
+                {
+                    title: "Alignment", items: [
+                        { title: "Left", icon: "alignleft", format: "alignleft" },
+                        { title: "Center", icon: "aligncenter", format: "aligncenter" },
+                        { title: "Right", icon: "alignright", format: "alignright" },
+                        { title: "Justify", icon: "alignjustify", format: "alignjustify" }
+                    ]
+                }
+            ]
+        });
+    </script>
     <!-- submit button func-->
     <!--question content-->
     <script>
@@ -25,97 +91,102 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="~/Content/Comment.css?ver=<?php echo rand(111,999)?" type="text/css" />
     <link rel="stylesheet" href="~/Content/creatPost.css?ver=<?php echo rand(111,999)?" type="text/css" />
+    <link rel="stylesheet" href="~/Content/Register.css?ver=<?php echo rand(111,999)?" type="text/css" />
 
 </head>
 <body>
 
     @using (Html.BeginForm("CreateComment", "QuestionRooms"))
-    { 
-    
+    {
+
         @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="row">
-
-
         <div class="CreatorName">
-            <h4> @Html.Raw(Model.Title)</h4>
-            <h6>@Html.DisplayFor(model => model.CreatorName)</h6>
-        </div>
-        <hr />
-        <div class="main">
+                    <h4> @Html.Raw(Model.Title)</h4> | By
+                    <h6>@Html.DisplayFor(model => model.CreatorName)</h6>
+                </div>
+                <hr />
 
-            @{ MyDB db = new MyDB();}
-            <!--Displaying all the comments in the room-->
-            @foreach (var item in db.QustionRoomComments.Where(d => d.RoomID == Model.QuestionRoomID))
-            {
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-10 col-sm-offset-1" id="logout">
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="comments-logout">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
 
 
-                                    <a class="pull-left" href="#">
-                                        <img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg" alt="profile">
-                                    </a>
-                                    <div class="media-body">
-                                        <div class="well well-lg">
-                                            <h4 class="media-heading text-uppercase reviews"> @Html.DisplayFor(modelItem => item.UserName) </h4>
-                                            <ul class="media-date text-uppercase reviews list-inline">
-                                                <li class="dd">@Html.DisplayFor(modelItem => item.Date.Day)</li>
-                                                <li class="mm">@Html.DisplayFor(modelItem => item.Date.Month)</li>
-                                                <li class="aaaa">@Html.DisplayFor(modelItem => item.Date.Year)</li>
-                                            </ul>
-                                            <p class="media-comment">
-                                                @Html.Raw(item.Content)
+                
+                <div class="main">
 
-                                            </p>
+                    @{ MyDB db = new MyDB();}
+                    <!--Displaying all the comments in the room-->
+                    @foreach (var item in db.QustionRoomComments.Where(d => d.RoomID == Model.QuestionRoomID))
+                    {
 
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-10 col-sm-offset-1" id="logout">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="comments-logout">
+
+                                            <a class="pull-left" href="#">
+                                                <img class="media-object img-circle" src='@Url.Action("ShowImage", "Posts", new { UserName = item.UserName })' alt="profile">
+                                            </a>
+
+
+                                            <div class="media-body">
+                                                <div class="well well-lg">
+                                                    <h4 class="media-heading text-uppercase reviews"> @Html.DisplayFor(modelItem => item.UserName) </h4>
+                                                    <ul class="media-date text-uppercase reviews list-inline">
+                                                        <li class="dd">@Html.DisplayFor(modelItem => item.Date.Day)</li>
+                                                        <li class="mm">@Html.DisplayFor(modelItem => item.Date.Month)</li>
+                                                        <li class="aaaa">@Html.DisplayFor(modelItem => item.Date.Year)</li>
+                                                    </ul>
+                                                    <p class="media-comment">
+                                                        @Html.Raw(item.Content)
+
+                                                    </p>
+
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
+                    }
+
+
+                    <!--room ID-->
+                    @Html.Hidden("RoomID", Model.QuestionRoomID)
+
+                    <div class="form-group">
+                        <!--text editor , tinymce-->
+
+                        <textarea id="mytextarea" name="mytextarea">Add a comment...</textarea>
+                        <!--comment content-->
+                        <!--the name is already set to Title-->
+
+                        @Html.Hidden("CommentContent", new { @id = "CommentContent" })
+                    </div>
+
+                    <!--creator name-->
+                    <div class="form-group">
+                        @Html.Hidden("CommentCreator", Session["UserName"])
+                    </div>
+
+
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Send comment" onclick="mySave()" class="btn btn-default" /><br />
+                        <a href="../Index">Back to question rooms</a><br />
+                        <a href="/HomePage/Home">Back to home page</a>
+                    </div>
+
+                </div>
+                @{ Session["QuestionRoomID"] = Model.QuestionRoomID;}
+
+
+
+            </div>
+            </div>
             }
 
-
-            <!--room ID-->
-            @Html.Hidden("RoomID", Model.QuestionRoomID)
-
-            <div class="form-group">
-                <!--text editor , tinymce-->
-
-                <textarea id="mytextarea" name="mytextarea">Add a comment...</textarea>
-                <!--comment content-->
-                <!--the name is already set to Title-->
-
-                @Html.Hidden("CommentContent", new { @id = "CommentContent" })
-            </div>
-
-            <!--creator name-->
-            <div class="form-group">
-                @Html.Hidden("CommentCreator", Session["UserName"])
-            </div>
-
-
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Send comment" onclick="mySave()" class="btn btn-default" /><br />
-                <a href="../QuestionRooms/Index">Back to question rooms</a><br />
-                <a href="../../HomePage/Home">Back to home page</a>
-            </div>
-
-        </div>
-        @{ Session["QuestionRoomID"] = Model.QuestionRoomID;}
-
-        
-
-    </div>
-      
-    }
-
-</body>
+    </body>
 </html>
