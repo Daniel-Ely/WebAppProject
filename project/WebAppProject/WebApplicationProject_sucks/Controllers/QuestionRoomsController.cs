@@ -161,6 +161,7 @@ namespace WebApplicationProject_sucks.Controllers
 
         public ActionResult DeleteQR([Bind(Include = "QuestionRoomID")] QuestionRoom qr)
         {
+            MyDB db = new MyDB();
             if (qr.QuestionRoomID == 0)
                 return Redirect("/QuestionRooms/Index");
             foreach (var item in db.QustionRoomComments.Where(d => d.RoomID == qr.QuestionRoomID).ToList())

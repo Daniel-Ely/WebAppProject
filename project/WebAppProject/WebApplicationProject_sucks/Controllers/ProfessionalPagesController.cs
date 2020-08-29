@@ -171,6 +171,7 @@ namespace WebApplicationProject_sucks.Controllers
 
         public ActionResult DeletePost([Bind(Include = "PostID,ProfessionalPageID")] Post p)
         {
+            MyDB db = new MyDB();
             if (p.PostID==0 || p.ProfessionalPageID==0)
                 return Redirect("../ProfessionalPages/Edit/" + p.ProfessionalPageID);
             foreach(var item in db.PostComments.Where(d=>d.PostID==p.PostID).ToList())

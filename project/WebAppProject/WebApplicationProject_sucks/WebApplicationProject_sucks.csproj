@@ -2073,7 +2073,6 @@
     <Compile Include="Attributes\Password.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
-    <Compile Include="Controllers\FirstController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\PageToCategoriesController.cs" />
@@ -2145,7 +2144,6 @@
     <Content Include="Views\ProfessionalPages\Edit.cshtml" />
     <Content Include="Views\ProfessionalPages\Index.cshtml" />
     <Content Include="Views\QuestionRooms\Create.cshtml" />
-    <Content Include="Views\QuestionRooms\Delete.cshtml" />
     <Content Include="Views\QuestionRooms\Details.cshtml" />
     <Content Include="Views\QuestionRooms\Edit.cshtml" />
     <Content Include="Views\QuestionRooms\Index.cshtml" />
@@ -2167,10 +2165,6 @@
     <Content Include="Views\PageToCategories\Edit.cshtml" />
     <Content Include="Views\PageToCategories\Index.cshtml" />
     <Content Include="Views\PostComments\Create.cshtml" />
-    <Content Include="Views\PostComments\Delete.cshtml" />
-    <Content Include="Views\PostComments\Details.cshtml" />
-    <Content Include="Views\PostComments\Edit.cshtml" />
-    <Content Include="Views\PostComments\Index.cshtml" />
     <Content Include="Views\PostToCategories\Create.cshtml" />
     <Content Include="Views\PostToCategories\Delete.cshtml" />
     <Content Include="Views\PostToCategories\Details.cshtml" />
@@ -2202,7 +2196,6 @@
     <Content Include="Views\ProfessionalPendings\Edit.cshtml" />
     <Content Include="Views\ProfessionalPendings\Index.cshtml" />
     <Content Include="Views\Posts\Create.cshtml" />
-    <Content Include="Views\Posts\Delete.cshtml" />
     <Content Include="Views\Posts\Details.cshtml" />
     <Content Include="Views\Posts\Edit.cshtml" />
     <Content Include="Views\Posts\Index.cshtml" />
