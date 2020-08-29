@@ -313,27 +313,24 @@
                                             var Mcount = db.Users.Where(d => d.Gender == "Male").Count();
                                             var Fcount = db.Users.Where(d => d.Gender == "Female").Count();
                                             var Ocount = db.Users.Where(d => d.Gender == "Other").Count();
-                                        
-                                    <div class="pieChartColor" style="background-color:#98abc5; white-space: nowrap;"></div>
-                                        <b id="Male" name="Male" value=@Mcount>Male: @Mcount</b><br>
-                                   
+                                      
+                                                <div class="pieChartColor" style="background-color:#98abc5; "></div>
+                                                <b id="Male" name="Male" value=@Mcount>Male: @Mcount</b><br>
+                                                                                  
+                                                <div class="pieChartColor" style="background-color:#8a89a6; "> </div>
+                                                <b id="Female" name="Female" value=@Fcount>Female: @Fcount</b><br>
+                                                                                   
+                                                <div class="pieChartColor" style="background-color:#7b6888; "></div>
+                                                <b id="Other" name="Other" value=@Ocount>Other: @Ocount</b>
+                                           
 
-                                    <div class="pieChartColor" style="background-color:#8a89a6; white-space: nowrap;"> </div>
-                                        <b id="Female" name="Female" value=@Fcount>Female: @Fcount</b><br>
-                                   
-
-                                    <div class="pieChartColor" style="background-color:#7b6888; white-space: nowrap;"></div>
-                                        <b id="Other" name="Other" value=@Ocount>Other: @Ocount</b>
-                                    
-
-
-                                            //pie chart
+                                                //pie chart
                                                 <div id="my_dataviz"></div>
 
 
                                                 <script src="~/Scripts/UserSexPie.js"></script>
-                                            }
-                                        }
+                                                }
+                                                }
 
 
                                                 <hr>
