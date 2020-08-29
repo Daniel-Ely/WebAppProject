@@ -314,3 +314,6 @@ header {
 footer {
     color: #0f485a;
 }
+ul{
+    column-count:3;
+}
