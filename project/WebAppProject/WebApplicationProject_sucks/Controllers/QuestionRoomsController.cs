@@ -20,7 +20,7 @@ namespace WebApplicationProject_sucks.Controllers
         {
             return View(db.QuestionRooms.ToList());
         }
-       
+
         // GET: QuestionRooms/Details/5
         [UserActivityFilter]
         public ActionResult Details(int? id)
@@ -48,15 +48,15 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Title,CreatorName")] QuestionRoom questionRoom,string[]selectedOptions)
+        public ActionResult Create([Bind(Include = "Title,CreatorName")] QuestionRoom questionRoom, string[] selectedOptions)
         {
-   
+
             if (ModelState.IsValid)
             {
                 questionRoom.QuestionRoomID = db.QuestionRooms.Count();
                 for (int i = 0; i < selectedOptions.Length; i++)
                 {//MtM of category-room relationship 
-                    
+
                     db.RoomToCategories.Add(new RoomToCategory(questionRoom.QuestionRoomID, selectedOptions[i]));
                 }
 
@@ -72,7 +72,7 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateInput(false)]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateComment(string RoomID,string CommentContent,string CommentCreator)
+        public ActionResult CreateComment(string RoomID, string CommentContent, string CommentCreator)
         {
             if (CommentContent != null)
             {
@@ -83,7 +83,7 @@ namespace WebApplicationProject_sucks.Controllers
             }
 
             return Redirect("../QuestionRooms/Details/" + Int32.Parse(RoomID));
-           
+
         }
 
 
@@ -110,7 +110,7 @@ namespace WebApplicationProject_sucks.Controllers
         public ActionResult Edit([Bind(Include = "QuestionRoomID,Title,CreatorName")] QuestionRoom questionRoom)
         {
             if (ModelState.IsValid)
-            {              
+            {
                 db.Entry(questionRoom).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -156,8 +156,8 @@ namespace WebApplicationProject_sucks.Controllers
         public ActionResult DeleteQR([Bind(Include = "QuestionRoomID")] QuestionRoom qr)
         {
             if (qr.QuestionRoomID == 0)
-                return Redirect("/QuestionRooms/Index" );
-            foreach(var item in db.QustionRoomComments.Where(d=>d.RoomID==qr.QuestionRoomID).ToList())
+                return Redirect("/QuestionRooms/Index");
+            foreach (var item in db.QustionRoomComments.Where(d => d.RoomID == qr.QuestionRoomID).ToList())
             {
                 db.QustionRoomComments.Remove(item);
             }
@@ -167,7 +167,9 @@ namespace WebApplicationProject_sucks.Controllers
             return Redirect("/QuestionRooms/Index");
 
         }
-
-
+        public ActionResult Cancel()
+        {
+            return View();
+        }
     }
 }

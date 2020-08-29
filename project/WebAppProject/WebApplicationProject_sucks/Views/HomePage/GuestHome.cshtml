@@ -27,7 +27,7 @@
                             {
                                 <li class="post">
                                     <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
-                                    <h2>@listOfQR.ElementAt(i).Title</h2>
+                                    <h2>@Html.Raw(listOfQR.ElementAt(i).Title)</h2>
                                     <h5>publish date , @listOfQR.ElementAt(i).DatePublished.Month.@listOfQR.ElementAt(i).DatePublished.Day.@listOfQR.ElementAt(i).DatePublished.Year</h5>
                                 </li>
                             }
