@@ -23,6 +23,7 @@ body {
     /* Increase the font size of the heading */
     .header h1 {
         font-size: 40px;
+        text-shadow: 3px 3px #000000;
     }
 
 /* Column container */
