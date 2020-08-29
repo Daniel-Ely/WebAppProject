@@ -5,33 +5,35 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-<script>
-    //SideBar
-    function open_side() {
-        document.getElementById("mySidebar").style.display = 'block';
-    }
-    function close_side() {
-        document.getElementById("mySidebar").style.display = "none";
-    }
-    //searchBar
-    function categoryFilter(e) {
-        document.getElementById("categoryName").value = e.id;
-    }
-    function contentTypeFilter(e) {
-        document.getElementById("contentType").value = e.id;
-    }
-    function creatorNameFilter(e) {
-        document.getElementById("creatorName").value = e.id;
-    }
-    //dropDown list
-    /* When the user clicks on the button,
-                        toggle between hiding and showing the dropdown content */
-    function dropDown() {
-        document.getElementById("myDropdown").style.display = 'block';
-    }
 
-</script>
+<head>
+    <script>
+        //SideBar
+        function open_side() {
+            document.getElementById("mySidebar").style.display = 'block';
+        }
+        function close_side() {
+            document.getElementById("mySidebar").style.display = "none";
+        }
+        //searchBar
+        function categoryFilter(e) {
+            document.getElementById("categoryName").value = e.id;
+        }
+        function contentTypeFilter(e) {
+            document.getElementById("contentType").value = e.id;
+        }
+        function creatorNameFilter(e) {
+            document.getElementById("creatorName").value = e.id;
+        }
+        //dropDown list
+        /* When the user clicks on the button,
+                            toggle between hiding and showing the dropdown content */
+        function dropDown() {
+            document.getElementById("myDropdown").style.display = 'block';
+        }
+
+    </script>
+    <link rel="stylesheet" href="~/Content/navbar.css?ver=<?php echo rand(111,999)?" type="text/css">
 </head>
 <body>
     @using (Html.BeginForm("FilterdSearch", "HomePage"))
@@ -61,47 +63,54 @@
                         <div id="myDropdown" class="dropdown-content">
                             <b>filter by category:</b>
                             <br>
-                            @{
-                                var round = 0;
-                                MyDB db = new MyDB();
-                                db.Categories.OrderBy(q => q.Name);
-                                foreach (var q in db.Categories)
-                                {
-                                    round++;
-                                    if (round == 3)
+                            <div class="filter-row">
+                                @{
+                                    var round = 0;
+                                    MyDB db = new MyDB();
+                                    db.Categories.OrderBy(q => q.Name);
+                                    foreach (var q in db.Categories)
                                     {
-                                        round = 0;
-                                        <br>
+                                        round++;
+                                        if (round == 3)
+                                        {
+                                            round = 0;
+                                            <br>
+                                        }
+                                        <input type="submit" class="mybtn" id=@q.Name onclick="categoryFilter(this)" value=@q.Name>
                                     }
-                                    <input type="submit" class="mybtn" id=@q.Name onclick="categoryFilter(this)" value=@q.Name>
                                 }
-                            }
-                            <br>
+                            </div>
+                            <br />
                             <b>filter by typeOf content:</b>
                             <br>
                             <div class="row">
-                                <input type="submit" class="mybtn" id="Question-rooms" onclick="contentTypeFilterFilter(this)" value="Question rooms">
-                                <input type="submit" class="mybtn" id="Post" onclick="contentTypeFilterFilter(this)" value="Post">
+                                <div class="filter-row">
+                                    <input type="submit" class="mybtn" id="Question-rooms" onclick="contentTypeFilterFilter(this)" value="Question rooms">
+                                    <input type="submit" class="mybtn" id="Post" onclick="contentTypeFilterFilter(this)" value="Post">
+                                </div>
                             </div>
+                            <br />
                             <b>filter by ContentCreators :</b>
                             <br>
-                            @{
-                                foreach (var q in db.Users)
-                                {
-                                    if (round == 3)
+                            <div class="filter-row">
+                                @{
+                                    foreach (var q in db.Users)
                                     {
-                                        round = 0;
-                                        <br>
+                                        if (round == 3)
+                                        {
+                                            round = 0;
+                                            <br>
+                                        }
+                                        <input type="submit" class="mybtn" id=@q.UserName onclick="creatorNameFilter(this)" value=@q.UserName>
+                                        round++;
                                     }
-                                    <input type="submit" class="mybtn" id=@q.UserName onclick="creatorNameFilter(this)" value=@q.UserName>
-                                    round++;
                                 }
-                            }
-                            @Html.Hidden("categoryName")
-                            @Html.Hidden("contentType")
-                            @Html.Hidden("creatorName")
+                                </div>
+                                @Html.Hidden("categoryName")
+                                @Html.Hidden("contentType")
+                                @Html.Hidden("creatorName")
+                            </div>
                         </div>
-                    </div>
                     <!-- end of SearchBar-->
                     <a href="" class="right" style="padding-left:2px">Welcome! @Session["UserName"]</a>
                 </div>
@@ -109,19 +118,22 @@
                 <div class="mySidebar" id="mySidebar" style="display:none">
                     <input type="button" onclick="close_side()" class="button" value="&times;">
                     <!-- the side panel with our info :)-->
-                    @{ string name = Session["UserName"].ToString();
-                        if (db.Users.Where(d => d.UserName == name).ToList().ElementAt(0).isProfessional)
-                        {
-                    <a href="#">@Html.ActionLink("Create an new professional page", "../ProfessionalPages/FromHome")</a><br />
-                            <a href="/Shared/MyProfessionalPages">My professional pages</a><br />
-                            <a href="">Show my views and others statistic data</a>
-                        }
-                    }
-                    <a href="../Categories/Index">Categories</a>
-                    <a href="../QuestionRooms/Index">Question Rooms</a>
-                    <a href="../ProfessionalPages/Index">Professional Pages</a>
+                    <nav>
+                        @{ string name = Session["UserName"].ToString();
+                            if (db.Users.Where(d => d.UserName == name).ToList().ElementAt(0).isProfessional)
+                            {
 
-                    <a href="#">@Html.ActionLink("Ask a new question", "../QuestionRooms/FromHome")</a>
+                                <a href="#">@Html.ActionLink("Create an new professional page", "../ProfessionalPages/FromHome")</a>
+                                <a href="/Shared/MyProfessionalPages">My professional pages</a>
+                                
+                            }
+                        }
+                        <a href="../Categories/Index">Categories</a>
+                        <a href="../QuestionRooms/Index">Question Rooms</a>
+                        <a href="../ProfessionalPages/Index">Professional Pages</a>
+
+                        <a href="#">@Html.ActionLink("Ask a new question", "../QuestionRooms/FromHome")</a>
+                    </nav>
                 </div>
 
             }

@@ -198,6 +198,7 @@ namespace WebApplicationProject_sucks.Controllers
 
         public ActionResult DeleteComment([Bind(Include = "PostID,PostCommentID")] PostComment pC)
         {
+            MyDB db = new MyDB();
             if (pC.PostCommentID == 0 || pC.PostID == 0)
                 return Redirect("../Posts/Edit/" + pC.PostID);
             PostComment postC = db.PostComments.Find(pC.PostCommentID);

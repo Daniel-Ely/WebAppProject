@@ -1,4 +1,12 @@
-﻿* {
+﻿@font-face {
+    font-family: 'Chilanka';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/chilanka-v6-latin-regular.woff2') format('woff2')
+}
+
+
+* {
     box-sizing: border-box;
 }
 
@@ -23,6 +31,7 @@ body {
     /* Increase the font size of the heading */
     .header h1 {
         font-size: 40px;
+        text-shadow: 3px 3px #06343b;
     }
 
 /* Column container */
@@ -289,4 +298,19 @@ img {
 }
 ul{
     list-style-type:none;
+}
+
+article p {
+    font-family: Chilanka;
+}
+
+aside{color:#0f485a;}
+section {
+    color: #0f485a;
+}
+header {
+    color: #0f485a;
+}
+footer {
+    color: #0f485a;
 }

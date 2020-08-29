@@ -14,7 +14,7 @@
     <link href="~/Content/AdminBootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <!-- Custom styles for this template-->
-    <link href="~/Content/AdminBootstrap/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/Content/AdminBootstrap/css/sb-admin-2.css?ver=<?php echo rand(111,999)?" rel="stylesheet">
     <!--D3 DATA VISUALIZATION PACKAGE, AS REQUESTED-->
     <script src="https://d3js.org/d3.v5.min.js"></script>
 </head>
@@ -313,65 +313,61 @@
                                             var Mcount = db.Users.Where(d => d.Gender == "Male").Count();
                                             var Fcount = db.Users.Where(d => d.Gender == "Female").Count();
                                             var Ocount = db.Users.Where(d => d.Gender == "Other").Count();
+                                      
+                                                <div class="pieChartColor" style="background-color:#98abc5; "></div>
+                                                <b id="Male" name="Male" value=@Mcount>Male: @Mcount</b><br>
+                                                                                  
+                                                <div class="pieChartColor" style="background-color:#8a89a6; "> </div>
+                                                <b id="Female" name="Female" value=@Fcount>Female: @Fcount</b><br>
+                                                                                   
+                                                <div class="pieChartColor" style="background-color:#7b6888; "></div>
+                                                <b id="Other" name="Other" value=@Ocount>Other: @Ocount</b>
+                                           
 
-                                            <svg width="20" height="20">
-                                                <rect width="20" height="20" style="fill:#98abc5;stroke-width:3;stroke:rgb(0,0,0)" />
-                                            </svg>
-                                            <b id="Male" name="Male" value=@Mcount>Male: @Mcount</b><br>
-
-                                            <svg width="20" height="20">
-                                                <rect width="20" height="20" style="fill:#8a89a6;stroke-width:3;stroke:rgb(0,0,0)" />
-                                            </svg>
-                                            <b id="Female" name="Female" value=@Fcount>Female: @Fcount</b><br>
-
-                                            <svg width="20" height="20">
-                                                <rect width="20" height="20" style="fill:#7b6888;stroke-width:3;stroke:rgb(0,0,0)" />
-                                            </svg>
-                                            <b id="Other" name="Other" value=@Ocount>Other: @Ocount</b>
-
-                                            //pie chart
-                                            <div id="my_dataviz"></div>
+                                                //pie chart
+                                                <div id="my_dataviz"></div>
 
 
-                                            <script src="~/Scripts/UserSexPie.js"></script>
-                                        }
-                                    }
+                                                <script src="~/Scripts/UserSexPie.js"></script>
+                                                }
+                                                }
 
-                                    <hr>
-                                </div>
-                            </div>
 
-                            <!-- Bar Chart -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Professions Count </h6>
-                                </div>
-                                <div class="card-body">
+                                                <hr>
+                                            </div>
+                                        </div>
 
-                                    @{
-                                        MyDB db2 = new MyDB();
+                                        <!-- Bar Chart -->
+                                        <div class="card shadow mb-4">
+                                            <div class="card-header py-3">
+                                                <h6 class="m-0 font-weight-bold text-primary">Professions Count </h6>
+                                            </div>
+                                            <div class="card-body">
 
-                                        if (db2 != null)
-                                        {
+                                                @{
+                                                    MyDB db2 = new MyDB();
 
-                                            var professionCount = db2.Professionals.GroupBy(g => g.Profession_Name).Select(g => new { Pro = g.Key, Count = g.Count() }).ToList();
-                                            foreach (var entry in professionCount)
-                                            {
-                                                <div name="ProfessionName" hidden="hidden" value=@entry.Pro></div>
-                                                <div name="ProfessionCount" hidden="hidden" value=@entry.Count></div>
-                                            }
-                                        
-                                            //bar chart
-                                        <div id="my_BarViz"></div>
-                                    
-                                        <script src="~/Scripts/ActivityStickGraph.js"></script>
-                                            }
-                                        }
+                                                    if (db2 != null)
+                                                    {
 
-                                    <hr>
-                                </div>
-                            </div>
-                        </div>
+                                                        var professionCount = db2.Professionals.GroupBy(g => g.Profession_Name).Select(g => new { Pro = g.Key, Count = g.Count() }).ToList();
+                                                        foreach (var entry in professionCount)
+                                                        {
+                                                            <div name="ProfessionName" hidden="hidden" value=@entry.Pro></div>
+                                                            <div name="ProfessionCount" hidden="hidden" value=@entry.Count></div>
+                                                        }
+
+                                                        //bar chart
+                                                        <div id="my_BarViz"></div>
+
+                                                        <script src="~/Scripts/ActivityStickGraph.js"></script>
+                                                    }
+                                                }
+
+                                                <hr>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
                         <!-- Donut Chart -->
