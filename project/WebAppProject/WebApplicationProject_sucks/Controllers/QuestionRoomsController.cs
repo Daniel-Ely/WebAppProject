@@ -24,7 +24,7 @@ namespace WebApplicationProject_sucks.Controllers
         public ActionResult FromHome()
         {
             Session["Cancel"] = "/HomePage/Home";
-            return View("/QuestionRoom/Create");
+            return Redirect("/QuestionRooms/Create");
         }
 
         // GET: QuestionRooms/Details/5
@@ -175,9 +175,13 @@ namespace WebApplicationProject_sucks.Controllers
         }
         public ActionResult Cancel()
         {
-            string path = Session["Cancel"].ToString();
-            if (path == "/HomePage/Home") return Redirect(path);
-            return Redirect("/QuestionRoom/Index");
+            if (Session["Cancel"] != null)
+            {
+                Session["Cancel"] = null;
+                 return Redirect("/HomePage/Home");
+            }
+           
+            return Redirect("/QuestionRooms/Index");
         }
     }
 }

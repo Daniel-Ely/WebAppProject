@@ -112,7 +112,7 @@
                     @{ string name = Session["UserName"].ToString();
                         if (db.Users.Where(d => d.UserName == name).ToList().ElementAt(0).isProfessional)
                         {
-                            <a href="../ProfessionalPages/Create">Create a new professional page</a><br />
+                    <a href="#">@Html.ActionLink("Create an new professional page", "../ProfessionalPages/FromHome")</a><br />
                             <a href="/Shared/MyProfessionalPages">My professional pages</a><br />
                             <a href="">Show my views and others statistic data</a>
                         }
@@ -121,7 +121,7 @@
                     <a href="../QuestionRooms/Index">Question Rooms</a>
                     <a href="../ProfessionalPages/Index">Professional Pages</a>
 
-                    <a href="#">@Html.ActionLink("Ask a new question", "../QuestionRooms/Create")</a>
+                    <a href="#">@Html.ActionLink("Ask a new question", "../QuestionRooms/FromHome")</a>
                 </div>
 
             }
