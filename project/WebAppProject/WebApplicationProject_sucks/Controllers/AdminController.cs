@@ -17,7 +17,8 @@ namespace WebApplicationProject_sucks.Controllers
         public ActionResult AdminStatistics()
         {
             return View();
-        }
+        }    
+
         public ActionResult myGragh()
         {
 
@@ -28,7 +29,7 @@ namespace WebApplicationProject_sucks.Controllers
 
             return View();
         }
-
+        
         public ActionResult ConfirmPendings(IEnumerable<string> Pendings)
         {
             MyDB db = new MyDB();
