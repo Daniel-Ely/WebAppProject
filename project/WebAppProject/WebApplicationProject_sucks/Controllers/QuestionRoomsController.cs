@@ -21,6 +21,12 @@ namespace WebApplicationProject_sucks.Controllers
             return View(db.QuestionRooms.ToList());
         }
 
+        public ActionResult FromHome()
+        {
+            Session["Cancel"] = "/HomePage/Home";
+            return View("/QuestionRoom/Create");
+        }
+
         // GET: QuestionRooms/Details/5
         [UserActivityFilter]
         public ActionResult Details(int? id)
@@ -169,7 +175,10 @@ namespace WebApplicationProject_sucks.Controllers
         }
         public ActionResult Cancel()
         {
-            return View();
+            string path = Session["Cancel"].ToString();
+            if (path == "/HomePage/Home") return Redirect(path);
+            return Redirect("/QuestionRoom/Index");
         }
     }
 }
+

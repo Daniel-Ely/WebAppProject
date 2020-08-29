@@ -22,7 +22,7 @@ namespace WebApplicationProject_sucks.Controllers
             var posts = db.Posts.Include(p => p.ProfessionalPage);
             return View(posts.ToList());
         }
-
+     
         // GET: Posts/Details/5
         public ActionResult Details(int? id)
         {
