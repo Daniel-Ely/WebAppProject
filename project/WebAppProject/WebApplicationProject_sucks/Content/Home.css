@@ -290,3 +290,8 @@ img {
 ul{
     list-style-type:none;
 }
+
+    article h2 {
+        border-radius: 50px 20px;
+        text-shadow: 4px 4px 5px #4c89ab;
+    }
