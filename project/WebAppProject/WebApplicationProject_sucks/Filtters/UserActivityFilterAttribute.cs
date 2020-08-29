@@ -10,9 +10,9 @@ namespace WebApplicationProject_sucks
 {
     public class UserActivityFilterAttribute : ActionFilterAttribute
     {
-        private MyDB db = new MyDB();
         public override void OnActionExecuting(ActionExecutingContext filterContext)//the fillter is activated after sending a comment to! -> comment increses the priority as well!!
         {
+            MyDB db = new MyDB();
             UsersController usersController = new UsersController();
             //
             //getting the Qroom/Post id and the current user
