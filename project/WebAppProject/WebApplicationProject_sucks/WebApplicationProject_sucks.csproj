@@ -2061,6 +2061,7 @@
     <Content Include="src\Owl family.png" />
     <Content Include="src\Owl.png" />
     <Content Include="src\QutionRoomOwl.png" />
+    <Content Include="src\videoplayback.mp4" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -22,6 +22,37 @@ namespace WebApplicationProject_sucks.Controllers
             return View(professionalPages.ToList());
         }
 
+        public ActionResult FromHome()
+        {
+            Session["Cancel"] = "/HomePage/Home";
+            return Redirect("/ProfessionalPages/Create");
+        }
+        public ActionResult Cancel()
+        {
+
+           if(Session["Cancel"]!=null)
+            {
+                Session["Cancel"] = null;
+                return Redirect("/HomePage/Home");
+
+            }
+            else if (Session["FromMy"] != null)
+            {
+                if (Session["FromMy"].ToString() == "true")
+                {
+                    Session["FromMy"] = null;
+                    return Redirect("/Shared/MyProfessionalPages");
+                }
+                else
+                {
+                    return Redirect("/ProfessionalPages/Index");
+                }
+            }
+                        else
+                        {
+                return Redirect("/ProfessionalPages/Index");
+                        }
+        }
         // GET: ProfessionalPages/Details/5
         public ActionResult Details(int? id)
         {
