@@ -1,4 +1,12 @@
-﻿* {
+﻿@font-face {
+    font-family: 'Chilanka';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/chilanka-v6-latin-regular.woff2') format('woff2')
+}
+
+
+* {
     box-sizing: border-box;
 }
 
@@ -291,7 +299,6 @@ ul{
     list-style-type:none;
 }
 
-    article h2 {
-        border-radius: 50px 20px;
-        text-shadow: 4px 4px 5px #4c89ab;
-    }
+article p {
+    font-family: Chilanka;
+}

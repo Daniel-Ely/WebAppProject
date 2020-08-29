@@ -12,26 +12,25 @@
         <div class="side">
             
             <article>
-                <canvas id="myCanvas" width="200" height="100" style="border:1px solid #5ff6f0;"></canvas>
-                <script>
-                    var ctx = document.getElementById("myCanvas").getContext("2d");
-                    var img = new Image();
-                    img.src = "/src/Owl.png";
-                    ctx.drawImage(img, 4, 4);
-                </script>
                 <header>
-                    <h2>About us...</h2>
+                    <canvas id="myCanvas" width="200" height="50" style="border:1px solid #4c89ab;"></canvas>
+                    <script>
+                        var c = document.getElementById("myCanvas");
+                        var ctx = c.getContext("2d");
+                        ctx.font = "20px Georgia";
+                        ctx.fillText("About us...", 60, 30);
+                    </script>
                 </header>
                 <video width="320" height="240" controls>
                     <source src="/src/videoplayback.mp4" type="video/mp4">
                 </video>
                 <section>
-                    <h4 >The Concept</h4>
+                    <h4>The Concept</h4>
                     <p>Soul Owl is a website which emphasizes the importance of mental health by providing its users the ability to ask questions in any topic. Our site consists of many professional users that  upload diverse content and advice the audience. Our professionals are carefully picked by the staff so you get the best reliable advices possible! </p>
                 </section>
 
                 <section>
-                    <h4 >The Creators</h4>
+                    <h4>The Creators</h4>
                     <p>We are a team of 3 who manage and run this website. This project is based on our thriving passion to link between people and make advices accessible to everyone!</p>
                 </section>
                 <aside>
@@ -40,7 +39,7 @@
                 <footer>
                     <p>© 2020 SoulOwl</p>
                 </footer>
-                
+
             </article>
         </div>
 
