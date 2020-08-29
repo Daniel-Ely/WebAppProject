@@ -5,33 +5,35 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-<script>
-    //SideBar
-    function open_side() {
-        document.getElementById("mySidebar").style.display = 'block';
-    }
-    function close_side() {
-        document.getElementById("mySidebar").style.display = "none";
-    }
-    //searchBar
-    function categoryFilter(e) {
-        document.getElementById("categoryName").value = e.id;
-    }
-    function contentTypeFilter(e) {
-        document.getElementById("contentType").value = e.id;
-    }
-    function creatorNameFilter(e) {
-        document.getElementById("creatorName").value = e.id;
-    }
-    //dropDown list
-    /* When the user clicks on the button,
-                        toggle between hiding and showing the dropdown content */
-    function dropDown() {
-        document.getElementById("myDropdown").style.display = 'block';
-    }
 
-</script>
+<head>
+    <script>
+        //SideBar
+        function open_side() {
+            document.getElementById("mySidebar").style.display = 'block';
+        }
+        function close_side() {
+            document.getElementById("mySidebar").style.display = "none";
+        }
+        //searchBar
+        function categoryFilter(e) {
+            document.getElementById("categoryName").value = e.id;
+        }
+        function contentTypeFilter(e) {
+            document.getElementById("contentType").value = e.id;
+        }
+        function creatorNameFilter(e) {
+            document.getElementById("creatorName").value = e.id;
+        }
+        //dropDown list
+        /* When the user clicks on the button,
+                            toggle between hiding and showing the dropdown content */
+        function dropDown() {
+            document.getElementById("myDropdown").style.display = 'block';
+        }
+
+    </script>
+    <link rel="stylesheet" href="~/Content/navbar.css?ver=<?php echo rand(111,999)?" type="text/css">
 </head>
 <body>
     @using (Html.BeginForm("FilterdSearch", "HomePage"))
@@ -109,19 +111,22 @@
                 <div class="mySidebar" id="mySidebar" style="display:none">
                     <input type="button" onclick="close_side()" class="button" value="&times;">
                     <!-- the side panel with our info :)-->
-                    @{ string name = Session["UserName"].ToString();
-                        if (db.Users.Where(d => d.UserName == name).ToList().ElementAt(0).isProfessional)
-                        {
-                    <a href="#">@Html.ActionLink("Create an new professional page", "../ProfessionalPages/FromHome")</a><br />
-                            <a href="/Shared/MyProfessionalPages">My professional pages</a><br />
-                            <a href="">Show my views and others statistic data</a>
-                        }
-                    }
-                    <a href="../Categories/Index">Categories</a>
-                    <a href="../QuestionRooms/Index">Question Rooms</a>
-                    <a href="../ProfessionalPages/Index">Professional Pages</a>
+                    <nav>
+                        @{ string name = Session["UserName"].ToString();
+                            if (db.Users.Where(d => d.UserName == name).ToList().ElementAt(0).isProfessional)
+                            {
 
-                    <a href="#">@Html.ActionLink("Ask a new question", "../QuestionRooms/FromHome")</a>
+                                <a href="#">@Html.ActionLink("Create an new professional page", "../ProfessionalPages/FromHome")</a><br />
+                                <a href="/Shared/MyProfessionalPages">My professional pages</a><br />
+                                <a href="">Show my views and others statistic data</a>
+                            }
+                        }
+                        <a href="../Categories/Index">Categories</a>
+                        <a href="../QuestionRooms/Index">Question Rooms</a>
+                        <a href="../ProfessionalPages/Index">Professional Pages</a>
+
+                        <a href="#">@Html.ActionLink("Ask a new question", "../QuestionRooms/FromHome")</a>
+                    </nav>
                 </div>
 
             }
