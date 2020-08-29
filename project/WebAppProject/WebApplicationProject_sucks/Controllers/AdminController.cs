@@ -13,9 +13,9 @@ namespace WebApplicationProject_sucks.Controllers
         //we use an empty controller to match and load views
         //the controller is EMPTY since we dont need reflexive CRUD actions for this model.
         //(CRUD actions for Admin are done hard-codedly)
-  
+
         public ActionResult AdminStatistics()
-        {         
+        {
             return View();
         }
         public ActionResult myGragh()
@@ -46,14 +46,14 @@ namespace WebApplicationProject_sucks.Controllers
                         professional.UserName = userName;
                         professional.Profession_Name = pendingDetails.Profession_Name;
                         professional.Description = pendingDetails.Description;
-                        
+
                         //only the associated pending categories!
                         foreach (var pendingCategory in pendingDetails.ProfessionalCategories)
                         {
                             ProfessionalToCategory acceptedCategory = new ProfessionalToCategory(userName, pendingCategory.CategoryName);
-                            db.ProfessionalToCategories.Add(acceptedCategory);                          
+                            db.ProfessionalToCategories.Add(acceptedCategory);
                         }
-                  
+
                         pendingDetails.ProfessionalCategories.Clear();
                         pendingDetails.ApplyFiles.Clear();
 
@@ -74,30 +74,32 @@ namespace WebApplicationProject_sucks.Controllers
         public ActionResult DisposePending(string PendingName)
         {
             MyDB db = new MyDB();
-               
-                    var user = db.Users.Find(PendingName);
-                    var pendingDetails = db.ProfessionalPendings.Find(PendingName);
 
-                    if (user != null)
-                    {                                
-                    pendingDetails.ProfessionalCategories.Clear();
-                    pendingDetails.ApplyFiles.Clear();
+            var user = db.Users.Find(PendingName);
+            var pendingDetails = db.ProfessionalPendings.Find(PendingName);
 
-                        //after removing relationships connections, lets remove 
-                        //the entry in the pendingProfessional!
-                        db.ProfessionalPendings.Remove(pendingDetails);                     
-                        db.SaveChanges();
-                    }
-                          
+            if (user != null)
+            {
+                pendingDetails.ProfessionalCategories.Clear();
+                pendingDetails.ApplyFiles.Clear();
+
+                //after removing relationships connections, lets remove 
+                //the entry in the pendingProfessional!
+                db.ProfessionalPendings.Remove(pendingDetails);
+                db.SaveChanges();
+            }
+
             return View("../Admin/ConfirmPendings");
         }
 
-        public FileContentResult GetApplyFile(string PendingName,int FileNum)
+        public FileContentResult GetApplyFile(string PendingName, int FileNum)
         {//TODO: restrict the files uploading to .pdf only
             MyDB db = new MyDB();
-            var file=db.PendingFiles.Where(d => d.P_UserName == PendingName && d.FileID == FileNum).ToList().ElementAt(0);
-            return File(file.FileContent,".pdf");
+            var file = db.PendingFiles.Where(d => d.P_UserName == PendingName && d.FileID == FileNum).ToList().ElementAt(0);
+            return File(file.FileContent, ".pdf");
         }
+
+ 
     }
 
 }

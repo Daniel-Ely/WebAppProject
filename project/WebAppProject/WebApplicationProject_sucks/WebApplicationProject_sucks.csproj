@@ -2041,6 +2041,7 @@
     <Content Include="PlugIn\tinymce\themes\silver\theme.min.js" />
     <Content Include="PlugIn\tinymce\tinymce.min.js" />
     <Content Include="Scripts\ActivityStickGraph.js" />
+    <Content Include="Scripts\AdminSearchbar.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\getData.js" />

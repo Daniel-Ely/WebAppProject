@@ -9,18 +9,34 @@ using WebApplicationProject_sucks.Models;
 
 namespace WebApplicationProject_sucks.Controllers
 {
+    //clases used specipicly in these class
     public class AllContent
     {
         public string CreatorName { set; get; }
-        public int AllContentID{set;get;}
+        public int AllContentID { set; get; }
         public string Title { set; get; }
         public string Content { set; get; }
         public DateTime Date { set; get; }
-        public byte[] Img { set; get;}
+        public byte[] Img { set; get; }
         public virtual ICollection<RoomToCategory> QCategories { get; set; }
         public virtual ICollection<PostToCategory> PCategories { get; set; }
 
+
     }
+    public class FullUser
+    {
+        public string Gender { set; get; }
+        public string Email { set; get; }
+        public string Name { set; get; }
+        public string UserName { set; get; }
+        public DateTime Birthday { set; get; }
+
+        public virtual ICollection<UserToCategory> Intrests { set; get; }
+        public byte[] ProfileImg { set; get; }
+        public string ProfessionName{set;get;}
+        public double Score { set; get; }
+    }
+    //
     public class HomePageController : Controller
     {
         MyDB db = new MyDB();
@@ -28,10 +44,12 @@ namespace WebApplicationProject_sucks.Controllers
         // [LogInFilter]
         public ActionResult Home()
         {
+         
             if(ViewData["ContentList"] == null )
             {
                 FilterdSearch("all" , "all" , "all");
             }
+           
             return View();
         }
         public ActionResult Register()
@@ -44,6 +62,10 @@ namespace WebApplicationProject_sucks.Controllers
         }
         public ActionResult AdminHome()
         {
+            if (ViewData["userList"] == null)
+            {
+                Filter(0, 60);
+            }
             return View();
         }
         public ActionResult SearchPage()
@@ -64,8 +86,6 @@ namespace WebApplicationProject_sucks.Controllers
                 return Redirect("../HomePage/Home");
             return Redirect("../HomePage/AdminHome");
         }
-
-
 
         public ActionResult FilterdSearch(string categoryName, string contentType , string creatorName)
         {
@@ -139,6 +159,53 @@ namespace WebApplicationProject_sucks.Controllers
             ViewData["ContentList"] = listByCategory.Where(c => listByCreator.Where(q => q.AllContentID == c.AllContentID).Count() > 0).ToList();
             return View("Home");
         }
-       
+        //
+        //the filter for the admin user search
+        //
+        [HttpPost]
+        public ActionResult Filter(int minage, int maxage)
+        {
+            IEnumerable<FullUser> allUsers;
+            List<FullUser> listUsers;
+            MyDB db = new MyDB();
+            if (db.Professionals.Count() > 0)
+            {
+                allUsers = from user in db.Users.AsEnumerable()
+                               join pro in db.Professionals.AsEnumerable() on user.UserName equals pro.UserName into table1
+                               from pro in table1.DefaultIfEmpty()
+                               select new FullUser
+                               {
+                                   Name = user.FirstName,
+                                   UserName = user.UserName,
+                                   Birthday = user.BirthDay,
+                                   Email = user.Email,
+                                   Gender = user.Gender,
+                                   Intrests = user.Interests,
+                                   ProfessionName = pro.Profession_Name,
+                                   Score = pro.Score
+                               };
+  
+            }
+            else
+            {
+                allUsers = from user in db.Users.AsEnumerable()
+                               select new FullUser
+                               {
+                                   Name = user.FirstName,
+                                   UserName = user.UserName,
+                                   Birthday = user.BirthDay,
+                                   Email = user.Email,
+                                   Gender = user.Gender,
+                                   Intrests = user.Interests
+                               };
+                              }
+            listUsers = allUsers.ToList();
+            if (maxage < 60)
+            {
+                listUsers = allUsers.Where(u => (((u.Birthday.Year < DateTime.Today.Year - minage) || (u.Birthday.Year == DateTime.Today.Year - minage && u.Birthday.DayOfYear < DateTime.Today.DayOfYear)) && ((u.Birthday.Year < DateTime.Today.Year - maxage) || (u.Birthday.Year == DateTime.Today.Year + maxage && u.Birthday.DayOfYear >= DateTime.Today.DayOfYear)))).ToList();
+            }
+            ViewData["userList"] = listUsers;
+            return View("AdminHome");
+        }
     }
 }

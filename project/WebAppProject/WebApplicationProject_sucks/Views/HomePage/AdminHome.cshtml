@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using WebApplicationProject_sucks.Models
+@using WebApplicationProject_sucks.Controllers
+<!DOCTYPE html>
 <html lang="en">
 
 @{
@@ -22,6 +24,20 @@
     <link href="~/Content/AdminBootstrap/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 <body id="page-top">
+    @{
+        MyDB db = new MyDB();
+        var list = ViewData["userList"] as List<FullUser>;
+        <!-- in order to load data to the search js-->
+        foreach (var user in list)
+        {
+            <div class="userName" value="@user.UserName"></div>
+            <div class="name" value="@user.Name"></div>
+            <div class="birthday" value="@user.Birthday"></div>
+            <div class="email" value="@user.Email"></div>
+            <div class="isP" value="False"></div>
+            <div class="image" value="@user.ProfileImg"></div>
+        }
+    }
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Sidebar -->
@@ -145,6 +161,7 @@
         <div id="content-wrapper" class="d-flex flex-column">
             <!-- Main Content -->
             <div id="content">
+
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                     <!-- Sidebar Toggle (Topbar) -->
@@ -154,9 +171,21 @@
                         </button>
                     </form>
                     <!-- Topbar Search -->
+                    <!--
+                       --
+                        --
+                        --
+                        ---
+                        --
+                        -
+                        --
+                        -
+                        -
+                        --
+                    -->
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" id="searchBar" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
                                     <i class="fas fa-search fa-sm"></i>
@@ -175,16 +204,13 @@
                             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
+                                        <input type="text" id="searchBar" name="searchBar" class="searchBar" placeholder="Search for co..." aria-label="Search" aria-describedby="basic-addon2">
+
                                     </div>
                                 </form>
                             </div>
                         </li>
+
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -329,40 +355,19 @@
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
                         </div>
+
                         <div class="card-body">
+                            <div class="filter-user-search">
+                                <a href="#" id="ageRang" class="ageRang" data-minAge=0 data-maxAge=12>0-12</a>
+                                <a class="ageRang" data-minAge=12 data-maxAge=18 href="#">12-18</a>
+                                <a class="ageRang" data-minAge=18 data-maxAge=21 href="#">18-21</a>
+                                <a class="ageRang" data-minAge=21 data-maxAge=35 href="#">21-35</a>
+                                <a class="ageRang" data-minAge=35 data-maxAge=60 href="#">35-60</a>
+                                <a class="ageRang" data-minAge=60 data-maxAge=61 href="#">60+</a>
+                            </div>
+                            @Html.Hidden("ageRange")
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
- 
-                                    </tbody>
-                                </table>
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"> </table>
                             </div>
                         </div>
                     </div>
@@ -406,6 +411,16 @@
         </div>
     </div>
     <!-- Bootstrap core JavaScript-->
+    <script type="text/javascript">
+   $('.ageRang').on("click" , (e) => {
+       e.preventDefault();
+       $.post("@Url.Action("Filter","HomePage")", { minAge: $(this).data("minAge") maxAge: $(this).data("maxAge") }, function (data) {
+        alert(data);
+     });
+   });
+
+    </script>
+    <script src="~/Scripts/AdminSearchbar.js"></script>
     <script src="~/Content/AdminBootstrap/vendor/jquery/jquery.min.js"></script>
     <script src="~/Content/AdminBootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
