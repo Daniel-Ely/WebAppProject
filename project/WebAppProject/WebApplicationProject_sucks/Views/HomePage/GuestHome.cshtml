@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>Home</title>
     <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
+    <link rel="stylesheet" href="~/Content/navbar.css?ver=<?php echo rand(111,999)?" type="text/css">
 </head>
 <body>
     <div class="row">
@@ -49,31 +50,31 @@
             @{
 
                 MyDB db = new MyDB();
-
-                if (db.QuestionRooms.ToList().Count > 0)
+            <ul  id="charactersList">
+                @if (db.QuestionRooms.ToList().Count > 0)
                 {
                     var listOfQR = db.QuestionRooms.OrderBy(d => d.DatePublished).ToList();
-                    <ul>
-                        @{ for (int i = 0; i < 10 && i < listOfQR.Count; i++)
+
+                        for (int i = 0; i < 10 && i < listOfQR.Count; i++)
                             {
-                                <li class="post">
+                                <li class="character">
                                     <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
                                     <h2>@Html.Raw(listOfQR.ElementAt(i).Title)</h2>
                                     <h5>publish date , @listOfQR.ElementAt(i).DatePublished.Month.@listOfQR.ElementAt(i).DatePublished.Day.@listOfQR.ElementAt(i).DatePublished.Year</h5>
                                 </li>
                             }
-                        }
-                    </ul>
+                        
+
                  }
 
-                  if (db.Posts.ToList().Count > 0)
+                  @if (db.Posts.ToList().Count > 0)
                    {
                      var listOfPS = db.Posts.OrderBy(d => d.Date).ThenBy(d => d.NumOfRating).ThenBy(d => d.Rating).ToList();
-                    <ul>
-                        @{ for (int i = 0; i < 10 && i < listOfPS.Count; i++)
+
+                        for (int i = 0; i < 10 && i < listOfPS.Count; i++)
                             {
 
-                                <li class="post">
+                                <li class="character">
                                     <img src="~/src/QutionRoomOwl.png" alt="Avatar" class="avatar" align="left">
                                     <h2>@listOfPS.ElementAt(i).Title</h2>
                                     @{int pageid = listOfPS.ElementAt(i).ProfessionalPageID;
@@ -82,10 +83,11 @@
                                         <h4>@listOfPS.ElementAt(i).Description</h4>
                                    </li>
                             }
-                         }
-                      </ul>
+                         
+
 
                   }
+             </ul>
                }
          </div>
     </div>

@@ -67,38 +67,46 @@
                                 var round = 0;
                                 MyDB db = new MyDB();
                                 db.Categories.OrderBy(q => q.Name);
-                                foreach (var q in db.Categories)
+                            <ul>
+                                @foreach (var q in db.Categories)
                                 {
-                                    round++;
-                                    if (round == 3)
-                                    {
-                                        round = 0;
-                                        <br>
-                                    }
+                                round++;
+                                
+                                <li>
                                     <input type="submit" class="mybtn" id=@q.Name onclick="categoryFilter(this)" value=@q.Name>
+                                </li>
                                 }
+                            </ul>
                             }
                             <br>
                             <b>filter by typeOf content:</b>
                             <br>
                             <div class="row">
-                                <input type="submit" class="mybtn" id="Question-rooms" onclick="contentTypeFilterFilter(this)" value="Question rooms">
-                                <input type="submit" class="mybtn" id="Post" onclick="contentTypeFilterFilter(this)" value="Post">
-                            </div>
+                                <ul>
+                                    <li>
+                                        <input type="submit" class="mybtn" id="Question-rooms" onclick="contentTypeFilterFilter(this)" value="Question rooms">
+                                        
+                                    </li>
+                                    <li>
+                                        <input type="submit" class="mybtn" id="Post" onclick="contentTypeFilterFilter(this)" value="Post">
+
+                                    </li>
+                                </ul>
+                                 </div>
                             <b>filter by ContentCreators :</b>
                             <br>
-                            @{
-                                foreach (var q in db.Users)
-                                {
-                                    if (round == 3)
+                            <ul>
+                                @{
+                                    foreach (var q in db.Users)
                                     {
-                                        round = 0;
-                                        <br>
+                                        
+                                            <li>
+                                                <input type="submit" class="mybtn" id=@q.UserName onclick="creatorNameFilter(this)" value=@q.UserName>
+                                            </li>
+                                            round++;
                                     }
-                                    <input type="submit" class="mybtn" id=@q.UserName onclick="creatorNameFilter(this)" value=@q.UserName>
-                                    round++;
                                 }
-                            }
+                            </ul>
                             @Html.Hidden("categoryName")
                             @Html.Hidden("contentType")
                             @Html.Hidden("creatorName")
@@ -116,9 +124,9 @@
                             if (db.Users.Where(d => d.UserName == name).ToList().ElementAt(0).isProfessional)
                             {
 
-                                <a href="#">@Html.ActionLink("Create an new professional page", "../ProfessionalPages/FromHome")</a><br />
-                                <a href="/Shared/MyProfessionalPages">My professional pages</a><br />
-                                <a href="">Show my views and others statistic data</a>
+                                <a href="#">@Html.ActionLink("Create an new professional page", "../ProfessionalPages/FromHome")</a>
+                                <a href="/Shared/MyProfessionalPages">My professional pages</a>
+                                
                             }
                         }
                         <a href="../Categories/Index">Categories</a>
