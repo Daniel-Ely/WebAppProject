@@ -54,12 +54,16 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-svg {
-    transition: width 2s;
+.pieChartColor {
+    width: 20px;
+    height: 20px;
+    transition-property: width;
+    transition-duration: 2s;
 }
 
-svg:hover {
-    width: 200%;
+
+.pieChartColor:hover {
+    width: 200px;
 }
 
 
