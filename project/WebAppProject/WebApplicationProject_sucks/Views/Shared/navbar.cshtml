@@ -63,55 +63,54 @@
                         <div id="myDropdown" class="dropdown-content">
                             <b>filter by category:</b>
                             <br>
-                            @{
-                                var round = 0;
-                                MyDB db = new MyDB();
-                                db.Categories.OrderBy(q => q.Name);
-                            <ul>
-                                @foreach (var q in db.Categories)
-                                {
-                                round++;
-                                
-                                <li>
-                                    <input type="submit" class="mybtn" id=@q.Name onclick="categoryFilter(this)" value=@q.Name>
-                                </li>
+                            <div class="filter-row">
+                                @{
+                                    var round = 0;
+                                    MyDB db = new MyDB();
+                                    db.Categories.OrderBy(q => q.Name);
+                                    foreach (var q in db.Categories)
+                                    {
+                                        round++;
+                                        if (round == 3)
+                                        {
+                                            round = 0;
+                                            <br>
+                                        }
+                                        <input type="submit" class="mybtn" id=@q.Name onclick="categoryFilter(this)" value=@q.Name>
+                                    }
                                 }
-                            </ul>
-                            }
-                            <br>
+                            </div>
+                            <br />
                             <b>filter by typeOf content:</b>
                             <br>
                             <div class="row">
-                                <ul>
-                                    <li>
-                                        <input type="submit" class="mybtn" id="Question-rooms" onclick="contentTypeFilterFilter(this)" value="Question rooms">
-                                        
-                                    </li>
-                                    <li>
-                                        <input type="submit" class="mybtn" id="Post" onclick="contentTypeFilterFilter(this)" value="Post">
-
-                                    </li>
-                                </ul>
-                                 </div>
+                                <div class="filter-row">
+                                    <input type="submit" class="mybtn" id="Question-rooms" onclick="contentTypeFilterFilter(this)" value="Question rooms">
+                                    <input type="submit" class="mybtn" id="Post" onclick="contentTypeFilterFilter(this)" value="Post">
+                                </div>
+                            </div>
+                            <br />
                             <b>filter by ContentCreators :</b>
                             <br>
-                            <ul>
+                            <div class="filter-row">
                                 @{
                                     foreach (var q in db.Users)
                                     {
-                                        
-                                            <li>
-                                                <input type="submit" class="mybtn" id=@q.UserName onclick="creatorNameFilter(this)" value=@q.UserName>
-                                            </li>
-                                            round++;
+                                        if (round == 3)
+                                        {
+                                            round = 0;
+                                            <br>
+                                        }
+                                        <input type="submit" class="mybtn" id=@q.UserName onclick="creatorNameFilter(this)" value=@q.UserName>
+                                        round++;
                                     }
                                 }
-                            </ul>
-                            @Html.Hidden("categoryName")
-                            @Html.Hidden("contentType")
-                            @Html.Hidden("creatorName")
+                                </div>
+                                @Html.Hidden("categoryName")
+                                @Html.Hidden("contentType")
+                                @Html.Hidden("creatorName")
+                            </div>
                         </div>
-                    </div>
                     <!-- end of SearchBar-->
                     <a href="" class="right" style="padding-left:2px">Welcome! @Session["UserName"]</a>
                 </div>
