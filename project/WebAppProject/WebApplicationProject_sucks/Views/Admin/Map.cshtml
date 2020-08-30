@@ -1,14 +1,13 @@
 ﻿
+@using System.Web.Mvc.Html;
+@{
+    Layout = null;
+}
+
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        /* Set the size of the div element that contains the map */
-        #map {
-            height: 400px; /* The height is 400 pixels */
-            width: 100%; /* The width is the width of the web page */
-        }
-    </style>
+    <link rel="stylesheet" href="~/Content/map.css?ver=<?php echo rand(111,999)?" type="text/css">
 </head>
 <body>
     @{
@@ -31,8 +30,8 @@
         function initMap() {
             var bounds = new google.maps.LatLngBounds();
             // The map,
-            var map = new google.maps.Map( document.getElementById('map'));
-     
+            var map = new google.maps.Map(document.getElementById('map'));
+
             // Display multiple markers on a map
             var infoWindow = new google.maps.InfoWindow(), marker, i;
 
@@ -45,7 +44,7 @@
                 marker = new google.maps.Marker({
                     position: position,
                     map: map,
-                    
+
                 });
             }
             map.fitBounds(bounds);
@@ -54,8 +53,8 @@
                 this.setZoom(14);
                 google.maps.event.removeListener(boundsListener);
             });
-      
-        } 
+
+        }
     </script>
     <!--Load the API from the specified URL
     * The async attribute allows the browser to render the page while the API loads
@@ -64,5 +63,6 @@
     -->
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5nv7F4qNvhiysPtgryNysdd0xUVqD5eo&callback=initMap">
     </script>
+    <a href="/HomePage/Home">Back to home page</a>
 </body>
 </html>
