@@ -123,3 +123,6 @@ h4 {
 .CreatorName{
     text-align:center;
 }
+.media-object img-circle {
+    width: 100px;
+}

@@ -314,3 +314,7 @@ header {
 footer {
     color: #0f485a;
 }
+.multiple-columns{
+    column-count:1;
+    column-width:400px;
+}

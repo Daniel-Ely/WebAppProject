@@ -22,7 +22,11 @@ namespace WebApplicationProject_sucks.Controllers
             var posts = db.Posts.Include(p => p.ProfessionalPage);
             return View(posts.ToList());
         }
-     
+
+        public ActionResult DeleteComments()
+        {
+            return View();
+        }
         // GET: Posts/Details/5
         public ActionResult Details(int? id)
         {
@@ -89,15 +93,18 @@ namespace WebApplicationProject_sucks.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PostID,Title,Date,Rating,NumOfRating,Description,PageID")] Post post)
+        public ActionResult Edit([Bind(Include = "PostID,Title,Description,Content")] Post post)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(post).State = EntityState.Modified;
+                Post p = db.Posts.Where(d => d.PostID == post.PostID).ToList().ElementAt(0);
+                p.Title = post.Title;
+                p.Description = post.Description;
+                p.Content = post.Content;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details/" + post.PostID);
             }
-            ViewBag.ProfessionalPageID = new SelectList(db.ProfessionalPages, "ProfessionalPageID", "NameOfPage", post.ProfessionalPageID);
+
             return View(post);
         }
 

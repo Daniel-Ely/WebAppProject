@@ -72,13 +72,14 @@
                                                         <li class="mm">@Html.DisplayFor(modelItem => item.Date.Month)</li>
                                                         <li class="aaaa">@Html.DisplayFor(modelItem => item.Date.Year)</li>
                                                     </ul>
-                                                    <p class="media-comment">
-                                                        @Html.Raw(item.Content)
+                                                    <div class="multiple-columns">
+                                                        <p class="media-comment">
+                                                            @Html.Raw(item.Content)
 
-                                                    </p>
-
+                                                        </p>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

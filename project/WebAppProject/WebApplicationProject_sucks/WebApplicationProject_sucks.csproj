@@ -2198,7 +2198,7 @@
     <Content Include="Views\ProfessionalPendings\Index.cshtml" />
     <Content Include="Views\Posts\Create.cshtml" />
     <Content Include="Views\Posts\Details.cshtml" />
-    <Content Include="Views\Posts\Edit.cshtml" />
+    <Content Include="Views\Posts\DeleteComments.cshtml" />
     <Content Include="Views\Posts\Index.cshtml" />
     <Content Include="Views\Professions\Create.cshtml" />
     <Content Include="Views\Professions\Delete.cshtml" />
@@ -2225,6 +2225,7 @@
     <Content Include="Views\Locations\Create.cshtml" />
     <Content Include="Views\HomePage\ChoiseBetweenAdminToUser.cshtml" />
     <Content Include="Views\Shared\MyProfessionalPages.cshtml" />
+    <Content Include="Views\Posts\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
