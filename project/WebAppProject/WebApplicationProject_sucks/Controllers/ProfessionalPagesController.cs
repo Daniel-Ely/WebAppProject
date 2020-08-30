@@ -30,7 +30,7 @@ namespace WebApplicationProject_sucks.Controllers
         public ActionResult Cancel()
         {
 
-           if(Session["Cancel"]!=null)
+            if (Session["Cancel"] != null)
             {
                 Session["Cancel"] = null;
                 return Redirect("/HomePage/Home");
@@ -48,10 +48,10 @@ namespace WebApplicationProject_sucks.Controllers
                     return Redirect("/ProfessionalPages/Index");
                 }
             }
-                        else
-                        {
+            else
+            {
                 return Redirect("/ProfessionalPages/Index");
-                        }
+            }
         }
         // GET: ProfessionalPages/Details/5
         public ActionResult Details(int? id)
@@ -128,9 +128,9 @@ namespace WebApplicationProject_sucks.Controllers
                 ProfessionalPage p = db.ProfessionalPages.Where(d => d.ProfessionalPageID == professionalPage.ProfessionalPageID).ToList().ElementAt(0);
                 p.NameOfPage = professionalPage.NameOfPage;
                 db.SaveChanges();
-                return RedirectToAction("Details/"+ professionalPage.ProfessionalPageID);
+                return RedirectToAction("Details/" + professionalPage.ProfessionalPageID);
             }
-          
+
             return View(professionalPage);
         }
 
@@ -172,14 +172,14 @@ namespace WebApplicationProject_sucks.Controllers
         public ActionResult DeletePost([Bind(Include = "PostID,ProfessionalPageID")] Post p)
         {
             MyDB db = new MyDB();
-            if (p.PostID==0 || p.ProfessionalPageID==0)
+            if (p.PostID == 0 || p.ProfessionalPageID == 0)
                 return Redirect("../ProfessionalPages/Edit/" + p.ProfessionalPageID);
-            foreach(var item in db.PostComments.Where(d=>d.PostID==p.PostID).ToList())
+            foreach (var item in db.PostComments.Where(d => d.PostID == p.PostID).ToList())
             {
                 var controller = DependencyResolver.Current.GetService<PostsController>();
                 controller.DeleteComment(item);
             }
-            foreach(var item in db.UserToPostRatings.Where(d=>d.PostId==p.PostID).ToList())
+            foreach (var item in db.UserToPostRatings.Where(d => d.PostId == p.PostID).ToList())
             {
                 db.UserToPostRatings.Remove(item);
             }
@@ -189,6 +189,15 @@ namespace WebApplicationProject_sucks.Controllers
             return Redirect("../ProfessionalPages/Delete/" + p.ProfessionalPageID);
 
         }
+        public ActionResult Search(string search)
+        {
+            Session["ListAfterSearchPP"] = db.ProfessionalPages.Where(d => d.NameOfPage.Contains(search)).ToList();
+            return View();
 
+        }
+        public ActionResult SearchResualt()
+        {
+            return View("Search");
+        }
     }
 }

@@ -42,8 +42,9 @@
         <div class="row">
 
             <div class="main">
-
-                @Html.Raw(Model.Content)
+                <div class="multiple-columns">
+                    @Html.Raw(Model.Content)
+                </div>
                 <br />
                 @Html.Hidden("UserName", Session["UserName"])
                 @{
@@ -98,13 +99,15 @@
                                                     <li class="aaaa">@Html.DisplayFor(modelItem => item.Date.Year)</li>
                                                 </ul>
                                                 <br />
-                                                <p class="media-comment">
-                                                    @item.PostCommentContent
+                                                <div class="multiple-columns">
+                                                    <p class="media-comment">
 
-                                                </p>
+                                                        @item.PostCommentContent
 
+                                                    </p>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -133,7 +136,8 @@
                 if (isP && isC.UserName == user)
                 {
             <div class="side">
-                @Html.ActionLink("Delete comments from this post", "Edit", new { id = Model.PostID }) <br /><br />
+                @Html.ActionLink("Delete comments from this post", "DeleteComments", new { id = Model.PostID }) <br /><br />
+                @Html.ActionLink("Edit this post", "Edit", new { id = Model.PostID }) <br /><br />
                 @{ string link = "/ProfessionalPages/Details/" + Model.ProfessionalPageID;}
                 <a href=@link>Back to my professional page</a> <br /><br />
                 <a href="/HomePage/Home">Back to home page</a>

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<WebApplicationProject_sucks.Models.QuestionRoom>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  
+
+    <link rel="stylesheet" href="~/Content/creatPost.css?ver=<?php echo rand(111,999)?" type="text/css" />
+    <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
+    <link rel="stylesheet" href="~/Content/Register.css?ver=<?php echo rand(111,999)?" type="text/css" />
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    @using (Html.BeginForm("DeleteQR", "QuestionRooms"))
+    {
+        @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        
+        <p>
+            <h4>Your search result</h4> 
+        </p>
+        <table class="table">
+            @if (ViewData["ListAfterSearchQR"] != null)
+            {
+            foreach (var item in ViewData["ListAfterSearchQR"] as IEnumerable<WebApplicationProject_sucks.Models.QuestionRoom>)
+            {
+            <tr>
+                <td>
+                    @Html.Raw(item.Title)
+                </td>
+                <td>
+                    By
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatorName)
+                </td>
+                <td>
+
+                    @Html.ActionLink("Details", "Details", new { id = item.QuestionRoomID })
+                    @{MyDB db = new MyDB();
+                        if (db.QuestionRooms.Where(d => d.QuestionRoomID == item.QuestionRoomID).ToList().ElementAt(0).CreatorName == Session["UserName"].ToString())
+                        {
+                            <label> | </label>
+                            @Html.Hidden("QuestionRoomID")
+                            <input type="submit" value=" Delete this question room" id=@item.QuestionRoomID onclick="Delete(this)" />
+                        }
+                    }
+                </td>
+
+            </tr>
+                            }
+                            }
+        </table>
+        <a href="/QuestionRooms/Index">Back to question rooms</a>
+    </div>
+    }
+
+</body>
+</html>
