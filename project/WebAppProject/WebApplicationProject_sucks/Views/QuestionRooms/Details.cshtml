@@ -42,7 +42,7 @@
         <!--room ID-->
         @Html.Hidden("RoomID", Model.QuestionRoomID)
 
-        @Html.Hidden("CommentContent", new { @id = "CommentContent" })
+        @Html.Hidden("CommentContent")
         <div class="main">
             <p>@Html.Raw(Model.Title)</p>
             <br>
