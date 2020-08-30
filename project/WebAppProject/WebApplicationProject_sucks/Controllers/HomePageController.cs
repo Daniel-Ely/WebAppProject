@@ -216,7 +216,7 @@ namespace WebApplicationProject_sucks.Controllers
                 }).ToList();
             }
             ViewData["userList"] = listUsers;
-            return Redirect("/HomePage/AdminHome");
+            return View("AdminHome");
         }
     }
 }
