@@ -23,9 +23,8 @@
 
     <meta name="viewport" content="width=device-width" />
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link rel="stylesheet" href="~/Content/Comment.css?ver=<?php echo rand(111,999)?" type="text/css" />
-    <link rel="stylesheet" href="~/Content/creatPost.css?ver=<?php echo rand(111,999)?" type="text/css" />
-    <link rel="stylesheet" href="~/Content/Register.css?ver=<?php echo rand(111,999)?" type="text/css" />
+    
+    <link rel="stylesheet" href="~/Content/QuestionRoom.css?ver=<?php echo rand(111,999)?" type="text/css" />
 
 </head>
 <body>
@@ -34,78 +33,52 @@
     {
 
         @Html.AntiForgeryToken()
-        <div class="CreatorName">
-                    <h4> @Html.Raw(Model.Title)</h4> | By
-                    <h6>@Html.DisplayFor(model => model.CreatorName)</h6>
-                </div>
-                <hr />
 
-        <div class="form-horizontal">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="row">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <h2>Question Room</h2><h5>by @Model.CreatorName</h5>
+        Session["QuestionRoomID"] = Model.QuestionRoomID;
+        <!--creator name-->
+        @Html.Hidden("CommentCreator", Session["UserName"])
+        <!--room ID-->
+        @Html.Hidden("RoomID", Model.QuestionRoomID)
 
+        @Html.Hidden("CommentContent", new { @id = "CommentContent" })
+        <div class="main">
+            <p>@Html.Raw(Model.Title)</p>
+            <br>
+            @{ MyDB db = new MyDB();}
+            <!--Displaying all the comments in the room-->
+            @foreach (var item in db.QustionRoomComments.Where(d => d.RoomID == Model.QuestionRoomID))
+            {
+                <div class="comment">
+                        <a class="im" href="#">
+                            <img class="media-object img-circle" src='@Url.Action("ShowImage", "Posts", new { UserName = item.UserName })' alt="profile">
+                        </a>
+                            <div class="text">
+                                <h4 class="media-heading text-uppercase reviews"> @Html.DisplayFor(modelItem => item.UserName) </h4>
+                                <ul class="media-date text-uppercase reviews list-inline">
+                                    <li class="dd">@Html.DisplayFor(modelItem => item.Date.Day)</li>
+                                    <li class="mm">@Html.DisplayFor(modelItem => item.Date.Month)</li>
+                                    <li class="aaaa">@Html.DisplayFor(modelItem => item.Date.Year)</li>
+                                </ul>
+                                <p class="media-comment">
+                                    @Html.Raw(item.Content)
+                                </p>
 
-                
-                <div class="main">
-
-                    @{ MyDB db = new MyDB();}
-                    <!--Displaying all the comments in the room-->
-                    @foreach (var item in db.QustionRoomComments.Where(d => d.RoomID == Model.QuestionRoomID))
-                    {
-
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm-10 col-sm-offset-1" id="logout">
-                                    <div class="tab-content">
-                                        <div class="tab-pane active" id="comments-logout">
-
-                                            <a class="pull-left" href="#">
-                                                <img class="media-object img-circle" src='@Url.Action("ShowImage", "Posts", new { UserName = item.UserName })' alt="profile">
-                                            </a>
-
-
-                                            <div class="media-body">
-                                                <div class="well well-lg">
-                                                    <h4 class="media-heading text-uppercase reviews"> @Html.DisplayFor(modelItem => item.UserName) </h4>
-                                                    <ul class="media-date text-uppercase reviews list-inline">
-                                                        <li class="dd">@Html.DisplayFor(modelItem => item.Date.Day)</li>
-                                                        <li class="mm">@Html.DisplayFor(modelItem => item.Date.Month)</li>
-                                                        <li class="aaaa">@Html.DisplayFor(modelItem => item.Date.Year)</li>
-                                                    </ul>
-                                                    <p class="media-comment">
-                                                        @Html.Raw(item.Content)
-
-                                                    </p>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
+                </div>
+            }
 
-                    }
 
 
-                    <!--room ID-->
-                    @Html.Hidden("RoomID", Model.QuestionRoomID)
+            <div class="form-group">
+                <!--text editor , tinymce-->
 
-                    <div class="form-group">
-                        <!--text editor , tinymce-->
+                <textarea id="mytextarea" name="mytextarea" placeholder="Add a comment..."></textarea>
+                <!--comment content-->
+                <!--the name is already set to Title-->
 
-                        <textarea id="mytextarea" name="mytextarea">Add a comment...</textarea>
-                        <!--comment content-->
-                        <!--the name is already set to Title-->
-
-                        @Html.Hidden("CommentContent", new { @id = "CommentContent" })
-                    </div>
-
-                    <!--creator name-->
-                    <div class="form-group">
-                        @Html.Hidden("CommentCreator", Session["UserName"])
-                    </div>
-
+            </div>
 
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Send comment" onclick="mySave()" class="btn btn-default" /><br />
@@ -113,14 +86,9 @@
                 <a href="/HomePage/Home">Back to home page</a>
             </div>
 
-                </div>
-                @{ Session["QuestionRoomID"] = Model.QuestionRoomID;}
+        </div>
 
+    }
 
-
-            </div>
-            </div>
-            }
-
-    </body>
+</body>
 </html>

@@ -1784,6 +1784,7 @@
     <Content Include="Content\Log_in.css" />
     <Content Include="Content\navbar.css" />
     <Content Include="Content\Professional.css" />
+    <Content Include="Content\QuestionRoom.css" />
     <Content Include="Content\Register.css" />
     <Content Include="Content\search.css" />
     <Content Include="Content\Site.css" />

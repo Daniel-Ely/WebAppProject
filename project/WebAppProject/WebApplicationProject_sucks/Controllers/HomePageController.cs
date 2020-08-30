@@ -72,12 +72,7 @@ namespace WebApplicationProject_sucks.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult ClickTest()
-        {
-            ViewData["test"] = "we are the bset";
-            return View("OnClicke");
-        }
+     
         public ActionResult SearchPage()
         {
             return View();

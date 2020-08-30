@@ -21,9 +21,9 @@ searchBar.addEventListener('keyup', (e) => {
     });
     displayUsers(filteredCharacters);
 });
-function load() {
+const load = async () => {
     //
-    //loads the personal Qroom (was filttered by intrest) list
+    //loads the Users (was filttered by paramters by user choice) list
     //
     for (i = 0; i < UserName.length; i++) {
         var userName = UserName.item(i).attributes.getNamedItem("value").nodeValue;
@@ -65,7 +65,6 @@ const displayUsers = (users) => {
         `;
         })
         .join('');
-    dataTable.innerHTML = htmlString;
+    usersList.innerHTML = htmlString;
 };
-
 load();
