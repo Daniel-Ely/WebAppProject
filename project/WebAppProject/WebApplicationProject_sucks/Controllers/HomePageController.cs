@@ -61,7 +61,7 @@ namespace WebApplicationProject_sucks.Controllers
         }
         public ActionResult AdminHome()
         {
-            if (ViewData["userList"] == null && Session["emptyQuery"] ==null)
+            if (ViewData["userList"] == null && Session["emptyQuery"] == null)
             {
                 Filter(0, 60);
             }
@@ -69,7 +69,7 @@ namespace WebApplicationProject_sucks.Controllers
         }
 
         public ActionResult AdminHomeRefreshed()
-        {         
+        {
             return View();
         }
 
@@ -78,7 +78,7 @@ namespace WebApplicationProject_sucks.Controllers
         {
             return View();
         }
-     
+
         public ActionResult SearchPage()
         {
             return View();
@@ -98,12 +98,12 @@ namespace WebApplicationProject_sucks.Controllers
             return Redirect("../HomePage/AdminHome");
         }
 
-        public ActionResult FilterdSearch(string categoryName, string contentType , string creatorName)
+        public ActionResult FilterdSearch(string categoryName, string contentType, string creatorName)
         {
             List<AllContent> allContent = new List<AllContent>();
-       
+
             //in case the user didnt choose to filter by ContentType(Post/ Question rom)
-            if (contentType == "all" || contentType=="")
+            if (contentType == "all" || contentType == "")
             {
                 allContent = db.QuestionRooms.AsEnumerable().OrderBy(q => q.DatePublished).Select(q => new AllContent
                 {
@@ -113,7 +113,7 @@ namespace WebApplicationProject_sucks.Controllers
                     QCategories = q.Categories,
                     PCategories = new List<PostToCategory>(),
                     AllContentID = q.QuestionRoomID,
-                    CreatorName=q.CreatorName
+                    CreatorName = q.CreatorName
                 }).Union(db.Posts.AsEnumerable().OrderBy(p => p.Date).Select(p => new AllContent
                 {
                     Title = p.Title,
@@ -174,76 +174,7 @@ namespace WebApplicationProject_sucks.Controllers
         //the filter for the admin user search
         //
         [HttpPost]
-        public ActionResult Filter(int? minage, int? maxage)
-        {
-            IEnumerable<FullUser> allUsers;
-            List<FullUser> listUsers;
-            MyDB db = new MyDB();
-            var users = db.Users.ToList();
-            var professionals = db.Professionals.ToList();
-            if (professionals.Count > 0)
-            {
-                allUsers = from user in users
-                           join pro in professionals on user.UserName equals pro.UserName into table1
-                           from pro in table1.DefaultIfEmpty()
-                           select new FullUser
-                           {
-                               Name = user.FirstName,
-                               UserName = user.UserName,
-                               Birthday = user.BirthDay,
-                               Email = user.Email,
-                               Gender = user.Gender,
-                               Intrests = user.Interests,
-                               professional = pro
-                               };
-  
-            }
-            else
-            {
-                allUsers = from user in db.Users.AsEnumerable()
-                               select new FullUser
-                               {
-                                   Name = user.FirstName,
-                                   UserName = user.UserName,
-                                   Birthday = user.BirthDay,
-                                   Email = user.Email,
-                                   Gender = user.Gender,
-                                   Intrests = user.Interests
-                               };
-                              }
-            listUsers = allUsers.ToList();
-            if (maxage < 60)
-            {
-                listUsers = allUsers.Where(u =>
-                {
-                    // cheack if not smaller
-                    bool notSmaller = ((u.Birthday.Year < DateTime.Today.Year - minage) || ((u.Birthday.Year == DateTime.Today.Year - minage) && u.Birthday.DayOfYear <= DateTime.Today.DayOfYear));
-                    bool notBigger = ((u.Birthday.Year > DateTime.Today.Year - maxage) || ((u.Birthday.Year == DateTime.Today.Year - maxage) && u.Birthday.DayOfYear > DateTime.Today.DayOfYear));
-                    return (notBigger && notSmaller);
-                }).ToList();
-            }
-            else
-            {
-                listUsers = allUsers.Where(u =>
-                {
-                    // cheack if not smaller
-                    bool notSmaller = ((u.Birthday.Year < DateTime.Today.Year - minage) || ((u.Birthday.Year == DateTime.Today.Year - minage) && u.Birthday.DayOfYear <= DateTime.Today.DayOfYear));
-
-                    return (notSmaller);
-                }).ToList();
-            }
-
-
-            Session["userList"] = listUsers;
-            Session["emptyQuery"] = "false";
-            return View("AdminHome");
-        }
-
-
-
-
-        [HttpPost]
-        public ActionResult Filter(string gender)
+        public ActionResult Filter(int? minage, int? maxage , string gender)
         {
             IEnumerable<FullUser> allUsers;
             List<FullUser> listUsers;
@@ -281,11 +212,32 @@ namespace WebApplicationProject_sucks.Controllers
                            };
             }
             listUsers = allUsers.ToList();
+            if (maxage < 60)
+            {
+                listUsers = allUsers.Where(u =>
+                {
+                    // cheack if not smaller
+                    bool notSmaller = ((u.Birthday.Year < DateTime.Today.Year - minage) || ((u.Birthday.Year == DateTime.Today.Year - minage) && u.Birthday.DayOfYear <= DateTime.Today.DayOfYear));
+                    bool notBigger = ((u.Birthday.Year > DateTime.Today.Year - maxage) || ((u.Birthday.Year == DateTime.Today.Year - maxage) && u.Birthday.DayOfYear > DateTime.Today.DayOfYear));
+                    return (notBigger && notSmaller);
+                }).ToList();
+            }
+            else
+            {
+                listUsers = allUsers.Where(u =>
+                {
+                    // cheack if not smaller
+                    bool notSmaller = ((u.Birthday.Year < DateTime.Today.Year - minage) || ((u.Birthday.Year == DateTime.Today.Year - minage) && u.Birthday.DayOfYear <= DateTime.Today.DayOfYear));
 
-            listUsers = allUsers.Where(u => u.Gender == gender).ToList();
-            
+                    return (notSmaller);
+                }).ToList();
+            }
+            if (gender != "all")
+            {
+
+            }
             Session["userList"] = listUsers;
-            Session["emptyQuery"] = "false";
+            Session["emptyQuery"] = false;
             return View("AdminHome");
         }
     }
