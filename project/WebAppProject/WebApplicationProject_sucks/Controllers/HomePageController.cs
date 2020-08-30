@@ -33,8 +33,7 @@ namespace WebApplicationProject_sucks.Controllers
 
         public virtual ICollection<UserToCategory> Intrests { set; get; }
         public byte[] ProfileImg { set; get; }
-        public string ProfessionName{set;get;}
-        public double Score { set; get; }
+        public Professional professional { set; get; }
     }
     //
     public class HomePageController : Controller
@@ -173,21 +172,22 @@ namespace WebApplicationProject_sucks.Controllers
             IEnumerable<FullUser> allUsers;
             List<FullUser> listUsers;
             MyDB db = new MyDB();
-            if (db.Professionals.Count() > 0)
+            var users = db.Users.ToList();
+            var professionals = db.Professionals.ToList();
+            if (professionals.Count > 0)
             {
-                allUsers = from user in db.Users.AsEnumerable()
-                               join pro in db.Professionals.AsEnumerable() on user.UserName equals pro.UserName into table1
-                               from pro in table1.DefaultIfEmpty()
-                               select new FullUser
-                               {
-                                   Name = user.FirstName,
-                                   UserName = user.UserName,
-                                   Birthday = user.BirthDay,
-                                   Email = user.Email,
-                                   Gender = user.Gender,
-                                   Intrests = user.Interests,
-                                   ProfessionName = pro.Profession_Name,
-                                   Score = pro.Score
+                allUsers = from user in users
+                           join pro in professionals on user.UserName equals pro.UserName into table1
+                           from pro in table1.DefaultIfEmpty()
+                           select new FullUser
+                           {
+                               Name = user.FirstName,
+                               UserName = user.UserName,
+                               Birthday = user.BirthDay,
+                               Email = user.Email,
+                               Gender = user.Gender,
+                               Intrests = user.Interests,
+                               professional = pro
                                };
   
             }
