@@ -130,11 +130,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
-    <Compile Include="Controllers\ClipsController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
-    <Compile Include="Controllers\HTMLScriptsController.cs" />
-    <Compile Include="Controllers\ImagesController.cs" />
-    <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\PageToCategoriesController.cs" />
     <Compile Include="Controllers\PostCommentsController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
@@ -145,7 +141,6 @@
     <Compile Include="Controllers\QuestionRoomsController.cs" />
     <Compile Include="Controllers\QuestRoomCommentsController.cs" />
     <Compile Include="Controllers\RoomToCategoriesController.cs" />
-    <Compile Include="Controllers\TextsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\UserToCategoriesController.cs" />
     <Compile Include="Global.asax.cs">

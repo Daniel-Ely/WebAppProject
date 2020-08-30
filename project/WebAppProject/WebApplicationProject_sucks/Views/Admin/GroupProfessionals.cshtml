@@ -1,0 +1,58 @@
+﻿@using WebApplicationProject_sucks.Models
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GroupProfessionals</title>
+</head>
+
+<body>
+    <div>
+
+        @{
+            switch (ViewData["Factor"])
+            {
+
+                case "Profession":
+                    foreach (var group in ViewData["GroupResult"] as IList<IGrouping<Profession, Professional>>)
+                    {
+                        var profession = group.Key.Profession_Name;
+                        <p>@profession :</p>
+
+                        foreach (var groupElement in group)
+                        {
+                            <h4>@groupElement.UserName</h4>
+                        }
+
+                    }
+                    break;
+
+
+                case "Score":
+                    foreach (var group in ViewData["GroupResult"] as IList<IGrouping<double, Professional>>)
+                    {
+                        var score = group.Key;
+                        <p>@score :</p>
+
+                        foreach (var groupElement in group)
+                        {
+                            <h4>@groupElement.UserName</h4>
+                        }
+
+                    }
+                    break;
+
+
+            }
+
+        }
+
+
+    </div>
+</body>
+</html>
