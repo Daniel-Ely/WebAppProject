@@ -22,11 +22,13 @@
     <link href="~/Content/AdminBootstrap/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- Custom styles for this page -->
     <link href="~/Content/AdminBootstrap/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    
 </head>
 <body id="page-top">
+
     @{
         MyDB db = new MyDB();
-        var list = ViewData["userList"] as List<FullUser>;
+        var list = Session["userList"] as List<FullUser>;
         <!-- in order to load data to the search js-->
         foreach (var user in list)
         {
@@ -38,6 +40,8 @@
             <div class="image" value="@user.ProfileImg"></div>
         }
     }
+
+    
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -152,6 +156,13 @@
                             <a class="ageRang" data-minAge=35 data-maxAge=60 href="#">35-60</a>
                             <a class="ageRang" data-minAge=60 data-maxAge=61 href="#">60+</a>
                         </div>
+                        <div class="filter-user-search">
+                            <a class="gender" data-gender="Male" href="#">Male</a>
+                            <a class="gender"data-gender="Female" href="#">Female</a>                        
+                        </div>
+
+
+
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"> </table>
                         </div>
@@ -198,16 +209,33 @@
     </div>
     <!-- scr-->
     <script src="~/Scripts/AdminSearchbar.js"></script>
+   
     <script>
         $(function () {
             $("a.ageRang").click(function () {
                 alert("audio Here");
-                $.post("/HomePage/Filter?minage=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge"));
-                return false;
+                $.post("/HomePage/Filter?minage=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge")).always(function (res) {
+                    location.reload();//to make sure page reloads to update the query results.                
+                });        
+            });
+        });
+
+
+        $(function () {
+            $("a.gender").click(function () {
+                alert("audio Here");
+                $.post("/HomePage/Filter?gender=" + (this).getAttribute("data-gender")).always(function (res) {
+                    location.reload();//to make sure page reloads to update the query results.                
+                });
             });
         });
 
     </script>
+
+    <script>
+        document.onload = load();
+    </script>
+
 </body>
 </html>
 
