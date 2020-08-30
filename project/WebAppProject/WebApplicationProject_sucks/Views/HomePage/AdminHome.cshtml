@@ -213,7 +213,6 @@
     <script>
         $(function () {
             $("a.ageRang").click(function () {
-                alert("audio Here");
                 $.post("/HomePage/Filter?minage=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge")).always(function (res) {
                     location.reload();//to make sure page reloads to update the query results.                
                 });        
@@ -231,7 +230,6 @@
         });
 
     </script>
-
     <script>
         document.onload = load();
     </script>
