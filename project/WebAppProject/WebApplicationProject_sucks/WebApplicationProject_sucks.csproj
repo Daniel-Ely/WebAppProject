@@ -2227,6 +2227,7 @@
     <Content Include="Views\Shared\MyProfessionalPages.cshtml" />
     <Content Include="Views\HomePage\OnClick.cshtml" />
     <Content Include="Views\Posts\Edit.cshtml" />
+    <Content Include="Views\QuestionRooms\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

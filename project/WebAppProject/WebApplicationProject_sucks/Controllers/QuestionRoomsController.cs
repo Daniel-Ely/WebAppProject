@@ -179,11 +179,22 @@ namespace WebApplicationProject_sucks.Controllers
             if (Session["Cancel"] != null)
             {
                 Session["Cancel"] = null;
-                 return Redirect("/HomePage/Home");
+                return Redirect("/HomePage/Home");
             }
-           
+
             return Redirect("/QuestionRooms/Index");
         }
+        public ActionResult Search(string search)
+        {
+            if (search != null)
+            {
+                ViewData["ListAfterSearchQR"] = db.QuestionRooms.Where(d => d.Title.Contains(search)).ToList();
+                return Redirect("/QuestionRooms/Search");
+            }
+            return Redirect("/QuestionRooms/Index");
+        }
+
+        
     }
 }
 
