@@ -12,10 +12,48 @@ using WebApplicationProject_sucks.Models;
 
 namespace WebApplicationProject_sucks.Controllers
 {
+    public class ProfileOfCreator
+    {
+        public int PostID { set; get; }
+        public int ProfessionalPageID { set; get; }
+        public string ProfessionalPageName { set; get; }
+        public string FirstName { set; get; }
+        public string UserName { set; get; }
+        public byte[] ProfileImg { set; get; }
+
+
+    }
     public class PostsController : Controller
     {
         private MyDB db = new MyDB();
 
+        
+
+        public void Profileofcreator()
+        {
+            IEnumerable<ProfileOfCreator> profileOfCreator;
+            MyDB db = new MyDB();
+            var users = db.Users.ToList();
+            var professionalpages = db.ProfessionalPages.ToList();
+            var posts = db.Posts.ToList();
+            profileOfCreator = from post in posts
+                               join pp in professionalpages on post.ProfessionalPageID equals pp.ProfessionalPageID into table1
+                               from pp in table1.DefaultIfEmpty()
+                               join user in users on pp.UserName equals user.UserName into table2
+                               from user in table2.DefaultIfEmpty()
+                               select new ProfileOfCreator
+                               {
+                                   PostID = post.PostID,
+                                   ProfessionalPageID=pp.ProfessionalPageID,
+                                   ProfessionalPageName=pp.NameOfPage,
+                                   FirstName=user.FirstName,
+                                   UserName=user.UserName,
+                                   ProfileImg=user.ProfileImage
+                           };
+            ViewData["Profileofcreator"]= profileOfCreator.AsQueryable().ToList();
+
+
+        }
         // GET: Posts
         public ActionResult Index()
         {
@@ -30,6 +68,7 @@ namespace WebApplicationProject_sucks.Controllers
         // GET: Posts/Details/5
         public ActionResult Details(int? id)
         {
+            Profileofcreator();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
