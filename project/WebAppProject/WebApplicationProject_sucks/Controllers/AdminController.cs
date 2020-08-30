@@ -29,6 +29,32 @@ namespace WebApplicationProject_sucks.Controllers
 
             return View();
         }
+
+        public ActionResult ProGroupBy()
+        {
+            return View();
+        }
+
+
+        public ActionResult GroupProfessionals(string factor)
+        {
+            MyDB db = new MyDB();          
+            switch (factor)
+            {
+              
+                case "Score":
+                    ViewData["Factor"] = "Score";
+                    ViewData["GroupResult"]=db.Professionals.GroupBy(d => d.Score).ToList();
+                    break;
+
+                case "Profession":
+                    ViewData["Factor"] = "Profession";
+                    ViewData["GroupResult"] = db.Professionals.GroupBy(d => d.Profession).ToList();
+                    break;
+
+            }
+            return View();
+        }
         
         public ActionResult ConfirmPendings(IEnumerable<string> Pendings)
         {

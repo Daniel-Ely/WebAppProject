@@ -184,9 +184,10 @@ namespace WebApplicationProject_sucks.Controllers
 
             return Redirect("/QuestionRooms/Index");
         }
-        public ActionResult Search(string search)
+        public ActionResult Search()
         {
-            if (search != null)
+            string search = Session["search"].ToString();
+            if (search!= null)
             {
                 ViewData["ListAfterSearchQR"] = db.QuestionRooms.Where(d => d.Title.Contains(search)).ToList();
                 return Redirect("/QuestionRooms/Search");

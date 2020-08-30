@@ -84,10 +84,15 @@
             document.getElementById("QuestionRoomID").value = id;
 
         }
+        
+      
         function Search() {
-           @Session["search"]= document.getElementById("search");
-
+            var search = document.getElementById("search").value;
+            @Session["Search"]=search;                                 
         }
+  
+
+
     </script>
 
     <link rel="stylesheet" href="~/Content/creatPost.css?ver=<?php echo rand(111,999)?" type="text/css" />
@@ -105,8 +110,12 @@
             @Html.ActionLink("Create New", "Create")
         </p>
         <p>
+
+
             @Html.Editor("search")
-            <a  onclick="Search()" href="#">@Html.ActionLink("Search", "Search","QuestionRooms",new { search=Session["search"]},null)</a>
+            <a href="/QuestionRooms/Search" onclick="Search()">Search</a>
+            <button onclick="Search()">Search</button>
+           
         </p>
         <table class="table">
 

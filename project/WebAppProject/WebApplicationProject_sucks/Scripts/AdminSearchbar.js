@@ -23,7 +23,7 @@ searchBar.addEventListener('keyup', (e) => {
 });
 function load() {
     //
-    //loads the personal Qroom (was filttered by intrest) list
+    //loads the personal Professional (was filttered by intrest) list
     //
     for (i = 0; i < UserName.length; i++) {
         var userName = UserName.item(i).attributes.getNamedItem("value").nodeValue;
