@@ -1,27 +1,39 @@
 ﻿
 const usersList = document.getElementById('dataTable');
-const searchBar = document.getElementById('searchBar');
-//user data
-var UserName = document.getElementsByClassName('userName');
-var Name = document.getElementsByClassName('name');
-var Birthday = document.getElementsByClassName('birthday');
-var Email = document.getElementsByClassName('email');
-var IsProfessinal = document.getElementsByClassName('isP');
-var PrifileImage = document.getElementsByClassName('image');
-//
+ const searchBar = document.getElementById('searchBar');
+
 let Users = [];
 
-searchBar.addEventListener('keyup', (e) => {
-    const searchString = e.target.value.toLowerCase();
+        searchBar.addEventListener('keyup', (e) => {
+            const searchString = e.target.value.toLowerCase();
 
-    const filteredCharacters = Users.filter((user) => {
-        return (
-            user.UserName.toLowerCase().includes(searchString) || user.Name.toLowerCase().includes(searchString)
-        );
-    });
-    displayUsers(filteredCharacters);
+            const filteredCharacters = Users.filter((user) => {
+                return (
+        user.UserName.toLowerCase().includes(searchString) || user.Name.toLowerCase().includes(searchString)
+    );
 });
+displayUsers(filteredCharacters);
+});
+
+      
+
+
+
+
+
+
+
 const load = async () => {
+    //user data
+    var UserName = document.getElementsByClassName('userName');
+    var Name = document.getElementsByClassName('name');
+    var Birthday = document.getElementsByClassName('birthday');
+    var Email = document.getElementsByClassName('email');
+    var IsProfessinal = document.getElementsByClassName('isP');
+    var PrifileImage = document.getElementsByClassName('image');
+    //
+   
+
     //
     //loads the Users (was filttered by paramters by user choice) list
     //
@@ -67,4 +79,4 @@ const displayUsers = (users) => {
         .join('');
     usersList.innerHTML = htmlString;
 };
-load();
+

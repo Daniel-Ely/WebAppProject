@@ -61,12 +61,19 @@ namespace WebApplicationProject_sucks.Controllers
         }
         public ActionResult AdminHome()
         {
-            if (ViewData["userList"] == null)
+            if (ViewData["userList"] == null && Session["emptyQuery"] ==null)
             {
                 Filter(0, 60);
             }
             return View();
         }
+
+        public ActionResult AdminHomeRefreshed()
+        {         
+            return View();
+        }
+
+
         public ActionResult OnClick()
         {
             return View();
@@ -215,7 +222,70 @@ namespace WebApplicationProject_sucks.Controllers
                     return (notBigger && notSmaller);
                 }).ToList();
             }
-            ViewData["userList"] = listUsers;
+            else
+            {
+                listUsers = allUsers.Where(u =>
+                {
+                    // cheack if not smaller
+                    bool notSmaller = ((u.Birthday.Year < DateTime.Today.Year - minage) || ((u.Birthday.Year == DateTime.Today.Year - minage) && u.Birthday.DayOfYear <= DateTime.Today.DayOfYear));
+
+                    return (notSmaller);
+                }).ToList();
+            }
+
+
+            Session["userList"] = listUsers;
+            Session["emptyQuery"] = "false";
+            return View("AdminHome");
+        }
+
+
+
+
+        [HttpPost]
+        public ActionResult Filter(string gender)
+        {
+            IEnumerable<FullUser> allUsers;
+            List<FullUser> listUsers;
+            MyDB db = new MyDB();
+            var users = db.Users.ToList();
+            var professionals = db.Professionals.ToList();
+            if (professionals.Count > 0)
+            {
+                allUsers = from user in users
+                           join pro in professionals on user.UserName equals pro.UserName into table1
+                           from pro in table1.DefaultIfEmpty()
+                           select new FullUser
+                           {
+                               Name = user.FirstName,
+                               UserName = user.UserName,
+                               Birthday = user.BirthDay,
+                               Email = user.Email,
+                               Gender = user.Gender,
+                               Intrests = user.Interests,
+                               professional = pro
+                           };
+
+            }
+            else
+            {
+                allUsers = from user in db.Users.AsEnumerable()
+                           select new FullUser
+                           {
+                               Name = user.FirstName,
+                               UserName = user.UserName,
+                               Birthday = user.BirthDay,
+                               Email = user.Email,
+                               Gender = user.Gender,
+                               Intrests = user.Interests
+                           };
+            }
+            listUsers = allUsers.ToList();
+
+            listUsers = allUsers.Where(u => u.Gender == gender).ToList();
+            
+            Session["userList"] = listUsers;
+            Session["emptyQuery"] = "false";
             return View("AdminHome");
         }
     }
