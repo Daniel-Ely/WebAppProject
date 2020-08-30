@@ -2,33 +2,131 @@
     background-image: url(../src/logIn.bmp);
     background-size: 100% 100%;
     background-size: cover;
-    text-align: center;
-    display: flex;
+    display: inline-block;
     flex-direction: column;
+    text-align:center;
 }
 .main {
-    text-align: center;
     display: flex;
     flex-direction: column;
+    flex: 70%;
+    height: 90vh;
+    background-color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+}
+    .main .Title h5 {
+        color: darkgrey;
+    }
+    .main .Title {
+        margin:4px;
+        font-size:20px;
+        border-radius:10px;
+        width:70%;
+        align-self:center;
+        background-color:rgba(128, 122, 122, 0.3)
+    }
+    .main .tiny {
+        width:100%;
+        align-self:center;
+        text-align:center;
+    }
+    .main #addBtn{
+        align-self:center;
+        width:20%;
+        height:70px;
+    }
+.comments {
+    align-self: center;
     width: 70%;
-    height: 80%;
-    background-color: rgba(255, 255, 255, 0.8);
     overflow: scroll;
 }
-.comment {
-    display:flex;
-    flex-direction:row;
-}
-.comment a img {
-    width: 50px;
-    border-radius: 30px;
-}
-.comment .text {
-    width:70%;
-    background-color:cadetblue;
-    border-radius:10px;
-}
+    .comments::-webkit-scrollbar {
+        width: 10px;
+    }
+
+/* Track */
+    .comments::-webkit-scrollbar-track {
+        background-color:transparent; 
+    }
+
+/* Handle */
+    .comments::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+        .comments::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    .comments .comment {
+        width:100%;
+        padding: 10px;
+        text-align: center;
+        display: inline-flex;
+        flex-direction: row;
+    }
+        .comments .comment a img {
+            width: 60px;
+            border-radius: 30px;
+        }
+        .comments .comment .text {
+            width: 90vw;
+            background-color: rgba(13, 78, 80, 0.6);
+            border-radius: 10px;
+        }
 #mytextarea {
     width:70%;
     resize:none;
+}
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 10px;
+    float: left;
+    margin-top:350px;
+    margin-left:40px;
+
+}
+.arrow-backround {
+    border-bottom-right-radius: 60px;
+    border-top-right-radius: 60px;
+    background-color:rgba(78, 78, 78, 0.64)
+}
+.right:hover + #side {
+    display: block;
+}
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+.side {
+    flex: 30%;
+    background-color: transparent;
+    text-align:center;
+}
+    .side #side {
+        width: 15vw;
+        background-color: darkcyan;
+        height: 100vh;
+    }
+        .side #side a {
+            width:100%;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            color:black;
+        }
+        .side #side a:hover {
+            background-color:white;
+        }
+.row {
+ display:flex;
 }

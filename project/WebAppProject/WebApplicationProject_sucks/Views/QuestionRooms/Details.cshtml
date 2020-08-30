@@ -17,13 +17,79 @@
         function mySave() {
             var myContent = tinymce.get("mytextarea").getContent();
             document.getElementById("CommentContent").value = myContent;
+            document.getElementById("addComment").style.display = 'none';
         }
 
     </script>
+    <!--tinymce init-->
+    <script>
+        tinymce.init({
+            selector: '#mytextarea',
+            /* theme of the editor */
 
+
+            /* width and height of the editor */
+            width: "70%",
+            height: "40vh",
+
+            /* display statusbar*/
+            statubar: true,
+
+            /* plugin */
+            plugins: [
+                "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                "save table contextmenu directionality emoticons template paste textcolor"
+            ],
+
+            /* toolbar */
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
+
+            /* style */
+            style_formats: [
+                {
+                    title: "Headers", items: [
+                        { title: "Header 1", format: "h1" },
+                        { title: "Header 2", format: "h2" },
+                        { title: "Header 3", format: "h3" },
+                        { title: "Header 4", format: "h4" },
+                        { title: "Header 5", format: "h5" },
+                        { title: "Header 6", format: "h6" }
+                    ]
+                },
+                {
+                    title: "Inline", items: [
+                        { title: "Bold", icon: "bold", format: "bold" },
+                        { title: "Italic", icon: "italic", format: "italic" },
+                        { title: "Underline", icon: "underline", format: "underline" },
+                        { title: "Strikethrough", icon: "strikethrough", format: "strikethrough" },
+                        { title: "Superscript", icon: "superscript", format: "superscript" },
+                        { title: "Subscript", icon: "subscript", format: "subscript" },
+                        { title: "Code", icon: "code", format: "code" }
+                    ]
+                },
+                {
+                    title: "Blocks", items: [
+                        { title: "Paragraph", format: "p" },
+                        { title: "Blockquote", format: "blockquote" },
+                        { title: "Div", format: "div" },
+                        { title: "Pre", format: "pre" }
+                    ]
+                },
+                {
+                    title: "Alignment", items: [
+                        { title: "Left", icon: "alignleft", format: "alignleft" },
+                        { title: "Center", icon: "aligncenter", format: "aligncenter" },
+                        { title: "Right", icon: "alignright", format: "alignright" },
+                        { title: "Justify", icon: "alignjustify", format: "alignjustify" }
+                    ]
+                }
+            ]
+        });
+    </script>
     <meta name="viewport" content="width=device-width" />
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    
+
     <link rel="stylesheet" href="~/Content/QuestionRoom.css?ver=<?php echo rand(111,999)?" type="text/css" />
 
 </head>
@@ -35,7 +101,7 @@
         @Html.AntiForgeryToken()
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <h2>Question Room</h2><h5>by @Model.CreatorName</h5>
+
         Session["QuestionRoomID"] = Model.QuestionRoomID;
         <!--creator name-->
         @Html.Hidden("CommentCreator", Session["UserName"])
@@ -43,51 +109,66 @@
         @Html.Hidden("RoomID", Model.QuestionRoomID)
 
         @Html.Hidden("CommentContent", new { @id = "CommentContent" })
+    <div class="row">
+        <div class="side">
+                
+                <div class="arrow-backround"><i id="open-arrow" class="arrow right" onclick="open_sideBar()"></i></div>
+                <div id="side" style="display:none">
+                    <a href="/QuestionRooms/Index">Back to question rooms</a><br />
+                    <a href="/HomePage/Home">Back to home page</a>
+                    <i class="arrow left" onclick="close_sideBar()"></i>
+            </div>
+        </div>
         <div class="main">
-            <p>@Html.Raw(Model.Title)</p>
-            <br>
+            <div class="Title">
+                <h2>Question Room</h2><h5>by @Model.CreatorName</h5>
+                <p>@Html.Raw(Model.Title)</p>
+            </div>
             @{ MyDB db = new MyDB();}
             <!--Displaying all the comments in the room-->
-            @foreach (var item in db.QustionRoomComments.Where(d => d.RoomID == Model.QuestionRoomID))
-            {
-                <div class="comment">
+            <div class="comments">
+                @foreach (var item in db.QustionRoomComments.Where(d => d.RoomID == Model.QuestionRoomID))
+                {
+                    <div class="comment">
                         <a class="im" href="#">
                             <img class="media-object img-circle" src='@Url.Action("ShowImage", "Posts", new { UserName = item.UserName })' alt="profile">
                         </a>
-                            <div class="text">
-                                <h4 class="media-heading text-uppercase reviews"> @Html.DisplayFor(modelItem => item.UserName) </h4>
-                                <ul class="media-date text-uppercase reviews list-inline">
-                                    <li class="dd">@Html.DisplayFor(modelItem => item.Date.Day)</li>
-                                    <li class="mm">@Html.DisplayFor(modelItem => item.Date.Month)</li>
-                                    <li class="aaaa">@Html.DisplayFor(modelItem => item.Date.Year)</li>
-                                </ul>
-                                <p class="media-comment">
-                                    @Html.Raw(item.Content)
-                                </p>
+                        <div class="text">
+                            <h5>
+                                @Html.DisplayFor(modelItem => item.UserName) , @Html.DisplayFor(modelItem => item.Date)
+                            </h5>
+                            <p class="media-comment">
+                                @Html.Raw(item.Content)
+                            </p>
+                        </div>
+                    </div>
 
-                            </div>
-                </div>
-            }
-
-
-
-            <div class="form-group">
+                }
+            </div>
+            <input id="addBtn" type="button" onclick="openTiny()" value="Add Comment">
+            <div id="addComment" class="tiny" style="display:none">
                 <!--text editor , tinymce-->
-
+                <input type="submit" value="Send comment" onclick="mySave()" class="btn btn-default" />
                 <textarea id="mytextarea" name="mytextarea" placeholder="Add a comment..."></textarea>
                 <!--comment content-->
                 <!--the name is already set to Title-->
-
             </div>
-
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Send comment" onclick="mySave()" class="btn btn-default" /><br />
-                <a href="/QuestionRooms/Index">Back to question rooms</a><br />
-                <a href="/HomePage/Home">Back to home page</a>
-            </div>
-
         </div>
 
+    </div>
+        <script>
+            function openTiny() {
+                document.getElementById("addComment").style.display = 'block';
+            }
+            function open_sideBar() {
+                document.getElementById("side").style.display = 'block';
+                document.getElementById("open-arrow").style.display = 'none';
+            }
+            function close_sideBar() {
+                document.getElementById("side").style.display = 'none';
+                document.getElementById("open-arrow").style.display = 'unset';
+            }
+        </script>
     }
 
 </body>
