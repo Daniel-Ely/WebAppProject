@@ -186,15 +186,16 @@ namespace WebApplicationProject_sucks.Controllers
         }
         public ActionResult Search(string search)
         {
-            if (search != null)
-            {
+            
                 ViewData["ListAfterSearchQR"] = db.QuestionRooms.Where(d => d.Title.Contains(search)).ToList();
-                return View("Search");
-            }
-            return Redirect("/QuestionRooms/Index");
+                return View();
+            
         }
 
-        
+        public ActionResult SearchResualt()
+        {
+            return View("Search");
+        }
     }
 }
 

@@ -29,9 +29,9 @@
         <table class="table">
             
 
-            @if (ViewData["ListAfterSearchPP"] != null)
+            @if (Session["ListAfterSearchPP"] != null)
             {
-                foreach (var item in ViewData["ListAfterSearchPP"] as IEnumerable<WebApplicationProject_sucks.Models.ProfessionalPage>)
+                foreach (var item in Session["ListAfterSearchPP"] as IEnumerable<WebApplicationProject_sucks.Models.ProfessionalPage>)
                 {
             <tr>
 
@@ -39,7 +39,10 @@
                     @Html.DisplayFor(modelItem => item.NameOfPage)
                 </td>
                 <td>
-                    By @Html.DisplayFor(modelItem => item.User.UserName)
+                    By
+                </td>
+                <td>
+                     @Html.DisplayFor(modelItem => item.UserName)
                 </td>
                 <td>
 

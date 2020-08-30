@@ -11,7 +11,11 @@
     <script>
         function Search() {
             var a = document.getElementById("search").value;
-            $.post("/ProfessionalPages/Search?search=" + a);
+            $.post("/ProfessionalPages/Search?search=" + a).done(function (res) {
+                window.location.href = "/ProfessionalPages/SearchResualt";
+            }).fail(function (xhr, a, error) {
+                console.log(error);
+            });
 
         }
     </script>
@@ -44,7 +48,10 @@
                     @Html.DisplayFor(modelItem => item.NameOfPage)
                 </td>
                 <td>
-                    By @Html.DisplayFor(modelItem => item.User.UserName)
+                    By 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
                 </td>
                 <td>
 

@@ -14,10 +14,9 @@
     <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
     <link rel="stylesheet" href="~/Content/Register.css?ver=<?php echo rand(111,999)?" type="text/css" />
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
 </head>
 <body>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("DeleteQR", "QuestionRooms"))
     {
         @Html.AntiForgeryToken()
     <div class="form-horizontal">
@@ -30,27 +29,30 @@
             {
             foreach (var item in ViewData["ListAfterSearchQR"] as IEnumerable<WebApplicationProject_sucks.Models.QuestionRoom>)
             {
-                <tr>
-                    <td>
-                        @Html.Raw(item.Title)
-                    </td>
-                    <td>
-                        By @Html.DisplayFor(modelItem => item.CreatorName)
-                    </td>
-                    <td>
+            <tr>
+                <td>
+                    @Html.Raw(item.Title)
+                </td>
+                <td>
+                    By
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatorName)
+                </td>
+                <td>
 
-                        @Html.ActionLink("Details", "Details", new { id = item.QuestionRoomID })
-                        @{MyDB db = new MyDB();
-                            if (db.QuestionRooms.Where(d => d.QuestionRoomID == item.QuestionRoomID).ToList().ElementAt(0).CreatorName == Session["UserName"].ToString())
-                            {
-                                <label> | </label>
-                                @Html.Hidden("QuestionRoomID")
-                                <input type="submit" value=" Delete this question room" id=@item.QuestionRoomID onclick="Delete(this)" />
-                            }
+                    @Html.ActionLink("Details", "Details", new { id = item.QuestionRoomID })
+                    @{MyDB db = new MyDB();
+                        if (db.QuestionRooms.Where(d => d.QuestionRoomID == item.QuestionRoomID).ToList().ElementAt(0).CreatorName == Session["UserName"].ToString())
+                        {
+                            <label> | </label>
+                            @Html.Hidden("QuestionRoomID")
+                            <input type="submit" value=" Delete this question room" id=@item.QuestionRoomID onclick="Delete(this)" />
                         }
-                    </td>
+                    }
+                </td>
 
-                </tr>
+            </tr>
                             }
                             }
         </table>
