@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "OnClick";
+}
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    </head>
+<body>
+    <a href="#" class="test">click me!</a>
+    @{
+        var test = "noo";
+        if (ViewData["test"] != null)
+        {
+            test = ViewData["test"] as string;
+        }
+        <div>@test</div>
+    }
+
+</body>
+

@@ -44,12 +44,12 @@ namespace WebApplicationProject_sucks.Controllers
         // [LogInFilter]
         public ActionResult Home()
         {
-         
-            if(ViewData["ContentList"] == null )
+
+            if (ViewData["ContentList"] == null)
             {
-                FilterdSearch("all" , "all" , "all");
+                FilterdSearch("all", "all", "all");
             }
-           
+
             return View();
         }
         public ActionResult Register()
@@ -67,6 +67,16 @@ namespace WebApplicationProject_sucks.Controllers
                 Filter(0, 60);
             }
             return View();
+        }
+        public ActionResult OnClick()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ClickTest()
+        {
+            ViewData["test"] = "we are the bset";
+            return View("OnClicke");
         }
         public ActionResult SearchPage()
         {
@@ -163,7 +173,7 @@ namespace WebApplicationProject_sucks.Controllers
         //the filter for the admin user search
         //
         [HttpPost]
-        public ActionResult Filter(int minage, int maxage)
+        public ActionResult Filter(int? minage, int? maxage)
         {
             IEnumerable<FullUser> allUsers;
             List<FullUser> listUsers;
@@ -202,7 +212,13 @@ namespace WebApplicationProject_sucks.Controllers
             listUsers = allUsers.ToList();
             if (maxage < 60)
             {
-                listUsers = allUsers.Where(u => (((u.Birthday.Year < DateTime.Today.Year - minage) || (u.Birthday.Year == DateTime.Today.Year - minage && u.Birthday.DayOfYear < DateTime.Today.DayOfYear)) && ((u.Birthday.Year < DateTime.Today.Year - maxage) || (u.Birthday.Year == DateTime.Today.Year + maxage && u.Birthday.DayOfYear >= DateTime.Today.DayOfYear)))).ToList();
+                listUsers = allUsers.Where(u =>
+                {
+                    // cheack if not smaller
+                    bool notSmaller = ((u.Birthday.Year < DateTime.Today.Year - minage) || ((u.Birthday.Year == DateTime.Today.Year - minage) && u.Birthday.DayOfYear <= DateTime.Today.DayOfYear));
+                    bool notBigger = ((u.Birthday.Year > DateTime.Today.Year - maxage) || ((u.Birthday.Year == DateTime.Today.Year - maxage) && u.Birthday.DayOfYear > DateTime.Today.DayOfYear));
+                    return (notBigger && notSmaller);
+                }).ToList();
             }
             ViewData["userList"] = listUsers;
             return View("AdminHome");
