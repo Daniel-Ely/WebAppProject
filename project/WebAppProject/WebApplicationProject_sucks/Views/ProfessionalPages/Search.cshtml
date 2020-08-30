@@ -1,11 +1,8 @@
 ﻿@model IEnumerable<WebApplicationProject_sucks.Models.ProfessionalPage>
-
 @{
     Layout = null;
 }
-
 <!DOCTYPE html>
-
 <html>
 <head>
     <script>
@@ -27,17 +24,15 @@
 <body>
     <div class="form-horizontal">
         <p>
-            @Html.ActionLink("Create New", "Create")
-        </p>
-        <p>
-            @Html.Editor("search", new { htmlAttributes = new {  placeholder = "Search by professional page name" } })
-            <button type="button" onclick="Search()" class="search">Search</button>
+            <h4>Your search result</h4>
         </p>
         <table class="table">
             
 
-            @foreach (var item in Model)
+            @if (ViewData["ListAfterSearchPP"] != null)
             {
+                foreach (var item in ViewData["ListAfterSearchPP"] as IEnumerable<WebApplicationProject_sucks.Models.ProfessionalPage>)
+                {
             <tr>
 
                 <td>
@@ -51,10 +46,10 @@
                     @Html.ActionLink("Details", "Details", new { id = item.ProfessionalPageID })
                 </td>
             </tr>
+                }
             }
-
-        </table>
-        <a href="../HomePage/Home">Back to home page</a>
+            </table>
+        <a href="/ProfessionalPages/Index">Back to professional pages</a>
     </div>
 </body>
 </html>

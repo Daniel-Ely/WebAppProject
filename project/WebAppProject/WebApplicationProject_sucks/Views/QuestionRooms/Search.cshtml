@@ -26,16 +26,16 @@
             <h4>Your search result</h4> 
         </p>
         <table class="table">
-
-
-            @foreach (var item in ViewData["ListAfterSearchQR"] as IEnumerable<WebApplicationProject_sucks.Models.QuestionRoom>)
+            @if (ViewData["ListAfterSearchQR"] != null)
+            {
+            foreach (var item in ViewData["ListAfterSearchQR"] as IEnumerable<WebApplicationProject_sucks.Models.QuestionRoom>)
             {
                 <tr>
                     <td>
                         @Html.Raw(item.Title)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CreatorName)
+                        By @Html.DisplayFor(modelItem => item.CreatorName)
                     </td>
                     <td>
 
@@ -51,8 +51,8 @@
                     </td>
 
                 </tr>
-            }
-
+                            }
+                            }
         </table>
         <a href="/QuestionRooms/Index">Back to question rooms</a>
     </div>

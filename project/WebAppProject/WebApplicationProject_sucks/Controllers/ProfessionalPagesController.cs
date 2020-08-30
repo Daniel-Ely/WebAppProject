@@ -189,6 +189,14 @@ namespace WebApplicationProject_sucks.Controllers
             return Redirect("../ProfessionalPages/Delete/" + p.ProfessionalPageID);
 
         }
-
+        public ActionResult Search(string search)
+        {
+            if (search != null)
+            {
+                ViewData["ListAfterSearchPP"] = db.ProfessionalPages.Where(d => d.NameOfPage.Contains(search)).ToList();
+                return View("Search");
+            }
+            return Redirect("/QuestionRooms/Index");
+        }
     }
 }

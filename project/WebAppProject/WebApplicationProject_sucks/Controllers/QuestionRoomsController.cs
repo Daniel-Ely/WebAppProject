@@ -189,7 +189,7 @@ namespace WebApplicationProject_sucks.Controllers
             if (search != null)
             {
                 ViewData["ListAfterSearchQR"] = db.QuestionRooms.Where(d => d.Title.Contains(search)).ToList();
-                return Redirect("/QuestionRooms/Search");
+                return View("Search");
             }
             return Redirect("/QuestionRooms/Index");
         }

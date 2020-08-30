@@ -85,7 +85,8 @@
 
         }
         function Search() {
-           @Session["search"]= document.getElementById("search");
+            var a = document.getElementById("search").value;
+            $.post("/QuestionRooms/Search?search=" + a);
 
         }
     </script>
@@ -93,6 +94,7 @@
     <link rel="stylesheet" href="~/Content/creatPost.css?ver=<?php echo rand(111,999)?" type="text/css" />
     <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
     <link rel="stylesheet" href="~/Content/Register.css?ver=<?php echo rand(111,999)?" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
 </head>
@@ -105,8 +107,8 @@
             @Html.ActionLink("Create New", "Create")
         </p>
         <p>
-            @Html.Editor("search")
-            <a  onclick="Search()" href="#">@Html.ActionLink("Search", "Search","QuestionRooms",new { search=Session["search"]},null)</a>
+            @Html.Editor("search", new { htmlAttributes = new { placeholder = "Search by question room title" } })
+            <button type="button" onclick="Search()" class="search"  >Search</button>
         </p>
         <table class="table">
 
@@ -118,7 +120,7 @@
                         @Html.Raw(item.Title)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CreatorName)
+                       By @Html.DisplayFor(modelItem => item.CreatorName)
                     </td>
                     <td>
 
