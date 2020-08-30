@@ -54,8 +54,8 @@
                 <div class="navbar">
 
                     <input type="button" class="sidebar_open" onclick="open_side()" value=☰ />
-
                     <a href="" class="active">Home</a>
+                    <a href="#">@Html.ActionLink("Help points", "../Users/ShowMap")</a>
                     <a href="#">@Html.ActionLink("Log out", "../Users/LogOut")</a>
                     <!-- search bar and drop dwon -->
                     <div class="dropdown" id="dropdown" name="dropdown">
@@ -105,12 +105,12 @@
                                         round++;
                                     }
                                 }
-                                </div>
-                                @Html.Hidden("categoryName")
-                                @Html.Hidden("contentType")
-                                @Html.Hidden("creatorName")
                             </div>
+                            @Html.Hidden("categoryName")
+                            @Html.Hidden("contentType")
+                            @Html.Hidden("creatorName")
                         </div>
+                    </div>
                     <!-- end of SearchBar-->
                     <a href="" class="right" style="padding-left:2px">Welcome! @Session["UserName"]</a>
                 </div>
