@@ -158,10 +158,14 @@
                         </div>
                         <div class="filter-user-search">
                             <a class="gender" data-gender="Male" href="#">Male</a>
-                            <a class="gender"data-gender="Female" href="#">Female</a>                        
+                            <a class="gender" data-gender="Female" href="#">Female</a>
+                            <a class="gender" data-gender="Other" href="#">Other</a>
+                            <a class="gender" data-gender="all" href="#">clear</a>
                         </div>
-
-
+                        @foreach (var c in db.Categories)
+                        {
+                            <a class="category" data-category=@c.Name href="#">@c.Name</a>
+                        }
 
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"> </table>
@@ -213,17 +217,22 @@
     <script>
         $(function () {
             $("a.ageRang").click(function () {
-                $.post("/HomePage/Filter?minage=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge")).always(function (res) {
+                $.post("/HomePage/Filter?minage=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge") + "&gender=" + (this).getAttribute("data-gender") + "&category=" + (this).getAttribute("data-category")).always(function (res) {
                     location.reload();//to make sure page reloads to update the query results.                
                 });        
             });
         });
 
-
         $(function () {
             $("a.gender").click(function () {
-                alert("audio Here");
-                $.post("/HomePage/Filter?gender=" + (this).getAttribute("data-gender")).always(function (res) {
+                $.post("/HomePage/Filter?minage=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge") + "&gender=" + (this).getAttribute("data-gender") + "&category=" + (this).getAttribute("data-category")).always(function (res) {
+                    location.reload();//to make sure page reloads to update the query results.                
+                });
+            });
+        });
+        $(function () {
+            $("a.category").click(function () {
+                $.post("/HomePage/Filter?gender=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge") + "&gender=" + (this).getAttribute("data-gender") + "&category=" + (this).getAttribute("data-category")).always(function (res) {
                     location.reload();//to make sure page reloads to update the query results.                
                 });
             });
