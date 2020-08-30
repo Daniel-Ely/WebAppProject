@@ -9,7 +9,6 @@ var Email = document.getElementsByClassName('email');
 var IsProfessinal = document.getElementsByClassName('isP');
 var PrifileImage = document.getElementsByClassName('image');
 //
-
 let Users = [];
 
 searchBar.addEventListener('keyup', (e) => {
@@ -43,8 +42,6 @@ function load() {
     }
     displayUsers(Users);
 }
-
-
 const displayUsers = (users) => {
     const htmlString = `<tr>
         <th>profile image</th>
@@ -70,6 +67,5 @@ const displayUsers = (users) => {
         .join('');
     dataTable.innerHTML = htmlString;
 };
-
 
 load();

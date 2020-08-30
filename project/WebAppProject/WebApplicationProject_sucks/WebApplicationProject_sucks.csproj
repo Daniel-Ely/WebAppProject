@@ -2225,6 +2225,7 @@
     <Content Include="Views\Locations\Create.cshtml" />
     <Content Include="Views\HomePage\ChoiseBetweenAdminToUser.cshtml" />
     <Content Include="Views\Shared\MyProfessionalPages.cshtml" />
+    <Content Include="Views\HomePage\OnClick.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
