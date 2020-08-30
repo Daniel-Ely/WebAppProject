@@ -84,20 +84,21 @@
             document.getElementById("QuestionRoomID").value = id;
 
         }
-        
-      
         function Search() {
-            var search = document.getElementById("search").value;
-            @Session["Search"]=search;                                 
+            var a = document.getElementById("search").value;
+            $.post("/QuestionRooms/Search?search=" + a).done(function (res) {
+                window.location.href = "/QuestionRooms/SearchResualt";
+            }).fail(function (xhr, a, error) {
+                console.log(error);
+            });
+
         }
-  
-
-
     </script>
 
     <link rel="stylesheet" href="~/Content/creatPost.css?ver=<?php echo rand(111,999)?" type="text/css" />
     <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
     <link rel="stylesheet" href="~/Content/Register.css?ver=<?php echo rand(111,999)?" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
 </head>
@@ -110,39 +111,38 @@
             @Html.ActionLink("Create New", "Create")
         </p>
         <p>
-
-
-            @Html.Editor("search")
-            <a href="/QuestionRooms/Search" onclick="Search()">Search</a>
-            <button onclick="Search()">Search</button>
-           
+            @Html.Editor("search", new { htmlAttributes = new { placeholder = "Search by question room title" } })
+            <button type="button" onclick="Search()" class="search"  >Search</button>
         </p>
         <table class="table">
 
 
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.Raw(item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreatorName)
-                    </td>
-                    <td>
+            <tr>
+                <td>
+                    @Html.Raw(item.Title)
+                </td>
+                <td>
+                    By 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatorName)
+                </td>
+                <td>
 
-                        @Html.ActionLink("Details", "Details", new { id = item.QuestionRoomID })
-                        @{MyDB db = new MyDB();
-                            if (db.QuestionRooms.Where(d => d.QuestionRoomID == item.QuestionRoomID).ToList().ElementAt(0).CreatorName == Session["UserName"].ToString())
-                            {
-                                <label> | </label>
-                                @Html.Hidden("QuestionRoomID")
-                                <input type="submit" value=" Delete this question room" id=@item.QuestionRoomID onclick="Delete(this)" />
-                            }
+                    @Html.ActionLink("Details", "Details", new { id = item.QuestionRoomID })
+                    @{MyDB db = new MyDB();
+                        if (db.QuestionRooms.Where(d => d.QuestionRoomID == item.QuestionRoomID).ToList().ElementAt(0).CreatorName == Session["UserName"].ToString())
+                        {
+                            <label> | </label>
+                            @Html.Hidden("QuestionRoomID")
+                            <input type="submit" value=" Delete this question room" id=@item.QuestionRoomID onclick="Delete(this)" />
                         }
-                    </td>
+                    }
+                </td>
 
-                </tr>
+            </tr>
             }
 
         </table>
