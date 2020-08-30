@@ -26,7 +26,7 @@ namespace WebApplicationProject_sucks.Controllers
         {
             return View(db.Users.ToList());
         }
-        
+
         // GET: Users/Details/5
         public ActionResult Details(string id)
         {
@@ -47,6 +47,13 @@ namespace WebApplicationProject_sucks.Controllers
         {
             return View();
         }
+
+        public ActionResult ShowMap()
+        {
+            return View("../Admin/Map");
+        }
+
+            
 
         // POST: Users/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
