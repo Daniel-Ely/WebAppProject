@@ -60,7 +60,7 @@ namespace WebApplicationProject_sucks.Controllers
             var posts = db.Posts.Include(p => p.ProfessionalPage);
             return View(posts.ToList());
         }
-
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteComments()
         {
             return View();
@@ -82,6 +82,7 @@ namespace WebApplicationProject_sucks.Controllers
         }
 
         // GET: Posts/Create
+        [ValidateAntiForgeryToken]
         public ActionResult Create()
         {
             ViewBag.PageID = new SelectList(db.ProfessionalPages, "ProffesionalPageID", "NameOfPage");
