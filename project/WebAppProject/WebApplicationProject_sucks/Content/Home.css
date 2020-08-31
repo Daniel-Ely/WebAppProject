@@ -87,12 +87,11 @@ body {
    
     height:100vh;
     flex: 70%;
-    display:flex;
     padding: 2px;
     float:right;
     margin-right: 1px;
     text-align: center;
-    background-color: pink;
+    background-color: white;
 }
 
 .allPost{
