@@ -257,7 +257,7 @@ namespace WebApplicationProject_sucks.Controllers
                 return File(image, "image/jpg");
             
         }
-
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteComment([Bind(Include = "PostID,PostCommentID")] PostComment pC)
         {
             MyDB db = new MyDB();

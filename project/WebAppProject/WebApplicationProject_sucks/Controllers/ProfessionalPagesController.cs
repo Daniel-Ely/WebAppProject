@@ -168,7 +168,7 @@ namespace WebApplicationProject_sucks.Controllers
             }
             base.Dispose(disposing);
         }
-
+        [ValidateAntiForgeryToken]
         public ActionResult DeletePost([Bind(Include = "PostID,ProfessionalPageID")] Post p)
         {
             MyDB db = new MyDB();
