@@ -8,12 +8,34 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>GroupProfessionals</title>
+    <link rel="stylesheet" href="~/Content/Register.css?ver=<?php echo rand(111,999)?" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Group Results</title>
+    <style>
+ 
+        a:link, a:visited {
+            background-color: aliceblue;
+              border-radius: 10px;
+            border-color:black;
+             color:black;
+            padding: 14px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        a:hover, a:active {
+            background-color: azure;           
+        }
+
+    </style>
 </head>
+
+
 
 <body>
     <div>
-
+        <br>
         @{
             switch (ViewData["Factor"])
             {
@@ -22,11 +44,11 @@
                     foreach (var group in ViewData["GroupResult"] as IList<IGrouping<Profession, Professional>>)
                     {
                         var profession = group.Key.Profession_Name;
-                        <p>@profession :</p>
+                        <i class="fa fa-folder-open-o" style="font-size:20px"></i><label style="font-size:20px;font-weight:bold;"> @profession </label><br><br>
 
                         foreach (var groupElement in group)
                         {
-                            <h4>@groupElement.UserName</h4>
+                            <i class="fa fa-mail-forward"></i><label> @groupElement.UserName</label><br><br>
                         }
 
                     }
@@ -37,11 +59,11 @@
                     foreach (var group in ViewData["GroupResult"] as IList<IGrouping<double, Professional>>)
                     {
                         var score = group.Key;
-                        <p>@score :</p>
+                        <i class="fa fa-folder-open-o" style="font-size:20px"></i><label style="font-size:20px;font-weight:bold;"> @score </label><br><br>
 
                         foreach (var groupElement in group)
                         {
-                            <h4>@groupElement.UserName</h4>
+                            <i class="fa fa-mail-forward"></i><label> @groupElement.UserName</label> <label>@groupElement.UserName</label><br><br>
                         }
 
                     }
@@ -49,6 +71,8 @@
 
 
             }
+
+            <a class="nav-link" href="~/HomePage/AdminHome">Move back to dashboard</a>
 
         }
 
