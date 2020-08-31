@@ -42,6 +42,7 @@
                 var long = longs.item(i).attributes.getNamedItem("value").nodeValue;
                 var lat = lats.item(i).attributes.getNamedItem("value").nodeValue;
                 var position = new google.maps.LatLng(long, lat);
+      
                 bounds.extend(position);
                 marker = new google.maps.Marker({
                     position: position,
