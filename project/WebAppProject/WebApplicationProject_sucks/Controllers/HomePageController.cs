@@ -299,7 +299,7 @@ namespace WebApplicationProject_sucks.Controllers
             for (int i = 0; i < numOfCategorys; i++)
             {
                 UserToCategory current = top10.ElementAt(i);
-                double cerunt = ( sumEntry / current.NumOfVisits);
+                double cerunt = ( (double) current.NumOfVisits / sumEntry);//TODO: ???
                 List<Post> fromCategory = allPost.Where((p) => p.Categories.Where(c => c.CategoryName == current.CategoryName).Count() > 0).ToList();
                 num = Math.Min((int)(Math.Round(cerunt * 20)) , fromCategory.Count());
                

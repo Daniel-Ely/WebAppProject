@@ -23,7 +23,7 @@
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                @Html.EditorFor(model => model.NameOfPage, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter page name" } })
+                @Html.EditorFor(model => model.NameOfPage, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter page name", @required = "required" } })
 
             </div>
 
@@ -39,7 +39,9 @@
                     }
                 }
 
-                @Html.ListBox("selectedOptions", listOfCategories)
+                @Html.ListBox("selectedOptions", listOfCategories,new { @id="selectedOptions"})
+                <label id="listValidator"></label>
+               
 
             </div>
             <div class="form-group">
@@ -48,15 +50,34 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" /><br />
+
+                    <input type="button" value="Create" class="btn btn-default" onclick="submit()"/><br />
+
+                    <input type="submit" id="submitMe" hidden /><br />
+
                     <a href="/ProfessionalPages/Cancel">Cancel</a>
-                   
+
+
 
                 </div>
             </div>
         </div>
     }
 
+ <script> 
+     //validate listbox
+     function submit() {
+         var values = $('#selectedOptions').val();
+         if (values == null) {
+             document.getElementById("listValidator").innerText="Pick at least one option."
+         }
+         else {//corrupsond with the html helpers values.
+             document.getElementById("submitMe").click();
+         }
+
+
+     }
+     </script>
 
 </body>
 </html>
