@@ -187,7 +187,6 @@
         <!-- End of Footer -->
     </div>
     <!-- End of Content Wrapper -->
-    </div>
     <!-- End of Page Wrapper -->
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -215,14 +214,47 @@
     <script src="~/Scripts/AdminSearchbar.js"></script>
    
     <script>
+
         $(function () {
             $("a.ageRang").click(function () {
-                $.post("/HomePage/Filter?minage=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge") + "&gender=" + (this).getAttribute("data-gender") + "&category=" + (this).getAttribute("data-category")).always(function (res) {
-                    location.reload();//to make sure page reloads to update the query results.                
-                });        
+                $.ajax({
+                    type: "POST",
+                    url: "/HomePage/Filter?minage=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge") + "&gender=" + (this).getAttribute("data-gender") + "&category=" + (this).getAttribute("data-category")
+                   
+                }).always(function (data) {
+                    location.reload();
+                });
+
             });
         });
 
+        $(function () {
+            $("a.gender").click(function () {
+
+        $.ajax({
+            type: "POST",
+            url: "/HomePage/Filter?minage=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge") + "&gender=" + (this).getAttribute("data-gender") + "&category=" + (this).getAttribute("data-category")           
+        }).always(function (data) {
+            location.reload();
+        });
+
+            });
+        });
+
+
+        $(function () {
+            $("a.category").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/HomePage/Filter?minage=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge") + "&gender=" + (this).getAttribute("data-gender") + "&category=" + (this).getAttribute("data-category")
+                }).always(function (data) {
+                        location.reload();
+                    });
+
+            });
+        });
+
+   /*     
         $(function () {
             $("a.gender").click(function () {
                 $.post("/HomePage/Filter?minage=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge") + "&gender=" + (this).getAttribute("data-gender") + "&category=" + (this).getAttribute("data-category")).always(function (res) {
@@ -230,13 +262,19 @@
                 });
             });
         });
+
+
         $(function () {
             $("a.category").click(function () {
-                $.post("/HomePage/Filter?gender=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge") + "&gender=" + (this).getAttribute("data-gender") + "&category=" + (this).getAttribute("data-category")).always(function (res) {
+                $.post("/HomePage/Filter?minage=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge") + "&gender=" + (this).getAttribute("data-gender") + "&category=" + (this).getAttribute("data-category")).always(function (res) {
                     location.reload();//to make sure page reloads to update the query results.                
                 });
             });
         });
+
+        
+*/
+        
 
     </script>
     <script>
