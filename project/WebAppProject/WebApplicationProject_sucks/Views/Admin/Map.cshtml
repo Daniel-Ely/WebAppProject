@@ -1,4 +1,9 @@
 ﻿
+@using System.Web.Mvc.Html;
+@{
+    Layout = null;
+}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,19 +12,20 @@
         #map {
             height: 400px; /* The height is 400 pixels */
             width: 100%; /* The width is the width of the web page */
+            align-content:center
         }
     </style>
 </head>
 <body>
-    @{                   
+    @{
 
-                    MyDB db = new MyDB();
-                    foreach (var pos in db.Locations)
-                    {
-                        <div name="long" value=@pos.Long></div>
-                        <div name="lat" value=@pos.Lat></div>
-                        <div name="address" value=@pos.Address></div>
-                    }
+        MyDB db = new MyDB();
+        foreach (var pos in db.Locations)
+        {
+            <div name="long" value=@pos.Long></div>
+            <div name="lat" value=@pos.Lat></div>
+            <div name="address" value=@pos.Address></div>
+        }
     }
     <h3>My Google Maps Demo</h3>
     <!--The div element for the map -->
@@ -65,5 +71,7 @@
     -->
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5nv7F4qNvhiysPtgryNysdd0xUVqD5eo&callback=initMap">
     </script>
+
+    <a href="/HomePage/Home">Back to home page</a>
 </body>
 </html>
