@@ -18,7 +18,7 @@
 
     @{ MyDB db = new MyDB();
         <!--in order to load the list to javaScript that is responsibale for the searchBar-->
-
+        var statisclist = ViewData["recommended"] as List<Post>;
         var ContentList = ViewData["ContentList"] as List<AllContent>;
         foreach (var item in ContentList)
         {
@@ -28,6 +28,15 @@
             <div class="Date" value=@item.Date></div>
             <div class="Name" value=@item.CreatorName></div>
         }
+        foreach (var item in statisclist)
+        {
+            <div class="IDs" value=@item.PostID></div>
+            <div class="Titles" value="@item.Title"></div>
+            <div class="Contents" value="@item.Description"></div>
+            <div class="Dates" value=@item.Date></div>
+            <div class="Names" value=@item.ProfessionalPage.UserName></div>
+        }
+
     }
 
     <!--

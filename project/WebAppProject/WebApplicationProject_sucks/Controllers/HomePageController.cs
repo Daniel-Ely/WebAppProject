@@ -43,12 +43,15 @@ namespace WebApplicationProject_sucks.Controllers
         // [LogInFilter]
         public ActionResult Home()
         {
-
+            if (Session["UserName"] != null)
+            {
+                statisticList();
+            }
             if (ViewData["ContentList"] == null)
             {
                 FilterdSearch("all", "all", "all");
             }
-
+         
             return View();
         }
         public ActionResult Register()
@@ -267,6 +270,47 @@ namespace WebApplicationProject_sucks.Controllers
             Session["userList"] = listUsers;
             Session["emptyQuery"] = false;
             return View("AdminHome");
+        }
+        public ActionResult statisticList()
+        {
+            var v = Session["UserName"];
+            User user = db.Users.Find(v);
+            int sumEntry = 0;
+            //
+            List<UserToCategory> intrests =  user.Interests.OrderBy(c => c.NumOfVisits).ToList();
+            if (intrests.Where(i=>i.NumOfVisits >0).Count() == 0)
+            {
+                ViewData["recommended"] = db.Posts.OrderBy(p=>p.Rating).OrderBy(o=>o.Date).ToList();
+                return View("Home");
+            }
+            List<UserToCategory> top10 = new List<UserToCategory>();
+            //
+            List<Post> allPost = db.Posts.OrderBy(p => p.Rating).ToList();
+            List<Post> recommended = new List<Post>();
+            //
+            int numOfCategorys = Math.Min(10, intrests.Count());
+            for (int i = 0; i<numOfCategorys; i++)
+            {
+                var elemnt = intrests.ElementAt(i);
+                top10.Add(elemnt);
+                sumEntry += elemnt.NumOfVisits;
+            }
+            int num;
+            for (int i = 0; i < numOfCategorys; i++)
+            {
+                UserToCategory current = top10.ElementAt(i);
+                double cerunt = (current.NumOfVisits / sumEntry);
+                List<Post> fromCategory = allPost.Where((p) => p.Categories.Where(c => c.CategoryName == current.CategoryName).Count() > 0).ToList();
+                num = Math.Min((int)(Math.Round(cerunt * 20)) , fromCategory.Count());
+               
+                for (int j = 0; j < num; j++)
+                {
+                    recommended.Add(fromCategory.ElementAt(j));
+                }
+            }
+            ViewData["recommended"] = recommended;
+            return View("Home");
+
         }
     }
 }

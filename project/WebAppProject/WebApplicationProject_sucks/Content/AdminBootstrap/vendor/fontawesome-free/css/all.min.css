@@ -356,3 +356,32 @@ fa-fw {
 .table img {
     width: 50px;
 }
+.ageRang,
+.gender,
+.category {
+    border: none;
+    outline: none;
+    padding: 10px 16px;
+    background-color: rgba(171, 176, 196, 0.40);
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+    .ageRang:hover,
+    .gender:hover,
+    .category:hover {
+        background-color: #666;
+        color: white;
+    }
+.card-body {
+    display:flex;
+    flex-direction:column;
+}
+.filter-user-search {
+    padding-top:20px;
+    padding-bottom:10px;
+}
+.main {
+}

@@ -162,16 +162,18 @@
                             <a class="gender" data-gender="Other" href="#">Other</a>
                             <a class="gender" data-gender="all" href="#">clear</a>
                         </div>
-                        @foreach (var c in db.Categories)
-                        {
-                            <a class="category" data-category=@c.Name href="#">@c.Name</a>
-                        }
+                        <div class="filter-user-search">
+                            @foreach (var c in db.Categories)
+                            {
+                                <a class="category" data-category=@c.Name href="#">@c.Name</a>
+                            }
+                            </div>
 
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"> </table>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"> </table>
+                            </div>
                         </div>
                     </div>
-                </div>
             </div>
             <!-- /.container-fluid -->
         </div>
@@ -187,7 +189,6 @@
         <!-- End of Footer -->
     </div>
     <!-- End of Content Wrapper -->
-    </div>
     <!-- End of Page Wrapper -->
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
