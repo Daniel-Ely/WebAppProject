@@ -36,8 +36,20 @@
             <div class="name" value="@user.Name"></div>
             <div class="birthday" value="@user.Birthday"></div>
             <div class="email" value="@user.Email"></div>
-            <div class="isP" value="False"></div>
-            <div class="image" value="@user.ProfileImg"></div>
+
+        if (user.professional != null)
+        {
+                <div class="isP" value="True"></div>
+                <div class="score" value="@user.professional.Score"></div>
+                <div class="profession" value="@user.professional.Profession_Name"></div>
+            }
+            else
+            {
+                <div class="isP" value="False"></div>
+                <div class="score" value="False"></div>
+                <div class="profession" value="False"></div>
+            }
+
         }
     }
 
@@ -187,6 +199,7 @@
         <!-- End of Footer -->
     </div>
     <!-- End of Content Wrapper -->
+    </div>
     <!-- End of Page Wrapper -->
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -212,7 +225,7 @@
     </div>
     <!-- scr-->
     <script src="~/Scripts/AdminSearchbar.js"></script>
-   
+
     <script>
 
         $(function () {

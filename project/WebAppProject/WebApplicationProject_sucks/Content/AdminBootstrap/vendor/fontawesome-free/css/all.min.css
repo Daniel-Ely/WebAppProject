@@ -356,3 +356,6 @@ fa-fw {
 .table img {
     width: 50px;
 }
+td{
+    text-align:center;
+}
