@@ -242,18 +242,37 @@ img {
     --
 */
 #charactersList {
-    width:inherit;
-    display:grid;
-    padding-top:2px;
-    padding:5px;
-    grid-gap:5px;
-    text-decoration:none;
-    background-color:white;
-}
-.character img {
     width: inherit;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+    grid-auto-rows: minmax(100px, auto);
+    text-decoration: none;
+    background-color: white;
+    overflow:scroll;
+}
+    #charactersList::-webkit-scrollbar {
+        width: 10px;
+    }
+
+/* Track */
+    #charactersList::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+/* Handle */
+    #charactersList::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+        #charactersList::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+.character img {
     object-fit: cover;
     background-color: darkslategrey;
+    width:100%;
 }
 .character a {
     width: inherit;
@@ -264,7 +283,8 @@ img {
    color:black;
 }
 .character {
-    width: 200px;
+    word-wrap: break-word;
+    overflow: scroll;
     list-style-type: none;
     background-color: white;
     border-radius: 3px;
@@ -273,6 +293,24 @@ img {
     box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.4);
     text-align: center;
 }
+    .character::-webkit-scrollbar {
+        width: 0px;
+    }
+
+/* Track */
+    .character::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+/* Handle */
+    .character::-webkit-scrollbar-thumb {
+        background-color:transparent;
+    }
+
+    /* Handle on hover */
+        .character::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
 /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 700px) {
     .row {
