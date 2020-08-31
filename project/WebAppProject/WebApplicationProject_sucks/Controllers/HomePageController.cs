@@ -51,7 +51,6 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 FilterdSearch("all", "all", "all");
             }
-         
             return View();
         }
         public ActionResult Register()
@@ -103,8 +102,11 @@ namespace WebApplicationProject_sucks.Controllers
 
         public ActionResult FilterdSearch(string categoryName, string contentType, string creatorName)
         {
-            
-
+            if (categoryName == "all" && contentType == "all" && creatorName == "all")
+            {
+                ViewData["filterd"] = "false";
+            }
+            else ViewData["filterd"] = "true";
             List<AllContent> allContent = new List<AllContent>();
 
             //in case the user didnt choose to filter by ContentType(Post/ Question rom)
@@ -297,7 +299,7 @@ namespace WebApplicationProject_sucks.Controllers
             for (int i = 0; i < numOfCategorys; i++)
             {
                 UserToCategory current = top10.ElementAt(i);
-                double cerunt = (current.NumOfVisits / sumEntry);
+                double cerunt = ( sumEntry / current.NumOfVisits);
                 List<Post> fromCategory = allPost.Where((p) => p.Categories.Where(c => c.CategoryName == current.CategoryName).Count() > 0).ToList();
                 num = Math.Min((int)(Math.Round(cerunt * 20)) , fromCategory.Count());
                
@@ -306,7 +308,7 @@ namespace WebApplicationProject_sucks.Controllers
                     recommended.Add(fromCategory.ElementAt(j));
                 }
             }
-            ViewData["recommended"] = recommended;
+            Session["recommended"] = recommended;
             return View("Home");
 
         }

@@ -49,12 +49,12 @@ function load()
             "Name": name.nodeValue
         })
     }
-    for (i = 0; i < ContentList.length; i++) {
-        var v = ContentTitleList.item(i).attributes.getNamedItem("value");
-        var e = ContentList.item(i).attributes.getNamedItem("value");
-        var id = idList.item(i).attributes.getNamedItem("value");
-        var date = DateList.item(i).attributes.getNamedItem("value");
-        var name = NameList.item(i).attributes.getNamedItem("value");
+    for (i = 0; i < sContentList.length; i++) {
+        var v = sContentTitleList.item(i).attributes.getNamedItem("value");
+        var e = sContentList.item(i).attributes.getNamedItem("value");
+        var id = sidList.item(i).attributes.getNamedItem("value");
+        var date = sDateList.item(i).attributes.getNamedItem("value");
+        var name = sNameList.item(i).attributes.getNamedItem("value");
 
         sPost.push({
             "Id": id.nodeValue,
@@ -65,11 +65,12 @@ function load()
             "Name": name.nodeValue
         })
     }
-    displayCharacters(sPost);
-   
+    if (document.getElementById("filterd").attributes.getNamedItem("value").nodeValue == "true")
+    {
+        displayCharacters(hpCharacters);
+    }
+    else displayCharacters(sPost); 
 }
-
-
 const displayCharacters = (characters) => {
     const htmlString = characters
         .map((character) => {
@@ -101,21 +102,4 @@ const displayCharacters = (characters) => {
     charactersList.innerHTML = htmlString;
 };
 
-const displayPosts = (posts) => {
-    const htmlString = posts
-        .map((post) => {
-            if (character.Title == "Question room")
-                return `
-                            <li class="character">
-                               <a href="../QuestionRooms/Details/${post.PostID}">
-                                  <img src="data:image/png;base64",${post.Thumbnail}></img>
-                                   <h5>by ${post.post.ProfessionalPage.UserName}  ${post.Date}</h5>
-                                    <h2>${post.Title}</h2>
-                                     <p>${post.Description}</p>
-                                </a>
-                            </li>
-        `;
-        }).join('');
-    charactersList.innerHTML = htmlString;
-}
 load();

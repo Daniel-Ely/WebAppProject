@@ -18,7 +18,7 @@
 
     @{ MyDB db = new MyDB();
         <!--in order to load the list to javaScript that is responsibale for the searchBar-->
-        var statisclist = ViewData["recommended"] as List<Post>;
+        var statisclist = Session["recommended"] as List<Post>;
         var ContentList = ViewData["ContentList"] as List<AllContent>;
         foreach (var item in ContentList)
         {
@@ -30,13 +30,20 @@
         }
         foreach (var item in statisclist)
         {
+            var p = db.ProfessionalPages.Find(item.ProfessionalPageID).UserName;
             <div class="IDs" value=@item.PostID></div>
             <div class="Titles" value="@item.Title"></div>
             <div class="Contents" value="@item.Description"></div>
             <div class="Dates" value=@item.Date></div>
-            <div class="Names" value=@item.ProfessionalPage.UserName></div>
+            <div class="Names" value=p></div>
         }
-
+        string isF = ViewData["filterd"] as string;
+        if (isF == "true")
+        {
+            <div id="filterd" value="true"></div>
+        }
+        else
+        { <div id="filterd" value="false"></div>}
     }
 
     <!--
