@@ -20,13 +20,15 @@
     @using (Html.BeginForm("AddCommentOrRate", "Posts"))
     {
 
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        Html.AntiForgeryToken();
+        Html.ValidationSummary(true, "", new { @class = "text-danger" });
 
-        @Html.Hidden("UserName", Session["UserName"])
-        @Html.Hidden("PostID", Model.PostID)
+        Html.Hidden("PostID", Model.PostID);
         Session["PostID"] = Model.PostID;
 
+        var list = ViewData["Profileofcreator"] as List<ProfileOfCreator>;
+        string CreatorName = list.Where(d => d.PostID == Model.PostID).ToList().ElementAt(0).UserName;
+        string userN = Session["UserName"].ToString();
 
         <div class="row">
             <div class="side">
@@ -34,17 +36,12 @@
                 <div class="arrow-backround"><i id="open-arrow" class="arrow right" onclick="open_sideBar()"></i></div>
                 <div id="side" style="display:none">
                     @{
-                        
+
                         MyDB db = new MyDB();
-                        string userN = Session["UserName"].ToString();
-                        var isP = db.Users.Where(d => d.UserName == userN).ToList().ElementAt(0).isProfessional;
-                        var isC = db.ProfessionalPages.Where(d => d.ProfessionalPageID == Model.ProfessionalPageID).ToList().ElementAt(0);
-
-                        if (isP && isC.UserName == userN)
+                        if(userN==CreatorName)
                         {
-
-                            Html.ActionLink("Delete comments from this post", "DeleteComments", new { id = Model.PostID }); <br /><br />
-                            Html.ActionLink("Edit this post", "Edit", new { id = Model.PostID }); <br /><br />
+                            @Html.ActionLink("Delete comments from this post", "DeleteComments", new { id = Model.PostID }) <br /><br />
+                            @Html.ActionLink("Edit this post", "Edit", new { id = Model.PostID }) <br /><br />
                             string link = "/ProfessionalPages/Details/" + Model.ProfessionalPageID;
                             <a href=@link>Back to my professional page</a> <br /><br />
                             <a href="/HomePage/Home">Back to home page</a>
@@ -71,10 +68,7 @@
 
             <div class="main">
                 <div class="Title">
-                    @{
-                        var list = ViewData["Profileofcreator"] as List<ProfileOfCreator>;
-                        string CreatorName = list.Where(d => d.PostID == Model.PostID).ToList().ElementAt(0).UserName;
-                    }
+
                     <h2>@Html.Raw(Model.Title)</h2><h5>by @CreatorName</h5>
                     <p>@Html.DisplayFor(model => model.Date)</p>
 
