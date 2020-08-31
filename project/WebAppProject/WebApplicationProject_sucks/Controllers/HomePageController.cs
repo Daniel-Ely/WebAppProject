@@ -63,7 +63,7 @@ namespace WebApplicationProject_sucks.Controllers
         {
             if (ViewData["userList"] == null && Session["emptyQuery"] == null)
             {
-                Filter(0, 60);
+                Filter(0, 60 ,"all" ,"all");
             }
             return View();
         }
@@ -173,9 +173,33 @@ namespace WebApplicationProject_sucks.Controllers
         //
         //the filter for the admin user search
         //
-        [HttpPost]
-        public ActionResult Filter(int? minage, int? maxage , string gender)
+        public ActionResult Filter(int? minage, int? maxage , string gender , string category)
         {
+            //minAge
+            if (minage != null)
+            {
+                Session["minage"] = minage;
+            }
+            else minage = Int32.Parse(Session["minage"].ToString());
+            //maxAge
+            if (maxage != null)
+            {
+                Session["maxage"] = maxage;
+            }
+            else maxage = Int32.Parse(Session["maxage"].ToString());
+            //gender
+            if (gender != "null")
+            {
+                Session["gender"] = gender;
+            }
+            else gender = Session["gender"].ToString();
+            //category
+            if (category != "null")
+            {
+                Session["category"] = category;
+            }
+            else category = Session["category"].ToString();
+            //
             IEnumerable<FullUser> allUsers;
             List<FullUser> listUsers;
             MyDB db = new MyDB();
@@ -222,7 +246,7 @@ namespace WebApplicationProject_sucks.Controllers
                     return (notBigger && notSmaller);
                 }).ToList();
             }
-            else
+            else if(maxage!=null)
             {
                 listUsers = allUsers.Where(u =>
                 {
@@ -232,9 +256,13 @@ namespace WebApplicationProject_sucks.Controllers
                     return (notSmaller);
                 }).ToList();
             }
-            if (gender != "all")
+            if (gender != "all" && gender!=null)
             {
-
+                listUsers = listUsers.Where(u => u.Gender == gender).ToList();
+            }
+            if (category != "all" && category != null)
+            {
+                listUsers = listUsers.Where(u => u.Intrests.Where(i => i.CategoryName == category).Count() > 0).ToList();
             }
             Session["userList"] = listUsers;
             Session["emptyQuery"] = false;
