@@ -1,11 +1,36 @@
-﻿body {
+﻿
+@font-face {
+    font-family: 'Chilanka';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/chilanka-v6-latin-regular.woff2') format('woff2');
+}
+
+/* Set the size of the div element that contains the map */
+body {
+    font-family: Chilanka;
+    font-size: 20px;
     text-align: center;
     background-image: url(../src/logIn.bmp);
     background-size: 100% 100%;
     background-size: cover;
 }
+
 #map {
-    align-self:center;
-    margin-left:10%;
-    width: 80%;
+    margin-left:5%;
+    align-self: center;
+    height: 500px; /* The height is 400 pixels */
+    width: 90%; /* The width is the width of the web page */
+    align-content: center
+}
+
+p {
+    column-count: 3;
+}
+.form-horizontal {
+    display: inline-block;
+    width: 90%;
+    background-color:rgba(255, 255, 255, 0.45);
+    border-radius: 25px;
+    text-align:center;
 }
