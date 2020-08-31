@@ -177,7 +177,7 @@ namespace WebApplicationProject_sucks.Controllers
             foreach (var item in db.PostComments.Where(d => d.PostID == p.PostID).ToList())
             {
                 var controller = DependencyResolver.Current.GetService<PostsController>();
-                controller.DeleteComment(item);
+                controller.DeleteComments(item);
             }
             foreach (var item in db.UserToPostRatings.Where(d => d.PostId == p.PostID).ToList())
             {
