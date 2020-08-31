@@ -2220,7 +2220,6 @@
     <Content Include="Views\HomePage\AdminHome.cshtml" />
     <Content Include="Views\HomePage\SearchPage.cshtml" />
     <Content Include="Views\HomePage\ProfessionalHome.cshtml" />
-    <Content Include="Views\Admin\myGragh.cshtml" />
     <Content Include="Views\HomePage\filterResults.cshtml" />
     <Content Include="Views\Admin\Map.cshtml" />
     <Content Include="Views\HomePage\FirstTimeInThisSystem.cshtml" />
@@ -2241,7 +2240,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Search\" />
     <Folder Include="Views\UserToPostRatings\" />
   </ItemGroup>
   <ItemGroup>

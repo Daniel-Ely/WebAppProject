@@ -201,6 +201,21 @@ namespace WebApplicationProject_sucks.Controllers
                 sum += item.Rating;
             post.Rating = sum / post.NumOfRating;
             db.SaveChanges();
+            string postCreator = db.ProfessionalPages.Where(d => d.ProfessionalPageID == post.ProfessionalPageID).ToList().ElementAt(0).UserName;
+            Professional pro = db.Professionals.Where(d => d.UserName == postCreator).ToList().ElementAt(0);
+            var listOfPP = db.ProfessionalPages.Where(d => d.UserName == pro.UserName).ToList();
+            double score=0;
+            int sumOfPosts = 0;
+            foreach(var pp in listOfPP)
+            {
+                foreach(var p in pp.Posts.ToList())
+                {
+                    sumOfPosts++;
+                    score += p.Rating;
+                }
+            }
+            pro.Score = score / sumOfPosts;
+            db.SaveChanges();
             return Redirect("../Posts/Details/" + uTPR.PostId);
         }
        

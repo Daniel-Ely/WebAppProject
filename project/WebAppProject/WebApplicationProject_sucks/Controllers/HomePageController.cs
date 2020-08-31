@@ -103,6 +103,8 @@ namespace WebApplicationProject_sucks.Controllers
 
         public ActionResult FilterdSearch(string categoryName, string contentType, string creatorName)
         {
+            
+
             List<AllContent> allContent = new List<AllContent>();
 
             //in case the user didnt choose to filter by ContentType(Post/ Question rom)
@@ -157,20 +159,16 @@ namespace WebApplicationProject_sucks.Controllers
                     AllContentID = p.PostID
                 }).ToList();
             }
-            //
-            var listByCategory = allContent;
-            var listByCreator = allContent;
-            //
             if (categoryName != "all" && categoryName != "")//in case the user choose a category
             {
-                listByCategory = allContent.Where(q => (q.QCategories.Where(c => c.CategoryName == categoryName.ToString()).Count() > 0) || q.PCategories.Where(c => c.CategoryName == categoryName.ToString()).Count() > 0).ToList();
+                allContent = allContent.Where(q => (q.QCategories.Where(c => c.CategoryName == categoryName.ToString()).Count() > 0) || q.PCategories.Where(c => c.CategoryName == categoryName.ToString()).Count() > 0).ToList();
             }
             //
             if (creatorName != "all" && creatorName != "")//in case the user choose a creatorName
             {
-                listByCreator = allContent.Where(q => q.CreatorName == creatorName.ToString()).ToList();
+                allContent = allContent.Where(q => q.CreatorName == creatorName.ToString()).ToList();
             }
-            ViewData["ContentList"] = listByCategory.Where(c => listByCreator.Where(q => q.AllContentID == c.AllContentID).Count() > 0).ToList();
+            ViewData["ContentList"] = allContent;
             return View("Home");
         }
         //

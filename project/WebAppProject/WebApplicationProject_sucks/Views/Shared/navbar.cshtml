@@ -17,6 +17,9 @@
         }
         //searchBar
         function categoryFilter(e) {
+            var current = document.getElementsByClassName("design");
+            current[0].className = current[0].className.replace(" design", "");
+            e.className += " design";
             document.getElementById("categoryName").value = e.id;
         }
         function contentTypeFilter(e) {
@@ -85,8 +88,8 @@
                             <br>
                             <div class="row">
                                 <div class="filter-row">
-                                    <input type="submit" class="mybtn" id="Question-rooms" onclick="contentTypeFilterFilter(this)" value="Question rooms">
-                                    <input type="submit" class="mybtn" id="Post" onclick="contentTypeFilterFilter(this)" value="Post">
+                                    <input type="submit" class="mybtn" id="Question-rooms" onclick="contentTypeFilter(this)" value="Question rooms">
+                                    <input type="submit" class="mybtn" id="Post" onclick="contentTypeFilter(this)" value="Post">
                                 </div>
                             </div>
                             <br />

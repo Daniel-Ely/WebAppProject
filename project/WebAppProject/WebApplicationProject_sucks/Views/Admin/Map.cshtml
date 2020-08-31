@@ -1,29 +1,41 @@
 ﻿
+@using System.Web.Mvc.Html;
+@{
+    Layout = null;
+}
+
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        /* Set the size of the div element that contains the map */
-        #map {
-            height: 400px; /* The height is 400 pixels */
-            width: 100%; /* The width is the width of the web page */
-        }
-    </style>
+    <link rel="stylesheet" href="~/Content/map.css?ver=<?php echo rand(111,999)?" type="text/css">
 </head>
 <body>
-    @{                   
+    @{
 
-                    MyDB db = new MyDB();
-                    foreach (var pos in db.Locations)
-                    {
-                        <div name="long" value=@pos.Long></div>
-                        <div name="lat" value=@pos.Lat></div>
-                        <div name="address" value=@pos.Address></div>
-                    }
+        MyDB db = new MyDB();
+        foreach (var pos in db.Locations)
+        {
+            <div name="long" value=@pos.Long></div>
+            <div name="lat" value=@pos.Lat></div>
+            <div name="address" value=@pos.Address></div>
+        }
     }
-    <h3>My Google Maps Demo</h3>
-    <!--The div element for the map -->
-    <div id="map"></div>
+    
+            <div class="form-horizontal">
+                <h3>My Google Maps Demo</h3>
+                <p>
+                    Health problems, even minor ones, can interfere with or even overshadow other aspects of your life. Even relatively minor health issues such as aches, pains, lethargy, and indigestion take a toll on your happiness and stress levels. One way to improve your ability to cope with stress and feel better is to make a commitment to healthier habits.
+
+
+                    Poor health habits can add stress to your life and also play a role in how well you are able to cope with stress. The stress that comes from poor health is significant. Health challenges also affect other areas of your life. Health problems can make daily tasks more challenging, create financial stress, and even jeopardize your ability to earn a living.
+
+                    Stress itself can exacerbate health issues from the common cold to more serious conditions and diseases,1﻿ so maintaining healthy habits can pay off in the long run.
+                </p>
+                <!--The div element for the map -->
+                <div id="map"></div>
+                <a href="/HomePage/Home">Back to home page</a>
+            </div>
+    
     <script>
         var longs = document.getElementsByName('long');
         var lats = document.getElementsByName('lat');
@@ -42,6 +54,7 @@
                 var long = longs.item(i).attributes.getNamedItem("value").nodeValue;
                 var lat = lats.item(i).attributes.getNamedItem("value").nodeValue;
                 var position = new google.maps.LatLng(long, lat);
+      
                 bounds.extend(position);
                 marker = new google.maps.Marker({
                     position: position,
@@ -65,5 +78,7 @@
     -->
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5nv7F4qNvhiysPtgryNysdd0xUVqD5eo&callback=initMap">
     </script>
+
+    
 </body>
 </html>

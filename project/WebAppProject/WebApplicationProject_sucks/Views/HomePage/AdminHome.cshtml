@@ -36,8 +36,20 @@
             <div class="name" value="@user.Name"></div>
             <div class="birthday" value="@user.Birthday"></div>
             <div class="email" value="@user.Email"></div>
-            <div class="isP" value="False"></div>
-            <div class="image" value="@user.ProfileImg"></div>
+
+        if (user.professional != null)
+        {
+                <div class="isP" value="True"></div>
+                <div class="score" value="@user.professional.Score"></div>
+                <div class="profession" value="@user.professional.Profession_Name"></div>
+            }
+            else
+            {
+                <div class="isP" value="False"></div>
+                <div class="score" value="False"></div>
+                <div class="profession" value="False"></div>
+            }
+
         }
     }
 
@@ -88,18 +100,20 @@
 
             <li class="nav-item">
                 <a class="nav-link" href="../HomePage/FirstTimeInThisSystem">
-                    <i class="material-icons">&#xe877;</i>
+                    <i class="fa fa-plus"></i>
                     <span>Add categories and professions</span>
                 </a>
             </li>
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item active">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span>
+            <!-- Nav Item - Grop professionals -->
+            <li class="nav-item">
+                <a class="nav-link" href="~/Admin/ProGroupBy">
+                    <i class="fa fa-users" aria-hidden="true"></i>
+                    <span>Group Professionals</span>
                 </a>
             </li>
+
+          
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
             <!-- Sidebar Toggler (Sidebar) -->
@@ -179,13 +193,7 @@
         </div>
         <!-- End of Main Content -->
         <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Soul Owl 2020</span>
-                </div>
-            </div>
-        </footer>
+        
         <!-- End of Footer -->
     </div>
     <!-- End of Content Wrapper -->
@@ -214,31 +222,48 @@
     </div>
     <!-- scr-->
     <script src="~/Scripts/AdminSearchbar.js"></script>
-   
+
     <script>
+
         $(function () {
             $("a.ageRang").click(function () {
-                $.post("/HomePage/Filter?minage=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge") + "&gender=" + (this).getAttribute("data-gender") + "&category=" + (this).getAttribute("data-category")).always(function (res) {
-                    location.reload();//to make sure page reloads to update the query results.                
-                });        
+                $.ajax({
+                    type: "POST",
+                    url: "/HomePage/Filter?minage=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge") + "&gender=" + (this).getAttribute("data-gender") + "&category=" + (this).getAttribute("data-category")
+                   
+                }).always(function (data) {
+                    location.reload();
+                });
+
             });
         });
 
         $(function () {
             $("a.gender").click(function () {
-                $.post("/HomePage/Filter?minage=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge") + "&gender=" + (this).getAttribute("data-gender") + "&category=" + (this).getAttribute("data-category")).always(function (res) {
-                    location.reload();//to make sure page reloads to update the query results.                
-                });
-            });
+
+        $.ajax({
+            type: "POST",
+            url: "/HomePage/Filter?minage=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge") + "&gender=" + (this).getAttribute("data-gender") + "&category=" + (this).getAttribute("data-category")           
+        }).always(function (data) {
+            location.reload();
         });
-        $(function () {
-            $("a.category").click(function () {
-                $.post("/HomePage/Filter?gender=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge") + "&gender=" + (this).getAttribute("data-gender") + "&category=" + (this).getAttribute("data-category")).always(function (res) {
-                    location.reload();//to make sure page reloads to update the query results.                
-                });
+
             });
         });
 
+
+        $(function () {
+            $("a.category").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/HomePage/Filter?minage=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge") + "&gender=" + (this).getAttribute("data-gender") + "&category=" + (this).getAttribute("data-category")
+                }).always(function (data) {
+                        location.reload();
+                    });
+
+            });
+        });
+  
     </script>
     <script>
         document.onload = load();
