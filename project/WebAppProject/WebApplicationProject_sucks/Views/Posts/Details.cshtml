@@ -33,7 +33,9 @@
 
                 <div class="arrow-backround"><i id="open-arrow" class="arrow right" onclick="open_sideBar()"></i></div>
                 <div id="side" style="display:none">
-                    @{MyDB db = new MyDB();
+                    @{
+                        
+                        MyDB db = new MyDB();
                         string userN = Session["UserName"].ToString();
                         var isP = db.Users.Where(d => d.UserName == userN).ToList().ElementAt(0).isProfessional;
                         var isC = db.ProfessionalPages.Where(d => d.ProfessionalPageID == Model.ProfessionalPageID).ToList().ElementAt(0);
@@ -121,7 +123,7 @@
 
                     }
                 </div>
-                <!--commetns fo post-->
+                <!--comments for post-->
                 <input id="addBtn" type="button" onclick="openTE()" value="Add Comment">
                 <div id="addComment" class="tiny" style="display:none">
                     @Html.Editor("PostCommentContent", new { placeholder = "Write a comment" })

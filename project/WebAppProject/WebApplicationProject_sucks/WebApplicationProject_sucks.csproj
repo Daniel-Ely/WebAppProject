@@ -1785,6 +1785,7 @@
     <Content Include="Content\map.css" />
     <Content Include="Content\navbar.css" />
     <Content Include="Content\Professional.css" />
+    <Content Include="Content\ProfessionalPage.css" />
     <Content Include="Content\QuestionRoom.css" />
     <Content Include="Content\Register.css" />
     <Content Include="Content\search.css" />
