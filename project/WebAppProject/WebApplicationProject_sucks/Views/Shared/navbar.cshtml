@@ -17,9 +17,7 @@
         }
         //searchBar
         function categoryFilter(e) {
-            var current = document.getElementsByClassName("design");
-            current[0].className = current[0].className.replace(" design", "");
-            e.className += " design";
+           
             document.getElementById("categoryName").value = e.id;
         }
         function contentTypeFilter(e) {
