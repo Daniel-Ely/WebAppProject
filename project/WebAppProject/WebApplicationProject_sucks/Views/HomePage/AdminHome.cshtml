@@ -36,12 +36,23 @@
             <div class="name" value="@user.Name"></div>
             <div class="birthday" value="@user.Birthday"></div>
             <div class="email" value="@user.Email"></div>
-            <div class="isP" value="False"></div>
-            <div class="image" value="@user.ProfileImg"></div>
+
+        if (user.professional != null)
+        {
+                <div class="isP" value="True"></div>
+                <div class="score" value="@user.professional.Score"></div>
+                <div class="profession" value="@user.professional.Profession_Name"></div>
+            }
+            else
+            {
+                <div class="isP" value="False"></div>
+                <div class="score" value="False"></div>
+                <div class="profession" value="False"></div>
+            }
+
         }
     }
 
-    
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -213,27 +224,27 @@
     </div>
     <!-- scr-->
     <script src="~/Scripts/AdminSearchbar.js"></script>
-   
+
     <script>
         $(function () {
             $("a.ageRang").click(function () {
                 $.post("/HomePage/Filter?minage=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge") + "&gender=" + (this).getAttribute("data-gender") + "&category=" + (this).getAttribute("data-category")).always(function (res) {
-                    location.reload();//to make sure page reloads to update the query results.                
-                });        
+                    location.reload();//to make sure page reloads to update the query results.
+                });
             });
         });
 
         $(function () {
             $("a.gender").click(function () {
                 $.post("/HomePage/Filter?minage=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge") + "&gender=" + (this).getAttribute("data-gender") + "&category=" + (this).getAttribute("data-category")).always(function (res) {
-                    location.reload();//to make sure page reloads to update the query results.                
+                    location.reload();//to make sure page reloads to update the query results.
                 });
             });
         });
         $(function () {
             $("a.category").click(function () {
                 $.post("/HomePage/Filter?gender=" + (this).getAttribute("data-minAge") + "&maxage=" + (this).getAttribute("data-maxAge") + "&gender=" + (this).getAttribute("data-gender") + "&category=" + (this).getAttribute("data-category")).always(function (res) {
-                    location.reload();//to make sure page reloads to update the query results.                
+                    location.reload();//to make sure page reloads to update the query results.
                 });
             });
         });
