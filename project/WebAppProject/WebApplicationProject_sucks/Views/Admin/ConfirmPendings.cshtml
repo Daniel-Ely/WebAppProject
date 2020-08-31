@@ -30,6 +30,36 @@
         table {
             border-spacing: 5px;
         }
+        a:link, a:visited {
+            background-color: #f44336;        
+        }
+
+        input[type="submit"] {
+            background-color: #228B22;
+        }
+     
+
+        input[type="submit"], a:link, a:visited {
+            border-radius: 10px;
+            color: white;
+            padding: 14px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+            input[type="submit"]:hover, input[type="submit"]:active {
+                border-radius: 10px;
+                background-color: green;
+                color: white;
+            }
+
+        a:hover, a:active {
+            background-color: red;
+            border-radius: 10px;
+        }
+    
+        
     </style>
 
 </head>
@@ -127,11 +157,12 @@
             </div>
         </div>
 
+        <div class="button">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Accept selected pendings" class="btn btn-default" />
             <a class="nav-link" href="~/HomePage/AdminHome">Move back to dashboard</a>
 
-
+           </div>
         </div>
 
         <!-- Bootstrap core JavaScript-->

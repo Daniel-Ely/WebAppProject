@@ -38,6 +38,7 @@ namespace WebApplicationProject_sucks.Controllers
 
         public ActionResult GroupProfessionals(string factor)
         {
+            if (factor == "") return View("ProGroupBy");
             MyDB db = new MyDB();          
             switch (factor)
             {
