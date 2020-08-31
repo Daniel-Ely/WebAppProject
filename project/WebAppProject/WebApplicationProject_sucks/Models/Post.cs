@@ -10,7 +10,7 @@ namespace WebApplicationProject_sucks.Models
     {
         [Key]public int PostID { get; set; }
 
-        [Required()]
+        [Required(ErrorMessage = "You must title your post...")]
         public string Title { get; set; }
 
         public DateTime Date { get; set; }
@@ -19,9 +19,11 @@ namespace WebApplicationProject_sucks.Models
         public int Rating { get; set; }
 
         public int NumOfRating { get; set; }
+        [Required(ErrorMessage = "Description is required")]
         public string Description { get; set; }
         public byte[] Thumbnail { get; set; }
 
+        [Required(ErrorMessage = "You cannot upload an empty post.")]
         [AllowHtml]
         public string Content { get; set; }
 
@@ -33,6 +35,7 @@ namespace WebApplicationProject_sucks.Models
         public int ProfessionalPageID { get; set; }
         public ProfessionalPage ProfessionalPage { get; set; }
 
+        [Required(ErrorMessage = "Pick at least one category")]
         //It derives from the page categories!
         public virtual ICollection<PostToCategory> Categories { get; set; }
 

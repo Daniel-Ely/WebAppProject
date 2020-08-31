@@ -8,7 +8,8 @@ namespace WebApplicationProject_sucks.Models
 {
     public class Profession
     {
-       [Key] public string Profession_Name { get; set; }
+        [Required(ErrorMessage = "Profession Name is required")]
+        [Key] public string Profession_Name { get; set; }
 
         public virtual ICollection<ProfessionToCategory> Categories { get; set; }
     }

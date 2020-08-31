@@ -25,6 +25,7 @@ namespace WebApplicationProject_sucks.Models
         public int PostID { get; set;}
         public Post Post { get; set; }
 
+        [Required(ErrorMessage = "You cannot post an empty comment...")]
         public string PostCommentContent { get; set; }
 
         [ForeignKey("User")]

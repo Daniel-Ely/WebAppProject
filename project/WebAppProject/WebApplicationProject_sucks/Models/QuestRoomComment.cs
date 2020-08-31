@@ -27,7 +27,8 @@ namespace WebApplicationProject_sucks.Models
         [ForeignKey("QuestionRoom")]
         public int RoomID { get; set; }
         public QuestionRoom QuestionRoom { get; set; }
-        
+
+        [Required(ErrorMessage = "You cannot post an empty comment...")]
         public string Content { get; set; }
 
 

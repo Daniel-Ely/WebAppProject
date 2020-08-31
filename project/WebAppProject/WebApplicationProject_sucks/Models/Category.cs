@@ -9,6 +9,7 @@ namespace WebApplicationProject_sucks.Models
 {
     public class Category
     {
+        [Required(ErrorMessage = "Category cannot be empty!")]
         [Key] public string Name { get; set; }
         public virtual ICollection<ProfessionalToCategory> Professionals { get; set; }
         public virtual ICollection<ProfessionalToCategory> ProfessionalPages { get; set; }

@@ -39,10 +39,8 @@
                     }
                 }
 
-                @Html.ListBox("selectedOptions", listOfCategories,new { @id="selectedOptions"})
-                <label id="listValidator"></label>
-               
-
+                @Html.ListBox("selectedOptions", listOfCategories)
+                            
             </div>
             <div class="form-group">
                 @Html.HiddenFor(Model => Model.UserName, new { Value = Session["UserName"] })
@@ -51,9 +49,8 @@
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
 
-                    <input type="button" value="Create" class="btn btn-default" onclick="submit()"/><br />
-
-                    <input type="submit" id="submitMe" hidden /><br />
+                    <input type="submit" value="Create" class="btn btn-default"/><br />
+                 
 
                     <a href="/ProfessionalPages/Cancel">Cancel</a>
 
@@ -64,20 +61,7 @@
         </div>
     }
 
- <script> 
-     //validate listbox
-     function submit() {
-         var values = $('#selectedOptions').val();
-         if (values == null) {
-             document.getElementById("listValidator").innerText="Pick at least one option."
-         }
-         else {//corrupsond with the html helpers values.
-             document.getElementById("submitMe").click();
-         }
 
-
-     }
-     </script>
 
 </body>
 </html>

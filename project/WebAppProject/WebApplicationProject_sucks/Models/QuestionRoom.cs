@@ -13,6 +13,8 @@ namespace WebApplicationProject_sucks.Models
         public DateTime DatePublished { set; get; }
 
         [Display(Name = "Question")]
+
+        [Required(ErrorMessage = "You must title your room")]
         [AllowHtml]
         public string Title { get; set; }
 
@@ -20,6 +22,7 @@ namespace WebApplicationProject_sucks.Models
         public string CreatorName { get; set; }
         public User User { get; set; }
 
+        [Required(ErrorMessage = "Pick at least one category")]
         //TODO: removed here the virtual
         public  virtual ICollection<RoomToCategory> Categories { get; set; }
 
