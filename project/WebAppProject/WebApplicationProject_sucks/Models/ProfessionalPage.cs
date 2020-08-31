@@ -11,6 +11,7 @@ namespace WebApplicationProject_sucks.Models
         
         public string NameOfPage { get; set; }
 
+        [Required]
         public virtual ICollection<PageToCategory> Categories {get; set;}
 
         public virtual ICollection<Post> Posts { get; set; }

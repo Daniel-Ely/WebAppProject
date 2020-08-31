@@ -84,9 +84,12 @@ body {
     }
 /* Main column */
 .main {
+   
+    height:100vh;
     flex: 70%;
     padding: 2px;
-    margin: 0 auto;
+    float:right;
+    margin-right: 1px;
     text-align: center;
     background-color: white;
 }
@@ -120,6 +123,9 @@ img {
     --
 */
 /* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
+.navbar .side {
+    
+}
 .navbar {
     font-size: 1vw;
     overflow: hidden;
@@ -144,6 +150,7 @@ img {
         text-decoration: none;
     }
     .navbar .sidebar_open {
+        flex: 30%;
         float: left;
         display: block;
         color: white;
@@ -246,10 +253,9 @@ img {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 30px;
-    grid-auto-rows: minmax(100px, auto);
     text-decoration: none;
     background-color: white;
-    overflow:scroll;
+    overflow: scroll;
 }
     #charactersList::-webkit-scrollbar {
         width: 10px;
@@ -284,7 +290,6 @@ img {
 }
 .character {
     word-wrap: break-word;
-    overflow: scroll;
     list-style-type: none;
     background-color: white;
     border-radius: 3px;

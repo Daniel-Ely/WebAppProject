@@ -115,27 +115,7 @@
                     <!-- end of SearchBar-->
                     <a href="" class="right" style="padding-left:2px">Welcome! @Session["UserName"]</a>
                 </div>
-                <!-- side bar-->
-                <div class="mySidebar" id="mySidebar" style="display:none">
-                    <input type="button" onclick="close_side()" class="button" value="&times;">
-                    <!-- the side panel with our info :)-->
-                    <nav>
-                        @{ string name = Session["UserName"].ToString();
-                            if (db.Users.Where(d => d.UserName == name).ToList().ElementAt(0).isProfessional)
-                            {
-
-                                <a href="#">@Html.ActionLink("Create a new professional page", "../ProfessionalPages/FromHome")</a>
-                                <a href="/Shared/MyProfessionalPages">My professional pages</a>
-                                
-                            }
-                        }
-                        <a href="../Categories/Index">Categories</a>
-                        <a href="../QuestionRooms/Index">Question Rooms</a>
-                        <a href="../ProfessionalPages/Index">Professional Pages</a>
-
-                        <a href="#">@Html.ActionLink("Ask a new question", "../QuestionRooms/FromHome")</a>
-                    </nav>
-                </div>
+               
 
             }
         }
