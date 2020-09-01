@@ -53,7 +53,7 @@ namespace WebApplicationProject_sucks.Controllers
             {
                 db.Locations.Add(location);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             return View(location);
