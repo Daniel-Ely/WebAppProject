@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 using WebApplicationProject_sucks.Attributes;
 
 namespace WebApplicationProject_sucks.Models
@@ -14,7 +15,6 @@ namespace WebApplicationProject_sucks.Models
         //
        
         [Key]
-        [Index(IsUnique =true)]
         [Required(ErrorMessage = "User name is Required")]
         [Display(Name = "User name")]
         public string UserName { get; set; }

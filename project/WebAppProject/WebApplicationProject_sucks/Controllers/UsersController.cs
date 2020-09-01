@@ -53,7 +53,6 @@ namespace WebApplicationProject_sucks.Controllers
             return View("../Admin/Map");
         }
 
-            
 
         // POST: Users/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -64,7 +63,7 @@ namespace WebApplicationProject_sucks.Controllers
         //JS is going to execute accordingly before this action takes place.
         public ActionResult Create([Bind(Include = "UserName,FirstName,Gender,BirthDay,Email,Password")] User user,string isProfessional, string[] selectedOptions, HttpPostedFileBase ProfileImage)
         {           
-            if (ModelState.IsValid&&selectedOptions!=null)
+            if ((ModelState.IsValid)&&(selectedOptions!=null)&& (db.Users.Where(d=>d.UserName==user.UserName).Count()==0))
             {//we just want to save the entry to the DB in both cases.  Process is the same 
                 byte[] salt = getSalt();
                 user.salt = salt;

@@ -59,7 +59,7 @@ namespace WebApplicationProject_sucks.Controllers
         
         public ActionResult ConfirmPendings(IEnumerable<string> Pendings)
         {
-            Session["fromAdmin"] = "true";
+
             MyDB db = new MyDB();
             if (Pendings != null)
             {
