@@ -209,6 +209,7 @@ namespace WebApplicationProject_sucks.Controllers
             MyDB db = new MyDB();
             var users = db.Users.ToList();
             var professionals = db.Professionals.ToList();
+            // the join between professional and user
             if (professionals.Count > 0)
             {
                 allUsers = from user in users
@@ -240,6 +241,7 @@ namespace WebApplicationProject_sucks.Controllers
                            };
             }
             listUsers = allUsers.ToList();
+            //filter by age
             if (maxage < 60)
             {
                 listUsers = allUsers.Where(u =>
@@ -250,20 +252,21 @@ namespace WebApplicationProject_sucks.Controllers
                     return (notBigger && notSmaller);
                 }).ToList();
             }
-            else if(maxage!=null)
+            else if (maxage == 61 && minage == 60) //in case of 60+
             {
                 listUsers = allUsers.Where(u =>
                 {
                     // cheack if not smaller
                     bool notSmaller = ((u.Birthday.Year < DateTime.Today.Year - minage) || ((u.Birthday.Year == DateTime.Today.Year - minage) && u.Birthday.DayOfYear <= DateTime.Today.DayOfYear));
-
                     return (notSmaller);
                 }).ToList();
             }
+            //filter by gender
             if (gender != "all" && gender!=null)
             {
                 listUsers = listUsers.Where(u => u.Gender == gender).ToList();
             }
+            //filter by category
             if (category != "all" && category != null)
             {
                 listUsers = listUsers.Where(u => u.Intrests.Where(i => i.CategoryName == category).Count() > 0).ToList();
