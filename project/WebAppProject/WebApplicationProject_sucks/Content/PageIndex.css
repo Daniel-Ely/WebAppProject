@@ -1,0 +1,89 @@
+﻿body {
+    background-image: url(../src/logIn.bmp);
+    background-size: 100% 100%;
+    background-size: cover;
+    display: inline-block;
+    flex-direction: column;
+    text-align: center;
+}
+.main {
+    width: 90vw;
+    height: 90vh;
+    background-color: rgba(255, 255, 255, 0.40);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin-left: 5%;
+    overflow: scroll;
+}
+.main::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+.main::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+/* Handle */
+.main::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+    /* Handle on hover */
+    .main::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+.table {
+    font-size: 25px;
+    border-collapse: collapse;
+    width: 100%;
+   
+}
+    .table td, .table th {
+        border: 1px solid #000000;
+        padding: 8px;
+        word-wrap: break-word;
+        max-width:450px;
+    }
+.table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table tr:hover {
+    background-color: #ddd;
+}
+
+.table th {
+    background-color: rgba(105, 113, 150, 0.6);
+    color: white;
+}
+a {
+ text-decoration:none;
+ color:black;
+ background-color:white;
+ font-size:20px;
+ padding:20px;
+ border:medium;
+ margin-top:10px;
+}
+    a:hover {
+        background-color: #ddd;
+    }
+.table a {
+    background-color: transparent;
+    padding: 5px;
+}
+input {
+    width:50%;
+    padding:20px;
+
+}
+button {
+    padding: 20px;
+    background-color:white;
+    border:none;
+}
+    button:hover {
+        background-color: #ddd;
+    }

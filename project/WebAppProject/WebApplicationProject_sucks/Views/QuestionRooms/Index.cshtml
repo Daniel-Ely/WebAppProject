@@ -95,9 +95,7 @@
         }
     </script>
 
-    <link rel="stylesheet" href="~/Content/creatPost.css?ver=<?php echo rand(111,999)?" type="text/css" />
-    <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
-    <link rel="stylesheet" href="~/Content/Register.css?ver=<?php echo rand(111,999)?" type="text/css" />
+    <link rel="stylesheet" href="~/Content/PageIndex.css?ver=<?php echo rand(111,999)?" type="text/css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
@@ -106,7 +104,7 @@
     @using (Html.BeginForm("DeleteQR", "QuestionRooms"))
     {
         @Html.AntiForgeryToken()
-    <div class="form-horizontal">
+    <div class="main">
         <p>
             @Html.ActionLink("Create New", "Create")
         </p>
@@ -116,15 +114,16 @@
         </p>
         <table class="table">
 
-
+            <tr>
+                <th>Question Content</th>
+                <th>Asker Name</th>
+                <th></th>
+            </tr>
             @foreach (var item in Model)
             {
             <tr>
                 <td>
                     @Html.Raw(item.Title)
-                </td>
-                <td>
-                    By 
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CreatorName)

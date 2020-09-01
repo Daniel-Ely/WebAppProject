@@ -76,25 +76,25 @@ const displayCharacters = (characters) => {
         .map((character) => {
             if (character.Title == "Question room")
             return `
-                            <li class="character">
+                            <div class="character">
                                <a href="../QuestionRooms/Details/${character.Id}">
                                   <img src="${character.image}"></img>
                                    <h5>by ${character.Name}  ${character.Date}</h5>
                                     <h2>${character.Title}</h2>
                                      <p>${character.Content}</p>
                                 </a>
-                            </li>
+                            </div>
         `;
             else
                 return `
-                            <li class="character">
+                            <div class="character">
                                 <a href="../Posts/Details/${character.Id}">
                                     <img src="${character.image}"></img>  
                                    <h5>by ${character.Name}  ${character.Date}</h5>
                                     <h2>${character.Title}</h2>
                                     <p>${character.Content}</p>
                                 </a>
-                            </li>
+                            </div>
         `;
 
         })

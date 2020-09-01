@@ -60,7 +60,7 @@
                     <a href="#">@Html.ActionLink("Log out", "../Users/LogOut")</a>
                     <!-- search bar and drop dwon -->
                     <div class="dropdown" id="dropdown" name="dropdown">
-                        <input type="text" name="searchBar" id="searchBar" clss="searchBar" placeholder="search for a post" onclick="dropDown()" />
+                        <input type="text" autocomplete="off" name="searchBar" id="searchBar" clss="searchBar" placeholder="search for a post" onclick="dropDown()" />
                         <div id="myDropdown" class="dropdown-content">
                             <b>filter by category:</b>
                             <br>
@@ -79,6 +79,7 @@
                                         }
                                         <input type="submit" class="mybtn" id=@q.Name onclick="categoryFilter(this)" value=@q.Name>
                                     }
+                                    <input type="submit" class="mybtn" id="all" onclick="categoryFilter(this)" value="cancel">
                                 }
                             </div>
                             <br />
@@ -88,6 +89,7 @@
                                 <div class="filter-row">
                                     <input type="submit" class="mybtn" id="Question-rooms" onclick="contentTypeFilter(this)" value="Question rooms">
                                     <input type="submit" class="mybtn" id="Post" onclick="contentTypeFilter(this)" value="Post">
+                                    <input type="submit" class="mybtn" id="all" onclick="contentTypeFilter(this)" value="Cancel">
                                 </div>
                             </div>
                             <br />
@@ -105,6 +107,7 @@
                                         <input type="submit" class="mybtn" id=@q.UserName onclick="creatorNameFilter(this)" value=@q.UserName>
                                         round++;
                                     }
+                                    <input type="submit" class="mybtn" id="all" onclick="contentTypeFilter(this)" value="Cancel">
                                 }
                             </div>
                             @Html.Hidden("categoryName")
