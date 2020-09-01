@@ -49,7 +49,7 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Profession_Name")] Profession profession)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid&& db.Professions.Where(d => d.Profession_Name == profession.Profession_Name).Count() == 0)
             {
                 db.Professions.Add(profession);
                 db.SaveChanges();
