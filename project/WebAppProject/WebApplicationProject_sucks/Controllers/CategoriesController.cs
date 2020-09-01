@@ -49,7 +49,8 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Name")] Category category)
         {
-            if (ModelState.IsValid)
+            MyDB db = new MyDB();
+            if (ModelState.IsValid&& db.Categories.Where(d=>d.Name==category.Name).Count()==0)
             {
                 db.Categories.Add(category);
                 db.SaveChanges();
