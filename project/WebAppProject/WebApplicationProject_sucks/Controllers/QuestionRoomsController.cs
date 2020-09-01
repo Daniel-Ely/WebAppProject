@@ -57,7 +57,7 @@ namespace WebApplicationProject_sucks.Controllers
         public ActionResult Create([Bind(Include = "Title,CreatorName")] QuestionRoom questionRoom, string[] selectedOptions)
         {
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && selectedOptions!=null)
             {
                 questionRoom.QuestionRoomID = db.QuestionRooms.Count();
                 for (int i = 0; i < selectedOptions.Length; i++)

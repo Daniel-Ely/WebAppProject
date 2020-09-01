@@ -82,7 +82,7 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProfessionalPageID,NameOfPage,UserName")] ProfessionalPage professionalPage, string[] selectedOptions)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && selectedOptions!=null)
             {
                 db.ProfessionalPages.Add(professionalPage);
                 for (int i = 0; i < selectedOptions.Length; i++)

@@ -92,7 +92,7 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Title,Content,Description,ProfessionalPageID")] Post post, string[] selectedOptions)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && selectedOptions!=null)
             {
                 post.Date = DateTime.Today;
                 db.Posts.Add(post);

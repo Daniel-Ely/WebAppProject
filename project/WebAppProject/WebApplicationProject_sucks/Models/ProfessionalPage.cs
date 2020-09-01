@@ -11,8 +11,7 @@ namespace WebApplicationProject_sucks.Models
 
         [Required(ErrorMessage = "Name is Required")]
         public string NameOfPage { get; set; }
-
-        [Required(ErrorMessage = "Pick at least one category")]
+        
         public virtual ICollection<PageToCategory> Categories {get; set;}
 
         public virtual ICollection<Post> Posts { get; set; }
