@@ -35,7 +35,7 @@ namespace WebApplicationProject_sucks.Models
         public int ProfessionalPageID { get; set; }
         public ProfessionalPage ProfessionalPage { get; set; }
 
-        [Required(ErrorMessage = "Pick at least one category")]
+   
         //It derives from the page categories!
         public virtual ICollection<PostToCategory> Categories { get; set; }
 

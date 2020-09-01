@@ -63,22 +63,24 @@ namespace WebApplicationProject_sucks.Controllers
         //this is going to take the boolean attribute as well since it matches with its name 
         //JS is going to execute accordingly before this action takes place.
         public ActionResult Create([Bind(Include = "UserName,FirstName,Gender,BirthDay,Email,Password")] User user,string isProfessional, string[] selectedOptions, HttpPostedFileBase ProfileImage)
-        {
-
-            if (ModelState.IsValid)
+        {           
+            if (ModelState.IsValid&&selectedOptions!=null)
             {//we just want to save the entry to the DB in both cases.  Process is the same 
                 byte[] salt = getSalt();
                 user.salt = salt;
                 user.Password = Convert.ToBase64String(GenerateSaltedHash(Encoding.ASCII.GetBytes(user.Password), salt));
                 db.Users.Add(user);
+
                 if (selectedOptions.Length > MaxCategories) // in case the user choose to much categories of intrest 
                 {
                     return View(user);
                 }
+
                 for (int i = 0; i < selectedOptions.Length; i++)
                 {//MtM relationship
                     db.UserToCategories.Add(new UserToCategory(user.UserName, selectedOptions[i]));
                 }
+
                 //converting each file to a byte array
                 if (ProfileImage != null)
                 {

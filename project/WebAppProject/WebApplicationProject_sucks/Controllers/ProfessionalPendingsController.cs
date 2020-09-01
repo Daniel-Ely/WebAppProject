@@ -53,7 +53,7 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UserName,Profession_Name,Description")] ProfessionalPending professionalPending,string[] selectedOptions,HttpPostedFileBase[] applyFiles)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid &&selectedOptions!=null&&applyFiles!=null)
             {
                 for (int i = 0; i < selectedOptions.Length; i++)
                 {//MtM relationship

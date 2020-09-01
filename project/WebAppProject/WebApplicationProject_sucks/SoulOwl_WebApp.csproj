@@ -2078,6 +2078,7 @@
     <Compile Include="Attributes\Birthday.cs" />
     <Compile Include="Attributes\Email.cs" />
     <Compile Include="Attributes\Password.cs" />
+    <Compile Include="Attributes\PrimaryKey.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />

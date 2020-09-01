@@ -22,8 +22,6 @@ namespace WebApplicationProject_sucks.Models
         public string CreatorName { get; set; }
         public User User { get; set; }
 
-        [Required(ErrorMessage = "Pick at least one category")]
-        //TODO: removed here the virtual
         public  virtual ICollection<RoomToCategory> Categories { get; set; }
 
         public virtual ICollection<QuestRoomComment> Comments { get; set; }

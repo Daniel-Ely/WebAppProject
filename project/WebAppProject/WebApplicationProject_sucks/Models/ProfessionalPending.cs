@@ -22,11 +22,10 @@ namespace WebApplicationProject_sucks.Models
         [Required(ErrorMessage = "Description is required")]
         public string Description { get; set; }//education related- requires approvement
 
-        [Required(ErrorMessage = "Pick at least one category")]
+      
         //categories
         public virtual ICollection<PendingToCategory> ProfessionalCategories { get; set; }
 
-        [Required(ErrorMessage = "Pick at least one file.")]
         //application files
         public virtual ICollection<PendingFile> ApplyFiles { get; set; }
     }

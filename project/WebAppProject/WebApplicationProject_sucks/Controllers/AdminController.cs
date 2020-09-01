@@ -59,6 +59,7 @@ namespace WebApplicationProject_sucks.Controllers
         
         public ActionResult ConfirmPendings(IEnumerable<string> Pendings)
         {
+            Session["fromAdmin"] = "true";
             MyDB db = new MyDB();
             if (Pendings != null)
             {
@@ -76,10 +77,10 @@ namespace WebApplicationProject_sucks.Controllers
                         professional.Description = pendingDetails.Description;
 
                         //only the associated pending categories!
-                        foreach (var pendingCategory in pendingDetails.ProfessionalCategories)
+                        foreach (var pendingCategory in db.PendingToCategories.Where(d=>d.P_UserName==userName).ToList())
                         {
                             ProfessionalToCategory acceptedCategory = new ProfessionalToCategory(userName, pendingCategory.CategoryName);
-                            db.ProfessionalToCategories.Add(acceptedCategory);
+                            db.ProfessionalToCategories.Add(acceptedCategory);                          
                         }
 
                         pendingDetails.ProfessionalCategories.Clear();
@@ -92,7 +93,6 @@ namespace WebApplicationProject_sucks.Controllers
                         //lets add a new entry for the brand new professional user
                         db.Professionals.Add(professional);
                         db.SaveChanges();
-
                     }
                 }
             }

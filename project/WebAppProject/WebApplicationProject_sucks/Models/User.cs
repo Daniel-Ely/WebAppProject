@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using WebApplicationProject_sucks.Attributes;
 
 namespace WebApplicationProject_sucks.Models
@@ -11,7 +12,9 @@ namespace WebApplicationProject_sucks.Models
         //
         //User name
         //
+       
         [Key]
+        [Index(IsUnique =true)]
         [Required(ErrorMessage = "User name is Required")]
         [Display(Name = "User name")]
         public string UserName { get; set; }
@@ -37,7 +40,8 @@ namespace WebApplicationProject_sucks.Models
         //
         //Intrests
         //
-        //[Required(ErrorMessage = "Choose at least one category")]
+
+ 
         public virtual ICollection<UserToCategory> Interests {get; set;}
         //
         //Email
