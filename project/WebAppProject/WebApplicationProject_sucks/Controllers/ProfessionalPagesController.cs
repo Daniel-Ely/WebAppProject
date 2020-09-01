@@ -173,16 +173,18 @@ namespace WebApplicationProject_sucks.Controllers
         {
             MyDB db = new MyDB();
             if (p.PostID == 0 || p.ProfessionalPageID == 0)
-                return Redirect("../ProfessionalPages/Edit/" + p.ProfessionalPageID);
+                return Redirect("../ProfessionalPages/Details/" + p.ProfessionalPageID);
             foreach (var item in db.PostComments.Where(d => d.PostID == p.PostID).ToList())
             {
                 var controller = DependencyResolver.Current.GetService<PostsController>();
-                controller.DeleteComment(item);
+                controller.DeleteComments(item);
             }
             foreach (var item in db.UserToPostRatings.Where(d => d.PostId == p.PostID).ToList())
             {
                 db.UserToPostRatings.Remove(item);
+                db.SaveChanges();
             }
+            db = new MyDB();
             Post post = db.Posts.Find(p.PostID);
             db.Posts.Remove(post);
             db.SaveChanges();

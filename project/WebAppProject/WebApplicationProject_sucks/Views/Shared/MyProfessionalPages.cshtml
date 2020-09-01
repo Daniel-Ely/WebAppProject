@@ -10,7 +10,7 @@
             document.getElementById("FromMy").value = "true";
         }
     </script>
-    <link rel="stylesheet" href="~/Content/Register.css?ver=<?php echo rand(111,999)?" type="text/css" />
+    <link rel="stylesheet" href="~/Content/PageIndex.css?ver=<?php echo rand(111,999)?" type="text/css" />
     <meta name="viewport" content="width=device-width" />
     <title>My Professional Pages</title>
 </head>
@@ -18,7 +18,7 @@
     @using (Html.BeginForm("FromMy", "Shared"))
     {
         @Html.AntiForgeryToken()
-        <div class="form-horizontal">
+        <div class="main">
             <p>
                 @Html.Hidden("FromMy")
                 <input type="submit" value="Create new" onclick="mySave()" class="btn btn-default" /><br />
@@ -26,13 +26,18 @@
             <table class="table">
                 @{ string user = Session["UserName"].ToString();
                     MyDB db = new MyDB();
+                <tr>
+                    <th>First Name</th>
+                    <th>Page Name</th>
+                     <th></th>
+                </tr>
                     if (db.ProfessionalPages.Where(d => d.UserName == user) != null)
                     {
                         foreach (var item in db.ProfessionalPages.Where(d => d.UserName == user).ToList())
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.User.FirstName)
+                                    @Html.DisplayFor(modelItem => db.Users.Find(item.UserName).FirstName)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.NameOfPage)

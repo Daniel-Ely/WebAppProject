@@ -2,16 +2,19 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = null;
 }
+<head>
+    <link rel="stylesheet" href="~/Content/PageIndex.css?ver=<?php echo rand(111,999)?" type="text/css" />
+</head>
 
-<h2>Index</h2>
-
-
+<div class="main">
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
+        <th>category Name</th>
         <th> </th>
     </tr>
 
@@ -52,3 +55,4 @@
         <a href="../HomePage/Home">Back to home page</a>
     }
 }
+    </div>

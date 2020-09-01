@@ -102,6 +102,7 @@ namespace WebApplicationProject_sucks.Controllers
 
         public ActionResult FilterdSearch(string categoryName, string contentType, string creatorName)
         {
+            // in order to give indecation to the js wht list to view
             if (categoryName == "all" && contentType == "all" && creatorName == "all")
             {
                 ViewData["filterd"] = "false";
@@ -278,31 +279,36 @@ namespace WebApplicationProject_sucks.Controllers
             int sumEntry = 0;
             //
             List<UserToCategory> intrests =  user.Interests.OrderBy(c => c.NumOfVisits).ToList();
-            if (intrests.Where(i=>i.NumOfVisits >0).Count() == 0)
-            {
-                ViewData["recommended"] = db.Posts.OrderBy(p=>p.Rating).OrderBy(o=>o.Date).ToList();
-                return View("Home");
-            }
             List<UserToCategory> top10 = new List<UserToCategory>();
             //
             List<Post> allPost = db.Posts.OrderBy(p => p.Rating).ToList();
             List<Post> recommended = new List<Post>();
             //
             int numOfCategorys = Math.Min(10, intrests.Count());
+            //in case the user is new and did not watch any content yet
+            if (intrests.Where(i => i.NumOfVisits > 0).Count() == 0)
+            {
+                allPost = db.Posts.OrderBy(p => p.Rating).OrderBy(o => o.Date).ToList();
+                Session["recommended"] = allPost;
+                return View("Home");
+            }
+            //adding the top 10 categorys into an orgenaized list
             for (int i = 0; i<numOfCategorys; i++)
             {
                 var elemnt = intrests.ElementAt(i);
                 top10.Add(elemnt);
                 sumEntry += elemnt.NumOfVisits;
             }
+            
             int num;
             for (int i = 0; i < numOfCategorys; i++)
             {
+                //calculating the num of of posts that we wiil display for the spec category
                 UserToCategory current = top10.ElementAt(i);
-                double cerunt = ( (double) current.NumOfVisits / sumEntry);//TODO: ???
+                double cerunt = ((double)current.NumOfVisits/ sumEntry);
                 List<Post> fromCategory = allPost.Where((p) => p.Categories.Where(c => c.CategoryName == current.CategoryName).Count() > 0).ToList();
                 num = Math.Min((int)(Math.Round(cerunt * 20)) , fromCategory.Count());
-               
+                //adding the posts from the spec category into the recomended list
                 for (int j = 0; j < num; j++)
                 {
                     recommended.Add(fromCategory.ElementAt(j));

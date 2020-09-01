@@ -87,68 +87,47 @@
 
     </script>
 
-    <link rel="stylesheet" href="~/Content/creatPost.css?ver=<?php echo rand(111,999)?" type="text/css" />
-    <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
-    <link rel="stylesheet" href="~/Content/Register.css?ver=<?php echo rand(111,999)?" type="text/css" />
+    <link rel="stylesheet" href="~/Content/QuestionRoom.css?ver=<?php echo rand(111,999)?" type="text/css" />
     <meta name="viewport" content="width=device-width" />
     <title>Edit</title>
 </head>
 <body>
-    @using (Html.BeginForm("DeleteComment", "Posts"))
+    @using (Html.BeginForm("DeleteComments", "Posts"))
     {
         @Html.AntiForgeryToken()
+        @Html.Hidden("PostID",Session["PostID"])
         <h4>Delete comments</h4>
         <div class="form-horizontal">
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @{ MyDB db = new MyDB();
                 int id = Int32.Parse(Session["PostID"].ToString());}
-            @foreach (var item in db.PostComments.Where(d => d.PostID == id).ToList())
-            {
 
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-10 col-sm-offset-1" id="logout">
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="comments-logout">
+            <div class="comments">
+                @foreach (var item in db.PostComments.Where(d => d.PostID == id).ToList())
+                {
+                    <div class="comment">
+                        <a class="im" href="#">
+                            <img class="media-object img-circle" src='@Url.Action("ShowImage", "Posts", new { UserName = @item.UserName })' alt="profile">
+                        </a>
 
-                                    <a class="pull-left" href="#">
-                                        <img class="media-object img-circle" src='@Url.Action("ShowImage", "Posts", new { UserName = item.UserName })' alt="profile">
-                                    </a>
-
-                                    <div class="media-body">
-                                        <div class="well well-lg">
-                                            <h4 class="media-heading text-uppercase reviews"> @Html.DisplayFor(modelItem => item.UserName) </h4>
-                                            <ul class="media-date text-uppercase reviews list-inline">
-                                                <li class="dd">@Html.DisplayFor(modelItem => item.Date.Day)</li>
-                                                <li class="mm">@Html.DisplayFor(modelItem => item.Date.Month)</li>
-                                                <li class="aaaa">@Html.DisplayFor(modelItem => item.Date.Year)</li>
-                                            </ul>
-                                            <br />
-                                            <p class="media-comment">
-                                                @item.PostCommentContent
-
-                                            </p>
-                                            <br />
-                                            @Html.HiddenFor(model => model.PostID, Session["PostID"])
-                                            @Html.Hidden("PostCommentID")
-                                            <input type="submit" value=" Delete this comment" id=@item.PostCommentID onclick="Delete(this)" />
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
+                        <div class="text">
+                            <h5>
+                                @Html.DisplayFor(modelItem => item.UserName) , @Html.DisplayFor(modelItem => item.Date)
+                            </h5>
+                            <p class="media-comment">
+                                @item.PostCommentContent
+                            </p>
+                            <br />
+                            @Html.Hidden("PostCommentID")
+                            <input type="submit" value=" Delete this comment" id=@item.PostCommentID onclick="Delete(this)" />
 
                         </div>
-
                     </div>
 
-                </div>
-
-            }
+                }
+            </div>
+            
             @{ string link = "../Details/" + Session["PostID"];}
             <a href=@link>Back to post</a>
 

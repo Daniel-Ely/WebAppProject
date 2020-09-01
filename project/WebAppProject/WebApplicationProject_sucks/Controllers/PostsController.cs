@@ -61,10 +61,7 @@ namespace WebApplicationProject_sucks.Controllers
             return View(posts.ToList());
         }
 
-        public ActionResult DeleteComments()
-        {
-            return View();
-        }
+      
         // GET: Posts/Details/5
         public ActionResult Details(int? id)
         {
@@ -256,19 +253,20 @@ namespace WebApplicationProject_sucks.Controllers
                 return File(image, "image/jpg");
             
         }
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteComment([Bind(Include = "PostID,PostCommentID")] PostComment pC)
+        public ActionResult DeleteComments([Bind(Include = "PostID,PostCommentID")] PostComment pC)
         {
             MyDB db = new MyDB();
             if (pC.PostCommentID == 0 || pC.PostID == 0)
-                return Redirect("../Posts/Edit/" + pC.PostID);
+                return View("DeleteComments");
             PostComment postC = db.PostComments.Find(pC.PostCommentID);
             db.PostComments.Remove(postC);
             db.SaveChanges();
-            return Redirect("../Posts/Edit/" + pC.PostID);
+            return View("DeleteComments");
            
         }
-
+        public ActionResult DeleteComments() { return View(); }
 
     }
 }

@@ -10,11 +10,12 @@
     align-self:center;
     display: flex;
     flex-direction: column;
-    flex: 70%;
+    flex: 80%;
     min-width:700px;
     height: 90vh;
     background-color: rgba(255, 255, 255, 0.6);
     text-align: center;
+    margin-right:15%;
 }
     .main .Title h5 {
         color: darkgrey;
@@ -108,12 +109,11 @@
     -webkit-transform: rotate(135deg);
 }
 .side {
-    flex: 30%;
+    flex: 15%;
     background-color: transparent;
     text-align:center;
 }
     .side #side {
-        width: 15vw;
         background-color: darkcyan;
         height: 100vh;
     }

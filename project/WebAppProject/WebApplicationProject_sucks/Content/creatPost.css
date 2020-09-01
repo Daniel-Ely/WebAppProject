@@ -1,16 +1,39 @@
 ﻿body {
-    background-color: dimgray;
-    text-align: center;
+    background-image: url(../src/logIn.bmp);
+    background-size: 100% 100%;
+    background-size: cover;
+    display:inline-block;
+    text-align:center;
 }
 .form-horizontal {
-    width:60%;
-    display: inline-block;
-    background-color: white;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    width:65vw;
+    height:90vh;
+    background-color:rgba(255, 255, 255, 0.6);
+    overflow:scroll;
+    margin-left:25%;
 }
 input {
-    width: 70%;
-    padding: 12px 20px;
-    margin: 8px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+    border-top: none;
+    border-right:none;
+    border-left:none;
+    width: 60%;
+    padding: 20px;
+    margin-top:20px;
+}
+select {
+    font-family: Arial;
+    width:60%;
+    font-size:20px;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
+}
+a {
+    text-decoration:none;
+    background-color:white;
+    padding:20px;
+    color:black;
+    margin:10px;
 }

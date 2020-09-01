@@ -14,8 +14,6 @@
     <link rel="stylesheet" href="~/Content/Home.css?ver=<?php echo rand(111,999)?" type="text/css">
 </head>
 <body>
-
-
     @{ MyDB db = new MyDB();
         <!--in order to load the list to javaScript that is responsibale for the searchBar-->
         var statisclist = Session["recommended"] as List<Post>;
@@ -49,20 +47,34 @@
     <!--
       the main area
     -->
-    <div class="row">
+          <div class="row">
+              <!-- side bar-->
+              <div class="mySidebar" id="mySidebar" style="display:none">
+                  <input type="button" onclick="close_side()" class="button" value="&times;">
+                  <!-- the side panel with our info :)-->
+                  <nav>
+                      @{ string name = Session["UserName"].ToString();
+                          if (db.Users.Where(d => d.UserName == name).ToList().ElementAt(0).isProfessional)
+                          {
 
-        <!-- the main area-->
-        <div class="main">
-            <div class="row">
-                <!--category buttons-->
+                              <a href="#">@Html.ActionLink("Create a new professional page", "../ProfessionalPages/FromHome")</a>
+                              <a href="/Shared/MyProfessionalPages">My professional pages</a>
 
-                <br>
-            </div>
+                          }
+                      }
+                      <a href="../Categories/Index">Categories</a>
+                      <a href="../QuestionRooms/Index">Question Rooms</a>
+                      <a href="../ProfessionalPages/Index">Professional Pages</a>
 
-            <ul class="allPost" id="charactersList"></ul>
-        </div>
+                      <a href="#">@Html.ActionLink("Ask a new question", "../QuestionRooms/FromHome")</a>
+                  </nav>
+              </div>
+              <!-- the main area-->
+              <div class="Umain">
+                  <div id="charactersList"></div>
+              </div>
 
-    </div>
+          </div>
     <script src="~/Scripts/searchBar.js"></script>
     <script>
         //hide the search tab when not focused
