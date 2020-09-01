@@ -213,8 +213,6 @@ namespace WebApplicationProject_sucks.Controllers
             }
             pro.Score = score / sumOfPosts;
             db.SaveChanges();
-            Session["Rating"] = null;       
-
             return Redirect("../Posts/Details/" + uTPR.PostId);
         }
        
@@ -236,9 +234,10 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddCommentOrRate([Bind(Include = "PostID,PostCommentContent,UserName")] PostComment pC, [Bind(Include = "Rating,UserName,PostId")] UserToPostRating uTPR)
         {
+            MyDB db = new MyDB();
             if (pC.PostCommentContent!=null)
                 return CreateComment(pC);
-            else if (Session["Rating"] != null)
+            else if ((uTPR.Rating.ToString()!=null)&&db.UserToPostRatings.Where(d => d.UserName == pC.UserName && d.PostId == pC.PostID).Count() == 0)
                 return CreateRating(uTPR);
             else return Redirect("../Posts/Details/" + pC.PostID);
         }

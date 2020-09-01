@@ -80,7 +80,7 @@ namespace WebApplicationProject_sucks.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateComment(string RoomID, string CommentContent, string CommentCreator)
         {
-            if (CommentContent != null)
+            if (CommentContent != null&&CommentContent!="")
             {
                 int commentID = db.QustionRoomComments.Count();
                 QuestRoomComment comment = new QuestRoomComment(commentID, Int32.Parse(RoomID), CommentContent, CommentCreator, DateTime.Today.Date);

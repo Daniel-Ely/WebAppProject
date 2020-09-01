@@ -86,7 +86,6 @@
                         @Model.Rating
 
                         if (db.UserToPostRatings.Where(d => d.UserName == userN && d.PostId == Model.PostID).ToList().Count == 0)
-
                         {
                             <ul>
                                 <li><input type="number" placeholder="Rate this post between 1 to 10" name="Rating" id="Rating" min="1" max="10" /></li>
